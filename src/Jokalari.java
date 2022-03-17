@@ -1,6 +1,6 @@
 
 public abstract class Jokalari {
-	private void proba() {
+	public void proba2() {
 		
 	}
 }
