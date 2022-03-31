@@ -1,8 +1,12 @@
 package eredua;
 
 public abstract class Jokalari {
-	public void proba2() {
-		//hola buenas
-		int i;
-	}
+	private float dirua;
+	public abstract void txandaJokatu();
+	public abstract void tiroEgin();
+	public abstract void armamentuaErosi();
+	public abstract void ontziaKonpondu();
+	public abstract void radarraKontsultatu();
+	
+	
 }
