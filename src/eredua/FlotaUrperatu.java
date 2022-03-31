@@ -1,4 +1,5 @@
 package eredua;
+import java.awt.Color;
 import java.util.Observable;
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
@@ -41,24 +42,59 @@ public class FlotaUrperatu extends Observable{
 	public void hasieratu() {
 		this.hasieratuMatrizeak();
 		txanda=true;
-		bot= new Bot();//SARTU DIRUA
-		jokalaria = new JokNormal();//SARTU DIRUA
+		bot= new Bot(1000);
+		jokalaria = new JokNormal(1000);
 		this.armamentuaHasieratu();
+		this.ontziakKokatu();
 		
 	}
 	
 
 
 	private void ontziakKokatu() {
-		
+		System.out.println("GOGORATU: Adierazi itsasontziaren lehenengo gelaxka. "
+				+ "Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira. "
+				+ "Bertikalean aldiz, beheruntz joango dira");
+		System.out.println("Sartu hegazkin-ontzi bat (4 posizio)");	
+		for(int i=0; i<2; i++) {
+			System.out.println("Sartu itsaspeko bat (3 posizio)");
+		}
+		for(int i=0; i<3; i++) {
+			System.out.println("Sartu suntzitzaile bat (2 posizio)");
+		}
+		for(int i=0; i<4; i++) {
+			System.out.println("Sartu fragata bat (posizio 1)");
+		}
+	}
+	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
+	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		int kont=pLuz;
+		int x=pX;
+		int y=pY;
+		while(pLuz>0) {
+			jokMatrizeOntzi[x][y]=true;
+			kont--;
+			if(pHorizontal) {x++;}
+			else {y++;}
+		}
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
-		
-		if(!jokMatrizeOntzi[pX][pY]) {
-			while(jokMatrizeOntzi[pX][pY]!=null && kokatu && !jokMatrizeOntzi[pX][pY]) {
-				//TODO
+		int kont=pLuz;
+		int x=pX;
+		int y=pY;
+
+		while(pX>=0 && pX<10 && pY>=0 && pY<10 && kokatu && kont>0) {
+			for(int i=x-1; i<=x+1; i++) {
+				for(int j=y-1; j<=y+1; j++) {
+					if(i>=0 && i<5 && j>=0 && j<5 && jokMatrizeOntzi[x][y]) {
+						kokatu=false;
+					}
+				}
 			}
+			kont--;
+			if(pHorizontal) {x++;}
+			else {y++;}
 		}
 		return kokatu;
 	}
