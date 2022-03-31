@@ -8,6 +8,9 @@ public class FlotaUrperatu extends Observable{
 	private boolean[][] jokMatrizeOntzi;
 	private boolean[][] botMatrizeOntzi;
 	
+	private JokNormal jokalaria;
+	private Bot bot;
+	
 	private boolean lehenengoRonda;
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
 	
@@ -34,6 +37,8 @@ public class FlotaUrperatu extends Observable{
 		this.hasieratuMatrizeak();
 		txanda=true;
 		lehenengoRonda=true;
+		bot= new Bot();
+		jokalaria = new JokNormal();
 		this.armamentuaHasieratu();
 		this.aurrekontuaEsleitu();
 	}
