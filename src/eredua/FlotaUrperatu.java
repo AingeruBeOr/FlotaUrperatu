@@ -40,7 +40,6 @@ public class FlotaUrperatu extends Observable{
 		bot= new Bot();
 		jokalaria = new JokNormal();
 		this.armamentuaHasieratu();
-		this.aurrekontuaEsleitu();
 	}
 	
 	private boolean lehenengoRondaDa() {
@@ -55,7 +54,7 @@ public class FlotaUrperatu extends Observable{
 		
 	}
 	
-	private void aurrekontuaEsleitu() {
+	/*private void aurrekontuaEsleitu() {
 		
-	}
+	}*/
 }

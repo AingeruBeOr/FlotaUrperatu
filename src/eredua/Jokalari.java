@@ -9,5 +9,6 @@ public abstract class Jokalari {
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
 	protected abstract void radarraKontsultatu();
+	protected abstract void armamentuaHasieratu();
 	
 }
