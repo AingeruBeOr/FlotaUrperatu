@@ -1,12 +1,11 @@
 package eredua;
 
 public abstract class Jokalari {
-	private float dirua;
-	public abstract void txandaJokatu();
-	public abstract void tiroEgin();
-	public abstract void armamentuaErosi();
-	public abstract void ontziaKonpondu();
-	public abstract void radarraKontsultatu();
+	protected float dirua;
+	protected abstract void txandaJokatu();
+	protected abstract void tiroEgin();
+	protected abstract void armamentuaErosi();
+	protected abstract void ontziaKonpondu();
+	protected abstract void radarraKontsultatu();
 	
-	//PRUEBA BRANCH 2
 }
