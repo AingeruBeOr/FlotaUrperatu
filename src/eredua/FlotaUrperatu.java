@@ -1,6 +1,7 @@
 package eredua;
 import java.util.Observable;
 public class FlotaUrperatu extends Observable{
+	private static FlotaUrperatu nireFlota;
 	//Matrize hauek true balioa badute jada bertan misil bat erori da (eta ez da konponketarik egon)
 	private boolean[][] jokMatrizeUkitu;
 	private boolean[][] botMatrizeUkitu;
@@ -11,13 +12,17 @@ public class FlotaUrperatu extends Observable{
 	private JokNormal jokalaria;
 	private Bot bot;
 	
-	private boolean lehenengoRonda;
+	// private boolean lehenengoRonda; Menuan jarri
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
 	
-	public static void main(String[] args) {
-		
-
+	private FlotaUrperatu() {}
+	public static FlotaUrperatu getNireFlotaUrperatu() {
+		if (nireFlota==null) {
+			nireFlota=new FlotaUrperatu();
+		}
+		return nireFlota;
 	}
+	
 	private void hasieratuMatrizeak(){
 		jokMatrizeUkitu= new boolean[10][10];
 		botMatrizeUkitu= new boolean[10][10];
@@ -36,23 +41,32 @@ public class FlotaUrperatu extends Observable{
 	public void hasieratu() {
 		this.hasieratuMatrizeak();
 		txanda=true;
-		lehenengoRonda=true;
-		bot= new Bot();
-		jokalaria = new JokNormal();
+		bot= new Bot();//SARTU DIRUA
+		jokalaria = new JokNormal();//SARTU DIRUA
 		this.armamentuaHasieratu();
+		
 	}
 	
-	private boolean lehenengoRondaDa() {
-		return this.lehenengoRonda;
-	}
 
-	public void ontziakKokatu() {
+
+	private void ontziakKokatu() {
 		
+	}
+	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
+		boolean kokatu=true;
+		
+		if(!jokMatrizeOntzi[pX][pY]) {
+			while(jokMatrizeOntzi[pX][pY]!=null && kokatu && !jokMatrizeOntzi[pX][pY]) {
+				//TODO
+			}
+		}
+		return kokatu;
+	}
+	private void armamentuaHasieratu() {
+		jokalaria.armamentuaHasieratu();
+		bot.armamentuaHasieratu();
 	}
 	
-	private void armamentuaHasieratu() {
-		
-	}
 	
 	/*private void aurrekontuaEsleitu() {
 		
