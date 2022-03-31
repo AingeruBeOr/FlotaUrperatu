@@ -8,5 +8,5 @@ public abstract class Jokalari {
 	public abstract void ontziaKonpondu();
 	public abstract void radarraKontsultatu();
 	
-	
+	//PRUEBA BRANCH
 }
