@@ -1,16 +1,18 @@
 package eredua;
 
 public abstract class Itsasontzi {
-	protected int luzera;
 	protected float konponketaPrezioa;
 	protected float suntziketaIrabazia;
 	
-	public Itsasontzi() {}
+	public Itsasontzi() {
+		this.konponketaPrezioa = 75;
+		this.suntziketaIrabazia = 50;
+	}
 	
-	protected float kalulatuKonponketa(int zatiKop) {
+	protected float kalkulatuKonponketa(int zatiKop) {
 		return zatiKop*konponketaPrezioa;
 	}
-	protected float kalulatuIrabazia(Itsasontzi pI) {
-		return pI.luzera*suntziketaIrabazia;
-	}
+	//protected float kalulatuIrabazia(Itsasontzi pI) {
+		//return pI.luzera*suntziketaIrabazia;
+	//}
 }
