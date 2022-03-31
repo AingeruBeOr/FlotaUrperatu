@@ -76,8 +76,8 @@ public class Tablero extends JFrame {
 		botMatrizeUkitu= new boolean[10][10];
 		jokMatrizeOntzi= new boolean[10][10];
 		botMatrizeOntzi= new boolean[10][10];
-		for(int l=0;l<10;l++) {
-			for(int z=0;z<10;z++) {
+		for(int l = 0;l < 10;l++) {
+			for(int z = 0;z < 10;z++) {
 				jokMatrizeOntzi[l][z]=false;
 				botMatrizeOntzi[l][z]=false;
 				jokMatrizeUkitu[l][z]=false;
@@ -87,8 +87,8 @@ public class Tablero extends JFrame {
 	}
 	private void matrizeaSortu() {
 		
-		for(int l=0;l<10;l++) {
-			for(int z=0;z<10;z++) {
+		for(int l = 0;l < 10;l++) {
+			for(int z = 0;z < 10;z++) {
 				matrizeEzk.add(getJokLaukia("", z, l));
 				matrizeEsk.add(getBotLaukia("", z, l));
 			}
@@ -221,15 +221,15 @@ public class Tablero extends JFrame {
 					//Misila bada:
 						//Aukeratu dezakezu? bot matrizean==false balioa du?
 				if(!botMatrizeUkitu[x][y]) {
-					botMatrizeUkitu[x][y]=true;
+					botMatrizeUkitu[x][y] = true;
 					if(botMatrizeOntzi[x][y]) {
 						System.out.println("UKITUA");
 						matrizeEsk.getComponent(y*10+x).setBackground(Color.BLACK);
-						botMatrizeOntzi[x][y]=false;
+						botMatrizeOntzi[x][y] = false;
 						boolean hondoratua=true;
-						for(int i=x-1; i<=x+1; i++) {
-							for(int j=y-1; j<=y+1; j++) {
-								if(i>=0 && i<5 && j>=0 && j<5) {
+						for(int i = x - 1; i <= x + 1; i++) {
+							for(int j = y - 1; j <= y + 1; j++) {
+								if(i >= 0 && i < 5 && j >= 0 && j < 5) {
 									if(botMatrizeOntzi[x][y]) {hondoratua=false;}
 								}
 							}
