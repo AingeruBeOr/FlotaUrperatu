@@ -65,7 +65,7 @@ public class FlotaUrperatu extends Observable{
 		for(int i=0; i<4; i++) {
 			System.out.println("Sartu fragata bat (posizio 1)");
 		}
-	}
+	} 
 	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		int kont=pLuz;
