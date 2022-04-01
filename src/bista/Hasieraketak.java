@@ -237,6 +237,7 @@ public class Hasieraketak extends JFrame implements Observer{
 			"GOGORATU: Adierazi itsasontziaren lehenengo gelaxka. \r\n"+
 			"Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira. "+
 			 "Bertikalean aldiz, beheruntz joango dira"*/
+			
 		}
 		return label2;
 	}
