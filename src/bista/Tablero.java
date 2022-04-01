@@ -73,7 +73,6 @@ public class Tablero extends JFrame implements Observer{
 	}
 
 	private void matrizeaSortu() {
-		
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
 				matrizeEzk.add(getJokLaukia("", z, l));
@@ -82,7 +81,8 @@ public class Tablero extends JFrame implements Observer{
 				zerrenda.add(botlauki);
 			}
 		}
-}
+	}
+	
 	private JPanel getErdia() {
 		if (erdia == null) {
 			erdia = new JPanel();
