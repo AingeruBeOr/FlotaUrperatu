@@ -100,6 +100,7 @@ public class Menu extends JFrame {
 			botoi2 = new JButton("Partida kargatu");
 			botoi2.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi2.addActionListener(getKontroladore());
+			botoi2.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
 		}
 		return botoi2;
 	}
@@ -108,6 +109,7 @@ public class Menu extends JFrame {
 			botoi3 = new JButton("Ranking ikusi");
 			botoi3.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi3.addActionListener(getKontroladore());
+			botoi3.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
 		}
 		return botoi3;
 	}
@@ -116,6 +118,7 @@ public class Menu extends JFrame {
 			botoi4 = new JButton("Arauak ikusi");
 			botoi4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi4.addActionListener(getKontroladore());
+			botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
 		}
 		return botoi4;
 	}
@@ -141,7 +144,7 @@ public class Menu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(botoi1)) {
-				Tablero.main(null);
+				Hasieraketak.main(null);
 				setVisible(false);
 			}
 			else if(e.getSource().equals(botoi2)) {

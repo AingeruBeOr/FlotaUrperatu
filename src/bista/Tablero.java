@@ -14,10 +14,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 
-public class Tablero extends JFrame {
+public class Tablero extends JFrame implements Observer{
 
 	private JPanel contentPane;
 	private JPanel erdia;
@@ -30,12 +33,8 @@ public class Tablero extends JFrame {
 	private JPanel matrizeEsk;
 	private JLabel info;
 	private JPanel datuak;
-	//Matrize hauek true balioa badute jada bertan misil bat erori da (eta ez da konponketarik egon)
-	private boolean[][] jokMatrizeUkitu;
-	private boolean[][] botMatrizeUkitu;
-	//Matrize hauek true balioa badute ontzia dute barnean
-	private boolean[][] jokMatrizeOntzi;
-	private boolean[][] botMatrizeOntzi;
+	private Kontroladore kontroladore;
+	private ArrayList<JLabel> zerrenda;
 
 	/**
 	 * Launch the application.
@@ -68,32 +67,22 @@ public class Tablero extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
+		this.zerrenda = new ArrayList<>();
 		matrizeaSortu();
-		hasieratuMatrizeak();
+		setLocationRelativeTo(null);
 	}
-	private void hasieratuMatrizeak(){
-		jokMatrizeUkitu= new boolean[10][10];
-		botMatrizeUkitu= new boolean[10][10];
-		jokMatrizeOntzi= new boolean[10][10];
-		botMatrizeOntzi= new boolean[10][10];
-		for(int l=0;l<10;l++) {
-			for(int z=0;z<10;z++) {
-				jokMatrizeOntzi[l][z]=false;
-				botMatrizeOntzi[l][z]=false;
-				jokMatrizeUkitu[l][z]=false;
-				botMatrizeUkitu[l][z]=false;
-			}
-		}
-	}
+
 	private void matrizeaSortu() {
-		
-		for(int l=0;l<10;l++) {
-			for(int z=0;z<10;z++) {
+		for(int l = 0;l < 10;l++) {
+			for(int z = 0;z < 10;z++) {
 				matrizeEzk.add(getJokLaukia("", z, l));
-				matrizeEsk.add(getBotLaukia("", z, l));
+				JLabel botlauki = getBotLaukia("", z, l); 
+				matrizeEsk.add(botlauki);
+				zerrenda.add(botlauki);
 			}
 		}
-}
+	}
+	
 	private JPanel getErdia() {
 		if (erdia == null) {
 			erdia = new JPanel();
@@ -198,13 +187,6 @@ public class Tablero extends JFrame {
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
-		lauki.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				//Ontzi tamaina aukeratu
-				//Posizioa aukeratu
-				//Konprobatu ahal den
-			}
-		});
 		return lauki;
 	}
 	private JLabel getBotLaukia(String pMezua, int x, int y) {
@@ -212,50 +194,7 @@ public class Tablero extends JFrame {
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
-		lauki.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				
-				
-				//TODO HAY ALGUNA FORMA DE BLOQUEAR LAS CASILLAS?
-				//konprobatu arma
-					//Misila bada:
-						//Aukeratu dezakezu? bot matrizean==false balioa du?
-				if(!botMatrizeUkitu[x][y]) {
-					botMatrizeUkitu[x][y]=true;
-					if(botMatrizeOntzi[x][y]) {
-						System.out.println("UKITUA");
-						matrizeEsk.getComponent(y*10+x).setBackground(Color.BLACK);
-						botMatrizeOntzi[x][y]=false;
-						boolean hondoratua=true;
-						for(int i=x-1; i<=x+1; i++) {
-							for(int j=y-1; j<=y+1; j++) {
-								if(i>=0 && i<5 && j>=0 && j<5) {
-									if(botMatrizeOntzi[x][y]) {hondoratua=false;}
-								}
-							}
-						}
-						if (hondoratua) {
-							System.out.println("HONDORATUA");
-							//Dirua gehitu
-						}
-						
-					}else {
-						System.out.println("URA");
-						matrizeEsk.getComponent(y*10+x).setBackground(Color.BLUE);
-					}
-					//Segun zer zegoen mezu bat jarri eta kolorea aldatu + botMatrizea balorean==true
-				}else {
-					System.out.println("Aukeratu beste lauki bat");
-					//Que aparezca otra ventana emergente para que elija otra opcion
-					//Beste bat aukeratu
-				}
-							
-					//Misila ez bada:
-						//TODO
-
-				
-			}
-		});
+		lauki.addMouseListener(getKontroladore());
 		return lauki;
 	}
 	
@@ -301,4 +240,33 @@ public class Tablero extends JFrame {
 		}
 		return datuak;
 	}
+	
+	
+	//KONTROLADOREA:
+	private Kontroladore getKontroladore() {
+		if(kontroladore == null) {
+			kontroladore = new Kontroladore();
+		}
+		return kontroladore;
+	}
+	
+	private class Kontroladore extends MouseAdapter{
+		public void mouseClicked(MouseEvent e) {
+			JLabel jl = (JLabel) e.getComponent();
+			int index = zerrenda.indexOf(jl);
+			int x = index%10;
+			int y = index/10;
+			//TODO
+		}
+	}
+
+	//Observer-ak jasotzen duena:
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 }
