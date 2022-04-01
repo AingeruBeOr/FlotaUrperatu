@@ -8,6 +8,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 
@@ -44,6 +47,7 @@ public class Hasieraketak extends JFrame implements Observer{
 	private Kontroladore kontroladore;
 	private boolean horizontalean;
 	int luzera;
+	private static Hasieraketak nHasieraketak;
 
 	/**
 	 * Launch the application.
@@ -64,8 +68,15 @@ public class Hasieraketak extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
-	public Hasieraketak() {
+	private Hasieraketak() {
 		initialize();
+		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
+	}
+	public static Hasieraketak getNireHasieraketak() {
+		if(nHasieraketak==null) {
+			nHasieraketak= new Hasieraketak();
+		}
+		return nHasieraketak;
 	}
 	private void initialize() {
 		horizontalean=true; //Defektuz horizontalean jarriko dira itsasontziak
@@ -171,13 +182,14 @@ public class Hasieraketak extends JFrame implements Observer{
 		JLabel matrizeGelaxka = new JLabel("");
 		matrizeGelaxka.setOpaque(true);
 		matrizeGelaxka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		matrizeGelaxka.setBackground(Color.LIGHT_GRAY);
+		matrizeGelaxka.setBackground(Color.BLUE);
 		matrizeGelaxka.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 				if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
 					fu.ontziaKokatu(x, y, horizontalean, luzera);
-					switch(luzera){
+					Hasieraketak.getNireHasieraketak().ontziaKokatu(x, y, horizontalean, luzera);
+					/*switch(luzera){
 						case 1:
 							//TODO QUITAR LA OPCION DE ESTE BARCO
 						break;
@@ -190,7 +202,7 @@ public class Hasieraketak extends JFrame implements Observer{
 						case 4:
 							//TODO QUITAR LA OPCION DE ESTE BARCO
 						break;
-					}
+					}*/
 					luzera=0;
 				}
 			}
@@ -230,6 +242,7 @@ public class Hasieraketak extends JFrame implements Observer{
 			}
 			else if(e.getSource().equals("Hegazkin-ontzia")) {
 				luzera=4;
+				System.out.println("Luzera: "+luzera);
 				
 			}
 			else if(e.getSource().equals("Itsaspeko1")) {
@@ -272,8 +285,21 @@ public class Hasieraketak extends JFrame implements Observer{
 		}
 		
 	}
+	private void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		int kont=pLuz;
+		int x=pX;
+		int y=pY;
+		while(pLuz>0) {
+			System.out.println("Koordenatuak:"+x+" "+y);
+			center.getComponent(y*10+x).setBackground(Color.BLACK);
+			kont--;
+			if(pHorizontal) {x++;}
+			else {y++;}
+		}
+	}
 	public void update(Observable arg0, Object arg1) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		
 		// TODO
 	}
 }

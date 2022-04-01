@@ -45,13 +45,13 @@ public class FlotaUrperatu extends Observable{
 		bot= new Bot(1000);
 		jokalaria = new JokNormal(1000);
 		this.armamentuaHasieratu();
-		this.ontziakKokatu();
+		//this.ontziakKokatu();
 		
 	}
 	
 
 
-	private void ontziakKokatu() {
+	/*private void ontziakKokatu() {
 		System.out.println("GOGORATU: Adierazi itsasontziaren lehenengo gelaxka. "
 				+ "Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira. "
 				+ "Bertikalean aldiz, beheruntz joango dira");
@@ -65,7 +65,8 @@ public class FlotaUrperatu extends Observable{
 		for(int i=0; i<4; i++) {
 			System.out.println("Sartu fragata bat (posizio 1)");
 		}
-	} 
+	} */
+	
 	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		int kont=pLuz;
@@ -77,6 +78,7 @@ public class FlotaUrperatu extends Observable{
 			if(pHorizontal) {x++;}
 			else {y++;}
 		}
+
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
@@ -104,7 +106,5 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	
-	/*private void aurrekontuaEsleitu() {
-		
-	}*/
+
 }
