@@ -71,6 +71,7 @@ public class Hasieraketak extends JFrame implements Observer{
 	private Hasieraketak() {
 		initialize();
 		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
+		FlotaUrperatu.getNireFlotaUrperatu().hasieratu();
 	}
 	public static Hasieraketak getNireHasieraketak() {
 		if(nHasieraketak==null) {
@@ -144,12 +145,22 @@ public class Hasieraketak extends JFrame implements Observer{
 		if (horizontalBotoi == null) {
 			horizontalBotoi = new JButton("Horizontalean");
 		}
+		horizontalBotoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				horizontalean=true;
+			}
+		});
 		return horizontalBotoi;
 	}
 	private JButton getBertikalBotoi() {
 		if (bertikalBotoi == null) {
 			bertikalBotoi = new JButton("Bertikalean");
 		}
+		bertikalBotoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				horizontalean=false;
+			}
+		});
 		return bertikalBotoi;
 	}
 	private JLabel getHutsik1() {
@@ -188,7 +199,16 @@ public class Hasieraketak extends JFrame implements Observer{
 				FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 				if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
 					fu.ontziaKokatu(x, y, horizontalean, luzera);
-					Hasieraketak.getNireHasieraketak().ontziaKokatu(x, y, horizontalean, luzera);
+					//Hasieraketak.getNireHasieraketak().ontziaKokatu(x, y, horizontalean, luzera);
+					int kont=luzera;
+					int pX=x;
+					int pY=y;
+					while(kont>0) {
+						center.getComponent(pY*10+pX).setBackground(Color.BLACK);
+						kont--;
+						if(horizontalean) {pX++;}
+						else {pY++;}
+					}
 					/*switch(luzera){
 						case 1:
 							//TODO QUITAR LA OPCION DE ESTE BARCO
@@ -232,17 +252,18 @@ public class Hasieraketak extends JFrame implements Observer{
 	
 	private class Kontroladore implements ActionListener{
 		@Override
+		
 		public void actionPerformed(ActionEvent e) {
 			String ontzi=comboBox.getSelectedItem().toString();
 			System.out.println(ontzi+ " da aukeratutakoa");
-			if(e.getSource().equals(horizontalBotoi)) {
+			/*if(e.getSource().equals(horizontalBotoi)) {
 				horizontalean=true;
 			}
 			else if(e.getSource().equals(bertikalBotoi)) {
 				horizontalean=false;
 				System.out.println(horizontalean);
 			}
-			else if(ontzi.equals("Hegazkin-ontzia")) {
+			else*/ if(ontzi.equals("Hegazkin-ontzia")) {
 				luzera=4;
 				System.out.println("Luzera: "+luzera);
 				
@@ -288,12 +309,15 @@ public class Hasieraketak extends JFrame implements Observer{
 		
 	}
 	private void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		System.out.println("Ontzia kokatuko dugu: luzera "+ pLuz+" horizontal "+pHorizontal);
 		int kont=pLuz;
 		int x=pX;
 		int y=pY;
-		while(pLuz>0) {
+		while(kont>0) {
 			System.out.println("Koordenatuak:"+x+" "+y);
 			center.getComponent(y*10+x).setBackground(Color.BLACK);
+			zerrenda.get(y*10+x).setBackground(Color.BLACK);
+			//matrizeGelaxka.setBackground(Color.BLUE);
 			kont--;
 			if(pHorizontal) {x++;}
 			else {y++;}

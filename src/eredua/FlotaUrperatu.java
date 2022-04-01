@@ -72,13 +72,17 @@ public class FlotaUrperatu extends Observable{
 		int kont=pLuz;
 		int x=pX;
 		int y=pY;
-		while(pLuz>0) {
+		while(kont>0) {
 			jokMatrizeOntzi[x][y]=true;
 			kont--;
 			if(pHorizontal) {x++;}
 			else {y++;}
 		}
-
+		for(int l=0;l<10;l++) {
+			for(int z=0;z<10;z++) {
+				System.out.println(jokMatrizeOntzi[l][z]);
+			}
+		}
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
@@ -89,15 +93,25 @@ public class FlotaUrperatu extends Observable{
 		while(pX>=0 && pX<10 && pY>=0 && pY<10 && kokatu && kont>0) {
 			for(int i=x-1; i<=x+1; i++) {
 				for(int j=y-1; j<=y+1; j++) {
-					if(i>=0 && i<5 && j>=0 && j<5 && jokMatrizeOntzi[x][y]) {
+					if(i>=0 && i<10 && j>=0 && j<10 && jokMatrizeOntzi[i][j]) {
 						kokatu=false;
 					}
 				}
 			}
 			kont--;
-			if(pHorizontal) {x++;}
-			else {y++;}
+			System.out.println("kokatu ahal da momentuz: "+kokatu);
+			System.out.println("gelaxka: "+x+ " "+y);
+			if(pHorizontal) {
+				x++;
+				if(x>=10) {kokatu=false;}
+			}
+			else {
+				y++;
+				if(y>=10) {kokatu=false;}
+			}
 		}
+		if(kokatu) {System.out.println("Ontzia bertan kokatu ahal da");}
+		else {System.out.println("Ontzia ezin da kokatu hor");}
 		return kokatu;
 	}
 	private void armamentuaHasieratu() {
