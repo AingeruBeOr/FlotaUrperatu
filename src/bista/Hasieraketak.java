@@ -233,51 +233,53 @@ public class Hasieraketak extends JFrame implements Observer{
 	private class Kontroladore implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			String ontzi=comboBox.getSelectedItem().toString();
+			System.out.println(ontzi+ " da aukeratutakoa");
 			if(e.getSource().equals(horizontalBotoi)) {
 				horizontalean=true;
 			}
 			else if(e.getSource().equals(bertikalBotoi)) {
 				horizontalean=false;
+				System.out.println(horizontalean);
 			}
-			else if(e.getSource().equals("Hegazkin-ontzia")) {
+			else if(ontzi.equals("Hegazkin-ontzia")) {
 				luzera=4;
 				System.out.println("Luzera: "+luzera);
 				
 			}
-			else if(e.getSource().equals("Itsaspeko1")) {
+			else if(ontzi.equals("Itsaspeko1")) {
 				luzera=3;
 				//TODO
 			}
-			else if(e.getSource().equals("Itsaspeko2")) {
+			else if(ontzi.equals("Itsaspeko2")) {
 				luzera=3;
 				//TODO
 			}
-			else if(e.getSource().equals("Suntzitzailea1")) {
+			else if(ontzi.equals("Suntzitzailea1")) {
 				luzera=2;
 				//TODO
 			}
-			else if(e.getSource().equals("Suntzitzailea2")) {
+			else if(ontzi.equals("Suntzitzailea2")) {
 				luzera=2;
 				//TODO
 			}
-			else if(e.getSource().equals("Suntzitzailea3")) {
+			else if(ontzi.equals("Suntzitzailea3")) {
 				luzera=2;
 				//TODO
 			}
-			else if(e.getSource().equals("Fragata1")) {
+			else if(ontzi.equals("Fragata1")) {
 				luzera=1;
 				//TODO
 			}
-			else if(e.getSource().equals("Fragata2")) {
+			else if(ontzi.equals("Fragata2")) {
 				luzera=1;
 				//TODO
 			}
-			else if(e.getSource().equals("Fragata3")) {
+			else if(ontzi.equals("Fragata3")) {
 				luzera=1;
 				//TODO
 			}
-			else if(e.getSource().equals("Fragata4")) {
+			else if(ontzi.equals("Fragata4")) {
 				luzera=1;
 				//TODO
 			}
