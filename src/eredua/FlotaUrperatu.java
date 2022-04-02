@@ -46,7 +46,66 @@ public class FlotaUrperatu extends Observable{
 		jokalaria = new JokNormal(1000);
 		this.armamentuaHasieratu();
 		
+		
 	}
+	
+	public void  jokatu() {
+		while (!jokoaAmaituDa()) {
+			
+			if (this.txanda) { //jokalaria
+				/*-armamentua erosi, konponketa egin edo ezkutua erabili
+				 * -radarra erabili
+				 * -tiro egin
+				 */
+				
+				
+				//Arma aukeratu eta tiroa egin 
+				Arma pArma= zeinArmaAukeratuDu(); //este metodo estara en bista
+				if (pArma instanceof Misil) { 
+					// kasilla bakarra
+					//bista.ukituaJarri(x,y)
+				}
+				else if (pArma instanceof Bonba){ 
+						//for ingurukoetarako
+						//bista.ukituaJarri(x,y)
+				}
+			}
+			else { //bot-a
+				
+			}
+		}
+	}
+	
+	private boolean jokoaAmaituDa() {
+		boolean amaitu=false;
+		if (!ontzirenBatGeratzenDa()) { 			//ez bada ontzirik geratzen
+			if (!this.txanda) {  					//botaren txanda da --> jokalaria irabazlea zen aurreko rondan
+				System.out.println("Irabazlea jokalaria da");
+			}
+			else {
+				System.out.println("Irabazlea bot-a da");
+			}
+		}
+		
+		
+		return amaitu;
+	}
+	
+	private boolean ontzirenBatGeratzenDa() {
+		boolean ontzirenBatGeratzenDa=false;
+		
+		while (!ontzirenBatGeratzenDa) {
+			for (int i=0; i<10; i++) {
+				for (int j=0; j<10; j++) {
+					if (jokMatrizeOntzi[i][j] || botMatrizeOntzi [i][j] ) {
+						ontzirenBatGeratzenDa=true;
+					}
+				}
+			}
+		}
+		return ontzirenBatGeratzenDa;
+	}
+	
 		
 	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
