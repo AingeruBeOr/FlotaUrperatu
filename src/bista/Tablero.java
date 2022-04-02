@@ -266,7 +266,7 @@ public class Tablero extends JFrame implements Observer{
 			int index = zerrendaBot.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			//TODO DEPENDIENDO DE SI ES MISIL O NO ESTO CAMBIA Y HABRIA Q ACTUALIZAR LAS MATRICES DE FLOTAURPERATU
+			//TODO DEPENDIENDO DE SI ES MISIL O NO ESTO CAMBIA Y HABRIA Q ACTUALIZAR LAS MATRICES DE FLOTAURPERATU 
 			if(!fu.botMatrizeUkituta(x, y)) {
 				if(fu.botMatrizeOntziaDu(x, y)) {
 					jl.setBackground(Color.RED);
