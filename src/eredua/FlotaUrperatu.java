@@ -29,14 +29,33 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeUkitu= new boolean[10][10];
 		jokMatrizeOntzi= new boolean[10][10];
 		botMatrizeOntzi= new boolean[10][10];
+		this.botariOntziakJarri();
 		for(int l=0;l<10;l++) {
 			for(int z=0;z<10;z++) {
 				jokMatrizeOntzi[l][z]=false;
-				botMatrizeOntzi[l][z]=false;
 				jokMatrizeUkitu[l][z]=false;
 				botMatrizeUkitu[l][z]=false;
 			}
 		}
+	}
+	private void botariOntziakJarri() {
+	//TODO FIJO QUE SE PUEDE HACER DE OTRA MANERA
+		for(int i=0; i<10; i++) {
+			for(int j=0; j<10; j++) {
+				if(i==0||i==2||i==4) {botMatrizeOntzi[i][j]=true;}
+				else {botMatrizeOntzi[i][j]=false;}
+			}
+		}
+		botMatrizeOntzi[0][4]=false;
+		botMatrizeOntzi[0][8]=false;
+		botMatrizeOntzi[0][9]=false;
+		botMatrizeOntzi[2][3]=false;
+		botMatrizeOntzi[2][6]=false;
+		botMatrizeOntzi[2][9]=false;
+		botMatrizeOntzi[4][2]=false;
+		botMatrizeOntzi[4][4]=false;
+		botMatrizeOntzi[4][6]=false;
+		botMatrizeOntzi[4][8]=false;
 	}
 	
 	public void hasieratu() {
@@ -44,9 +63,7 @@ public class FlotaUrperatu extends Observable{
 		txanda=true;
 		bot= new Bot(1000);
 		jokalaria = new JokNormal(1000);
-		this.armamentuaHasieratu();
-		
-		
+		this.armamentuaHasieratu();	
 	}
 	
 	public void  jokatu() {
@@ -162,6 +179,8 @@ public class FlotaUrperatu extends Observable{
 		bot.armamentuaHasieratu();
 	}
 	
+	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
+	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
 	
 
 }
