@@ -5,4 +5,5 @@ public class Misil extends ArmamentuSuntsitzaile {
 		super();
 		super.prezioa=10;
 	}
+	public void suntsitu() {}
 }

@@ -42,11 +42,11 @@ public class Tablero extends JFrame implements Observer{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(ArrayList<JLabel> pZ) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tablero frame = new Tablero();
+					Tablero frame = new Tablero(pZ);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,8 @@ public class Tablero extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
-	public Tablero() {
+	public Tablero(ArrayList<JLabel> pZ) {
+		zerrenda=pZ;
 		initialize();
 	}
 	

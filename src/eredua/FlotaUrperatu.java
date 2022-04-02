@@ -60,7 +60,7 @@ public class FlotaUrperatu extends Observable{
 				
 				
 				//Arma aukeratu eta tiroa egin 
-				Arma pArma= zeinArmaAukeratuDu(); //este metodo estara en bista
+				Arma pArma= //zeinArmaAukeratuDu(); //este metodo estara en bista
 				if (pArma instanceof Misil) { 
 					// kasilla bakarra
 					//bista.ukituaJarri(x,y)
@@ -142,8 +142,8 @@ public class FlotaUrperatu extends Observable{
 				}
 			}
 			kont--;
-			System.out.println("Kokatu ahal da momentuz: "+kokatu);
-			System.out.println("gelaxka: "+x+ " "+y);
+			//System.out.println("Kokatu ahal da momentuz: "+kokatu);
+			//System.out.println("gelaxka: "+x+ " "+y);
 			if(pHorizontal) {
 				x++;
 				if(x>10) {kokatu=false;}

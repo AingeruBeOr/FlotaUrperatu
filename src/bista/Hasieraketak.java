@@ -56,6 +56,7 @@ public class Hasieraketak extends JFrame implements Observer{
 	private JPanel panel1;
 	private JLabel aukeratutakoa;
 	private JLabel mezuaComboBox;
+	private int faltaDira;
 
 	/**
 	 * Launch the application.
@@ -84,6 +85,7 @@ public class Hasieraketak extends JFrame implements Observer{
 	private void initialize() {
 		horizontalean=true; //Defektuz horizontalean jarriko dira itsasontziak
 		luzera=0;
+		faltaDira=10;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -281,41 +283,15 @@ public class Hasieraketak extends JFrame implements Observer{
 			}
 			else if(ontzi.equals("Hegazkin-ontzia")) {
 				luzera=4;
-				System.out.println("Luzera: "+luzera);
 			}
-			else if(ontzi.equals("Itsaspeko1")) {
+			else if(ontzi.equals("Itsaspeko1")||ontzi.equals("Itsaspeko2")) {
 				luzera=3;
-				//TODO
 			}
-			else if(ontzi.equals("Itsaspeko2")) {
-				luzera=3;
-				//TODO
-			}
-			else if(ontzi.equals("Suntzitzailea1")) {
+			else if(ontzi.equals("Suntzitzailea1")||ontzi.equals("Suntzitzailea2")||ontzi.equals("Suntzitzailea3")) {
 				luzera=2;
 				//TODO
 			}
-			else if(ontzi.equals("Suntzitzailea2")) {
-				luzera=2;
-				//TODO
-			}
-			else if(ontzi.equals("Suntzitzailea3")) {
-				luzera=2;
-				//TODO
-			}
-			else if(ontzi.equals("Fragata1")) {
-				luzera=1;
-				//TODO
-			}
-			else if(ontzi.equals("Fragata2")) {
-				luzera=1;
-				//TODO
-			}
-			else if(ontzi.equals("Fragata3")) {
-				luzera=1;
-				//TODO
-			}
-			else if(ontzi.equals("Fragata4")) {
+			else if(ontzi.equals("Fragata1")||ontzi.equals("Fragata2")||ontzi.equals("Fragata3")||ontzi.equals("Fragata4")) {
 				luzera=1;
 				//TODO
 			}
@@ -339,8 +315,20 @@ public class Hasieraketak extends JFrame implements Observer{
 					kont--;
 					if(horizontalean) pX++;
 					else pY++;
+				} 
+				faltaDira--;
+				if(faltaDira<=0) {
+					Tablero.main( zerrenda);
+					setVisible(false);
 				}
-				getComboBox().remove(getComboBox().getSelectedIndex()); //TODO esto hace cosas raras
+				else {
+					System.out.println(faltaDira+"konponente daude");
+					getComboBox().removeItem(getComboBox().getSelectedItem());
+					luzera=0;
+				}
+				
+			
+				//getComboBox().remove(getComboBox().getSelectedIndex()); //Esto hace cosas raras
 			}
 		}
 		
