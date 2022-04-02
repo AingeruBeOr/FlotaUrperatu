@@ -145,22 +145,16 @@ public class Hasieraketak extends JFrame implements Observer{
 		if (horizontalBotoi == null) {
 			horizontalBotoi = new JButton("Horizontalean");
 		}
-		horizontalBotoi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				horizontalean=true;
-			}
-		});
+		horizontalBotoi.addActionListener(getKontroladore());
+		
 		return horizontalBotoi;
 	}
 	private JButton getBertikalBotoi() {
 		if (bertikalBotoi == null) {
 			bertikalBotoi = new JButton("Bertikalean");
 		}
-		bertikalBotoi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				horizontalean=false;
-			}
-		});
+		bertikalBotoi.addActionListener(getKontroladore());
+		
 		return bertikalBotoi;
 	}
 	private JLabel getHutsik1() {
@@ -251,20 +245,20 @@ public class Hasieraketak extends JFrame implements Observer{
 		return kontroladore;
 	}
 	
-	private class Kontroladore implements ActionListener{
+	private class Kontroladore extends MouseAdapter implements ActionListener {
 		@Override
 		
 		public void actionPerformed(ActionEvent e) {
 			String ontzi=comboBox.getSelectedItem().toString();
 			System.out.println(ontzi+ " da aukeratutakoa");
-			/*if(e.getSource().equals(horizontalBotoi)) {
+			if(e.getSource().equals(horizontalBotoi)) {
 				horizontalean=true;
 			}
 			else if(e.getSource().equals(bertikalBotoi)) {
 				horizontalean=false;
 				System.out.println(horizontalean);
 			}
-			else*/ if(ontzi.equals("Hegazkin-ontzia")) {
+			else if(ontzi.equals("Hegazkin-ontzia")) {
 				luzera=4;
 				System.out.println("Luzera: "+luzera);
 				
