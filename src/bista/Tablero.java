@@ -75,8 +75,8 @@ public class Tablero extends JFrame implements Observer{
 	private void matrizeaSortu() {
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				matrizeEzk.add(getJokLaukia("", z, l));
-				JLabel botlauki = getBotLaukia("", z, l); 
+				matrizeEzk.add(getJokLaukia());
+				JLabel botlauki = getBotLaukia(); 
 				matrizeEsk.add(botlauki);
 				zerrenda.add(botlauki);
 			}
@@ -182,15 +182,15 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return bEskuin;
 	}
-	private JLabel getJokLaukia(String pMezua, int x, int y) {
-		JLabel lauki = new JLabel(pMezua);
+	private JLabel getJokLaukia() {
+		JLabel lauki = new JLabel("");
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
 		return lauki;
 	}
-	private JLabel getBotLaukia(String pMezua, int x, int y) {
-		JLabel lauki = new JLabel(pMezua);
+	private JLabel getBotLaukia() {
+		JLabel lauki = new JLabel("");
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
