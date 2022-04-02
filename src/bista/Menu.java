@@ -160,6 +160,5 @@ public class Menu extends JFrame {
 				System.exit(0);
 			}			
 		}
-		
 	}
 }

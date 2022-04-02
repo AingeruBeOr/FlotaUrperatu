@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 
@@ -29,6 +30,8 @@ import java.awt.event.MouseEvent;
 
 
 import eredua.FlotaUrperatu;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 
 public class Hasieraketak extends JFrame implements Observer{
@@ -47,6 +50,10 @@ public class Hasieraketak extends JFrame implements Observer{
 	private Kontroladore kontroladore;
 	private boolean horizontalean;
 	int luzera;
+	private JPanel south;
+	private JLabel labelInstrukzio1;
+	private JLabel labelInstrukzio2;
+	private JLabel labelInstrukzio3;
 
 	/**
 	 * Launch the application.
@@ -84,6 +91,7 @@ public class Hasieraketak extends JFrame implements Observer{
 		contentPane.add(getCenter(), BorderLayout.CENTER);
 		contentPane.add(getRight(), BorderLayout.EAST);
 		contentPane.add(getNorth(), BorderLayout.NORTH);
+		contentPane.add(getSouth(), BorderLayout.SOUTH);
 		this.zerrenda = new ArrayList<JLabel>();
 		matrizeaSortu();
 		setLocationRelativeTo(null);
@@ -187,11 +195,6 @@ public class Hasieraketak extends JFrame implements Observer{
 		if (label2 == null) {
 			label2 = new JLabel("Partida hasi baino lehen, zure itsasontzien posizioa zehaztu.");
 			label2.setHorizontalAlignment(SwingConstants.CENTER);
-			/*+
-			"GOGORATU: Adierazi itsasontziaren lehenengo gelaxka. \r\n"+
-			"Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira. "+
-			 "Bertikalean aldiz, beheruntz joango dira"*/
-			
 		}
 		return label2;
 	}
@@ -317,5 +320,36 @@ public class Hasieraketak extends JFrame implements Observer{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		
 		// TODO
+	}
+	private JPanel getSouth() {
+		if (south == null) {
+			south = new JPanel();
+			south.setLayout(new GridLayout(3, 1, 0, 0));
+			south.add(getLabelInstrukzio1());
+			south.add(getLabelInstrukzio2());
+			south.add(getLabelInstrukzio3());
+		}
+		return south;
+	}
+	private JLabel getLabelInstrukzio1() {
+		if (labelInstrukzio1 == null) {
+			labelInstrukzio1 = new JLabel("GOGORATU: Adierazi itsasontziaren lehenengo gelaxka.");
+			labelInstrukzio1.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio1;
+	}
+	private JLabel getLabelInstrukzio2() {
+		if (labelInstrukzio2 == null) {
+			labelInstrukzio2 = new JLabel("Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira.");
+			labelInstrukzio2.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio2;
+	}
+	private JLabel getLabelInstrukzio3() {
+		if (labelInstrukzio3 == null) {
+			labelInstrukzio3 = new JLabel("Bertikalean aldiz, beheruntz joango dira.");
+			labelInstrukzio3.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio3;
 	}
 }
