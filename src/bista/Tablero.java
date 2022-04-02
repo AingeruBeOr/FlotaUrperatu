@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import eredua.FlotaUrperatu;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -73,6 +76,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 
 	private void matrizeaSortu() {
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
 				matrizeEzk.add(getJokLaukia());
