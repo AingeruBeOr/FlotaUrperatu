@@ -45,28 +45,9 @@ public class FlotaUrperatu extends Observable{
 		bot= new Bot(1000);
 		jokalaria = new JokNormal(1000);
 		this.armamentuaHasieratu();
-		//this.ontziakKokatu();
 		
 	}
-	
-
-
-	/*private void ontziakKokatu() {
-		System.out.println("GOGORATU: Adierazi itsasontziaren lehenengo gelaxka. "
-				+ "Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira. "
-				+ "Bertikalean aldiz, beherantz joango dira");
-		System.out.println("Sartu hegazkin-ontzi bat (4 posizio)");	
-		for(int i=0; i<2; i++) {
-			System.out.println("Sartu itsaspeko bat (3 posizio)");
-		}
-		for(int i=0; i<3; i++) {
-			System.out.println("Sartu suntzitzaile bat (2 posizio)");
-		}
-		for(int i=0; i<4; i++) {
-			System.out.println("Sartu fragata bat (posizio 1)");
-		}
-	} */
-	
+		
 	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		int kont=pLuz;

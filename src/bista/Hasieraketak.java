@@ -47,7 +47,6 @@ public class Hasieraketak extends JFrame implements Observer{
 	private Kontroladore kontroladore;
 	private boolean horizontalean;
 	int luzera;
-	private static Hasieraketak nHasieraketak;
 
 	/**
 	 * Launch the application.
@@ -68,16 +67,10 @@ public class Hasieraketak extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
-	private Hasieraketak() {
+	public Hasieraketak() {
 		initialize();
 		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
 		FlotaUrperatu.getNireFlotaUrperatu().hasieratu();
-	}
-	public static Hasieraketak getNireHasieraketak() {
-		if(nHasieraketak==null) {
-			nHasieraketak= new Hasieraketak();
-		}
-		return nHasieraketak;
 	}
 	private void initialize() {
 		horizontalean=true; //Defektuz horizontalean jarriko dira itsasontziak
@@ -99,7 +92,7 @@ public class Hasieraketak extends JFrame implements Observer{
 	private void matrizeaSortu() {
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				JLabel label = getMatrizeGelaxka(z,l);
+				JLabel label = getMatrizeGelaxka();
 				center.add(label);
 				zerrenda.add(label);
 			}
@@ -182,45 +175,12 @@ public class Hasieraketak extends JFrame implements Observer{
 		}
 		return comboBox;
 	}
-	private JLabel getMatrizeGelaxka(int x, int y) {
-
+	private JLabel getMatrizeGelaxka() {
 		JLabel matrizeGelaxka = new JLabel("");
 		matrizeGelaxka.setOpaque(true);
 		matrizeGelaxka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		matrizeGelaxka.setBackground(Color.BLUE);
-		matrizeGelaxka.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-				if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
-					fu.ontziaKokatu(x, y, horizontalean, luzera);
-					//Hasieraketak.getNireHasieraketak().ontziaKokatu(x, y, horizontalean, luzera);
-					int kont=luzera;
-					int pX=x;
-					int pY=y;
-					while(kont>0) {
-						center.getComponent(pY*10+pX).setBackground(Color.BLACK);
-						kont--;
-						if(horizontalean) {pX++;}
-						else {pY++;}
-					}
-					/*switch(luzera){
-						case 1:
-							//TODO QUITAR LA OPCION DE ESTE BARCO
-						break;
-						case 2:
-							//TODO QUITAR LA OPCION DE ESTE BARCO
-						break;
-						case 3:
-							//TODO QUITAR LA OPCION DE ESTE BARCO
-						break;
-						case 4:
-							//TODO QUITAR LA OPCION DE ESTE BARCO
-						break;
-					}*/
-					luzera=0;
-				}
-			}
-		});
+		matrizeGelaxka.addMouseListener(getKontroladore());
 		return matrizeGelaxka;
 	}
 	private JLabel getLabel2() {
@@ -300,6 +260,41 @@ public class Hasieraketak extends JFrame implements Observer{
 				//TODO
 			}
 			// TODO Auto-generated method stub
+		}
+		
+		public void mouseClicked(MouseEvent e) {
+			JLabel jl = (JLabel) e.getComponent();
+			int index = zerrenda.indexOf(jl);
+			int x = index%10;
+			int y = index/10;
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
+				fu.ontziaKokatu(x, y, horizontalean, luzera);
+				int kont=luzera;
+				int pX=x;
+				int pY=y;
+				while(kont>0) {
+					center.getComponent(pY*10+pX).setBackground(Color.BLACK);
+					kont--;
+					if(horizontalean) {pX++;}
+					else {pY++;}
+				}
+				/*switch(luzera){
+					case 1:
+						//TODO QUITAR LA OPCION DE ESTE BARCO
+					break;
+					case 2:
+						//TODO QUITAR LA OPCION DE ESTE BARCO
+					break;
+					case 3:
+						//TODO QUITAR LA OPCION DE ESTE BARCO
+					break;
+					case 4:
+						//TODO QUITAR LA OPCION DE ESTE BARCO
+					break;
+				}*/
+				luzera=0;
+			}
 		}
 		
 	}
