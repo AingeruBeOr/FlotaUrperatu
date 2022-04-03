@@ -1,6 +1,8 @@
 package eredua;
 import java.awt.Color;
 import java.util.Observable;
+
+import bista.Tablero;
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
 	//Matrize hauek true balioa badute jada bertan misil bat erori da (eta ez da konponketarik egon)
@@ -66,34 +68,17 @@ public class FlotaUrperatu extends Observable{
 		this.armamentuaHasieratu();	
 	}
 	
-	public void  jokatu() {
-		while (!jokoaAmaituDa()) {
-			
-			if (this.txanda) { //jokalaria
-				/*-armamentua erosi, konponketa egin edo ezkutua erabili
-				 * -radarra erabili
-				 * -tiro egin
-				 */
-				
-				
-				//Arma aukeratu eta tiroa egin 
-				Arma pArma= //zeinArmaAukeratuDu(); //este metodo estara en bista
-				if (pArma instanceof Misil) { 
-					// kasilla bakarra
-					//bista.ukituaJarri(x,y)
-				}
-				else if (pArma instanceof Bonba){ 
-						//for ingurukoetarako
-						//bista.ukituaJarri(x,y)
-				}
-			}
-			else { //bot-a
-				
-			}
-		}
-	}
 	
-	private boolean jokoaAmaituDa() {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public boolean jokoaAmaituDa() {
 		boolean amaitu=false;
 		if (!ontzirenBatGeratzenDa()) { 			//ez bada ontzirik geratzen
 			if (!this.txanda) {  					//botaren txanda da --> jokalaria irabazlea zen aurreko rondan
@@ -180,7 +165,13 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
-	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
+	public boolean botMatrizeOntziaDu(int x, int y){
+		return botMatrizeOntzi[x][y];}
 	
 
+	public void botarenOntziaUkituDu(int x, int y) { //botaren matrizeak eguneratu, ukituta dagoela adierazi eta ontzirik ez dagoela 
+		botMatrizeUkitu[x][y]=true;
+		botMatrizeOntzi[x][y]=false;
+	}
+	
 }

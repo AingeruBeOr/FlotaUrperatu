@@ -251,6 +251,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 	
 	
+	
 	//KONTROLADOREA:
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
@@ -259,6 +260,7 @@ public class Tablero extends JFrame implements Observer{
 		return kontroladore;
 	}
 	
+	
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
 			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
@@ -266,16 +268,98 @@ public class Tablero extends JFrame implements Observer{
 			int index = zerrendaBot.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			//TODO DEPENDIENDO DE SI ES MISIL O NO ESTO CAMBIA Y HABRIA Q ACTUALIZAR LAS MATRICES DE FLOTAURPERATU 
-			if(!fu.botMatrizeUkituta(x, y)) {
-				if(fu.botMatrizeOntziaDu(x, y)) {
-					jl.setBackground(Color.RED);
-				}else{
-					jl.setBackground(Color.BLUE);
+				//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
+				if(!fu.botMatrizeUkituta(x, y)) { 
+					if(fu.botMatrizeOntziaDu(x, y)) {
+						jl.setBackground(Color.RED);
+						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
+						
+						
+						//BOTONES DE ARMAS HACER CON SWITCH
+						//si es un misil mirar los de alrededdor, si es bonba ya esta
+						//Zein arma aukeratu duen esango duen metodoa (public pArma zeinArmaAukeratu())
+						
+						/*Arma pArma= zeinArmaAukeratu();
+						if (pArma  instanceof Misil) {
+							this.misilTiroa(x,y);
+						}
+						*/
+						
+					}else{
+						jl.setBackground(Color.BLUE);
+					}
 				}
+			
+			
+			
+			
+		}
+
+		private void misilTiroa( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			if (x>0 && fu.botMatrizeOntziaDu(x-1, y) ) { 
+				this.goikoakAztertu( x-1, y); 
+				
+			}
+			else if (x<9 && fu.botMatrizeOntziaDu(x+1, y)) {
+				this.behekoakAztertu( x+1, y);
+			}
+						
+			else if (y>0 && fu.botMatrizeOntziaDu(x, y-1)) {
+				this.ezkerrekoakAztertu( x, y-1);
+			}
+			else if (y<9 && fu.botMatrizeOntziaDu(x, y+1)) {
+				this.eskumakoakAztertu( x, y+1);
+			}
+			
+			
+		}
+		private void goikoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (x>=0 && fu.botMatrizeOntziaDu(x, y)) {  
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				x--;
 			}
 		}
+		private void behekoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (x<=9 && fu.botMatrizeOntziaDu(x, y)) { 
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				x++;
+			}
+		}
+		private void ezkerrekoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (y>=0 && fu.botMatrizeOntziaDu(x, y)) {
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				y--;
+			}
+		}
+		
+		private void eskumakoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (y<=9 && fu.botMatrizeOntziaDu(x, y)) {
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				y++;
+			}
+		}
+		
+		
+		
+		private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
+			matrizeEsk.getComponent(y*10+x).setBackground(c);
+		}
 	}
+	
+	
+	
+
+	
+	
 
 	//Observer-ak jasotzen duena:
 	@Override
