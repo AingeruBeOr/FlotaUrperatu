@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import eredua.FlotaUrperatu;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -34,16 +37,17 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel info;
 	private JPanel datuak;
 	private Kontroladore kontroladore;
-	private ArrayList<JLabel> zerrenda;
+	private ArrayList<JLabel> zerrendaBot;
+	private ArrayList<JLabel> zerrendaJok;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(ArrayList<JLabel> pZ) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tablero frame = new Tablero();
+					Tablero frame = new Tablero(pZ);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +59,8 @@ public class Tablero extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
-	public Tablero() {
+	public Tablero(ArrayList<JLabel> pZ) {
+		zerrendaJok=pZ;
 		initialize();
 	}
 	
@@ -67,18 +72,22 @@ public class Tablero extends JFrame implements Observer{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
-		this.zerrenda = new ArrayList<>();
+		this.zerrendaBot = new ArrayList<>();
 		matrizeaSortu();
 		setLocationRelativeTo(null);
 	}
 
 	private void matrizeaSortu() {
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		int kont=0;
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				matrizeEzk.add(getJokLaukia());
+				JLabel jokLauki=getBotLaukia();
+				jokLauki.setBackground(zerrendaJok.get(l*10+z).getBackground());
+				matrizeEzk.add(jokLauki);
 				JLabel botlauki = getBotLaukia(); 
 				matrizeEsk.add(botlauki);
-				zerrenda.add(botlauki);
+				zerrendaBot.add(botlauki);
 			}
 		}
 	}
@@ -252,11 +261,19 @@ public class Tablero extends JFrame implements Observer{
 	
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 			JLabel jl = (JLabel) e.getComponent();
-			int index = zerrenda.indexOf(jl);
+			int index = zerrendaBot.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			//TODO
+			//TODO DEPENDIENDO DE SI ES MISIL O NO ESTO CAMBIA Y HABRIA Q ACTUALIZAR LAS MATRICES DE FLOTAURPERATU 
+			if(!fu.botMatrizeUkituta(x, y)) {
+				if(fu.botMatrizeOntziaDu(x, y)) {
+					jl.setBackground(Color.RED);
+				}else{
+					jl.setBackground(Color.BLUE);
+				}
+			}
 		}
 	}
 
