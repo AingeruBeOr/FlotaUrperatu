@@ -52,11 +52,11 @@ public class Hasieraketak extends JFrame implements Observer{
 	private ArrayList<JLabel> zerrenda;
 	private Kontroladore kontroladore;
 	private boolean horizontalean;
-	private int luzera;
 	private JPanel panel1;
 	private JLabel aukeratutakoa;
 	private JLabel mezuaComboBox;
 	private int faltaDira;
+	private JLabel labelTxarto;
 
 	/**
 	 * Launch the application.
@@ -80,12 +80,11 @@ public class Hasieraketak extends JFrame implements Observer{
 	public Hasieraketak() {
 		initialize();
 		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
-		FlotaUrperatu.getNireFlotaUrperatu().hasieratu();
 	}
 	private void initialize() {
 		horizontalean=true; //Defektuz horizontalean jarriko dira itsasontziak
-		luzera=0;
-		faltaDira=10;
+		faltaDira=10;		
+		this.zerrenda = new ArrayList<JLabel>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -96,7 +95,6 @@ public class Hasieraketak extends JFrame implements Observer{
 		contentPane.add(getRight(), BorderLayout.EAST);
 		contentPane.add(getNorth(), BorderLayout.NORTH);
 		contentPane.add(getSouth(), BorderLayout.SOUTH);
-		this.zerrenda = new ArrayList<JLabel>();
 		matrizeaSortu();
 		setLocationRelativeTo(null);
 	}
@@ -126,6 +124,7 @@ public class Hasieraketak extends JFrame implements Observer{
 			right.add(getAukeratutakoa());
 			right.add(getBertikalBotoi());
 			right.add(getHorizontalBotoi());
+			right.add(getLabelTxarto());
 		}
 		return right;
 	}
@@ -205,6 +204,14 @@ public class Hasieraketak extends JFrame implements Observer{
 		}
 		return aukeratutakoa;
 	}
+	private JLabel getLabelTxarto() {
+		if (labelTxarto == null) {
+			labelTxarto = new JLabel("");
+			labelTxarto.setForeground(Color.RED);
+			labelTxarto.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelTxarto;
+	}
 	private JPanel getPanel1() {
 		if (panel1 == null) {
 			panel1 = new JPanel();
@@ -235,7 +242,6 @@ public class Hasieraketak extends JFrame implements Observer{
 			comboBox.addItem("Fragata3");
 			comboBox.addItem("Fragata4");
 			
-			//TODO beste guztiak gehitu
 			comboBox.addActionListener(getKontroladore());
 		}
 		return comboBox;
@@ -270,18 +276,24 @@ public class Hasieraketak extends JFrame implements Observer{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String ontzi = comboBox.getSelectedItem().toString();
 			if(e.getSource().equals(horizontalBotoi)) {
 				horizontalBotoi.setBackground(Color.GREEN);
 				bertikalBotoi.setBackground(Color.GRAY);
 				horizontalean=true;
+				mezuaEguneratu();
 			}
 			else if(e.getSource().equals(bertikalBotoi)) {
 				horizontalBotoi.setBackground(Color.GRAY);
 				bertikalBotoi.setBackground(Color.GREEN);
 				horizontalean=false;
+				mezuaEguneratu();
 			}
-			else if(ontzi.equals("Hegazkin-ontzia")) {
+		}
+		
+		public void mouseClicked(MouseEvent e) {
+			int luzera = 0;
+			String ontzi = comboBox.getSelectedItem().toString();
+			if(ontzi.equals("Hegazkin-ontzia")) {
 				luzera=4;
 			}
 			else if(ontzi.equals("Itsaspeko1")||ontzi.equals("Itsaspeko2")) {
@@ -289,23 +301,17 @@ public class Hasieraketak extends JFrame implements Observer{
 			}
 			else if(ontzi.equals("Suntzitzailea1")||ontzi.equals("Suntzitzailea2")||ontzi.equals("Suntzitzailea3")) {
 				luzera=2;
-				//TODO
 			}
 			else if(ontzi.equals("Fragata1")||ontzi.equals("Fragata2")||ontzi.equals("Fragata3")||ontzi.equals("Fragata4")) {
 				luzera=1;
-				//TODO
 			}
-			mezuaEguneratu();
-			// TODO Auto-generated method stub
-		}
-		
-		public void mouseClicked(MouseEvent e) {
 			JLabel jl = (JLabel) e.getComponent();
 			int index = zerrenda.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
 			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 			if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
+				getLabelTxarto().setText("");
 				fu.ontziaKokatu(x, y, horizontalean, luzera);
 				int kont=luzera;
 				int pX=x;
@@ -322,32 +328,19 @@ public class Hasieraketak extends JFrame implements Observer{
 					setVisible(false);
 				}
 				else {
-					System.out.println(faltaDira+"konponente daude");
+					System.out.println(faltaDira+" konponente daude");
 					getComboBox().removeItem(getComboBox().getSelectedItem());
 					luzera=0;
-				}
-				
-			
-				//getComboBox().remove(getComboBox().getSelectedIndex()); //Esto hace cosas raras
+				}			
+			}
+			else {
+				getLabelTxarto().setText("Ontzia ezin da hor kokatu.");
 			}
 		}
 		
 	}
-	/*private void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
-		System.out.println("Ontzia kokatuko dugu: luzera "+ pLuz+" horizontal "+pHorizontal);
-		int kont=pLuz;
-		int x=pX;
-		int y=pY;
-		while(kont>0) {
-			System.out.println("Koordenatuak:"+x+" "+y);
-			center.getComponent(y*10+x).setBackground(Color.BLACK);
-			zerrenda.get(y*10+x).setBackground(Color.BLACK);
-			//matrizeGelaxka.setBackground(Color.BLUE);
-			kont--;
-			if(pHorizontal) {x++;}
-			else {y++;}
-		}
-	}*/
+	
+	
 	public void update(Observable arg0, Object arg1) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		

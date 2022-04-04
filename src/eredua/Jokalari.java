@@ -1,11 +1,13 @@
 package eredua;
-
-public abstract class Jokalari {
+import java.util.Observable;
+public abstract class Jokalari extends Observable {
 	protected float dirua;
 	protected ArmamentuZerrenda armak;
 	protected ItsasontziZerrenda itsasontzi;
 	protected boolean[][] matrizeUkitu;
 	protected boolean[][] matrizeOntzi;
+	protected ItsasontziZerrenda itsasontziak;
+	
 	public Jokalari ( float pD ) {
 		matrizeUkitu=new boolean[10][10];
 		matrizeOntzi=new boolean[10][10];
@@ -19,16 +21,15 @@ public abstract class Jokalari {
 		}
 	}
 	
-	protected ItsasontziZerrenda itsasontziak;
 	protected abstract void txandaJokatu();
 	protected abstract void tiroEgin();
+	protected abstract boolean tiroaOndoEginDu();
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
 	protected abstract void radarraKontsultatu();
 	
 	protected void armamentuaHasieratu() {
-		Bonba a=new Bonba();
+		Misil a = new Misil();
 		armak.gehituOrdenatua(a);
 	}
-	
 }

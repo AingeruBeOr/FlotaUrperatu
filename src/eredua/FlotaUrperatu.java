@@ -5,7 +5,7 @@ import java.util.Observable;
 import bista.Tablero;
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
-	//Matrize hauek true balioa badute jada bertan misil bat erori da (eta ez da konponketarik egon)
+	//Matrize hauek true balioa badute, jada bertan misil bat erori da (eta ez da konponketarik egon)
 	private boolean[][] jokMatrizeUkitu;
 	private boolean[][] botMatrizeUkitu;
 	//Matrize hauek true balioa badute ontzia dute barnean
@@ -18,12 +18,22 @@ public class FlotaUrperatu extends Observable{
 	// private boolean lehenengoRonda; Menuan jarri
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
 	
-	private FlotaUrperatu() {}
+	private FlotaUrperatu() {
+		hasieratu();
+	}
 	public static FlotaUrperatu getNireFlotaUrperatu() {
 		if (nireFlota==null) {
 			nireFlota=new FlotaUrperatu();
 		}
 		return nireFlota;
+	}
+	
+	private void hasieratu() {
+		this.hasieratuMatrizeak();
+		txanda=true;
+		bot= new Bot(1000);
+		jokalaria = new JokNormal(1000);
+		this.armamentuaHasieratu();	
 	}
 	
 	private void hasieratuMatrizeak(){
@@ -60,22 +70,6 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeOntzi[4][8]=false;
 	}
 	
-	public void hasieratu() {
-		this.hasieratuMatrizeak();
-		txanda=true;
-		bot= new Bot(1000);
-		jokalaria = new JokNormal(1000);
-		this.armamentuaHasieratu();	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public boolean jokoaAmaituDa() {
@@ -109,7 +103,7 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 		
-	//PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAKKOKATU-REN BARRUAN
+	//TODO PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAK KOKATU-REN BARRUAN
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		int kont=pLuz;
 		int x=pX;
@@ -155,8 +149,8 @@ public class FlotaUrperatu extends Observable{
 				if(y>10) {kokatu=false;}
 			}
 		}
-		if(kokatu) {System.out.println("Ontzia bertan kokatu ahal da");}
-		else {System.out.println("Ontzia ezin da kokatu hor");}
+		if(kokatu) System.out.println("Ontzia bertan kokatu ahal da");
+		else System.out.println("Ontzia ezin da kokatu hor");
 		return kokatu;
 	}
 	private void armamentuaHasieratu() {
@@ -165,13 +159,13 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
-	public boolean botMatrizeOntziaDu(int x, int y){
-		return botMatrizeOntzi[x][y];}
+	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
 	
 
 	public void botarenOntziaUkituDu(int x, int y) { //botaren matrizeak eguneratu, ukituta dagoela adierazi eta ontzirik ez dagoela 
 		botMatrizeUkitu[x][y]=true;
 		botMatrizeOntzi[x][y]=false;
 	}
-	
+	public Jokalari getJok() {return this.jokalaria;}
+	public Jokalari getBot() {return this.bot;}
 }
