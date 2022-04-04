@@ -1,6 +1,8 @@
 package eredua;
+import java.util.*;
 
-public class JokNormal extends Jokalari{
+
+public class JokNormal  extends Jokalari{
 
 	public JokNormal( float pD ) {
 		super(pD);
@@ -10,5 +12,11 @@ public class JokNormal extends Jokalari{
 	public void armamentuaErosi() {}
 	public void ontziaKonpondu() {}
 	public void radarraKontsultatu() {}
+	protected boolean tiroaOndoEginDu() {
+		boolean ondo=true;
+		setChanged();
+		notifyObservers();
+		return ondo;
+	}
 
 }

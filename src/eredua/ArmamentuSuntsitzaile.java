@@ -1,7 +1,8 @@
 package eredua;
 
 public abstract class ArmamentuSuntsitzaile extends Arma {
-
+	int x;
+	int y;
 	public ArmamentuSuntsitzaile() {
 		super();	
 	}
@@ -11,12 +12,12 @@ public abstract class ArmamentuSuntsitzaile extends Arma {
 			
 			//Primero, le pasamos las coordenadas
 		
-		int y = 0;
-		int x = 0;
-		Koordenatu k = new Koordenatu(x, y);
+		y = 0;
+		x = 0;
+		//Koordenatu k = new Koordenatu(x, y);
 
-		k.jasoX();
-		k.jasoY();
+		//k.jasoX();
+		//k.jasoY();
 		
 			//TODO
 			//y ahora, depende de lo que sea, se hacen los cambios

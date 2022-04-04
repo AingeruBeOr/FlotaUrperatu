@@ -159,13 +159,13 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
-	public boolean botMatrizeOntziaDu(int x, int y){
-		return botMatrizeOntzi[x][y];}
+	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
 	
 
 	public void botarenOntziaUkituDu(int x, int y) { //botaren matrizeak eguneratu, ukituta dagoela adierazi eta ontzirik ez dagoela 
 		botMatrizeUkitu[x][y]=true;
 		botMatrizeOntzi[x][y]=false;
 	}
-	
+	public Jokalari getJok() {return this.jokalaria;}
+	public Jokalari getBot() {return this.bot;}
 }

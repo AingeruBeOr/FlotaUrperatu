@@ -70,6 +70,7 @@ public class Tablero extends JFrame implements Observer{
 	 */
 	public Tablero(ArrayList<JLabel> pZ) {
 		initialize(pZ);
+		FlotaUrperatu.getNireFlotaUrperatu().getJok().addObserver(this);
 	}
 	
 	private void initialize(ArrayList<JLabel> pZ) {
