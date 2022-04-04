@@ -1,7 +1,7 @@
 package eredua;
 
 public class Bot extends Jokalari{
-
+	int txanda;
 	public Bot( float pD ) {
 		super(pD);
 		boolean matrizea[][]=new boolean[10][10];
@@ -22,9 +22,21 @@ public class Bot extends Jokalari{
 		matrizea[4][6]=false;
 		matrizea[4][8]=false;
 		super.matrizeOntzi=matrizea;
+		txanda=-1;
 	}
 	public void txandaJokatu() {}
-	public void tiroEgin() {}
+	public int tiroEgin() {
+		txanda++;
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		int x=txanda/10;
+		int y=txanda%10;
+		if(fu.jokMatrizeOntziaDu(x, y)) {
+			fu.jokalariarenOntziaUkituDu(x, y);
+		}else {
+			fu.uraUkituDuBota(x, y);
+		}
+		return txanda;
+	}
 	public boolean tiroaOndoEginDu() {return true;}
 	public void armamentuaErosi() {}
 	public void ontziaKonpondu() {}

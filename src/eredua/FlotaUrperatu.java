@@ -34,7 +34,7 @@ public class FlotaUrperatu extends Observable{
 		txanda = true;
 		bot = new Bot(1000);
 		jokalaria = new JokNormal(1000);
-		this.armamentuaHasieratu();	
+
 	}
 	
 	private void hasieratuMatrizeak(){
@@ -55,6 +55,7 @@ public class FlotaUrperatu extends Observable{
 	public Jokalari getJok() {return this.jokalaria;}
 	public Jokalari getBot() {return this.bot;}
 	public boolean getTxanda() {return this.txanda;}
+	public void aldatuTxanda() {txanda=!txanda;}
 	
 	private void botariOntziakJarri() {
 	//TODO FIJO QUE SE PUEDE HACER DE OTRA MANERA
@@ -76,7 +77,7 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeOntzi[4][8]=false;
 	}
 	
-	
+	public int botTxanda() {return bot.tiroEgin();}
 	
 	public boolean jokoaAmaituDa() {
 		boolean amaitu=false;
@@ -87,6 +88,8 @@ public class FlotaUrperatu extends Observable{
 			else {
 				System.out.println("Irabazlea bot-a da");
 			}
+			amaitu=true;
+
 		}
 		
 		
@@ -94,18 +97,20 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	private boolean ontzirenBatGeratzenDa() {
-		boolean ontzirenBatGeratzenDa=false;
+		boolean ontziBot=false;
+		boolean ontziJok=false;
 		
-		while (!ontzirenBatGeratzenDa) {
 			for (int i=0; i<10; i++) {
 				for (int j=0; j<10; j++) {
-					if (jokMatrizeOntzi[i][j] || botMatrizeOntzi [i][j] ) {
-						ontzirenBatGeratzenDa=true;
+					if (jokMatrizeOntzi[i][j] ) {
+						ontziJok=true;
+					}
+					if (botMatrizeOntzi[i][j] ) {
+						ontziBot=true;
 					}
 				}
 			}
-		}
-		return ontzirenBatGeratzenDa;
+		return ontziJok &&ontziBot;
 	}
 	
 		
@@ -185,9 +190,21 @@ public class FlotaUrperatu extends Observable{
 	public void uraUkituDu(int x, int y) {
 		botMatrizeUkitu[x][y]=true;
 	}
-	
-	public boolean misilEguneratu() {
-		
+	public boolean jokMatrizeUkituta(int x, int y){return jokMatrizeUkitu[x][y];}
+
+	public boolean jokMatrizeOntziaDu(int x, int y){return jokMatrizeOntzi[x][y];}
+
+	public void jokalariarenOntziaUkituDu(int x, int y) { //jokalariaren matrizeak eguneratu, ukituta dagoela adierazi eta ontzirik ez dagoela 
+		jokMatrizeUkitu[x][y]=true;
+		jokMatrizeOntzi[x][y]=false;
 	}
+	
+	public void uraUkituDuBota(int x, int y) {
+		jokMatrizeUkitu[x][y]=true;
+	}
+	
+	//public boolean misilEguneratu() {
+		
+	//}
 	
 }

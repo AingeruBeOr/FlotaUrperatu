@@ -3,7 +3,6 @@ import java.util.Observable;
 public abstract class Jokalari extends Observable {
 	protected float dirua;
 	protected ArmamentuZerrenda armak;
-	protected 
 	protected ItsasontziZerrenda itsasontzi;
 	protected boolean[][] matrizeUkitu;
 	protected boolean[][] matrizeOntzi;
@@ -23,7 +22,7 @@ public abstract class Jokalari extends Observable {
 	}
 	
 	protected abstract void txandaJokatu();
-	protected abstract void tiroEgin();
+	protected abstract int tiroEgin();
 	protected abstract boolean tiroaOndoEginDu();
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();

@@ -322,12 +322,13 @@ public class Tablero extends JFrame implements Observer{
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
 		else getLblTxanda().setText("Botaren txanda da.");
 	}
-	/*private void xJarri(int index) {
+	private void xJarri(int index) {
 		JLabel jl = zerrendaJok.get(index);
 		ImageIcon cross = new ImageIcon(this.getClass().getResource("RedCross.png"));
-		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(jl.getWidth(), jl.getHeight(),Image.SCALE_DEFAULT));
+		//ESKALA HANDITZEN DA
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(jl.getWidth(), jl.getHeight(),Image.SCALE_SMOOTH));
 		jl.setIcon(crossAdj);
-	}*/
+	}
 	
 	
 	
@@ -369,10 +370,25 @@ public class Tablero extends JFrame implements Observer{
 						fu.uraUkituDu(x, y);
 						jl.setBackground(Color.BLUE);
 					}
+					fu.aldatuTxanda();
+					if(fu.jokoaAmaituDa()) {
+						Irabazlea.main(null);
+						setVisible(false);
+					}else {
+						System.out.println("BOTAREN TXANDA");
+						int koord=fu.botTxanda();
+						zerrendaJok.get(koord).setBackground(Color.red);
+						fu.aldatuTxanda();
+						if(fu.jokoaAmaituDa()) {
+							Irabazlea.main(null);
+							setVisible(false);
+						}
+					}
 				}
 				else {
 					getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
+				
 			}
 		}
 
