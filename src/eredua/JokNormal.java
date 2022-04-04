@@ -14,10 +14,8 @@ public class JokNormal  extends Jokalari{
 	public void ontziaKonpondu() {}
 	public void radarraKontsultatu() {}
 	protected boolean tiroaOndoEginDu() {
-		boolean ondo=true;
-		setChanged();
-		notifyObservers();
-		return ondo;
+		
+		return true;
 	}
 
 }
