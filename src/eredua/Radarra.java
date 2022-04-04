@@ -1,17 +1,14 @@
 package eredua;
 
 public class Radarra extends Arma{
-	private int kontsultaKop;
 	
-	public Radarra(int kontsultaKop) {
-		super();
-		this.kontsultaKop = kontsultaKop;
-		
+	public Radarra(int pPrezioa, int pKantitatea) {
+		super(pPrezioa, pKantitatea);
 	}
 	
-	public int ezarriKontsultak() {
+	/*public int ezarriKontsultak() {
 		return kontsultaKop;
-	}
+	}*/
 	
 	public void itzuliKoordenatuak() {
 		int x = 0;

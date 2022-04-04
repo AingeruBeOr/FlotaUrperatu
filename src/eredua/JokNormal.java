@@ -4,9 +4,10 @@ import java.util.*;
 
 public class JokNormal  extends Jokalari{
 
-	public JokNormal( float pD ) {
-		super(pD);
+	public JokNormal( float pDiru ) {
+		super(pDiru);
 	}
+	
 	public void txandaJokatu() {}
 	public void tiroEgin() {}
 	public void armamentuaErosi() {}

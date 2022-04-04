@@ -1,9 +1,12 @@
 package eredua;
 
-public class Misil extends ArmamentuSuntsitzaile {
-	public Misil() {
-		super();
-		super.prezioa=10;
+public class Misil extends Arma {
+	private int kopurua;
+	
+	public Misil(int pPrezioa, int pKantitatea) {
+		super(pPrezioa, pKantitatea);
+		//super.prezioa=10;
 	}
+	
 	public void suntsitu() {}
 }

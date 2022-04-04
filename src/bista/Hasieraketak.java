@@ -291,6 +291,7 @@ public class Hasieraketak extends JFrame implements Observer{
 		}
 		
 		public void mouseClicked(MouseEvent e) {
+			JLabel jl = (JLabel) e.getComponent(); //lehenbailen ze JLabel clickatu den jasosko dugu TODO ez un prueba
 			int luzera = 0;
 			String ontzi = comboBox.getSelectedItem().toString();
 			if(ontzi.equals("Hegazkin-ontzia")) {
@@ -305,7 +306,6 @@ public class Hasieraketak extends JFrame implements Observer{
 			else if(ontzi.equals("Fragata1")||ontzi.equals("Fragata2")||ontzi.equals("Fragata3")||ontzi.equals("Fragata4")) {
 				luzera=1;
 			}
-			JLabel jl = (JLabel) e.getComponent();
 			int index = zerrenda.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
@@ -343,7 +343,6 @@ public class Hasieraketak extends JFrame implements Observer{
 	
 	public void update(Observable arg0, Object arg1) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
-		
 		// TODO
 	}
 }

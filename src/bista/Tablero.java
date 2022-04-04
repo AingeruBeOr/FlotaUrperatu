@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class Tablero extends JFrame implements Observer{
 
@@ -48,6 +49,10 @@ public class Tablero extends JFrame implements Observer{
 	private JRadioButton rdbtnMisil;
 	private JRadioButton rdbtnBonba;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPanel north;
+	private JLabel lblTxanda;
+	private JPanel south;
+	private JLabel lblArazoa;
 
 	/**
 	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
@@ -75,17 +80,18 @@ public class Tablero extends JFrame implements Observer{
 	
 	private void initialize(ArrayList<JLabel> pZ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 558);
+		setBounds(100, 100, 1000, 604);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
+		contentPane.add(getNorth(), BorderLayout.NORTH);
+		contentPane.add(getSouth(), BorderLayout.SOUTH);
 		this.zerrendaJok = new ArrayList<>();
 		this.zerrendaBot = new ArrayList<>();
 		matrizeaSortu(pZ);
 		setLocationRelativeTo(null);
-		//xJarri(20); //TODO kenduuuuuu!!!!
 	}
 
 	private void matrizeaSortu(ArrayList<JLabel> pZ) {
@@ -102,7 +108,20 @@ public class Tablero extends JFrame implements Observer{
 			}
 		}
 	}
-	
+	private JPanel getNorth() {
+		if (north == null) {
+			north = new JPanel();
+			north.add(getLblTxanda());
+		}
+		return north;
+	}
+	private JPanel getSouth() {
+		if (south == null) {
+			south = new JPanel();
+			south.add(getLblArazoa());
+		}
+		return south;
+	}
 	private JPanel getErdia() {
 		if (erdia == null) {
 			erdia = new JPanel();
@@ -235,6 +254,7 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel getJok() {
 		if (jok == null) {
 			jok = new JLabel("JOKALARI FLOTA");
+			jok.setFont(new Font("Tahoma", Font.BOLD, 20));
 			jok.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return jok;
@@ -242,9 +262,23 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel getBot() {
 		if (bot == null) {
 			bot = new JLabel("BOTAREN FLOTA");
+			bot.setFont(new Font("Tahoma", Font.BOLD, 20));
 			bot.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return bot;
+	}
+	private JLabel getLblTxanda() {
+		if (lblTxanda == null) {
+			lblTxanda = new JLabel("Zure txanda da.");
+		}
+		return lblTxanda;
+	}
+	private JLabel getLblArazoa() {
+		if (lblArazoa == null) {
+			lblArazoa = new JLabel("");
+			lblArazoa.setForeground(Color.RED);
+		}
+		return lblArazoa;
 	}
 	private JLabel getInfo() {
 		if (info == null) {
@@ -280,8 +314,13 @@ public class Tablero extends JFrame implements Observer{
 		if (rdbtnBonba == null) {
 			rdbtnBonba = new JRadioButton("Bonba");
 			buttonGroup.add(rdbtnBonba);
+			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
 		}
 		return rdbtnBonba;
+	}
+	private void txandaAldatu(boolean txanda) {
+		if(txanda) getLblTxanda().setText("Zure txanda da.");
+		else getLblTxanda().setText("Botaren txanda da.");
 	}
 	/*private void xJarri(int index) {
 		JLabel jl = zerrendaJok.get(index);
@@ -303,14 +342,16 @@ public class Tablero extends JFrame implements Observer{
 	
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
+			getLblArazoa().setText("");
 			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			JLabel jl = (JLabel) e.getComponent();
-			int index = zerrendaBot.indexOf(jl);
-			int x = index%10;				
-			int y = index/10;
-				//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
-				if(!fu.botMatrizeUkituta(x, y)) { 
-					if(fu.botMatrizeOntziaDu(x, y)) {
+			if(fu.getTxanda()) {//jokalariaren txanda bada
+				JLabel jl = (JLabel) e.getComponent();
+				int index = zerrendaBot.indexOf(jl);
+				int x = index%10;				
+				int y = index/10;
+					//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
+				if(!fu.botMatrizeUkituta(x, y)) { //jadanik puntu horretan tiro egin ez badu
+					if(fu.botMatrizeOntziaDu(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);
 						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
 						if(rdbtnBonba.isSelected()) {
@@ -318,28 +359,21 @@ public class Tablero extends JFrame implements Observer{
 						}
 						else if(rdbtnMisil.isSelected()) {
 							misilTiroa(x,y);
+							getRdbtnMisil().setEnabled(false);
 						}
-						
-						//BOTONES DE ARMAS HACER CON SWITCH
-						//si es un misil mirar los de alrededdor, si es bonba ya esta
-						//Zein arma aukeratu duen esango duen metodoa (public pArma zeinArmaAukeratu())
-						
-						/*Arma pArma= zeinArmaAukeratu();
-						if (pArma  instanceof Misil) {
-							this.misilTiroa(x,y);
-						}
-						*/
-						
+						else {
+							getLblArazoa().setText("Tiro egin aurretik, arma mota bat zehaztu, mesedez.");
+						}						
 					} 
 					else{
+						fu.uraUkituDu(x, y);
 						jl.setBackground(Color.BLUE);
 					}
 				}
 				else {
-					//TODO pantailatik mezu bat erakutsi (inplementatzeke)
-					System.out.println("Puntu hori jadanik ukitu duzu.");
+					getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
-	
+			}
 		}
 
 		private void misilTiroa( int x, int y) {
@@ -416,14 +450,17 @@ public class Tablero extends JFrame implements Observer{
 	
 	
 
-	//Observer-ak jasotzen duena:
+	/**
+	 * Observer-ak jasotzen duena:
+	 * Hurrengoak konprobatu behar dira:
+	 * 		· Txanda aldatu da --> mezua eguneratu
+	 * 		· Jokalariak misil gabe --> misil aukeara desgaitu
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 	
 	
 }

@@ -21,6 +21,7 @@ public class FlotaUrperatu extends Observable{
 	private FlotaUrperatu() {
 		hasieratu();
 	}
+	
 	public static FlotaUrperatu getNireFlotaUrperatu() {
 		if (nireFlota==null) {
 			nireFlota=new FlotaUrperatu();
@@ -30,8 +31,8 @@ public class FlotaUrperatu extends Observable{
 	
 	private void hasieratu() {
 		this.hasieratuMatrizeak();
-		txanda=true;
-		bot= new Bot(1000);
+		txanda = true;
+		bot = new Bot(1000);
 		jokalaria = new JokNormal(1000);
 		this.armamentuaHasieratu();	
 	}
@@ -50,6 +51,11 @@ public class FlotaUrperatu extends Observable{
 			}
 		}
 	}
+	
+	public Jokalari getJok() {return this.jokalaria;}
+	public Jokalari getBot() {return this.bot;}
+	public boolean getTxanda() {return this.txanda;}
+	
 	private void botariOntziakJarri() {
 	//TODO FIJO QUE SE PUEDE HACER DE OTRA MANERA
 		for(int i=0; i<10; i++) {
@@ -153,12 +159,21 @@ public class FlotaUrperatu extends Observable{
 		else System.out.println("Ontzia ezin da kokatu hor");
 		return kokatu;
 	}
-	private void armamentuaHasieratu() {
-		jokalaria.armamentuaHasieratu();
-		bot.armamentuaHasieratu();
-	}
 	
+	/**
+	 * Botaren matrizean (x,y) koordenatuan aurretik tiro egin den bueltatzen du.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
+	
+	/**
+	 * Botaren marizean (x,y) koordenatan ontzi bat dagoen ala ez bueltatzen du.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
 	
 
@@ -166,6 +181,13 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeUkitu[x][y]=true;
 		botMatrizeOntzi[x][y]=false;
 	}
-	public Jokalari getJok() {return this.jokalaria;}
-	public Jokalari getBot() {return this.bot;}
+	
+	public void uraUkituDu(int x, int y) {
+		botMatrizeUkitu[x][y]=true;
+	}
+	
+	public boolean misilEguneratu() {
+		
+	}
+	
 }
