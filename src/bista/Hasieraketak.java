@@ -1,12 +1,17 @@
 package bista;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+
+
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 
@@ -14,13 +19,22 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
-public class Hasieraketak extends JFrame {
+import eredua.FlotaUrperatu;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
+
+public class Hasieraketak extends JFrame implements Observer{
 
 	private JPanel contentPane;
 	private JPanel center;
@@ -30,10 +44,19 @@ public class Hasieraketak extends JFrame {
 	private JLabel label2;
 	private JButton horizontalBotoi;
 	private JButton bertikalBotoi;
-	private JLabel hutsik1;
 	private JComboBox comboBox;
+	private JPanel south;
+	private JLabel labelInstrukzio1;
+	private JLabel labelInstrukzio2;
+	private JLabel labelInstrukzio3;
 	private ArrayList<JLabel> zerrenda;
 	private Kontroladore kontroladore;
+	private boolean horizontalean;
+	private int luzera;
+	private JPanel panel1;
+	private JLabel aukeratutakoa;
+	private JLabel mezuaComboBox;
+	private int faltaDira;
 
 	/**
 	 * Launch the application.
@@ -56,8 +79,13 @@ public class Hasieraketak extends JFrame {
 	 */
 	public Hasieraketak() {
 		initialize();
+		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
+		FlotaUrperatu.getNireFlotaUrperatu().hasieratu();
 	}
 	private void initialize() {
+		horizontalean=true; //Defektuz horizontalean jarriko dira itsasontziak
+		luzera=0;
+		faltaDira=10;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -67,6 +95,7 @@ public class Hasieraketak extends JFrame {
 		contentPane.add(getCenter(), BorderLayout.CENTER);
 		contentPane.add(getRight(), BorderLayout.EAST);
 		contentPane.add(getNorth(), BorderLayout.NORTH);
+		contentPane.add(getSouth(), BorderLayout.SOUTH);
 		this.zerrenda = new ArrayList<JLabel>();
 		matrizeaSortu();
 		setLocationRelativeTo(null);
@@ -93,8 +122,8 @@ public class Hasieraketak extends JFrame {
 		if (right == null) {
 			right = new JPanel();
 			right.setLayout(new GridLayout(5, 1, 0, 0));
-			right.add(getComboBox());
-			right.add(getHutsik1());
+			right.add(getPanel1());
+			right.add(getAukeratutakoa());
 			right.add(getBertikalBotoi());
 			right.add(getHorizontalBotoi());
 		}
@@ -109,6 +138,37 @@ public class Hasieraketak extends JFrame {
 		}
 		return north;
 	}
+	private JPanel getSouth() {
+		if (south == null) {
+			south = new JPanel();
+			south.setLayout(new GridLayout(3, 1, 0, 0));
+			south.add(getLabelInstrukzio1());
+			south.add(getLabelInstrukzio2());
+			south.add(getLabelInstrukzio3());
+		}
+		return south;
+	}
+	private JLabel getLabelInstrukzio1() {
+		if (labelInstrukzio1 == null) {
+			labelInstrukzio1 = new JLabel("GOGORATU: Adierazi itsasontziaren lehenengo gelaxka.");
+			labelInstrukzio1.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio1;
+	}
+	private JLabel getLabelInstrukzio2() {
+		if (labelInstrukzio2 == null) {
+			labelInstrukzio2 = new JLabel("Horizontalean hurrengo gelaxkak eskuinerantz jarriko dira.");
+			labelInstrukzio2.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio2;
+	}
+	private JLabel getLabelInstrukzio3() {
+		if (labelInstrukzio3 == null) {
+			labelInstrukzio3 = new JLabel("Bertikalean aldiz, beheruntz joango dira.");
+			labelInstrukzio3.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return labelInstrukzio3;
+	}
 	private JLabel getLabel1() {
 		if (label1 == null) {
 			label1 = new JLabel("Hasieraketak\r\n");
@@ -120,26 +180,61 @@ public class Hasieraketak extends JFrame {
 	private JButton getHorizontalBotoi() {
 		if (horizontalBotoi == null) {
 			horizontalBotoi = new JButton("Horizontalean");
+			horizontalBotoi.setBackground(Color.GREEN);
+			horizontalBotoi.addActionListener(getKontroladore());
 		}
 		return horizontalBotoi;
 	}
 	private JButton getBertikalBotoi() {
 		if (bertikalBotoi == null) {
 			bertikalBotoi = new JButton("Bertikalean");
+			bertikalBotoi.setBackground(Color.GRAY);
+			bertikalBotoi.addActionListener(getKontroladore());
 		}
 		return bertikalBotoi;
 	}
-	private JLabel getHutsik1() {
-		if (hutsik1 == null) {
-			hutsik1 = new JLabel("");
+	private void mezuaEguneratu() {
+		if(horizontalean) aukeratutakoa.setText("Horizontalean jarriko da");
+		else aukeratutakoa.setText("Bertikalean jarriko da");
+	}
+	private JLabel getAukeratutakoa() {
+		if (aukeratutakoa == null) {
+			aukeratutakoa = new JLabel();
+			aukeratutakoa.setHorizontalAlignment(SwingConstants.CENTER);
+			mezuaEguneratu();
 		}
-		return hutsik1;
+		return aukeratutakoa;
+	}
+	private JPanel getPanel1() {
+		if (panel1 == null) {
+			panel1 = new JPanel();
+			panel1.setLayout(new GridLayout(4, 1, 0, 0));
+			panel1.add(getMezuaComboBox());
+			panel1.add(getComboBox());
+		}
+		return panel1;
+	}
+	private JLabel getMezuaComboBox() {
+		if (mezuaComboBox == null) {
+			mezuaComboBox = new JLabel("Aukeratu itsasontzi bat:");
+			mezuaComboBox.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return mezuaComboBox;
 	}
 	private JComboBox getComboBox() {
 		if (comboBox == null) {
 			comboBox = new JComboBox();
-			comboBox.addItem("Suntzitzailea");
-			comboBox.addItem("Itsasontzi2");
+			comboBox.addItem("Hegazkin-ontzia");
+			comboBox.addItem("Itsaspeko1");
+			comboBox.addItem("Itsaspeko2");
+			comboBox.addItem("Suntzitzailea1");
+			comboBox.addItem("Suntzitzailea2");
+			comboBox.addItem("Suntzitzailea3");
+			comboBox.addItem("Fragata1");
+			comboBox.addItem("Fragata2");
+			comboBox.addItem("Fragata3");
+			comboBox.addItem("Fragata4");
+			
 			//TODO beste guztiak gehitu
 			comboBox.addActionListener(getKontroladore());
 		}
@@ -149,7 +244,8 @@ public class Hasieraketak extends JFrame {
 		JLabel matrizeGelaxka = new JLabel("");
 		matrizeGelaxka.setOpaque(true);
 		matrizeGelaxka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		matrizeGelaxka.setBackground(Color.LIGHT_GRAY);
+		matrizeGelaxka.setBackground(Color.BLUE);
+		matrizeGelaxka.addMouseListener(getKontroladore());
 		return matrizeGelaxka;
 	}
 	private JLabel getLabel2() {
@@ -159,9 +255,10 @@ public class Hasieraketak extends JFrame {
 		}
 		return label2;
 	}
+
+
 	
-	
-	//KONTROLADOREA
+	/********************** KONTROLADOREA ****************************************/
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();
@@ -169,20 +266,91 @@ public class Hasieraketak extends JFrame {
 		return kontroladore;
 	}
 	
-	private class Kontroladore implements ActionListener{
+	private class Kontroladore extends MouseAdapter implements ActionListener {
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String ontzi = comboBox.getSelectedItem().toString();
 			if(e.getSource().equals(horizontalBotoi)) {
-				//TODO
+				horizontalBotoi.setBackground(Color.GREEN);
+				bertikalBotoi.setBackground(Color.GRAY);
+				horizontalean=true;
 			}
 			else if(e.getSource().equals(bertikalBotoi)) {
+				horizontalBotoi.setBackground(Color.GRAY);
+				bertikalBotoi.setBackground(Color.GREEN);
+				horizontalean=false;
+			}
+			else if(ontzi.equals("Hegazkin-ontzia")) {
+				luzera=4;
+			}
+			else if(ontzi.equals("Itsaspeko1")||ontzi.equals("Itsaspeko2")) {
+				luzera=3;
+			}
+			else if(ontzi.equals("Suntzitzailea1")||ontzi.equals("Suntzitzailea2")||ontzi.equals("Suntzitzailea3")) {
+				luzera=2;
 				//TODO
 			}
-			else if(e.getSource().equals("Suntzitzailea")) {
+			else if(ontzi.equals("Fragata1")||ontzi.equals("Fragata2")||ontzi.equals("Fragata3")||ontzi.equals("Fragata4")) {
+				luzera=1;
 				//TODO
 			}
+			mezuaEguneratu();
 			// TODO Auto-generated method stub
 		}
 		
+		public void mouseClicked(MouseEvent e) {
+			JLabel jl = (JLabel) e.getComponent();
+			int index = zerrenda.indexOf(jl);
+			int x = index%10;
+			int y = index/10;
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
+				fu.ontziaKokatu(x, y, horizontalean, luzera);
+				int kont=luzera;
+				int pX=x;
+				int pY=y;
+				while(kont>0) {
+					center.getComponent(pY*10+pX).setBackground(Color.BLACK);
+					kont--;
+					if(horizontalean) pX++;
+					else pY++;
+				} 
+				faltaDira--;
+				if(faltaDira<=0) {
+					Tablero.main( zerrenda);
+					setVisible(false);
+				}
+				else {
+					System.out.println(faltaDira+"konponente daude");
+					getComboBox().removeItem(getComboBox().getSelectedItem());
+					luzera=0;
+				}
+				
+			
+				//getComboBox().remove(getComboBox().getSelectedIndex()); //Esto hace cosas raras
+			}
+		}
+		
+	}
+	/*private void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		System.out.println("Ontzia kokatuko dugu: luzera "+ pLuz+" horizontal "+pHorizontal);
+		int kont=pLuz;
+		int x=pX;
+		int y=pY;
+		while(kont>0) {
+			System.out.println("Koordenatuak:"+x+" "+y);
+			center.getComponent(y*10+x).setBackground(Color.BLACK);
+			zerrenda.get(y*10+x).setBackground(Color.BLACK);
+			//matrizeGelaxka.setBackground(Color.BLUE);
+			kont--;
+			if(pHorizontal) {x++;}
+			else {y++;}
+		}
+	}*/
+	public void update(Observable arg0, Object arg1) {
+		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		
+		// TODO
 	}
 }

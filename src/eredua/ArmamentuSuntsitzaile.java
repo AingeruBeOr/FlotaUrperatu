@@ -1,3 +1,4 @@
+
 package eredua;
 
 public abstract class ArmamentuSuntsitzaile extends Arma {
@@ -16,7 +17,7 @@ public abstract class ArmamentuSuntsitzaile extends Arma {
 		Koordenatu k = new Koordenatu(x, y);
 
 		k.jasoX();
-		k.jasoY();
+		k.jasoY(); 
 		
 			//TODO
 			//y ahora, depende de lo que sea, se hacen los cambios

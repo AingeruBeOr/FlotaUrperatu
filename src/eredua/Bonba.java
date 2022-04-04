@@ -5,4 +5,5 @@ public class Bonba extends ArmamentuSuntsitzaile {
 		super();
 		super.prezioa=20;
 	}
+	public void suntsitu() {}
 }

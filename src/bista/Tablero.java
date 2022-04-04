@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import eredua.FlotaUrperatu;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -34,16 +37,17 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel info;
 	private JPanel datuak;
 	private Kontroladore kontroladore;
-	private ArrayList<JLabel> zerrenda;
+	private ArrayList<JLabel> zerrendaBot;
+	private ArrayList<JLabel> zerrendaJok;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(ArrayList<JLabel> pZ) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tablero frame = new Tablero();
+					Tablero frame = new Tablero(pZ);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +59,8 @@ public class Tablero extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
-	public Tablero() {
+	public Tablero(ArrayList<JLabel> pZ) {
+		zerrendaJok=pZ;
 		initialize();
 	}
 	
@@ -67,18 +72,22 @@ public class Tablero extends JFrame implements Observer{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
-		this.zerrenda = new ArrayList<>();
+		this.zerrendaBot = new ArrayList<>();
 		matrizeaSortu();
 		setLocationRelativeTo(null);
 	}
 
 	private void matrizeaSortu() {
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		int kont=0;
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				matrizeEzk.add(getJokLaukia("", z, l));
-				JLabel botlauki = getBotLaukia("", z, l); 
+				JLabel jokLauki=getBotLaukia();
+				jokLauki.setBackground(zerrendaJok.get(l*10+z).getBackground());
+				matrizeEzk.add(jokLauki);
+				JLabel botlauki = getBotLaukia(); 
 				matrizeEsk.add(botlauki);
-				zerrenda.add(botlauki);
+				zerrendaBot.add(botlauki);
 			}
 		}
 	}
@@ -182,15 +191,15 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return bEskuin;
 	}
-	private JLabel getJokLaukia(String pMezua, int x, int y) {
-		JLabel lauki = new JLabel(pMezua);
+	private JLabel getJokLaukia() {
+		JLabel lauki = new JLabel("");
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
 		return lauki;
 	}
-	private JLabel getBotLaukia(String pMezua, int x, int y) {
-		JLabel lauki = new JLabel(pMezua);
+	private JLabel getBotLaukia() {
+		JLabel lauki = new JLabel("");
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
@@ -242,6 +251,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 	
 	
+	
 	//KONTROLADOREA:
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
@@ -250,15 +260,106 @@ public class Tablero extends JFrame implements Observer{
 		return kontroladore;
 	}
 	
+	
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 			JLabel jl = (JLabel) e.getComponent();
-			int index = zerrenda.indexOf(jl);
+			int index = zerrendaBot.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			//TODO
+				//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
+				if(!fu.botMatrizeUkituta(x, y)) { 
+					if(fu.botMatrizeOntziaDu(x, y)) {
+						jl.setBackground(Color.RED);
+						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
+						
+						
+						//BOTONES DE ARMAS HACER CON SWITCH
+						//si es un misil mirar los de alrededdor, si es bonba ya esta
+						//Zein arma aukeratu duen esango duen metodoa (public pArma zeinArmaAukeratu())
+						
+						/*Arma pArma= zeinArmaAukeratu();
+						if (pArma  instanceof Misil) {
+							this.misilTiroa(x,y);
+						}
+						*/
+						
+					}else{
+						jl.setBackground(Color.BLUE);
+					}
+				}
+			
+			
+			
+			
+		}
+
+		private void misilTiroa( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			if (x>0 && fu.botMatrizeOntziaDu(x-1, y) ) { 
+				this.goikoakAztertu( x-1, y); 
+				
+			}
+			else if (x<9 && fu.botMatrizeOntziaDu(x+1, y)) {
+				this.behekoakAztertu( x+1, y);
+			}
+						
+			else if (y>0 && fu.botMatrizeOntziaDu(x, y-1)) {
+				this.ezkerrekoakAztertu( x, y-1);
+			}
+			else if (y<9 && fu.botMatrizeOntziaDu(x, y+1)) {
+				this.eskumakoakAztertu( x, y+1);
+			}
+			
+			
+		}
+		private void goikoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (x>=0 && fu.botMatrizeOntziaDu(x, y)) {  
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				x--;
+			}
+		}
+		private void behekoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (x<=9 && fu.botMatrizeOntziaDu(x, y)) { 
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				x++;
+			}
+		}
+		private void ezkerrekoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (y>=0 && fu.botMatrizeOntziaDu(x, y)) {
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				y--;
+			}
+		}
+		
+		private void eskumakoakAztertu ( int x, int y) {
+			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			while (y<=9 && fu.botMatrizeOntziaDu(x, y)) {
+				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
+				fu.botarenOntziaUkituDu(x, y);
+				y++;
+			}
+		}
+		
+		
+		
+		private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
+			matrizeEsk.getComponent(y*10+x).setBackground(c);
 		}
 	}
+	
+	
+	
+
+	
+	
 
 	//Observer-ak jasotzen duena:
 	@Override
