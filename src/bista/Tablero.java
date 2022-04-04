@@ -21,7 +21,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 
 public class Tablero extends JFrame implements Observer{
 
@@ -39,9 +44,13 @@ public class Tablero extends JFrame implements Observer{
 	private Kontroladore kontroladore;
 	private ArrayList<JLabel> zerrendaBot;
 	private ArrayList<JLabel> zerrendaJok;
+	private JLabel lblArmaAukeratu;
+	private JRadioButton rdbtnMisil;
+	private JRadioButton rdbtnBonba;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
-	 * Launch the application.
+	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
 	 */
 	public static void main(ArrayList<JLabel> pZ) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,11 +69,10 @@ public class Tablero extends JFrame implements Observer{
 	 * Create the frame.
 	 */
 	public Tablero(ArrayList<JLabel> pZ) {
-		zerrendaJok=pZ;
-		initialize();
+		initialize(pZ);
 	}
 	
-	private void initialize() {
+	private void initialize(ArrayList<JLabel> pZ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 558);
 		contentPane = new JPanel();
@@ -72,19 +80,21 @@ public class Tablero extends JFrame implements Observer{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
+		this.zerrendaJok = new ArrayList<>();
 		this.zerrendaBot = new ArrayList<>();
-		matrizeaSortu();
+		matrizeaSortu(pZ);
 		setLocationRelativeTo(null);
+		//xJarri(20); //TODO kenduuuuuu!!!!
 	}
 
-	private void matrizeaSortu() {
-		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-		int kont=0;
+	private void matrizeaSortu(ArrayList<JLabel> pZ) {
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				JLabel jokLauki=getBotLaukia();
-				jokLauki.setBackground(zerrendaJok.get(l*10+z).getBackground());
+				JLabel jokLauki = getJokLaukia();
+				jokLauki.setBackground(pZ.get(l*10+z).getBackground());
 				matrizeEzk.add(jokLauki);
+				zerrendaJok.add(jokLauki);
+				
 				JLabel botlauki = getBotLaukia(); 
 				matrizeEsk.add(botlauki);
 				zerrendaBot.add(botlauki);
@@ -191,6 +201,20 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return bEskuin;
 	}
+	private JPanel getMatrizeEzk() {
+		if (matrizeEzk == null) {
+			matrizeEzk = new JPanel();
+			matrizeEzk.setLayout(new GridLayout(10, 10, 0, 0));
+		}
+		return matrizeEzk;
+	}
+	private JPanel getMatrizeEsk() {
+		if (matrizeEsk == null) {
+			matrizeEsk = new JPanel();
+			matrizeEsk.setLayout(new GridLayout(10, 10, 0, 0));
+		}
+		return matrizeEsk;
+	}
 	private JLabel getJokLaukia() {
 		JLabel lauki = new JLabel("");
 		lauki.setOpaque(true);
@@ -221,20 +245,6 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return bot;
 	}
-	private JPanel getMatrizeEzk() {
-		if (matrizeEzk == null) {
-			matrizeEzk = new JPanel();
-			matrizeEzk.setLayout(new GridLayout(10, 10, 0, 0));
-		}
-		return matrizeEzk;
-	}
-	private JPanel getMatrizeEsk() {
-		if (matrizeEsk == null) {
-			matrizeEsk = new JPanel();
-			matrizeEsk.setLayout(new GridLayout(10, 10, 0, 0));
-		}
-		return matrizeEsk;
-	}
 	private JLabel getInfo() {
 		if (info == null) {
 			info = new JLabel("INFO");
@@ -245,14 +255,43 @@ public class Tablero extends JFrame implements Observer{
 	private JPanel getDatuak() {
 		if (datuak == null) {
 			datuak = new JPanel();
-			datuak.setLayout(new GridLayout(15, 2, 0, 0));
+			datuak.setLayout(new GridLayout(10, 1, 0, 0));
+			datuak.add(getLblArmaAukeratu());
+			datuak.add(getRdbtnBonba());
+			datuak.add(getRdbtnMisil());
 		}
 		return datuak;
 	}
+	private JLabel getLblArmaAukeratu() {
+		if (lblArmaAukeratu == null) {
+			lblArmaAukeratu = new JLabel("Arma mota aukeratu:");
+		}
+		return lblArmaAukeratu;
+	}
+	private JRadioButton getRdbtnMisil() {
+		if (rdbtnMisil == null) {
+			rdbtnMisil = new JRadioButton("Misil");
+			buttonGroup.add(rdbtnMisil);
+		}
+		return rdbtnMisil;
+	}
+	private JRadioButton getRdbtnBonba() {
+		if (rdbtnBonba == null) {
+			rdbtnBonba = new JRadioButton("Bonba");
+			buttonGroup.add(rdbtnBonba);
+		}
+		return rdbtnBonba;
+	}
+	/*private void xJarri(int index) {
+		JLabel jl = zerrendaJok.get(index);
+		ImageIcon cross = new ImageIcon(this.getClass().getResource("RedCross.png"));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(jl.getWidth(), jl.getHeight(),Image.SCALE_DEFAULT));
+		jl.setIcon(crossAdj);
+	}*/
 	
 	
 	
-	//KONTROLADOREA:
+	/********************** KONTROLADOREA ****************************************/
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();
@@ -273,7 +312,12 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.botMatrizeOntziaDu(x, y)) {
 						jl.setBackground(Color.RED);
 						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
-						
+						if(rdbtnBonba.isSelected()) {
+							
+						}
+						else if(rdbtnMisil.isSelected()) {
+							misilTiroa(x,y);
+						}
 						
 						//BOTONES DE ARMAS HACER CON SWITCH
 						//si es un misil mirar los de alrededdor, si es bonba ya esta
@@ -285,9 +329,14 @@ public class Tablero extends JFrame implements Observer{
 						}
 						*/
 						
-					}else{
+					} 
+					else{
 						jl.setBackground(Color.BLUE);
 					}
+				}
+				else {
+					//TODO pantailatik mezu bat erakutsi (inplementatzeke)
+					System.out.println("Puntu hori jadanik ukitu duzu.");
 				}
 			
 			
@@ -351,7 +400,11 @@ public class Tablero extends JFrame implements Observer{
 		
 		
 		private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
-			matrizeEsk.getComponent(y*10+x).setBackground(c);
+			String sx = String.valueOf(x);
+			String sy = String.valueOf(y);
+			String sindex = sx + sy;
+			int index = Integer.parseInt(sindex);
+			zerrendaBot.get(index).setBackground(c);
 		}
 	}
 	
@@ -367,6 +420,7 @@ public class Tablero extends JFrame implements Observer{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	
 	

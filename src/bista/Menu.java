@@ -1,4 +1,4 @@
- package bista;
+package bista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -131,7 +131,7 @@ public class Menu extends JFrame {
 		return botoi5;
 	}
 	
-	//Kontroladore//
+	/********************** KONTROLADOREA ****************************************/
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();

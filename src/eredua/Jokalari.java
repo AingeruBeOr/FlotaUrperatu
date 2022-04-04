@@ -6,6 +6,8 @@ public abstract class Jokalari {
 	protected ItsasontziZerrenda itsasontzi;
 	protected boolean[][] matrizeUkitu;
 	protected boolean[][] matrizeOntzi;
+	protected ItsasontziZerrenda itsasontziak;
+	
 	public Jokalari ( float pD ) {
 		matrizeUkitu=new boolean[10][10];
 		matrizeOntzi=new boolean[10][10];
@@ -19,7 +21,6 @@ public abstract class Jokalari {
 		}
 	}
 	
-	protected ItsasontziZerrenda itsasontziak;
 	protected abstract void txandaJokatu();
 	protected abstract void tiroEgin();
 	protected abstract void armamentuaErosi();
@@ -27,8 +28,7 @@ public abstract class Jokalari {
 	protected abstract void radarraKontsultatu();
 	
 	protected void armamentuaHasieratu() {
-		Bonba a=new Bonba();
+		Bonba a = new Bonba();
 		armak.gehituOrdenatua(a);
 	}
-	
 }
