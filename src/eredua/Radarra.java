@@ -2,8 +2,6 @@ package eredua;
 
 public class Radarra extends Arma{
 	private int kontsultaKop;
-	int x;
-	int y;
 	
 	public Radarra(int kontsultaKop) {
 		super();
@@ -16,11 +14,12 @@ public class Radarra extends Arma{
 	}
 	
 	public void itzuliKoordenatuak() {
-		x = 0;
-		y = 0;
-		//Koordenatu koord = new Koordenatu(x, y);
-		//koord.jasoX();
-		//koord.jasoY();
+		int x = 0;
+		int y = 0;
+		Koordenatu koord = new Koordenatu(x, y);
+		koord.jasoX();
+		koord.jasoY(); 
 		
 	}
 }
+
