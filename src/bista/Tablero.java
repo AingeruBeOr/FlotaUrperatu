@@ -11,12 +11,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import eredua.FlotaUrperatu;
+import eredua.Misil;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -75,7 +77,7 @@ public class Tablero extends JFrame implements Observer{
 	 */
 	public Tablero(ArrayList<JLabel> pZ) {
 		initialize(pZ);
-		FlotaUrperatu.getNireFlotaUrperatu().getJok().addObserver(this);
+		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
 	}
 	
 	private void initialize(ArrayList<JLabel> pZ) {
@@ -325,11 +327,16 @@ public class Tablero extends JFrame implements Observer{
 	private void xJarri(int index) {
 		JLabel jl = zerrendaJok.get(index);
 		ImageIcon cross = new ImageIcon(this.getClass().getResource("RedCross.png"));
-		//ESKALA HANDITZEN DA
-		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(jl.getWidth(), jl.getHeight(),Image.SCALE_SMOOTH));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(crossAdj);
 	}
-	
+	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
+		String sx = String.valueOf(x);
+		String sy = String.valueOf(y);
+		String sindex = sy + sx;
+		int index = Integer.parseInt(sindex);
+		zerrendaBot.get(index).setBackground(c);
+	}
 	
 	
 	/********************** KONTROLADOREA ****************************************/
@@ -355,29 +362,33 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.botMatrizeOntziaDu(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);
 						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
-						if(rdbtnBonba.isSelected()) {
-							
-						}
-						else if(rdbtnMisil.isSelected()) {
-							misilTiroa(x,y);
-							getRdbtnMisil().setEnabled(false);
-						}
-						else {
-							getLblArazoa().setText("Tiro egin aurretik, arma mota bat zehaztu, mesedez.");
-						}						
+						if(rdbtnMisil.isSelected()) {
+							fu.misilTiroa(x,y);
+							if(!fu.armaErabiliDa(new Misil())) {
+								getRdbtnMisil().setEnabled(false);
+								getRdbtnBonba().setSelected(true);
+							}
+						}					
 					} 
-					else{
+					else{ //urari eman badio
 						fu.uraUkituDu(x, y);
 						jl.setBackground(Color.BLUE);
+						if(rdbtnMisil.isSelected()) { //misil batekin urari eman badio
+							if(!fu.armaErabiliDa(new Misil())) {
+								getRdbtnMisil().setEnabled(false);
+								getRdbtnBonba().setSelected(true);
+							}
+						}
 					}
 					fu.aldatuTxanda();
 					if(fu.jokoaAmaituDa()) {
 						Irabazlea.main(null);
 						setVisible(false);
-					}else {
+					}
+					else {
 						System.out.println("BOTAREN TXANDA");
 						int koord=fu.botTxanda();
-						zerrendaJok.get(koord).setBackground(Color.red);
+						xJarri(koord);
 						fu.aldatuTxanda();
 						if(fu.jokoaAmaituDa()) {
 							Irabazlea.main(null);
@@ -388,75 +399,7 @@ public class Tablero extends JFrame implements Observer{
 				else {
 					getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
-				
 			}
-		}
-
-		private void misilTiroa( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			if (x>0 && fu.botMatrizeOntziaDu(x-1, y) ) { 
-				this.ezkerrekoakAztertu( x-1, y); 	
-			}
-			if (x<9 && fu.botMatrizeOntziaDu(x+1, y)) {
-				this.eskumakoakAztertu( x+1, y);	
-			}
-						
-			if (y>0 && fu.botMatrizeOntziaDu(x, y-1)) {
-				this.goikoakAztertu( x, y-1);	
-			}
-			if (y<9 && fu.botMatrizeOntziaDu(x, y+1)) {
-				this.behekoakAztertu( x, y+1);
-			}
-		}
-		
-		private void goikoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (y>=0 && fu.botMatrizeOntziaDu(x, y)) {  
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				y--;
-				
-			}
-		}
-		private void behekoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (y<=9 && fu.botMatrizeOntziaDu(x, y)) { 
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				y++;
-				
-			}
-		}
-		private void ezkerrekoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (x>=0 && fu.botMatrizeOntziaDu(x, y)) {
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				x--;
-				
-			}
-		}
-		
-		private void eskumakoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (x<=9 && fu.botMatrizeOntziaDu(x, y)) {
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				x++;
-				System.out.println(x-1+" B "+y);
-				
-				
-			}
-		}
-		
-		
-		
-		private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
-			String sx = String.valueOf(x);
-			String sy = String.valueOf(y);
-			String sindex = sy + sx;
-			int index = Integer.parseInt(sindex);
-			zerrendaBot.get(index).setBackground(c);
 		}
 	}
 	
@@ -468,14 +411,21 @@ public class Tablero extends JFrame implements Observer{
 
 	/**
 	 * Observer-ak jasotzen duena:
-	 * Hurrengoak konprobatu behar dira:
+	 * Hurrengoak konprobatuko dira:
 	 * 		· Txanda aldatu da --> mezua eguneratu
 	 * 		· Jokalariak misil gabe --> misil aukeara desgaitu
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		if(arg != null) {
+			int[] array = (int[]) arg; 
+			this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+		}
+		else if(arg == null) {
+			if(fu.getTxanda()) this.txandaAldatu(true);
+			else this.txandaAldatu(false);
+		}		
 	}
 	
 	

@@ -1,6 +1,5 @@
 package eredua;
-import java.util.Observable;
-public abstract class Jokalari extends Observable {
+public abstract class Jokalari {
 	protected float dirua;
 	protected ArmamentuZerrenda armak;
 	protected ItsasontziZerrenda itsasontzi;
@@ -27,6 +26,14 @@ public abstract class Jokalari extends Observable {
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
 	protected abstract void radarraKontsultatu();
+	
+	public boolean armaKantitateaEguneratu(Arma arma) {
+		return armak.armaKantitateaEguneratu(arma);
+	}
+	
+	public Arma getArma(Arma arma) {
+		return this.armak.getArma(arma);
+	}
 	
 	/*protected void armamentuaHasieratu() {
 		Misil a = new Misil();

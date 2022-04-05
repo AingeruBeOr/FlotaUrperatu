@@ -52,10 +52,12 @@ public class FlotaUrperatu extends Observable{
 		}
 	}
 	
-	public Jokalari getJok() {return this.jokalaria;}
-	public Jokalari getBot() {return this.bot;}
 	public boolean getTxanda() {return this.txanda;}
-	public void aldatuTxanda() {txanda=!txanda;}
+	public void aldatuTxanda() {
+		txanda=!txanda;
+		setChanged();
+		notifyObservers(null);
+	}
 	
 	private void botariOntziakJarri() {
 	//TODO FIJO QUE SE PUEDE HACER DE OTRA MANERA
@@ -110,7 +112,7 @@ public class FlotaUrperatu extends Observable{
 					}
 				}
 			}
-		return ontziJok &&ontziBot;
+		return ontziJok && ontziBot;
 	}
 	
 		
@@ -203,8 +205,72 @@ public class FlotaUrperatu extends Observable{
 		jokMatrizeUkitu[x][y]=true;
 	}
 	
-	//public boolean misilEguneratu() {
-		
-	//}
+	/**
+	 * Misil tiroa egin bada, metodo honi deituko zaio. false bueltatuko du misil gabe geratu bada.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public void misilTiroa( int x, int y) {
+		if (x>0 && botMatrizeOntziaDu(x-1, y) ) { 
+			this.ezkerrekoakAztertu( x-1, y); 	
+		}
+		if (x<9 && botMatrizeOntziaDu(x+1, y)) {
+			this.eskumakoakAztertu( x+1, y);	
+		}
+					
+		if (y>0 && botMatrizeOntziaDu(x, y-1)) {
+			this.goikoakAztertu( x, y-1);	
+		}
+		if (y<9 && botMatrizeOntziaDu(x, y+1)) {
+			this.behekoakAztertu( x, y+1);
+		}
+	}
+	
+	private void goikoakAztertu ( int x, int y) {
+		while (y>=0 && botMatrizeOntziaDu(x, y)) {
+			setChanged();
+			notifyObservers(new int[] {x,y});
+			botarenOntziaUkituDu(x, y);
+			y--;
+		}
+	}
+	private void behekoakAztertu ( int x, int y) {
+		while (y<=9 && botMatrizeOntziaDu(x, y)) { 
+			setChanged();
+			notifyObservers(new int[] {x,y});
+			botarenOntziaUkituDu(x, y);
+			y++;
+			
+		}
+	}
+	private void ezkerrekoakAztertu ( int x, int y) {
+		while (x>=0 && botMatrizeOntziaDu(x, y)) {
+			setChanged();
+			notifyObservers(new int[] {x,y});
+			botarenOntziaUkituDu(x, y);
+			x--;
+			
+		}
+	}
+	
+	private void eskumakoakAztertu ( int x, int y) {
+		while (x<=9 && botMatrizeOntziaDu(x, y)) {
+			setChanged();
+			notifyObservers(new int[] {x,y});
+			botarenOntziaUkituDu(x, y);
+			x++;
+			System.out.println(x-1+" B "+y);
+		}
+	}
+	
+	/**
+	 * "arma" armari -1 egingo dio kantitatean eta false bueltatuko du arma gehiagorik ez badu
+	 * @param arma erabili den arma mota adierazten da
+	 * @return
+	 */
+	public boolean armaErabiliDa(Arma arma) {
+		return this.jokalaria.armaKantitateaEguneratu(arma);
+	}
 	
 }

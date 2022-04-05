@@ -17,5 +17,7 @@ public class JokNormal  extends Jokalari{
 		
 		return true;
 	}
+	
+	
 
 }
