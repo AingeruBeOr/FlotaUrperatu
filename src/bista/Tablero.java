@@ -367,7 +367,7 @@ public class Tablero extends JFrame implements Observer{
 			if(fu.getTxanda()) {//jokalariaren txanda bada
 				JLabel jl = (JLabel) e.getComponent();
 				int index = zerrendaBot.indexOf(jl);
-				int x = index%10;				
+				int x = index%10;
 				int y = index/10;
 				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
 				if(!fu.botMatrizeUkituta(x, y)) { //jadanik puntu horretan tiro egin ez badu
@@ -440,6 +440,4 @@ public class Tablero extends JFrame implements Observer{
 			else this.txandaAldatu(false);
 		}		
 	}
-	
-	
 }
