@@ -143,8 +143,6 @@ public class FlotaUrperatu extends Observable{
 				}
 			}
 			kont--;
-			//System.out.println("Kokatu ahal da momentuz: "+kokatu);
-			//System.out.println("gelaxka: "+x+ " "+y);
 			if(pHorizontal) {
 				x++;
 				if(x>10) {kokatu=false;}

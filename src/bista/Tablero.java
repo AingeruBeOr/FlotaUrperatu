@@ -369,7 +369,7 @@ public class Tablero extends JFrame implements Observer{
 				int index = zerrendaBot.indexOf(jl);
 				int x = index%10;				
 				int y = index/10;
-					//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
+				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
 				if(!fu.botMatrizeUkituta(x, y)) { //jadanik puntu horretan tiro egin ez badu
 					if(fu.botMatrizeOntziaDu(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);

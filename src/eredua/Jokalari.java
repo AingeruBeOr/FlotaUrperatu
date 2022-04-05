@@ -31,9 +31,9 @@ public abstract class Jokalari {
 		return armak.armaKantitateaEguneratu(arma);
 	}
 	
-	public Arma getArma(Arma arma) {
+	/*public Arma getArma(Arma arma) {
 		return this.armak.getArma(arma);
-	}
+	}*/
 	
 	/*protected void armamentuaHasieratu() {
 		Misil a = new Misil();

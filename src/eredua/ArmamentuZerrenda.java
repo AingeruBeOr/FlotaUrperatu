@@ -24,14 +24,14 @@ public class ArmamentuZerrenda {
 		return bueltatzeko;
 	}
 	
-	public Arma getArma(Arma arma) {
+	/*public Arma getArma(Arma arma) {
 		Arma bueltatzeko = null;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak;
 		else if(arma instanceof Misil) 	bueltatzeko =  this.misilak;
 		else if(arma instanceof Radarra) bueltatzeko = this.radarrak;
 		else if(arma instanceof Ezkutua) bueltatzeko =  this.ezkutuak;
 		return bueltatzeko;
-	}
+	}*/
 	
 	public void gehituOrdenatua(Arma pA) { 
 		//Lehenengo misilak eta azkenak bonbak
