@@ -55,6 +55,7 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel lblTxanda;
 	private JPanel south;
 	private JLabel lblArazoa;
+	private JLabel lblOntziOsoa; 
 
 	/**
 	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
@@ -121,6 +122,7 @@ public class Tablero extends JFrame implements Observer{
 		if (south == null) {
 			south = new JPanel();
 			south.add(getLblArazoa());
+			south.add(getLblOntziOsoa());   
 		}
 		return south;
 	}
@@ -282,6 +284,15 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return lblArazoa;
 	}
+	
+	private JLabel getLblOntziOsoa() {		
+		if (lblOntziOsoa == null) {
+			lblOntziOsoa = new JLabel("");
+			lblOntziOsoa.setForeground(Color.GREEN);
+		}
+		return lblOntziOsoa;
+	}
+	
 	private JLabel getInfo() {
 		if (info == null) {
 			info = new JLabel("INFO");
@@ -351,6 +362,7 @@ public class Tablero extends JFrame implements Observer{
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
 			getLblArazoa().setText("");
+			getLblOntziOsoa().setText("");
 			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 			if(fu.getTxanda()) {//jokalariaren txanda bada
 				JLabel jl = (JLabel) e.getComponent();
@@ -368,6 +380,7 @@ public class Tablero extends JFrame implements Observer{
 								getRdbtnMisil().setEnabled(false);
 								getRdbtnBonba().setSelected(true);
 							}
+							getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
 						}					
 					} 
 					else{ //urari eman badio
@@ -386,7 +399,7 @@ public class Tablero extends JFrame implements Observer{
 						setVisible(false);
 					}
 					else {
-						System.out.println("BOTAREN TXANDA");
+						//System.out.println("BOTAREN TXANDA");
 						int koord=fu.botTxanda();
 						xJarri(koord);
 						fu.aldatuTxanda();

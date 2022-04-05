@@ -328,7 +328,6 @@ public class Hasieraketak extends JFrame implements Observer{
 					setVisible(false);
 				}
 				else {
-					System.out.println(faltaDira+" konponente daude");
 					getComboBox().removeItem(getComboBox().getSelectedItem());
 					luzera=0;
 				}			

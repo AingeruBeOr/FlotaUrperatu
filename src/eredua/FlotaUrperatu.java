@@ -81,20 +81,12 @@ public class FlotaUrperatu extends Observable{
 	
 	public int botTxanda() {return bot.tiroEgin();}
 	
+
 	public boolean jokoaAmaituDa() {
 		boolean amaitu=false;
-		if (!ontzirenBatGeratzenDa()) { 			//ez bada ontzirik geratzen
-			if (!this.txanda) {  					//botaren txanda da --> jokalaria irabazlea zen aurreko rondan
-				System.out.println("Irabazlea jokalaria da");
-			}
-			else {
-				System.out.println("Irabazlea bot-a da");
-			}
+		if (!ontzirenBatGeratzenDa()) { 	
 			amaitu=true;
-
 		}
-		
-		
 		return amaitu;
 	}
 	
@@ -162,8 +154,6 @@ public class FlotaUrperatu extends Observable{
 				if(y>10) {kokatu=false;}
 			}
 		}
-		if(kokatu) System.out.println("Ontzia bertan kokatu ahal da");
-		else System.out.println("Ontzia ezin da kokatu hor");
 		return kokatu;
 	}
 	
@@ -260,7 +250,6 @@ public class FlotaUrperatu extends Observable{
 			notifyObservers(new int[] {x,y});
 			botarenOntziaUkituDu(x, y);
 			x++;
-			System.out.println(x-1+" B "+y);
 		}
 	}
 	
