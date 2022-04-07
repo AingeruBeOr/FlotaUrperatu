@@ -28,8 +28,8 @@ public class Bot extends Jokalari{
 	public int tiroEgin() {
 		txanda++;
 		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-		int x=txanda/10;
-		int y=txanda%10;
+		int x=txanda%10;
+		int y=txanda/10;
 		if(fu.jokMatrizeOntziaDu(x, y)) {
 			fu.jokalariarenOntziaUkituDu(x, y);
 		}else {
