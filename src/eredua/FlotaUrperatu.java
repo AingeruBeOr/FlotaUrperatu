@@ -119,7 +119,7 @@ public class FlotaUrperatu extends Observable{
 			if(pHorizontal) {x++;}
 			else {y++;}
 		}
-		/*esto es para inrpimir las celdas 
+		/*esto es para imprimir las celdas 
 		for(int l=0;l<10;l++) {
 			for(int z=0;z<10;z++) {
 				System.out.println(jokMatrizeOntzi[l][z]);
