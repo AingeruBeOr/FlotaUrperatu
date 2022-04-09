@@ -6,6 +6,9 @@ public abstract class Jokalari {
 	protected boolean[][] matrizeUkitu;
 	protected boolean[][] matrizeOntzi;
 	protected ItsasontziZerrenda itsasontziak;
+	//TODO:
+	protected Tablero nireItsasontziak;
+	protected Tablero ukituak;
 	
 	public Jokalari ( float pDiru ) {
 		matrizeUkitu=new boolean[10][10];
