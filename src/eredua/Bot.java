@@ -2,8 +2,10 @@ package eredua;
 
 public class Bot extends Jokalari{
 	int txanda;
-	public Bot( float pD ) {
-		super(pD);
+	private static Bot nireBot;
+	
+	private Bot( float pDiru ) {
+		super(pDiru);
 		boolean matrizea[][]=new boolean[10][10];
 		for(int i=0; i<10; i++) {
 			for(int j=0; j<10; j++) {
@@ -24,6 +26,13 @@ public class Bot extends Jokalari{
 		super.matrizeOntzi=matrizea;
 		txanda=-1;
 	}
+	public static Bot getNireBot() {
+		if(nireBot==null) {
+			nireBot=new Bot(1000);
+		}
+		return nireBot;
+	}
+	
 	public void txandaJokatu() {}
 	public int tiroEgin() {
 		txanda++;

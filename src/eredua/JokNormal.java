@@ -3,9 +3,15 @@ import java.util.*;
 
 
 public class JokNormal  extends Jokalari{
-
-	public JokNormal( float pDiru ) {
+	private static JokNormal nireJok;
+	private JokNormal( float pDiru ) {
 		super(pDiru);
+	}
+	public static JokNormal getNireJok() {
+		if(nireJok==null) {
+			nireJok=new JokNormal(1000);
+		}
+		return nireJok;
 	}
 	
 	public void txandaJokatu() {}

@@ -32,8 +32,8 @@ public class FlotaUrperatu extends Observable{
 	private void hasieratu() {
 		this.hasieratuMatrizeak();
 		txanda = true;
-		bot = new Bot(1000);
-		jokalaria = new JokNormal(1000);
+		bot = Bot.getNireBot();
+		jokalaria = JokNormal.getNireJok();
 
 	}
 	
