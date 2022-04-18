@@ -23,7 +23,14 @@ public class JokNormal  extends Jokalari{
 		
 		return true;
 	}
+	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
+	}
+	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
+		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
+	}
 	
-	
+	protected void ontziaUkituDu(int x, int y) {}
+	protected void uraUkituDu(int x, int y) {}
 
 }

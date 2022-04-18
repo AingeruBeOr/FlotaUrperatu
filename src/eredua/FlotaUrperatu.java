@@ -6,11 +6,11 @@ import bista.Tablero;
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
 	//Matrize hauek true balioa badute, jada bertan misil bat erori da (eta ez da konponketarik egon)
-	private boolean[][] jokMatrizeUkitu;
-	private boolean[][] botMatrizeUkitu;
+	//private boolean[][] jokMatrizeUkitu;
+	//private boolean[][] botMatrizeUkitu;
 	//Matrize hauek true balioa badute ontzia dute barnean
-	private boolean[][] jokMatrizeOntzi;
-	private boolean[][] botMatrizeOntzi;
+	//private boolean[][] jokMatrizeOntzi;
+	//private boolean[][] botMatrizeOntzi;
 	
 	private JokNormal jokalaria;
 	private Bot bot;
@@ -30,19 +30,17 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	private void hasieratu() {
-		this.hasieratuMatrizeak();
 		txanda = true;
 		bot = Bot.getNireBot();
 		jokalaria = JokNormal.getNireJok();
 
 	}
 	
-	private void hasieratuMatrizeak(){
+	/*private void hasieratuMatrizeak(){
 		jokMatrizeUkitu= new boolean[10][10];
 		botMatrizeUkitu= new boolean[10][10];
 		jokMatrizeOntzi= new boolean[10][10];
 		botMatrizeOntzi= new boolean[10][10];
-		this.botariOntziakJarri();
 		for(int l=0;l<10;l++) {
 			for(int z=0;z<10;z++) {
 				jokMatrizeOntzi[l][z]=false;
@@ -50,7 +48,7 @@ public class FlotaUrperatu extends Observable{
 				botMatrizeUkitu[l][z]=false;
 			}
 		}
-	}
+	}*/
 	
 	public boolean getTxanda() {return this.txanda;}
 	public void aldatuTxanda() {
@@ -59,7 +57,7 @@ public class FlotaUrperatu extends Observable{
 		notifyObservers(null);
 	}
 	
-	private void botariOntziakJarri() {
+	/*private void botariOntziakJarri() {
 	//TODO FIJO QUE SE PUEDE HACER DE OTRA MANERA
 		for(int i=0; i<10; i++) {
 			for(int j=0; j<10; j++) {
@@ -77,7 +75,7 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeOntzi[4][4]=false;
 		botMatrizeOntzi[4][6]=false;
 		botMatrizeOntzi[4][8]=false;
-	}
+	}*/
 	
 	public int botTxanda() {return bot.tiroEgin();}
 	
@@ -91,6 +89,10 @@ public class FlotaUrperatu extends Observable{
 	}
 	
 	private boolean ontzirenBatGeratzenDa() {
+		return (Bot.getNireBot().ontzirenBatGeratzenDa() && 
+				JokNormal.getNireJok().ontzirenBatGeratzenDa());
+	}
+	/*private boolean ontzirenBatGeratzenDa() {
 		boolean ontziBot=false;
 		boolean ontziJok=false;
 		
@@ -105,11 +107,11 @@ public class FlotaUrperatu extends Observable{
 				}
 			}
 		return ontziJok && ontziBot;
-	}
+	}*/
 	
 		
 	//TODO PRIBATUAN JARRI BEHARKO ZEN AGIAN ONTZIAK KOKATU-REN BARRUAN
-	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+	/*public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		int kont=pLuz;
 		int x=pX;
 		int y=pY;
@@ -119,13 +121,7 @@ public class FlotaUrperatu extends Observable{
 			if(pHorizontal) {x++;}
 			else {y++;}
 		}
-		/*esto es para imprimir las celdas 
-		for(int l=0;l<10;l++) {
-			for(int z=0;z<10;z++) {
-				System.out.println(jokMatrizeOntzi[l][z]);
-			}
-		}
-		*/
+		
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
@@ -153,7 +149,7 @@ public class FlotaUrperatu extends Observable{
 			}
 		}
 		return kokatu;
-	}
+	}*/
 	
 	/**
 	 * Botaren matrizean (x,y) koordenatuan aurretik tiro egin den bueltatzen du.
@@ -161,14 +157,14 @@ public class FlotaUrperatu extends Observable{
 	 * @param y
 	 * @return
 	 */
-	public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
+	/*public boolean botMatrizeUkituta(int x, int y){return botMatrizeUkitu[x][y];}
 	
 	/**
 	 * Botaren marizean (x,y) koordenatan ontzi bat dagoen ala ez bueltatzen du.
 	 * @param x
 	 * @param y
 	 * @return
-	 */
+	 *
 	public boolean botMatrizeOntziaDu(int x, int y){return botMatrizeOntzi[x][y];}
 	
 
@@ -191,7 +187,7 @@ public class FlotaUrperatu extends Observable{
 	
 	public void uraUkituDuBota(int x, int y) {
 		jokMatrizeUkitu[x][y]=true;
-	}
+	}*/
 	
 	/**
 	 * Misil tiroa egin bada, metodo honi deituko zaio. false bueltatuko du misil gabe geratu bada.
@@ -199,7 +195,7 @@ public class FlotaUrperatu extends Observable{
 	 * @param y
 	 * @return
 	 */
-	public void misilTiroa( int x, int y) {
+	/*public void misilTiroa( int x, int y) {
 		if (x>0 && botMatrizeOntziaDu(x-1, y) ) { 
 			this.ezkerrekoakAztertu( x-1, y); 	
 		}
@@ -249,7 +245,7 @@ public class FlotaUrperatu extends Observable{
 			botarenOntziaUkituDu(x, y);
 			x++;
 		}
-	}
+	}*/
 	
 	/**
 	 * "arma" armari -1 egingo dio kantitatean eta false bueltatuko du arma gehiagorik ez badu
