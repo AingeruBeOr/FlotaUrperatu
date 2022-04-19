@@ -30,6 +30,8 @@ import java.awt.event.MouseEvent;
 
 
 import eredua.FlotaUrperatu;
+import eredua.JokNormal;
+
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
@@ -309,10 +311,10 @@ public class Hasieraketak extends JFrame implements Observer{
 			int index = zerrenda.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			if(luzera!=0 && fu.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
+			JokNormal jn = JokNormal.getNireJok();
+			if(luzera!=0 && jn.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
 				getLabelTxarto().setText("");
-				fu.ontziaKokatu(x, y, horizontalean, luzera);
+				jn.ontziaKokatu(x, y, horizontalean, luzera);
 				int kont=luzera;
 				int pX=x;
 				int pY=y;
@@ -339,9 +341,16 @@ public class Hasieraketak extends JFrame implements Observer{
 		
 	}
 	
-	
+	/*
 	public void update(Observable arg0, Object arg1) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		// TODO
 	}
+	*/
+	
+	public void update(Observable arg0, Object arg1) {
+		JokNormal jn = JokNormal.getNireJok();
+		// TODO
+	}	
+	
 }
