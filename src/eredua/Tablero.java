@@ -87,5 +87,5 @@ public class Tablero extends Observable{
 		{return true;}
 		return false;
 	}
-	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDu();}
+	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDagoZegoen();}
 }

@@ -12,7 +12,7 @@ public class Gelaxka {
 			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pItsasontzi);
 		}
 	}
-	public boolean itsasontziaDu() {
+	public boolean itsasontziaDu() { //este metodo te dice si la egoera es = itsasontzi
 		//TODO no se si esto da bien asi
 		if(egoera.equals(Egoera.ITSASONTZIA)) {return true;}
 		return false;
@@ -33,4 +33,12 @@ public class Gelaxka {
 		return false;
 	}
 	public void aldatuEgoera(Egoera pE) {egoera=pE;}
+	
+	
+	public boolean itsasontziaDagoZegoen() { //este metodo te dice si hay/habia barco
+		if (itsasontzi!=null) {
+			return true;
+		}
+		return false;
+	}
 }
