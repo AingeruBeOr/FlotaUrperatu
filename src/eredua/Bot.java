@@ -1,5 +1,7 @@
 package eredua;
 
+import java.util.Random;
+
 public class Bot extends Jokalari{
 	int txanda;
 	private static Bot nireBot;
@@ -28,4 +30,117 @@ public class Bot extends Jokalari{
 	public void ontziaKonpondu() {}
 	public void radarraKontsultatu() {}
 	
+	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
+	}
+	
+	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
+		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
+	}
+	
+	private void botarenItsasontziakKokatu(){
+		hegazkinOntziaKokatu();
+		itsaspekoaKokatu();
+		itsaspekoaKokatu();
+		suntzitzaileaKokatu();
+		suntzitzaileaKokatu();
+		suntzitzaileaKokatu();
+		fragataKokatu();
+		fragataKokatu();
+		fragataKokatu();
+		fragataKokatu();
+	}
+
+	private void hegazkinOntziaKokatu(){
+		int x = random.nextInt();
+		int y = random.nextInt();
+		int luzera = 4;
+		int horber = random.nextInt();
+		boolean horizontal;
+		boolean kokatua = false;
+		while (!kokatua){
+			if (horber % 2 == 0){
+				horizontal = true;
+			}
+
+			else{
+				horizontal = false;
+			}
+			
+			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
+				ontziaKokatu(x, y, horizontal, luzera);
+				kokatua = true;
+			}
+		}
+	}
+
+	private void itsaspekoaKokatu(){
+		int x = random.nextInt();
+		int y = random.nextInt();
+		int luzera = 3;
+		int horber = random.nextInt();
+		boolean horizontal;
+		boolean kokatua = false;
+		while (!kokatua){
+			if (horber % 2 == 0){
+				horizontal = true;
+			}
+
+			else{
+				horizontal = false;
+			}
+			
+			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
+				ontziaKokatu(x, y, horizontal, luzera);
+				kokatua = true;
+			}
+		}
+	}
+
+	private void suntzitzaileaKokatu(){
+		int x = random.nextInt();
+		int y = random.nextInt();
+		int luzera = 2;
+		int horber = random.nextInt();
+		boolean horizontal;
+		boolean kokatua = false;
+		while (!kokatua){
+				if (horber % 2 == 0){
+				horizontal = true;
+			}
+
+			else{
+				horizontal = false;
+			}
+			
+			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
+				ontziaKokatu(x, y, horizontal, luzera);
+				kokatua = true;
+			}
+		}
+	}
+
+	private void fragataKokatu(){
+		int x = random.nextInt();
+		int y = random.nextInt();
+		int luzera = 1;
+		int horber = random.nextInt();
+		boolean horizontal;
+		boolean kokatua = false;
+		while (!kokatua){
+				if (horber % 2 == 0){
+				horizontal = true;
+			}
+
+			else{
+				horizontal = false;
+			}
+			
+			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
+				ontziaKokatu(x, y, horizontal, luzera);
+				kokatua = true;
+			}
+		}
+	}
+
 }
