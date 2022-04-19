@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import eredua.FlotaUrperatu;
+import eredua.JokNormal;
+import eredua.Jokalari;
 import eredua.Misil;
 
 import java.awt.GridBagLayout;
@@ -56,6 +58,8 @@ public class Tablero extends JFrame implements Observer{
 	private JPanel south;
 	private JLabel lblArazoa;
 	private JLabel lblOntziOsoa; 
+	private JRadioButton rdbtnRadar;
+	private JRadioButton rdbtnEzkutu;
 
 	/**
 	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
@@ -307,6 +311,8 @@ public class Tablero extends JFrame implements Observer{
 			datuak.add(getLblArmaAukeratu());
 			datuak.add(getRdbtnBonba());
 			datuak.add(getRdbtnMisil());
+			datuak.add(getRdbtnRadar());
+			datuak.add(getRdbtnEzkutu());
 		}
 		return datuak;
 	}
@@ -316,13 +322,6 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return lblArmaAukeratu;
 	}
-	private JRadioButton getRdbtnMisil() {
-		if (rdbtnMisil == null) {
-			rdbtnMisil = new JRadioButton("Misil");
-			buttonGroup.add(rdbtnMisil);
-		}
-		return rdbtnMisil;
-	}
 	private JRadioButton getRdbtnBonba() {
 		if (rdbtnBonba == null) {
 			rdbtnBonba = new JRadioButton("Bonba");
@@ -330,6 +329,27 @@ public class Tablero extends JFrame implements Observer{
 			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
 		}
 		return rdbtnBonba;
+	}
+	private JRadioButton getRdbtnMisil() {
+		if (rdbtnMisil == null) {
+			rdbtnMisil = new JRadioButton("Misil");
+			buttonGroup.add(rdbtnMisil);
+		}
+		return rdbtnMisil;
+	}
+	private JRadioButton getRdbtnRadar() {
+		if (rdbtnRadar == null) {
+			rdbtnRadar = new JRadioButton("Radarra");
+			buttonGroup.add(rdbtnRadar);
+		}
+		return rdbtnRadar;
+	}
+	private JRadioButton getRdbtnEzkutu() {
+		if (rdbtnEzkutu == null) {
+			rdbtnEzkutu = new JRadioButton("Ezkutua");
+			buttonGroup.add(rdbtnEzkutu);
+		}
+		return rdbtnEzkutu;
 	}
 	private void txandaAldatu(boolean txanda) {
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
@@ -350,7 +370,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 	
 	
-	/********************** KONTROLADOREA ****************************************/
+	//********************** KONTROLADOREA ****************************************
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();
@@ -363,19 +383,20 @@ public class Tablero extends JFrame implements Observer{
 		public void mouseClicked(MouseEvent e) {
 			getLblArazoa().setText("");
 			getLblOntziOsoa().setText("");
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+			JokNormal jokNormal = JokNormal.getNireJok();
 			if(fu.getTxanda()) {//jokalariaren txanda bada
 				JLabel jl = (JLabel) e.getComponent();
 				int index = zerrendaBot.indexOf(jl);
 				int x = index%10;
 				int y = index/10;
 				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
-				if(!fu.botMatrizeUkituta(x, y)) { //jadanik puntu horretan tiro egin ez badu
-					if(fu.botMatrizeOntziaDu(x, y)) { //botaren ontzi bati eman badio
+				if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
+					if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);
-						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
+						jokNormal.ontziaUkitutaIpini(x, y); //botaren matrizeak eguneratu
 						if(rdbtnMisil.isSelected()) {
-							fu.misilTiroa(x,y);
+							jokNormal.misilTiroa(x, y);
 							if(!fu.armaErabiliDa(new Misil())) {
 								getRdbtnMisil().setEnabled(false);
 								getRdbtnBonba().setSelected(true);
@@ -384,7 +405,7 @@ public class Tablero extends JFrame implements Observer{
 						}					
 					} 
 					else{ //urari eman badio
-						fu.uraUkituDu(x, y);
+						//fu.uraUkituDu(x, y);
 						jl.setBackground(Color.BLUE);
 						if(rdbtnMisil.isSelected()) { //misil batekin urari eman badio
 							if(!fu.armaErabiliDa(new Misil())) {
@@ -421,7 +442,8 @@ public class Tablero extends JFrame implements Observer{
 
 	
 	
-
+	// ************************************** OBSERVER ************************************************************
+	
 	/**
 	 * Observer-ak jasotzen duena:
 	 * Hurrengoak konprobatuko dira:

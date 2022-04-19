@@ -2,11 +2,6 @@ package eredua;
 public abstract class Jokalari {
 	protected float dirua;
 	protected ArmamentuZerrenda armak;
-	protected ItsasontziZerrenda itsasontzi;
-	//protected boolean[][] matrizeUkitu;
-	//protected boolean[][] matrizeOntzi;
-	protected ItsasontziZerrenda itsasontziak;
-	//TODO:
 	protected Tablero nireItsasontziak;
 	protected Tablero ukituak;
 	
@@ -42,26 +37,37 @@ public abstract class Jokalari {
 		return armak.armaKantitateaEguneratu(arma);
 	}
 	
-	//UKITUAK ZEHAZTEKO:
+	//************************************ UKITUAK ZEHAZTEKO ***********************************************
+	
+	/**
+	 * true bueltatuko du jadanik bertan jo badu edo false bestela
+	 * @param x: x koordenatua
+	 * @param y: y koordenatua
+	 * @return 
+	 */
 	public boolean ukitutaZegoen(int x, int y) {
 		return ukituak.ukitutaEdoUrperatutaZegoen(x, y);
 	}
-	protected boolean ukituDuItsasontzia(int x, int y) {
-		if(nireItsasontziak.itsasontziaDuGelaxka(x, y)) {return true;}
-		return false;
+	
+	/**
+	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu edo false bestela
+	 * @param x: x koordenatua
+	 * @param y: y koordenatua
+	 * @return
+	 */
+	public boolean ukituDuItsasontzia(int x, int y) {
+		if(nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
+		else return false;
 	}
-	protected void ontziaUkitutaIpini(int x, int y) {
+	
+	public void ontziaUkitutaIpini(int x, int y) {
 		if(ukituDuItsasontzia(x,y)) {
 			//TODO
 			/*setChanged();
 			notifyObservers(PARAMETRO Q TE DIGA SI ES EL BOT y la casilla);*/
 		}
 		nireItsasontziak.gelaxkaUkituaIpini(x, y);
-		if(this instanceof Bot) {
-			JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
-		}else {
-			Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
-		}
+		this.ukituak.gelaxkaUkituaIpini(x,y);
 	}
 	//MISIL TIROA IZATEKOTAN
 	public void misilTiroa( int x, int y) {

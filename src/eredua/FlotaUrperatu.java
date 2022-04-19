@@ -11,10 +11,6 @@ public class FlotaUrperatu extends Observable{
 	//Matrize hauek true balioa badute ontzia dute barnean
 	//private boolean[][] jokMatrizeOntzi;
 	//private boolean[][] botMatrizeOntzi;
-	
-	private JokNormal jokalaria;
-	private Bot bot;
-	
 	// private boolean lehenengoRonda; Menuan jarri
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
 	

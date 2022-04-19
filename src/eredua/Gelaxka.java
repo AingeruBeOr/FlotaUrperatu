@@ -3,6 +3,7 @@ package eredua;
 public class Gelaxka {
 	private Egoera egoera;
 	private Itsasontzi itsasontzi;
+	private int ezkutua; // 0 --> ezkuturik ez ; 1 --> ezkutu erdia ; 2 --> ezkutu osoa
 	
 	public Gelaxka( int pItsasontzi) {
 		if(pItsasontzi==0) {
@@ -11,6 +12,7 @@ public class Gelaxka {
 			egoera=Egoera.ITSASONTZIA;
 			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pItsasontzi);
 		}
+		ezkutua = 0;
 	}
 	public boolean itsasontziaDu() { //este metodo te dice si la egoera es = itsasontzi
 		//TODO no se si esto da bien asi
