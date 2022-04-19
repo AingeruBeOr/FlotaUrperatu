@@ -9,7 +9,6 @@ public abstract class Jokalari {
 		
 		dirua=pDiru;
 		armak = new ArmamentuZerrenda(1,0,0);
-		itsasontzi = new ItsasontziZerrenda();
 		//TODO
 		ukituak=new Tablero();
 		nireItsasontziak= new Tablero();

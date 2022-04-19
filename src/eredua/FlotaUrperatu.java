@@ -15,7 +15,8 @@ public class FlotaUrperatu extends Observable{
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
 	
 	private FlotaUrperatu() {
-		hasieratu();
+		txanda=true;
+		//hasieratu();
 	}
 	
 	public static FlotaUrperatu getNireFlotaUrperatu() {
@@ -25,12 +26,9 @@ public class FlotaUrperatu extends Observable{
 		return nireFlota;
 	}
 	
-	private void hasieratu() {
+	/*private void hasieratu() {
 		txanda = true;
-		bot = Bot.getNireBot();
-		jokalaria = JokNormal.getNireJok();
-
-	}
+	}*/
 	
 	/*private void hasieratuMatrizeak(){
 		jokMatrizeUkitu= new boolean[10][10];
@@ -73,7 +71,7 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeOntzi[4][8]=false;
 	}*/
 	
-	public int botTxanda() {return bot.tiroEgin();}
+	public int botTxanda() {return Bot.getNireBot().tiroEgin();}
 	
 
 	public boolean jokoaAmaituDa() {
@@ -249,7 +247,7 @@ public class FlotaUrperatu extends Observable{
 	 * @return
 	 */
 	public boolean armaErabiliDa(Arma arma) {
-		return this.jokalaria.armaKantitateaEguneratu(arma);
+		return JokNormal.getNireJok().armaKantitateaEguneratu(arma);
 	}
 	
 }

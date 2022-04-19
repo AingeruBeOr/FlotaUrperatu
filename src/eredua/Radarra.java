@@ -12,10 +12,7 @@ public class Radarra extends Arma{
 	
 	public void itzuliKoordenatuak() {
 		int x = 0;
-		int y = 0;
-		Koordenatu koord = new Koordenatu(x, y);
-		koord.jasoX();
-		koord.jasoY(); 
+		int y = 0; 
 		
 	}
 }
