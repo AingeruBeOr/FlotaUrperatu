@@ -8,7 +8,7 @@ public class Bot extends Jokalari{
 	
 	private Bot( float pDiru ) {
 		super(pDiru);
-		nireItsasontziak.botariOntziakJarri();
+		this.probazkoOntziakJarri();
 	}
 	public static Bot getNireBot() {
 		if(nireBot==null) {
@@ -18,6 +18,10 @@ public class Bot extends Jokalari{
 	}
 	
 	public void txandaJokatu() {}
+	
+	public void probazkoOntziakJarri() {
+		nireItsasontziak.botariOntziakJarri();
+	}
 	
 	public int tiroEgin() {
 		/*
@@ -29,16 +33,19 @@ public class Bot extends Jokalari{
 		*/
 		
 	 	Random r = new Random();
-		boolean ezUkitua = false;
+	 	int x=0;
+	 	int y=0;
+		boolean ukitua = false;
 		do{
-			int x = r.nextInt();
-			int y = r.nextInt();
+			x = r.nextInt(10);
+			y = r.nextInt(10);
 			if (!this.ukitutaZegoen(x, y)) {
-				JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
-				ezUkitua = true;
+				JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
+				ukitua = true;
 			}
 		}
-		while(!ezUkitua);		 
+		while(!ukitua);
+		return (x+y*10);
 	}
 	
 	public boolean tiroaOndoEginDu() {return true;}
@@ -72,8 +79,8 @@ public class Bot extends Jokalari{
 
 	private void hegazkinOntziaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt();
-		int y = r.nextInt();
+		int x = r.nextInt(10);
+		int y = r.nextInt(10);
 		int luzera = 4;
 		int horber = r.nextInt();
 		boolean horizontal;
@@ -96,8 +103,8 @@ public class Bot extends Jokalari{
 
 	private void itsaspekoaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt();
-		int y = r.nextInt();
+		int x = r.nextInt(10);
+		int y = r.nextInt(10);
 		int luzera = 3;
 		int horber = r.nextInt();
 		boolean horizontal;
@@ -120,8 +127,8 @@ public class Bot extends Jokalari{
 
 	private void suntzitzaileaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt();
-		int y = r.nextInt();
+		int x = r.nextInt(10);
+		int y = r.nextInt(10);
 		int luzera = 2;
 		int horber = r.nextInt();
 		boolean horizontal;
@@ -144,8 +151,8 @@ public class Bot extends Jokalari{
 
 	private void fragataKokatu(){
 		Random r = new Random();
-		int x = r.nextInt();
-		int y = r.nextInt();
+		int x = r.nextInt(10);
+		int y = r.nextInt(10);
 		int luzera = 1;
 		int horber = r.nextInt();
 		boolean horizontal;

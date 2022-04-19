@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import eredua.Bot;
 import eredua.FlotaUrperatu;
 import eredua.JokNormal;
 import eredua.Jokalari;
@@ -83,6 +84,8 @@ public class Tablero extends JFrame implements Observer{
 	public Tablero(ArrayList<JLabel> pZ) {
 		initialize(pZ);
 		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
+		JokNormal.getNireJok().addObserver(this);
+		Bot.getNireBot().addObserver(this);
 	}
 	
 	private void initialize(ArrayList<JLabel> pZ) {
@@ -392,9 +395,19 @@ public class Tablero extends JFrame implements Observer{
 				int y = index/10;
 				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
 				if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
-					if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
+					int arma=0;
+					//TODO METERLE EL RADAR
+					if(rdbtnMisil.isSelected()) {
+						arma=1;
+						if(!fu.armaErabiliDa(new Misil())) {
+							getRdbtnMisil().setEnabled(false);
+							getRdbtnBonba().setSelected(true);
+						}
+					}
+					jokNormal.tiroEgin(x, y, arma);
+					/*if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);
-						jokNormal.ontziaUkitutaIpini(x, y); //botaren matrizeak eguneratu
+						jokNormal.gelaxkaUkitutaIpini(x, y); //botaren matrizeak eguneratu
 						if(rdbtnMisil.isSelected()) {
 							jokNormal.misilTiroa(x, y);
 							if(!fu.armaErabiliDa(new Misil())) {
@@ -413,7 +426,7 @@ public class Tablero extends JFrame implements Observer{
 								getRdbtnBonba().setSelected(true);
 							}
 						}
-					}
+					}*/
 					fu.aldatuTxanda();
 					if(fu.jokoaAmaituDa()) {
 						Irabazlea.main(null);
@@ -421,6 +434,8 @@ public class Tablero extends JFrame implements Observer{
 					}
 					else {
 						//System.out.println("BOTAREN TXANDA");
+						//TODO HAY Q HACERLO CON ESTO:
+						//Bot.getNireBot().tiroEgin();
 						int koord=fu.botTxanda();
 						xJarri(koord);
 						fu.aldatuTxanda();
@@ -453,9 +468,34 @@ public class Tablero extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
+		 * 0 -> URA ZEN (URDINA)
+		 * 1 -> UKITU DU(GORRIA)
+		 * 2 -> URPERATU DU (GORRIA+MEZUA)
+		 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
+		 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
+		 * */
 		if(arg != null) {
 			int[] array = (int[]) arg; 
-			this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+			switch (array[2]){
+				case 0:
+					this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
+                break;
+				case 1:
+					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+                break;
+				case 2:
+					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+					getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+                break;
+				case 3:
+					this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
+                break;
+				case 4:
+					this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+                break;
+			}
+			
 		}
 		else if(arg == null) {
 			if(fu.getTxanda()) this.txandaAldatu(true);

@@ -15,7 +15,22 @@ public class JokNormal  extends Jokalari{
 	}
 	
 	public void txandaJokatu() {}
-	public int tiroEgin() {return 0;}
+	/*Integer bat pasatuko zaio adieraziko duena zer arma motarekin tiro egin duen:
+	 * 0 -> Bonba
+	 * 1 -> Misila
+	 * 2 -> Radarra
+	 * */
+	public void tiroEgin(int x, int y,int pArma) {
+		if (pArma==2) {
+			//TODO RADARRA IMPLEMENTATU
+		}else if (pArma==1){
+			misilTiroa(x,y);
+		}else {
+			gelaxkaUkitutaIpini(x, y);
+			//TODO: URPERATUTA DAGOEN KONPROBATU
+		}	
+	}
+	
 	public void armamentuaErosi() {}
 	public void ontziaKonpondu() {}
 	public void radarraKontsultatu() {}

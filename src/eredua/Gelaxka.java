@@ -36,6 +36,15 @@ public class Gelaxka {
 	}
 	public void aldatuEgoera(Egoera pE) {egoera=pE;}
 	
+	public void aldatuItsasontzia(int pL) {
+		if(pL==0) {
+			egoera=Egoera.URA;
+			itsasontzi=null;
+		}else {
+			egoera=Egoera.ITSASONTZIA;
+			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
+		}
+	}
 	
 	public boolean itsasontziaDagoZegoen() { //este metodo te dice si hay/habia barco
 		if (itsasontzi!=null) {
