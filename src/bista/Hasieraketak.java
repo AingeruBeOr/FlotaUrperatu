@@ -341,16 +341,16 @@ public class Hasieraketak extends JFrame implements Observer{
 		
 	}
 	
-	/*
+	
 	public void update(Observable arg0, Object arg1) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		// TODO
 	}
-	*/
 	
+	/*
 	public void update(Observable arg0, Object arg1) {
 		JokNormal jn = JokNormal.getNireJok();
 		// TODO
 	}	
-	
+	*/
 }

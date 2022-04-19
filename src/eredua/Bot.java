@@ -52,10 +52,11 @@ public class Bot extends Jokalari{
 	}
 
 	private void hegazkinOntziaKokatu(){
-		int x = random.nextInt();
-		int y = random.nextInt();
+		Random r = new Random();
+		int x = r.nextInt();
+		int y = r.nextInt();
 		int luzera = 4;
-		int horber = random.nextInt();
+		int horber = r.nextInt();
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
@@ -75,10 +76,11 @@ public class Bot extends Jokalari{
 	}
 
 	private void itsaspekoaKokatu(){
-		int x = random.nextInt();
-		int y = random.nextInt();
+		Random r = new Random();
+		int x = r.nextInt();
+		int y = r.nextInt();
 		int luzera = 3;
-		int horber = random.nextInt();
+		int horber = r.nextInt();
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
@@ -98,14 +100,15 @@ public class Bot extends Jokalari{
 	}
 
 	private void suntzitzaileaKokatu(){
-		int x = random.nextInt();
-		int y = random.nextInt();
+		Random r = new Random();
+		int x = r.nextInt();
+		int y = r.nextInt();
 		int luzera = 2;
-		int horber = random.nextInt();
+		int horber = r.nextInt();
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-				if (horber % 2 == 0){
+			if (horber % 2 == 0){
 				horizontal = true;
 			}
 
@@ -121,14 +124,15 @@ public class Bot extends Jokalari{
 	}
 
 	private void fragataKokatu(){
-		int x = random.nextInt();
-		int y = random.nextInt();
+		Random r = new Random();
+		int x = r.nextInt();
+		int y = r.nextInt();
 		int luzera = 1;
-		int horber = random.nextInt();
+		int horber = r.nextInt();
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-				if (horber % 2 == 0){
+			if (horber % 2 == 0){
 				horizontal = true;
 			}
 
