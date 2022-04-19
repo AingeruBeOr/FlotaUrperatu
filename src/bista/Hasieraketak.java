@@ -311,10 +311,10 @@ public class Hasieraketak extends JFrame implements Observer{
 			int index = zerrenda.indexOf(jl);
 			int x = index%10;
 			int y = index/10;
-			JokNormal jn = JokNormal.getNireJok();
-			if(luzera!=0 && jn.ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
+			//JokNormal jn = JokNormal.getNireJok();
+			if(luzera!=0 && JokNormal.getNireJok().ontziaKokatuAhalDa(x, y, horizontalean, luzera)) {
 				getLabelTxarto().setText("");
-				jn.ontziaKokatu(x, y, horizontalean, luzera);
+				JokNormal.getNireJok().ontziaKokatu(x, y, horizontalean, luzera);
 				int kont=luzera;
 				int pX=x;
 				int pY=y;

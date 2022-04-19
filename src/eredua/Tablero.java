@@ -1,6 +1,7 @@
 package eredua;
 
 import java.util.Observable;
+import java.util.Arrays;
 
 public class Tablero extends Observable{
 	private Gelaxka[][] tablero;
@@ -9,7 +10,7 @@ public class Tablero extends Observable{
 		tablero=new Gelaxka[10][10];
 		for (int i=0; i<10; i++) {
 			for (int j=0; j<10; j++) {
-				tablero[i][j].aldatuEgoera(Egoera.URA);
+				tablero[i][j]=new Gelaxka(0);
 			}
 		}
 	}
