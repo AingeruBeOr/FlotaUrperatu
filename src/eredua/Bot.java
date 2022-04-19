@@ -18,16 +18,35 @@ public class Bot extends Jokalari{
 	}
 	
 	public void txandaJokatu() {}
+	
 	public int tiroEgin() {
+		/*
 		txanda++;
 		int x=txanda%10;
 		int y=txanda/10;
 		JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
 		return txanda;
+		*/
+		
+	 	Random r = new Random();
+		boolean ezUkitua = false;
+		do{
+			int x = r.nextInt();
+			int y = r.nextInt();
+			if (!this.ukitutaZegoen(x, y)) {
+				JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
+				ezUkitua = true;
+			}
+		}
+		while(!ezUkitua);		 
 	}
+	
 	public boolean tiroaOndoEginDu() {return true;}
+	
 	public void armamentuaErosi() {}
+	
 	public void ontziaKonpondu() {}
+	
 	public void radarraKontsultatu() {}
 	
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
