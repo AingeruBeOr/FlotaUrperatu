@@ -404,6 +404,7 @@ public class Tablero extends JFrame implements Observer{
 							getRdbtnBonba().setSelected(true);
 						}
 					}
+					System.out.println("Aukeratutako arma zenbakia (1 misil): "+arma);
 					jokNormal.tiroEgin(x, y, arma);
 					/*if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
 						jl.setBackground(Color.RED);
@@ -436,8 +437,7 @@ public class Tablero extends JFrame implements Observer{
 						//System.out.println("BOTAREN TXANDA");
 						//TODO HAY Q HACERLO CON ESTO:
 						//Bot.getNireBot().tiroEgin();
-						int koord=fu.botTxanda();
-						xJarri(koord);
+						fu.botTxanda();
 						fu.aldatuTxanda();
 						if(fu.jokoaAmaituDa()) {
 							Irabazlea.main(null);
@@ -478,28 +478,47 @@ public class Tablero extends JFrame implements Observer{
 		if(arg != null) {
 			int[] array = (int[]) arg; 
 			switch (array[2]){
-				case 0:
+			case 0:
+				if(fu.getTxanda()) {
 					this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
-                break;
-				case 1:
+				}else {
+					xJarri(array[0]+ array[1]*10);
+				}
+				break;
+			case 1:
+				if(fu.getTxanda()) {
 					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-                break;
-				case 2:
+				}else {
+					xJarri(array[0]+ array[1]*10);
+				}
+				break;
+			case 2:
+				if(fu.getTxanda()) {
 					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
 					getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
-                break;
-				case 3:
+				}else {
+					xJarri(array[0]+ array[1]*10);
+					getLblOntziOsoa().setText("Ontzi osoa urperatu du aurkariak!");
+				}
+				break;
+			case 3:
+				if(fu.getTxanda()) {
 					this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
-                break;
-				case 4:
+				}else {
+					//TODO
+				}
+				break;
+			case 4:
+				if(fu.getTxanda()) {
 					this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
-                break;
-			}
-			
-		}
-		else if(arg == null) {
+				}else {
+					//TODO
+				}
+				break;
+			}	
+		}else if(arg == null) {
 			if(fu.getTxanda()) this.txandaAldatu(true);
 			else this.txandaAldatu(false);
-		}		
+		}	
 	}
 }

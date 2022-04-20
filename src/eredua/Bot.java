@@ -34,7 +34,7 @@ public class Bot extends Jokalari{
 		//TODO
 	}
 	
-	public int tiroEgin() {
+	public void tiroEgin() {
 		/*
 		txanda++;
 		int x=txanda%10;
@@ -57,7 +57,6 @@ public class Bot extends Jokalari{
 		}
 		while(!ukitua);
 		//return (x+y*10);
-		return tiroEgin();
 	}
 	
 	public boolean tiroaOndoEginDu() {return true;}
@@ -75,8 +74,8 @@ public class Bot extends Jokalari{
 		boolean ezkutuKokatua = false;
 		{
 			do {
-				//TODO
-			} while (//TODO);
+				//TODO el true lo he puesto para q no de error
+			} while (true);
 		}
 		//TODO
 	}

@@ -71,7 +71,7 @@ public class FlotaUrperatu extends Observable{
 		botMatrizeOntzi[4][8]=false;
 	}*/
 	
-	public int botTxanda() {return Bot.getNireBot().tiroEgin();}
+	public void botTxanda() { Bot.getNireBot().tiroEgin();}
 	
 
 	public boolean jokoaAmaituDa() {

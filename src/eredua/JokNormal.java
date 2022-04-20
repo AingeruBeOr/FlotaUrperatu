@@ -24,6 +24,7 @@ public class JokNormal  extends Jokalari{
 		if (pArma==2) {
 			//TODO RADARRA IMPLEMENTATU
 		}else if (pArma==1){
+			System.out.println("Misila erabiliko da");
 			misilTiroa(x,y);
 		}else { 
 			gelaxkaUkitutaIpini(x, y);

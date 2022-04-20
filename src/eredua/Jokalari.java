@@ -57,23 +57,32 @@ public abstract class Jokalari extends Observable{
 	 * @return
 	 */
 	public boolean ukituDuItsasontzia(int x, int y) {
-		if(nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
-		else return false;
+		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
+		if(!fu.getTxanda()) {
+			if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
+			else return false;
+		}else {
+			if(Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
+			else return false;
+		}
+
 	}
 	
 	public void gelaxkaUrperatu(int x, int y) {
-		
+		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		setChanged();
 		notifyObservers(new int[] {x,y,2});
-		if(this instanceof Bot) {
+		if(!fu.getTxanda()) {
 			JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+			Bot.getNireBot().ukituak.gelaxkaUrperatutaIpini(x, y);
 		}else {
 			Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+			JokNormal.getNireJok().ukituak.gelaxkaUrperatutaIpini(x, y);
 		}
-		this.ukituak.gelaxkaUrperatutaIpini(x,y);
 	}
 	
 	public void gelaxkaUkitutaIpini(int x, int y) {
+		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		if(ukituDuItsasontzia(x,y)) {
 			setChanged();
 			notifyObservers(new int[] {x,y,1});
@@ -82,12 +91,13 @@ public abstract class Jokalari extends Observable{
 			notifyObservers(new int[] {x,y,0});
 		}
 		//TODO IGUAL ES AL REVES
-		if(this instanceof Bot) {
+		if(!fu.getTxanda()) {
 			JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+			Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
 		}else {
 			Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+			JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
 		}
-		this.ukituak.gelaxkaUkituaIpini(x,y);
 	}
 	
 	
@@ -97,6 +107,7 @@ public abstract class Jokalari extends Observable{
 		
 		if(ukituDuItsasontzia(x,y)) {
 			gelaxkaUrperatu(x,y);
+			System.out.println("Misila itsasontzia aurkitu du");
 			if(!fu.getTxanda()) {
 				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 					this.ezkerrekoakUrperatu( x-1, y); 	
@@ -145,12 +156,12 @@ public abstract class Jokalari extends Observable{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				y--;
 			}
 		}else {
 			while (y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				y--;
 			}
 		}
@@ -159,12 +170,12 @@ public abstract class Jokalari extends Observable{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			while (y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				y++;
 			}
 		}else {
 			while (y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				y++;
 			}
 		}
@@ -173,12 +184,12 @@ public abstract class Jokalari extends Observable{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			while (x>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				x--;
 			}
 		}else {
 			while (x>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				x--;
 			}
 		}
@@ -188,12 +199,12 @@ public abstract class Jokalari extends Observable{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			while (x<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				x++;
 			}
 		}else {
 			while (x<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
+				gelaxkaUrperatu(x,y);
 				x++;
 			}
 		}
@@ -378,7 +389,6 @@ public abstract class Jokalari extends Observable{
 		}
 		return aurkitua;
 	}
-	
 	
 	
 	
