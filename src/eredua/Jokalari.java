@@ -235,7 +235,7 @@ public abstract class Jokalari extends Observable{
 		boolean eskumakoak=false;
 
 		if(ukituDuItsasontzia(x,y)) {			
-			while (!aurkitua && !guztiakAztertu) { //ontziaren zati ez ukitua aurkitzen ez duzun bitartean eta amaitzen (guztiak aztertu) ez den bitartean
+			while (!aurkitua && !guztiakAztertu) { //ontziaren zati ez ukitua aurkitzen ez den bitartean eta amaitzen (guztiak aztertu) ez den bitartean
 				if(this instanceof Bot) {
 					if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
