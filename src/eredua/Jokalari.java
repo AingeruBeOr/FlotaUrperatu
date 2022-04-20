@@ -97,31 +97,31 @@ public abstract class Jokalari extends Observable{
 			gelaxkaUrperatu(x,y);
 			if(this instanceof Bot) {
 				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-					this.ezkerrekoakAztertu( x-1, y); 	
+					this.ezkerrekoakUrperatu( x-1, y); 	
 				}
 				if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-					this.eskumakoakAztertu( x+1, y);	
+					this.eskumakoakUrperatu( x+1, y);	
 				}
 							
 				if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-					this.goikoakAztertu( x, y-1);	
+					this.goikoakUrperatu( x, y-1);	
 				}
 				if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-					this.behekoakAztertu( x, y+1);
+					this.behekoakUrperatu( x, y+1);
 				}
 			}else {
 				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-					this.ezkerrekoakAztertu( x-1, y); 	
+					this.ezkerrekoakUrperatu( x-1, y); 	
 				}
 				if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-					this.eskumakoakAztertu( x+1, y);	
+					this.eskumakoakUrperatu( x+1, y);	
 				}
 							
 				if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-					this.goikoakAztertu( x, y-1);	
+					this.goikoakUrperatu( x, y-1);	
 				}
 				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-					this.behekoakAztertu( x, y+1);
+					this.behekoakUrperatu( x, y+1);
 				}
 			}
 		}else {
@@ -138,7 +138,7 @@ public abstract class Jokalari extends Observable{
 		
 	}
 	
-	private void goikoakAztertu ( int x, int y) {
+	private void goikoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
 			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
@@ -151,7 +151,7 @@ public abstract class Jokalari extends Observable{
 			}
 		}
 	}
-	private void behekoakAztertu ( int x, int y) {
+	private void behekoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
 			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
@@ -164,7 +164,7 @@ public abstract class Jokalari extends Observable{
 			}
 		}
 	}
-	private void ezkerrekoakAztertu ( int x, int y) {
+	private void ezkerrekoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
 			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
@@ -178,7 +178,7 @@ public abstract class Jokalari extends Observable{
 		}
 	}
 	
-	private void eskumakoakAztertu ( int x, int y) {
+	private void eskumakoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
 			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
@@ -191,6 +191,178 @@ public abstract class Jokalari extends Observable{
 			}
 		}
 	}
+	
+	
+	public void ontziaUrperatu(int x, int y) {
+			gelaxkaUrperatu(x,y);
+			if(this instanceof Bot) {
+				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+					this.ezkerrekoakUrperatu( x-1, y); 	
+				}
+				if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+					this.eskumakoakUrperatu( x+1, y);	
+				}
+							
+				if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+					this.goikoakUrperatu( x, y-1);	
+				}
+				if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+					this.behekoakUrperatu( x, y+1);
+				}
+			}else {
+				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+					this.ezkerrekoakUrperatu( x-1, y); 	
+				}
+				if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+					this.eskumakoakUrperatu( x+1, y);	
+				}
+							
+				if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+					this.goikoakUrperatu( x, y-1);	
+				}
+				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+					this.behekoakUrperatu( x, y+1);
+				}
+			}
+	}
+	
+	public boolean ontziOsoaUrperatuDu(int x, int y) {
+		boolean aurkitua=false;
+		boolean guztiakAztertu=false;
+		boolean goikoak=false;
+		boolean behekoak=false;
+		boolean ezkerrekoak=false;
+		boolean eskumakoak=false;
+
+		if(ukituDuItsasontzia(x,y)) {			
+			while (!aurkitua && !guztiakAztertu) { //ontziaren zati ez ukitua aurkitzen ez duzun bitartean eta amaitzen (guztiak aztertu) ez den bitartean
+				if(this instanceof Bot) {
+					if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
+					}
+					if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+						eskumakoak=this.eskumakoakAztertu( x+1, y);	
+					}
+								
+					if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+						goikoak=this.goikoakAztertu( x, y-1);	
+					}
+					if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+						behekoak=this.behekoakAztertu( x, y+1);
+					}
+					if (ezkerrekoak && eskumakoak && goikoak && behekoak) {
+						aurkitua=true;
+					}
+					guztiakAztertu=true;
+				}else {
+					if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
+					}
+					if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+						eskumakoak=this.eskumakoakAztertu( x+1, y);	
+					}
+								
+					if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+						goikoak=this.goikoakAztertu( x, y-1);	
+					}
+					if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+						behekoak=this.behekoakAztertu( x, y+1);
+					}
+					if (ezkerrekoak && eskumakoak && goikoak && behekoak) {
+						aurkitua=true;
+					}
+					guztiakAztertu=true;
+				}
+			}
+		}
+		return aurkitua;
+	}
+	
+	private boolean goikoakAztertu(int x, int y) {
+		boolean aurkitua=false;
+		if(this instanceof Bot) {
+			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				y--;
+			}	
+		}else {
+			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				y--;
+			}
+		}
+		return aurkitua;
+	}
+	
+	private boolean behekoakAztertu(int x, int y) {
+		boolean aurkitua=false;
+		if(this instanceof Bot) {
+			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				y++;
+			}	
+		}else {
+			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				y++;
+			}
+		}
+		return aurkitua;
+	}
+	
+	private boolean ezkerrekoakAztertu(int x, int y) {
+		boolean aurkitua=false;
+		if(this instanceof Bot) {
+			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				x--;
+			}	
+		}else {
+			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				x--;
+			}
+		}
+		return aurkitua;
+	}
+	
+	private boolean eskumakoakAztertu(int x, int y) {
+		boolean aurkitua=false;
+		if(this instanceof Bot) {
+			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				x++;
+			}	
+		}else {
+			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
+					aurkitua=true;
+				}
+				x++;
+			}
+		}
+		return aurkitua;
+	}
+	
+	
+	
+	
+	
+	
 	//TODO BESTE
 	
 	/*public Arma getArma(Arma arma) {

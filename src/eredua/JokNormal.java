@@ -25,9 +25,11 @@ public class JokNormal  extends Jokalari{
 			//TODO RADARRA IMPLEMENTATU
 		}else if (pArma==1){
 			misilTiroa(x,y);
-		}else {
+		}else { 
 			gelaxkaUkitutaIpini(x, y);
-			//TODO: URPERATUTA DAGOEN KONPROBATU
+			if (ontziOsoaUrperatuDu(x,y)){ 
+				ontziaUrperatu(x,y);
+			}
 		}	
 	}
 	
