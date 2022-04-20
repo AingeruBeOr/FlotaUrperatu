@@ -153,12 +153,12 @@ public abstract class Jokalari extends Observable{
 	}
 	private void behekoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
-			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				y++;
 			}
 		}else {
-			while (y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				y++;
 			}
@@ -166,12 +166,12 @@ public abstract class Jokalari extends Observable{
 	}
 	private void ezkerrekoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
-			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (x>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				x--;
 			}
 		}else {
-			while (y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (x>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				x--;
 			}
@@ -180,12 +180,12 @@ public abstract class Jokalari extends Observable{
 	
 	private void eskumakoakUrperatu ( int x, int y) {
 		if(this instanceof Bot) {
-			while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (x<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				x++;
 			}
 		}else {
-			while (y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (x<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 				x++;
 			}
@@ -234,7 +234,8 @@ public abstract class Jokalari extends Observable{
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
 
-		if(ukituDuItsasontzia(x,y)) {			
+
+		if(ukituDuItsasontzia(x,y)) {
 			while (!aurkitua && !guztiakAztertu) { //ontziaren zati ez ukitua aurkitzen ez den bitartean eta amaitzen (guztiak aztertu) ez den bitartean
 				if(this instanceof Bot) {
 					if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
@@ -255,6 +256,7 @@ public abstract class Jokalari extends Observable{
 					}
 					guztiakAztertu=true;
 				}else {
+					
 					if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
 					}
@@ -268,9 +270,14 @@ public abstract class Jokalari extends Observable{
 					if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
 						behekoak=this.behekoakAztertu( x, y+1);
 					}
+					//System.out.println(ezkerrekoak);
+					//System.out.println(eskumakoak);
+					//System.out.println(goikoak);
+					//System.out.println(behekoak);
 					if (ezkerrekoak && eskumakoak && goikoak && behekoak) {
-						aurkitua=true;
+						aurkitua=true;		
 					}
+
 					guztiakAztertu=true;
 				}
 			}
@@ -301,14 +308,14 @@ public abstract class Jokalari extends Observable{
 	private boolean behekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		if(this instanceof Bot) {
-			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+			while (!aurkitua && y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
 				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
 				y++;
 			}	
 		}else {
-			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
@@ -321,14 +328,14 @@ public abstract class Jokalari extends Observable{
 	private boolean ezkerrekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		if(this instanceof Bot) {
-			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+			while (!aurkitua && x>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
 				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
 				x--;
 			}	
 		}else {
-			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (!aurkitua && x>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
@@ -341,14 +348,14 @@ public abstract class Jokalari extends Observable{
 	private boolean eskumakoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		if(this instanceof Bot) {
-			while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+			while (!aurkitua && y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
 				if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
 				x++;
 			}	
 		}else {
-			while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 				if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 					aurkitua=true;
 				}
