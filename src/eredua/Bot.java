@@ -12,15 +12,26 @@ public class Bot extends Jokalari{
 	}
 	public static Bot getNireBot() {
 		if(nireBot==null) {
-			nireBot=new Bot(1000);
+			nireBot=new Bot(1000);			// 1000 = dirua
 		}
 		return nireBot;
 	}
 	
+	/*Maider --> Metodo bat egin dut tableroa hasieratzeko bere ontziekin
+	
+	public void hasieratuTablero() {
+		setTablero(new Tablero());
+	}
+	*/
 	public void txandaJokatu() {}
 	
 	public void probazkoOntziakJarri() {
 		nireItsasontziak.botariOntziakJarri();
+	}
+	
+	public void zenbakiRandom() {
+		Random zenbakia = new Random();
+		//TODO
 	}
 	
 	public int tiroEgin() {
@@ -45,7 +56,8 @@ public class Bot extends Jokalari{
 			}
 		}
 		while(!ukitua);
-		return (x+y*10);
+		//return (x+y*10);
+		return tiroEgin();
 	}
 	
 	public boolean tiroaOndoEginDu() {return true;}
@@ -54,10 +66,29 @@ public class Bot extends Jokalari{
 	
 	public void ontziaKonpondu() {}
 	
-	public void radarraKontsultatu() {}
+	public void radarraKontsultatu() {
+		//TODO
+	}
+	
+	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
+	public void ezkutuaKokatu() {
+		boolean ezkutuKokatua = false;
+		{
+			do {
+				//TODO
+			} while (//TODO);
+		}
+		//TODO
+	}
 	
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
+		//Random r = new Random();
+	 	//int pX=0;
+	 	//int pY=0;
+		/*//TODO while (pX > 0 and pX<=10) do {
+			
+		} */
 	}
 	
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
