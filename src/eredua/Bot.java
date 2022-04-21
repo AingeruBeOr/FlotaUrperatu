@@ -16,7 +16,10 @@ public class Bot extends Jokalari{
 		}
 		return nireBot;
 	}
-	
+	public void zenbakiRandom() {
+		Random zenbakia = new Random();
+		//TODO
+	}
 	/*Maider --> Metodo bat egin dut tableroa hasieratzeko bere ontziekin
 	
 	public void hasieratuTablero() {
@@ -24,66 +27,10 @@ public class Bot extends Jokalari{
 	}
 	*/
 	public void txandaJokatu() {}
-	
+	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
 		nireItsasontziak.botariOntziakJarri();
 	}
-	
-	public void zenbakiRandom() {
-		Random zenbakia = new Random();
-		//TODO
-	}
-	
-	public void tiroEgin() {
-		/*
-		txanda++;
-		int x=txanda%10;
-		int y=txanda/10;
-		JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
-		return txanda;
-		*/
-		
-	 	Random r = new Random();
-	 	int x=0;
-	 	int y=0;
-		boolean tiro = false;
-		do{
-			x = r.nextInt(10);
-			y = r.nextInt(10);
-			if (!this.ukitutaZegoen(x, y)) {
-				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
-					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
-				}else {
-					JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
-				}
-				tiro = true;
-			}
-		}
-		while(!tiro);
-		//return (x+y*10);
-	}
-	
-	public boolean tiroaOndoEginDu() {return true;}
-	
-	public void armamentuaErosi() {}
-	
-	public void ontziaKonpondu() {}
-	
-	public void radarraKontsultatu() {
-		//TODO
-	}
-	
-	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
-	public void ezkutuaKokatu() {
-		boolean ezkutuKokatua = false;
-		{
-			do {
-				//TODO el true lo he puesto para q no de error
-			} while (true);
-		}
-		//TODO
-	}
-	
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
 		//Random r = new Random();
@@ -206,5 +153,59 @@ public class Bot extends Jokalari{
 			}
 		}
 	}
+	
+	//*********************************************** TIROA *******************************************************
+	public void tiroEgin() {
+		/*
+		txanda++;
+		int x=txanda%10;
+		int y=txanda/10;
+		JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
+		return txanda;
+		*/
+		
+	 	Random r = new Random();
+	 	int x=0;
+	 	int y=0;
+		boolean tiro = false;
+		do{
+			x = r.nextInt(10);
+			y = r.nextInt(10);
+			if (!this.ukitutaZegoen(x, y)) {
+				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
+					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
+				}else {
+					JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
+				}
+				tiro = true;
+			}
+		}
+		while(!tiro);
+		//return (x+y*10);
+	}
+	
+	public boolean tiroaOndoEginDu() {return true;}
+	
+	
+	//********************************** RADAR *******************************************************
+	public void radarraKontsultatu() {
+		//TODO
+	}
+	//********************************** EZKUTUA *******************************************************
+	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
+	public void ezkutuaKokatu() {
+		boolean ezkutuKokatua = false;
+		{
+			do {
+				//TODO el true lo he puesto para q no de error
+			} while (true);
+		}
+		//TODO
+	}
+	
+	//********************************** EROSKETAK *******************************************************
+		public void armamentuaErosi() {}
+		
+		public void ontziaKonpondu() {}
 
 }

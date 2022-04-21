@@ -426,7 +426,6 @@ public class Tablero extends JFrame implements Observer{
 					int x = index%10;
 					int y = index/10;
 					jokNormal.ezkutuaJarri(x,y);
-					//fu.aldatuTxanda();
 				}
 				else {
 					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
@@ -452,13 +451,11 @@ public class Tablero extends JFrame implements Observer{
 				}
 			}
 			fu.aldatuTxanda();
-			System.out.println("Nire txanda da: "+ fu.getTxanda());
 			if(fu.jokoaAmaituDa()) {
 				Irabazlea.main(null);
 				setVisible(false);
 			}
 			else {
-				//System.out.println("BOTAREN TXANDA");
 				Bot.getNireBot().tiroEgin();
 				fu.aldatuTxanda();
 				if(fu.jokoaAmaituDa()) {
