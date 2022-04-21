@@ -67,7 +67,7 @@ public abstract class Jokalari extends Observable{
 		}
 	}
 	
-	public void gelaxkaUrperatu(int x, int y) {
+	/*public void gelaxkaUrperatu(int x, int y) {
 		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		setChanged();
 		notifyObservers(new int[] {x,y,2});
@@ -78,9 +78,9 @@ public abstract class Jokalari extends Observable{
 			Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 			JokNormal.getNireJok().ukituak.gelaxkaUrperatutaIpini(x, y);
 		}
-	}
+	}*/
 	
-	public void gelaxkaUkitutaIpini(int x, int y) {
+	/*public void gelaxkaUkitutaIpini(int x, int y) {
 		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		if(ukituDuItsasontzia(x,y)) {
 			setChanged();
@@ -89,7 +89,6 @@ public abstract class Jokalari extends Observable{
 			setChanged();
 			notifyObservers(new int[] {x,y,0});
 		}
-		//TODO IGUAL ES AL REVES
 		if(!fu.getTxanda()) {
 			JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
 			Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
@@ -97,12 +96,12 @@ public abstract class Jokalari extends Observable{
 			Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
 			JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
 		}
-	}
+	}*/
 	
 	
 	// **************************************** MISIL TIROA IZATEKOTAN *******************************************
 	
-	public void misilTiroa( int x, int y) {
+	/*public void misilTiroa( int x, int y) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		
 		if(ukituDuItsasontzia(x,y)) {
@@ -245,7 +244,7 @@ public abstract class Jokalari extends Observable{
 				this.behekoakUrperatu( x, y+1);
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * (x,y) posizioan dagoen ontzi osoa ureperatuta dagoen ala adierziko du
