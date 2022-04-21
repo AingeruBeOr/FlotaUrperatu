@@ -433,9 +433,18 @@ public abstract class Jokalari extends Observable{
 			this.nireItsasontziak.setEzkutua(x, y, level);
 			y--;
 		}
-		behekoeiEzkutuaJarri(x, y, level);
-		ezkerrekoeiEzkutuaJarri(x, y, level);
-		eskumakoeiEzkutuaJarri(x, y, level);
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			y++;
+		}
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			x--;
+		}
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			x++;
+		}
 	}
 	
 	/**
@@ -447,30 +456,6 @@ public abstract class Jokalari extends Observable{
 	public boolean ezkutuaDago(int x, int y) {
 		return this.nireItsasontziak.ezkutuaDago(x, y);
 	}
-	
-	private void goikoeiEzkutuaJarri(int x, int y, int level) {
-		
-	}
-	private void behekoeiEzkutuaJarri( int x, int y, int level) {
-		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
-			y++;
-		}
-	}
-	private void ezkerrekoeiEzkutuaJarri(int x, int y, int level) {
-		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
-			x--;
-		}
-	}
-	private void eskumakoeiEzkutuaJarri(int x, int y, int level) {
-		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
-			x++;
-		}
-	}
-	
-	
 	
 	//TODO BESTE
 	
