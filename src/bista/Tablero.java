@@ -138,7 +138,7 @@ public class Tablero extends JFrame implements Observer{
 		if (south == null) {
 			south = new JPanel();
 			south.add(getLblArazoa());
-			south.add(getLblOntziOsoa());   
+			south.add(getLblOntzia());   
 		}
 		return south;
 	}
@@ -301,7 +301,7 @@ public class Tablero extends JFrame implements Observer{
 		return lblArazoa;
 	}
 	
-	private JLabel getLblOntziOsoa() {		
+	private JLabel getLblOntzia() {		
 		if (lblOntziOsoa == null) {
 			lblOntziOsoa = new JLabel("");
 			lblOntziOsoa.setForeground(Color.GREEN);
@@ -394,7 +394,7 @@ public class Tablero extends JFrame implements Observer{
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
 			getLblArazoa().setText("");
-			getLblOntziOsoa().setText("");
+			getLblOntzia().setText("");
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 			JokNormal jokNormal = JokNormal.getNireJok();
 			if(fu.getTxanda()) {//jokalariaren txanda bada
@@ -419,7 +419,7 @@ public class Tablero extends JFrame implements Observer{
 								getRdbtnMisil().setEnabled(false);
 								getRdbtnBonba().setSelected(true);
 							}
-							getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+							getLblOntzia().setText("Ontzi osoa urperatu duzu!");
 						}					
 					} 
 					else{ //urari eman badio
@@ -500,10 +500,10 @@ public class Tablero extends JFrame implements Observer{
 				case 2:
 					if(fu.getTxanda()) {
 						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-						getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+						getLblOntzia().setText("Ontzi osoa urperatu duzu!");
 					}else {
 						xJarri(array[0]+ array[1]*10);
-						getLblOntziOsoa().setText("Ontzi osoa urperatu du aurkariak!");
+						getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
 					}
 					break;
 				case 3:
@@ -513,16 +513,25 @@ public class Tablero extends JFrame implements Observer{
 						//TODO
 					}
 					break;
-				case 4:
+				case 4: //radarra erabiliz ontzia aurkitu du
 					if(fu.getTxanda()) {
 						this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						getLblOntzia().setText("Ontzia aurkitu duzu!");
 					}else {
 						//TODO
 					}
 					break;
 				case 5: //ontzi osoa urperatzea bonbak erabiliz (lo dejo??)
 					if (fu.getTxanda()) {
-						getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+						getLblOntzia().setText("Ontzi osoa urperatu duzu!");
+						
+					}
+					else {
+						//TODO
+					}
+				case 6: //radarra erabiliz EZ du ontzia aurkitu 
+					if (fu.getTxanda()) {
+						getLblOntzia().setText("Ez duzu ontzirik aurkitu!");
 						
 					}
 					else {

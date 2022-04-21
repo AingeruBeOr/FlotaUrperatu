@@ -42,6 +42,7 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {1,kop});
 		}else if (pArma == 2) {
+			radarra(x,y);
 			//TODO RADARRA IMPLEMENTATU
 			int kop = super.armaKantitateaEguneratu(new Radarra());
 			setChanged();

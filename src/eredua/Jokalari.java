@@ -387,6 +387,27 @@ public abstract class Jokalari extends Observable{
 	
 	
 	
+	public void radarra(int x, int y) {
+		boolean aurkituDu=false;
+		for(int i=x-1; i<=x+1; i++) {
+			for(int j=y-1; j<=y+1; j++) {
+				if(i>=0 && i<=9 && j>=0 && j<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
+					setChanged();
+					notifyObservers(new int[] {i,j,4});
+					aurkituDu=true;
+					
+				}
+			}
+		}
+		if (!aurkituDu) {
+			
+			setChanged();
+			notifyObservers(new int[] {x,y,6});
+		}
+	}
+	
+	
+	
 	
 	
 	//TODO BESTE
