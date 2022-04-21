@@ -52,17 +52,17 @@ public abstract class Jokalari extends Observable{
 		return ukituak.ukitutaEdoUrperatutaZegoen(x, y);
 	}
 	
+	public boolean itsasontziaDaukat(int x,int y) {
+		return this.nireItsasontziak.itsasontziaDuGelaxka(x, y);
+	}
+	
 	/**
-	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu edo false bestela
+	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
 	 * @param x: x koordenatua
 	 * @param y: y koordenatua
 	 * @return
 	 */
 	public boolean ukituDuItsasontzia(int x, int y) {
-		/*
-		 * return this.nireItsasontziak.itsasontziaDuGelaxka(x,y);
-		 * */
-		
 		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
@@ -71,7 +71,6 @@ public abstract class Jokalari extends Observable{
 			if(Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
 			else return false;
 		}
-
 	}
 	
 	public void gelaxkaUrperatu(int x, int y) {
@@ -107,7 +106,8 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	
-	//MISIL TIROA IZATEKOTAN
+	// **************************************** MISIL TIROA IZATEKOTAN *******************************************
+	
 	public void misilTiroa( int x, int y) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		
@@ -154,8 +154,10 @@ public abstract class Jokalari extends Observable{
 			}
 			this.ukituak.gelaxkaUkituaIpini(x,y);
 		}
-		
-		
+		//misil kantitatea eguneratu:
+		int kop = armaKantitateaEguneratu(new Misil());
+		setChanged();
+		notifyObservers(new int[] {0,kop}); 
 	}
 	
 	private void goikoakUrperatu ( int x, int y) {
@@ -390,6 +392,9 @@ public abstract class Jokalari extends Observable{
 	
 	
 	
+	
+	//******************************* RADARRA **************************************************************************
+	
 	public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
@@ -406,9 +411,30 @@ public abstract class Jokalari extends Observable{
 			setChanged();
 			notifyObservers(new int[] {x,y,6});
 		}
+		//radar kantitatea eguneratu:
+		int kop = armaKantitateaEguneratu(new Radarra());
+		setChanged();
+		notifyObservers(new int[] {1,kop});
 	}
 	
 	
+	
+	
+	//************************** EZKUTUA **********************************************************************************
+	
+	public void ezkutuaIpini(int x,int y, int level) {
+		this.nireItsasontziak.setEzkutua(x, y, level);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return true bueltatuko du x,y posizioan ezkutu bat badago
+	 */
+	public boolean ezkutuaDago(int x, int y) {
+		return this.nireItsasontziak.ezkutuaDago(x, y);
+	}
 	
 	
 	

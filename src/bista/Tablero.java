@@ -374,6 +374,12 @@ public class Tablero extends JFrame implements Observer{
 		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(crossAdj);
 	}
+	private void ezkutuaJarri(int index) {
+		JLabel jl = zerrendaJok.get(index);
+		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu1.png"));
+		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(ezkutuAdj);
+	}
 	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
 		String sy = String.valueOf(y);
@@ -405,7 +411,7 @@ public class Tablero extends JFrame implements Observer{
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
-					
+					jokNormal.ezkutuaJarri(x,y);
 				}
 				else {
 					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
@@ -475,6 +481,10 @@ public class Tablero extends JFrame implements Observer{
 				 * 2 -> URPERATU DU (GORRIA+MEZUA)
 				 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
 				 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
+				 * 5 ->
+				 * 6 -> 
+				 * 7 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA ITSASONTZIA BAT DU POSIZIO HORRETAN
+				 * 8 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA EZ DU ITSASONTZIRIK POSIZIO HORRETAN
 				 * */
 				switch (array[2]){
 				case 0:
@@ -523,6 +533,7 @@ public class Tablero extends JFrame implements Observer{
 					else {
 						//TODO
 					}
+					break;
 				case 6: //radarra erabiliz EZ du ontzia aurkitu 
 					if (fu.getTxanda()) {
 						getLblOntzia().setText("Ez duzu ontzirik aurkitu!");
@@ -531,7 +542,17 @@ public class Tablero extends JFrame implements Observer{
 					else {
 						//TODO
 					}
-				}	
+					break;
+				case 7:
+					ezkutuaJarri(array[0]+ array[1]*10);
+					break;
+				case 8:
+					getLblArazoa().setText("Klik egin ezazu itsasontzi bat duzun posizioan");
+					break;
+				case 9:
+					getLblArazoa().setText("Jadanik badago ezkutu bat bertan");
+					break;
+				}
 			}
 			else if(array.length == 2) { 
 				/*

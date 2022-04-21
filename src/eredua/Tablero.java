@@ -99,4 +99,12 @@ public class Tablero extends Observable{
 	}
 	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDagoZegoen();}
 	
+	public void setEzkutua(int x,int y, int level) {
+		tablero[x][y].setEzkutua(level);
+	}
+	
+	public boolean ezkutuaDago(int x, int y) {
+		return tablero[x][y].ezkutuaDago();
+	}
+	
 }

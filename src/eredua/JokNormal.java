@@ -34,15 +34,45 @@ public class JokNormal  extends Jokalari{
 		}else if (pArma == 1){ 
 			System.out.println("Misila erabiliko da");
 			misilTiroa(x,y);
-			int kop = super.armaKantitateaEguneratu(new Misil());
-			setChanged();
-			notifyObservers(new int[] {0,kop});
 		}else if (pArma == 2) {
 			radarraKontsultatu(x,y);
-			int kop = super.armaKantitateaEguneratu(new Radarra());
-			setChanged();
-			notifyObservers(new int[] {1,kop});
 		}	
+	}
+	
+	/**
+	 * Jokalariak (x,y) posizioan ezkutu bat jarri nahi dela adierazi du. 
+	 * Bertan ezkutu bat jarri dezakeen konprobatuko da. Hala bada, ezkutua
+	 * jarriko zaio bertan dagoen itsaontzi osoari.
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 */
+	public void ezkutuaJarri(int x, int y) {
+		if(super.itsasontziaDaukat(x, y)) {
+			if(!super.ezkutuaDago(x, y)) {
+				//ezkutu irudia ipini:
+				setChanged();
+				notifyObservers(new int[] {x,y,7});
+				
+				super.ezkutuaIpini(x, y, 2);
+				
+				//ezkutu kantitatea eguneratu:
+				int kop = armaKantitateaEguneratu(new Ezkutua());
+				setChanged();
+				notifyObservers(new int[] {2,kop}); 
+			}
+			else {
+				//posizio horretan jadanik dago ezkutu bat:
+				setChanged();
+				notifyObservers(new int[] {x,y,9});
+			}
+		}
+		else {
+			//posizio horretan ezkutu bat ezin du ipini:
+			setChanged();
+			notifyObservers(new int[] {x,y,8});
+		}
+		
+		
 	}
 	
 	public void armamentuaErosi() {}

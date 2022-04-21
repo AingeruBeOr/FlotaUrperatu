@@ -52,6 +52,7 @@ public class Irabazlea extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getPanel(), BorderLayout.CENTER);
+		setLocationRelativeTo(null);
 	}
 
 	private JPanel getPanel() {

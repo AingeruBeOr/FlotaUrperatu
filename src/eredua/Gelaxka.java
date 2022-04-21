@@ -52,4 +52,13 @@ public class Gelaxka {
 		}
 		return false;
 	}
+	
+	public void setEzkutua(int level) {
+		ezkutua = level;
+	}
+	
+	public boolean ezkutuaDago() {
+		if(ezkutua == 1 || ezkutua == 2) return true;
+		else return false;
+	}
 }
