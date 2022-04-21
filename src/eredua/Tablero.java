@@ -55,6 +55,9 @@ public class Tablero extends Observable{
 		//TODO UN IF PARA VER SI ES URPERATUTA
 		tablero[x][y].aldatuEgoera(Egoera.UKITUA);
 	}
+	public boolean urperatutaDago(int x, int y) {
+		return tablero[x][y].urperatutaDu();
+	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
 		int kont=pLuz;
@@ -99,11 +102,11 @@ public class Tablero extends Observable{
 	}
 	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDagoZegoen();}
 	
+	public int ezkutuaXTxikitu(int x, int y, int k) {
+		return tablero[x][y].ezkutuaXTxikitu(k);
+	}
 	public void setEzkutua(int x,int y, int level) {
-		tablero[x][y].setEzkutua(level);
-		//ezkutu irudia ipini:
-		setChanged();
-		notifyObservers(new int[] {x,y,7});
+		tablero[x][y].setEzkutua(level);		
 	}
 	
 	public boolean ezkutuaDago(int x, int y) {

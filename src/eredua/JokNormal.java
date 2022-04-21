@@ -27,9 +27,15 @@ public class JokNormal  extends Jokalari{
 	 */
 	public void tiroEgin(int x, int y,int pArma) {
 		if (pArma == 0){
-			gelaxkaUkitutaIpini(x, y);
-			if (ontziOsoaUrperatuDu(x,y)){ 
-				ontziaUrperatu(x,y);
+			
+			if(Bot.getNireBot().ezkutuaDago(x, y)) {
+				//TODO ESTO ESTA MAL
+				Bot.getNireBot().ezkutuaIpini(x, y, 1);
+			}else {
+				gelaxkaUkitutaIpini(x, y);
+				if (ontziOsoaUrperatuDu(x,y)){ 
+					ontziaUrperatu(x,y);
+				}
 			}
 		}else if (pArma == 1){ 
 			System.out.println("Misila erabiliko da");
@@ -49,7 +55,7 @@ public class JokNormal  extends Jokalari{
 	public void ezkutuaJarri(int x, int y) {
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
-				if(!super.ontziOsoaUrperatuDu(x, y)) {
+				if(!nireItsasontziak.urperatutaDago(x, y)) { //!super.ontziOsoaUrperatuDu(x, y)
 					super.ezkutuaIpini(x, y, 2);
 					
 					//ezkutu kantitatea eguneratu:
@@ -74,7 +80,6 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,8});
 		}
-		
 		
 	}
 	

@@ -60,6 +60,11 @@ public class Gelaxka{
 	public void setEzkutua(int level) {
 		ezkutua = level;
 	}
+	public int ezkutuaXTxikitu(int k) {
+		if(k==2) ezkutua=0;
+		else ezkutua--;
+		return ezkutua;
+	}
 	
 	public boolean ezkutuaDago() {
 		if(ezkutua == 1 || ezkutua == 2) return true;

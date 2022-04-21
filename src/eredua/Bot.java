@@ -46,16 +46,20 @@ public class Bot extends Jokalari{
 	 	Random r = new Random();
 	 	int x=0;
 	 	int y=0;
-		boolean ukitua = false;
+		boolean tiro = false;
 		do{
 			x = r.nextInt(10);
 			y = r.nextInt(10);
 			if (!this.ukitutaZegoen(x, y)) {
-				JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
-				ukitua = true;
+				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
+					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
+				}else {
+					JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
+				}
+				tiro = true;
 			}
 		}
-		while(!ukitua);
+		while(!tiro);
 		//return (x+y*10);
 	}
 	

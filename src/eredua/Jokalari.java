@@ -428,21 +428,66 @@ public abstract class Jokalari extends Observable{
 	
 	//************************** EZKUTUA **********************************************************************************
 	
-	public void ezkutuaIpini(int x,int y, int level) {
+	public void ezkutuaXTxikitu(int x, int y, int k) {
+		int hX=x;
+		int hY=y;
 		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x, y, 3, level});
 			y--;
 		}
+		y=hY+1;
 		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x, y, 3, level});
 			y++;
 		}
+		y=hY;
+		x=hX-1;
 		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x,y,3, level});
 			x--;
 		}
+		x=hX+1;
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x,y,3, level});
+			x++;
+		}
+	}
+	public void ezkutuaIpini(int x,int y, int level) {
+		int hX=x;
+		int hY=y;
+		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			setChanged();
+			notifyObservers(new int[] {x,y,7});
+			y--;
+		}
+		y=hY+1;
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			setChanged();
+			notifyObservers(new int[] {x,y,7});
+			y++;
+		}
+		y=hY;
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			setChanged();
+			notifyObservers(new int[] {x,y,7});
+			x--;
+		}
+		x=hX+1;
 		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			this.nireItsasontziak.setEzkutua(x, y, level);
+			setChanged();
+			notifyObservers(new int[] {x,y,7});
 			x++;
 		}
 	}

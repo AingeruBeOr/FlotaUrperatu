@@ -380,6 +380,20 @@ public class Tablero extends JFrame implements Observer{
 		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(ezkutuAdj);
 	}
+	private void ezkutuBakarraJarri(int index) {
+		JLabel jl = zerrendaJok.get(index);
+		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu2.png"));
+		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(ezkutuAdj);
+	}
+	private void nireTableroariIrudiaKendu(int x, int y) {
+		String sx = String.valueOf(x);
+		String sy = String.valueOf(y);
+		String sindex = sy + sx;
+		int index = Integer.parseInt(sindex);
+		zerrendaJok.get(index).setIcon(null);
+		
+	}
 	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
 		String sy = String.valueOf(y);
@@ -412,6 +426,7 @@ public class Tablero extends JFrame implements Observer{
 					int x = index%10;
 					int y = index/10;
 					jokNormal.ezkutuaJarri(x,y);
+					//fu.aldatuTxanda();
 				}
 				else {
 					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
@@ -424,25 +439,9 @@ public class Tablero extends JFrame implements Observer{
 					int y = index/10;
 					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
 						int arma = 0;
-						//TODO METERLE EL RADAR
 						if(rdbtnMisil.isSelected()) arma=1;
 						else if(rdbtnRadar.isSelected()) arma = 2;
-						System.out.println("Aukeratutako arma zenbakia (1 misil): "+arma);
 						jokNormal.tiroEgin(x, y, arma);
-						fu.aldatuTxanda();
-						if(fu.jokoaAmaituDa()) {
-							Irabazlea.main(null);
-							setVisible(false);
-						}
-						else {
-							//System.out.println("BOTAREN TXANDA");
-							Bot.getNireBot().tiroEgin();
-							fu.aldatuTxanda();
-							if(fu.jokoaAmaituDa()) {
-								Irabazlea.main(null);
-								setVisible(false);
-							}
-						}
 					}
 					else {
 						getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
@@ -452,7 +451,21 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 				}
 			}
-			
+			fu.aldatuTxanda();
+			System.out.println("Nire txanda da: "+ fu.getTxanda());
+			if(fu.jokoaAmaituDa()) {
+				Irabazlea.main(null);
+				setVisible(false);
+			}
+			else {
+				//System.out.println("BOTAREN TXANDA");
+				Bot.getNireBot().tiroEgin();
+				fu.aldatuTxanda();
+				if(fu.jokoaAmaituDa()) {
+					Irabazlea.main(null);
+					setVisible(false);
+				}
+			}
 		}
 	}
 	
@@ -474,7 +487,7 @@ public class Tablero extends JFrame implements Observer{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(arg != null) {
 			int[] array = (int[]) arg;
-			if(array.length == 3) {
+			if(array.length == 3 || array.length==4) {
 				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
 				 * 0 -> URA ZEN (URDINA)
 				 * 1 -> UKITU DU(GORRIA)
@@ -514,7 +527,8 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.getTxanda()) {
 						this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
 					}else {
-						//TODO
+						if (array[3]==1) {ezkutuBakarraJarri(array[0]+ array[1]*10);}
+						else if(array[3]==0) {nireTableroariIrudiaKendu(array[0], array[1]);}
 					}
 					break;
 				case 4: //radarra erabiliz ontzia aurkitu du
@@ -544,7 +558,9 @@ public class Tablero extends JFrame implements Observer{
 					}
 					break;
 				case 7:
-					ezkutuaJarri(array[0]+ array[1]*10);
+					if (fu.getTxanda()) {
+						ezkutuaJarri(array[0]+ array[1]*10);
+					}
 					break;
 				case 8:
 					getLblArazoa().setText("Klik egin ezazu itsasontzi bat duzun posizioan");
@@ -553,7 +569,7 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Jadanik badago ezkutu bat bertan.");
 					break;
 				case 10:
-					getLblArazoa().setText("Onodratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
+					getLblArazoa().setText("Ondoratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
 					break;
 				}
 			}
