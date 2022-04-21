@@ -520,6 +520,14 @@ public class Tablero extends JFrame implements Observer{
 						//TODO
 					}
 					break;
+				case 5: //ontzi osoa urperatzea bonbak erabiliz (lo dejo??)
+					if (fu.getTxanda()) {
+						getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+						
+					}
+					else {
+						//TODO
+					}
 				}	
 			}
 			else if(array.length == 2) { 

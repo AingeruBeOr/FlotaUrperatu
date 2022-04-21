@@ -110,7 +110,7 @@ public abstract class Jokalari extends Observable{
 		
 		if(ukituDuItsasontzia(x,y)) {
 			gelaxkaUrperatu(x,y);
-			System.out.println("Misila itsasontzia aurkitu du");
+			System.out.println("Misilak itsasontzia aurkitu du");
 			if(!fu.getTxanda()) {
 				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 					this.ezkerrekoakUrperatu( x-1, y); 	
@@ -249,67 +249,59 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	public boolean ontziOsoaUrperatuDu(int x, int y) {
-		boolean aurkitua=false;
-		boolean guztiakAztertu=false;
+		boolean urperatuta=false;
 		boolean goikoak=false;
 		boolean behekoak=false;
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
 
-		
-
 		if(ukituDuItsasontzia(x,y)) {
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
-			while (!aurkitua && !guztiakAztertu) { //ontziaren zati ez ukitua aurkitzen ez den bitartean eta amaitzen (guztiak aztertu) ez den bitartean
-				if(!fu.getTxanda()) {
-					if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
-					}
-					if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-						eskumakoak=this.eskumakoakAztertu( x+1, y);	
-					}
-								
-					if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-						goikoak=this.goikoakAztertu( x, y-1);	
-					}
-					if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-						behekoak=this.behekoakAztertu( x, y+1);
-					}
-					if (ezkerrekoak && eskumakoak && goikoak && behekoak) {
-						aurkitua=true;
-					}
-					guztiakAztertu=true;
-				}else {
-					
-					if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-						ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
-					}
-					if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-						eskumakoak=this.eskumakoakAztertu( x+1, y);	
-					}
-								
-					if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-						goikoak=this.goikoakAztertu( x, y-1);	
-					}
-					if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-						behekoak=this.behekoakAztertu( x, y+1);
-					}
-					//System.out.println(ezkerrekoak);
-					//System.out.println(eskumakoak);
-					//System.out.println(goikoak);
-					//System.out.println(behekoak);
-					if (ezkerrekoak && eskumakoak && goikoak && behekoak) {
-						aurkitua=true;		
-					}
-
-					guztiakAztertu=true;
+			if(!fu.getTxanda()) {
+				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+					ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
+				}
+				if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+					eskumakoak=this.eskumakoakAztertu( x+1, y);	
+				}
+							
+				if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+					goikoak=this.goikoakAztertu( x, y-1);	
+				}
+				
+				if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+					behekoak=this.behekoakAztertu( x, y+1);
+				}	
+			}else {
+				
+				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+					ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
+				}
+				
+				if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+					eskumakoak=this.eskumakoakAztertu( x+1, y);	
+				}
+							
+				if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+					goikoak=this.goikoakAztertu( x, y-1);	
+				}
+				
+				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+					behekoak=this.behekoakAztertu( x, y+1);
 				}
 			}
+			if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
+				urperatuta=true;
+			}
+			if (urperatuta) {
+				setChanged();
+				notifyObservers(new int[] {x,y,5});
+			}			
 		}
-		return aurkitua;
+		return urperatuta;
 	}
 	
-	private boolean goikoakAztertu(int x, int y) {
+	private boolean goikoakAztertu(int x, int y) { //true urperatuta ez dagoen gelaxka aurkitzen badu
 		boolean aurkitua=false;
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
