@@ -28,17 +28,11 @@ public abstract class Jokalari extends Observable{
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
 	
-	public boolean ontzirenBatGeratzenDa() {
-		return nireItsasontziak.ontzirenBatGeratzenDa();
-	}
+	public boolean ontzirenBatGeratzenDa() {return nireItsasontziak.ontzirenBatGeratzenDa();}
 	
-	public int armaKantitateaEguneratu(Arma arma) {
-		return armak.armaKantitateaEguneratu(arma);
-	}
+	public int armaKantitateaEguneratu(Arma arma) {return armak.armaKantitateaEguneratu(arma);}
 	
-	public int getArmaKop(Arma arma) {
-		return armak.getArmaKop(arma);
-	}
+	public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	
@@ -253,6 +247,12 @@ public abstract class Jokalari extends Observable{
 		}
 	}
 	
+	/**
+	 * (x,y) posizioan dagoen ontzi osoa ureperatuta dagoen ala adierziko du
+	 * @param x
+	 * @param y
+	 * @return true (x,y) posizioan dagoen itsasontzia ondoratuta badago
+	 */
 	public boolean ontziOsoaUrperatuDu(int x, int y) {
 		boolean urperatuta=false;
 		boolean goikoak=false;
@@ -306,6 +306,12 @@ public abstract class Jokalari extends Observable{
 		return urperatuta;
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return 
+	 */
 	private boolean goikoakAztertu(int x, int y) { //true urperatuta ez dagoen gelaxka aurkitzen badu
 		boolean aurkitua=false;
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
@@ -423,17 +429,45 @@ public abstract class Jokalari extends Observable{
 	//************************** EZKUTUA **********************************************************************************
 	
 	public void ezkutuaIpini(int x,int y, int level) {
-		this.nireItsasontziak.setEzkutua(x, y, level);
+		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			y--;
+		}
+		behekoeiEzkutuaJarri(x, y, level);
+		ezkerrekoeiEzkutuaJarri(x, y, level);
+		eskumakoeiEzkutuaJarri(x, y, level);
 	}
 	
 	/**
 	 * 
 	 * @param x
 	 * @param y
-	 * @return true bueltatuko du x,y posizioan ezkutu bat badago
+	 * @return true bueltatuko du (x,y) posizioan ezkutu bat badago
 	 */
 	public boolean ezkutuaDago(int x, int y) {
 		return this.nireItsasontziak.ezkutuaDago(x, y);
+	}
+	
+	private void goikoeiEzkutuaJarri(int x, int y, int level) {
+		
+	}
+	private void behekoeiEzkutuaJarri( int x, int y, int level) {
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			y++;
+		}
+	}
+	private void ezkerrekoeiEzkutuaJarri(int x, int y, int level) {
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			x--;
+		}
+	}
+	private void eskumakoeiEzkutuaJarri(int x, int y, int level) {
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.setEzkutua(x, y, level);
+			x++;
+		}
 	}
 	
 	

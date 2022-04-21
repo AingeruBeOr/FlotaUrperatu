@@ -101,6 +101,9 @@ public class Tablero extends Observable{
 	
 	public void setEzkutua(int x,int y, int level) {
 		tablero[x][y].setEzkutua(level);
+		//ezkutu irudia ipini:
+		setChanged();
+		notifyObservers(new int[] {x,y,7});
 	}
 	
 	public boolean ezkutuaDago(int x, int y) {

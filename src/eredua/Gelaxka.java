@@ -1,6 +1,6 @@
 package eredua;
 
-public class Gelaxka {
+public class Gelaxka{
 	private Egoera egoera;
 	private Itsasontzi itsasontzi;
 	private int ezkutua; // 0 --> ezkuturik ez ; 1 --> ezkutu erdia ; 2 --> ezkutu osoa
@@ -46,7 +46,11 @@ public class Gelaxka {
 		}
 	}
 	
-	public boolean itsasontziaDagoZegoen() { //este metodo te dice si hay/habia barco
+	/**
+	 * este metodo te dice si hay/habia barco
+	 * @return
+	 */
+	public boolean itsasontziaDagoZegoen() { 
 		if (itsasontzi!=null) {
 			return true;
 		}

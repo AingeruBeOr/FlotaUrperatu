@@ -550,7 +550,10 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Klik egin ezazu itsasontzi bat duzun posizioan");
 					break;
 				case 9:
-					getLblArazoa().setText("Jadanik badago ezkutu bat bertan");
+					getLblArazoa().setText("Jadanik badago ezkutu bat bertan.");
+					break;
+				case 10:
+					getLblArazoa().setText("Onodratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
 					break;
 				}
 			}

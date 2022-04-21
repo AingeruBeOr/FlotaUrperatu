@@ -49,16 +49,19 @@ public class JokNormal  extends Jokalari{
 	public void ezkutuaJarri(int x, int y) {
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
-				//ezkutu irudia ipini:
-				setChanged();
-				notifyObservers(new int[] {x,y,7});
-				
-				super.ezkutuaIpini(x, y, 2);
-				
-				//ezkutu kantitatea eguneratu:
-				int kop = armaKantitateaEguneratu(new Ezkutua());
-				setChanged();
-				notifyObservers(new int[] {2,kop}); 
+				if(!super.ontziOsoaUrperatuDu(x, y)) {
+					super.ezkutuaIpini(x, y, 2);
+					
+					//ezkutu kantitatea eguneratu:
+					int kop = armaKantitateaEguneratu(new Ezkutua());
+					setChanged();
+					notifyObservers(new int[] {2,kop}); 
+				}
+				else {
+					//posizio horretan dagoen itsasontzia ondoratuta dago:
+					setChanged();
+					notifyObservers(new int[] {x,y,10});
+				}
 			}
 			else {
 				//posizio horretan jadanik dago ezkutu bat:
