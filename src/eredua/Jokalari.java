@@ -8,9 +8,9 @@ public abstract class Jokalari extends Observable{
 	protected Tablero nireItsasontziak;
 	protected Tablero ukituak;
 	
-	public Jokalari ( float pDiru ) {
-		dirua=pDiru;
-		armak = new ArmamentuZerrenda(1,1,1);
+	public Jokalari () {
+		dirua=1000;
+		armak = new ArmamentuZerrenda(2,2,2); //2 misil, 2 radar eta 2 ezkutu
 		//TODO
 		ukituak=new Tablero();
 		nireItsasontziak= new Tablero();
@@ -27,7 +27,6 @@ public abstract class Jokalari extends Observable{
 	protected abstract boolean tiroaOndoEginDu();
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
-	protected abstract void radarraKontsultatu();
 	
 	public boolean ontzirenBatGeratzenDa() {
 		return nireItsasontziak.ontzirenBatGeratzenDa();
@@ -60,6 +59,10 @@ public abstract class Jokalari extends Observable{
 	 * @return
 	 */
 	public boolean ukituDuItsasontzia(int x, int y) {
+		/*
+		 * return this.nireItsasontziak.itsasontziaDuGelaxka(x,y);
+		 * */
+		
 		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
 			if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
@@ -387,7 +390,7 @@ public abstract class Jokalari extends Observable{
 	
 	
 	
-	public void radarra(int x, int y) {
+	public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
@@ -400,7 +403,6 @@ public abstract class Jokalari extends Observable{
 			}
 		}
 		if (!aurkituDu) {
-			
 			setChanged();
 			notifyObservers(new int[] {x,y,6});
 		}

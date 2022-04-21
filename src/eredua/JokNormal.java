@@ -5,12 +5,11 @@ import java.util.*;
 public class JokNormal  extends Jokalari{
 	private static JokNormal nireJok;
 	
-	private JokNormal( float pDiru ) {
-		super(pDiru);
-	}
+	private JokNormal() {super();}
+	
 	public static JokNormal getNireJok() {
 		if(nireJok==null) {
-			nireJok=new JokNormal(1000);
+			nireJok=new JokNormal();
 		}
 		return nireJok;
 	}
@@ -32,27 +31,22 @@ public class JokNormal  extends Jokalari{
 			if (ontziOsoaUrperatuDu(x,y)){ 
 				ontziaUrperatu(x,y);
 			}
-			int kop = super.armaKantitateaEguneratu(new Bonba());
-			setChanged();
-			notifyObservers(new int[] {0,kop});
 		}else if (pArma == 1){ 
 			System.out.println("Misila erabiliko da");
 			misilTiroa(x,y);
 			int kop = super.armaKantitateaEguneratu(new Misil());
 			setChanged();
-			notifyObservers(new int[] {1,kop});
+			notifyObservers(new int[] {0,kop});
 		}else if (pArma == 2) {
-			radarra(x,y);
-			//TODO RADARRA IMPLEMENTATU
+			radarraKontsultatu(x,y);
 			int kop = super.armaKantitateaEguneratu(new Radarra());
 			setChanged();
-			notifyObservers(new int[] {2,kop});
+			notifyObservers(new int[] {1,kop});
 		}	
 	}
 	
 	public void armamentuaErosi() {}
 	public void ontziaKonpondu() {}
-	public void radarraKontsultatu() {}
 	protected boolean tiroaOndoEginDu() {
 		
 		return true;

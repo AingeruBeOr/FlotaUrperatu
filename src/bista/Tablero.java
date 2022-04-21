@@ -260,6 +260,7 @@ public class Tablero extends JFrame implements Observer{
 		lauki.setOpaque(true);
 		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		lauki.setBackground(Color.LIGHT_GRAY);
+		lauki.addMouseListener(getKontroladore());
 		return lauki;
 	}
 	private JLabel getBotLaukia() {
@@ -336,7 +337,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 	private JRadioButton getRdbtnBonba() {
 		if (rdbtnBonba == null) {
-			rdbtnBonba = new JRadioButton("Bonba X" + JokNormal.getNireJok().getArmaKop(new Bonba()));
+			rdbtnBonba = new JRadioButton("Bonba");
 			buttonGroup.add(rdbtnBonba);
 			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
 		}
@@ -397,62 +398,55 @@ public class Tablero extends JFrame implements Observer{
 			getLblOntzia().setText("");
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 			JokNormal jokNormal = JokNormal.getNireJok();
-			if(fu.getTxanda()) {//jokalariaren txanda bada
-				JLabel jl = (JLabel) e.getComponent();
+			JLabel jl = (JLabel) e.getComponent();
+			
+			if(rdbtnEzkutu.isSelected()) {
+				int index = zerrendaJok.indexOf(jl);
+				if(index != -1) {
+					int x = index%10;
+					int y = index/10;
+					
+				}
+				else {
+					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
+				}
+			}
+			else {
 				int index = zerrendaBot.indexOf(jl);
-				int x = index%10;
-				int y = index/10;
-				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
-				if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
-					int arma = 0;
-					//TODO METERLE EL RADAR
-					if(rdbtnMisil.isSelected()) arma=1;
-					else if(rdbtnRadar.isSelected()) arma = 2;
-					System.out.println("Aukeratutako arma zenbakia (1 misil): "+arma);
-					jokNormal.tiroEgin(x, y, arma);
-					/*if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
-						jl.setBackground(Color.RED);
-						jokNormal.gelaxkaUkitutaIpini(x, y); //botaren matrizeak eguneratu
-						if(rdbtnMisil.isSelected()) {
-							jokNormal.misilTiroa(x, y);
-							if(!fu.armaErabiliDa(new Misil())) {
-								getRdbtnMisil().setEnabled(false);
-								getRdbtnBonba().setSelected(true);
-							}
-							getLblOntzia().setText("Ontzi osoa urperatu duzu!");
-						}					
-					} 
-					else{ //urari eman badio
-						//fu.uraUkituDu(x, y);
-						jl.setBackground(Color.BLUE);
-						if(rdbtnMisil.isSelected()) { //misil batekin urari eman badio
-							if(!fu.armaErabiliDa(new Misil())) {
-								getRdbtnMisil().setEnabled(false);
-								getRdbtnBonba().setSelected(true);
-							}
-						}
-					}*/
-					fu.aldatuTxanda();
-					if(fu.jokoaAmaituDa()) {
-						Irabazlea.main(null);
-						setVisible(false);
-					}
-					else {
-						//System.out.println("BOTAREN TXANDA");
-						//TODO HAY Q HACERLO CON ESTO:
-						//Bot.getNireBot().tiroEgin();
-						fu.botTxanda();
+				if(index != -1) {
+					int x = index%10;
+					int y = index/10;
+					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
+						int arma = 0;
+						//TODO METERLE EL RADAR
+						if(rdbtnMisil.isSelected()) arma=1;
+						else if(rdbtnRadar.isSelected()) arma = 2;
+						System.out.println("Aukeratutako arma zenbakia (1 misil): "+arma);
+						jokNormal.tiroEgin(x, y, arma);
 						fu.aldatuTxanda();
 						if(fu.jokoaAmaituDa()) {
 							Irabazlea.main(null);
 							setVisible(false);
 						}
+						else {
+							//System.out.println("BOTAREN TXANDA");
+							Bot.getNireBot().tiroEgin();
+							fu.aldatuTxanda();
+							if(fu.jokoaAmaituDa()) {
+								Irabazlea.main(null);
+								setVisible(false);
+							}
+						}
+					}
+					else {
+						getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 					}
 				}
 				else {
-					getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
+					getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 				}
 			}
+			
 		}
 	}
 	
@@ -542,30 +536,26 @@ public class Tablero extends JFrame implements Observer{
 			else if(array.length == 2) { 
 				/*
 				 * Arrayaren lehenengo posizioa eguneratu beharreko arma mota adierazten du:
-				 * 		0 --> Bonba
-				 * 		1 --> Misila
-				 * 		2 --> Radarra
-				 * 		3 --> Ezkutua
+				 * 		0 --> Misila
+				 * 		1 --> Radarra
+				 * 		2 --> Ezkutua
 				 * */
 				switch(array[0]) {
 				case 0:
-					getRdbtnBonba().setText("Bonba X" + array[1]);
-					break;
-				case 1:
 					getRdbtnMisil().setText("Misil X" + array[1]);
 					if(array[1] == 0) {
 						getRdbtnMisil().setEnabled(false);
 						getRdbtnBonba().setSelected(true);
 					}
 					break;
-				case 2:
+				case 1:
 					getRdbtnRadar().setText("Radarra X" + array[1]);
 					if(array[1] == 0) {
 						getRdbtnRadar().setEnabled(false);
 						getRdbtnBonba().setSelected(true);
 					}
 					break;
-				case 3:
+				case 2:
 					getRdbtnEzkutu().setText("Ezkutua X" + array[1]);
 					if(array[1] == 0) {
 						getRdbtnEzkutu().setEnabled(false);

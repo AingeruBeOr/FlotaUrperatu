@@ -9,10 +9,10 @@ public class ArmamentuZerrenda {
 	private Ezkutua ezkutuak;
 	
 	public ArmamentuZerrenda(int pMisilKop,int pRadarKop, int pEzkutuKop) {
-		this.bonbak = new Bonba(0,100);
-		this.misilak = new Misil(10,pMisilKop);
-		this.radarrak = new Radarra(10,pRadarKop);
-		this.ezkutuak = new Ezkutua(10,pEzkutuKop);
+		this.bonbak = new Bonba();
+		this.misilak = new Misil(pMisilKop);
+		this.radarrak = new Radarra(pRadarKop);
+		this.ezkutuak = new Ezkutua(pEzkutuKop);
 	}
 	
 	public int armaKantitateaEguneratu(Arma arma) {
@@ -27,9 +27,9 @@ public class ArmamentuZerrenda {
 	public int getArmaKop(Arma arma) {
 		int bueltatzeko = 0;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak.getKop();
-		else if(arma instanceof Misil) bueltatzeko = this.misilak.kantitatea1unitateJaitsi();
-		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.kantitatea1unitateJaitsi();
-		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.kantitatea1unitateJaitsi();
+		else if(arma instanceof Misil) bueltatzeko = this.misilak.getKop();
+		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.getKop();
+		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.getKop();
 		return bueltatzeko;
 	}
 	

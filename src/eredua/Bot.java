@@ -6,13 +6,13 @@ public class Bot extends Jokalari{
 	int txanda;
 	private static Bot nireBot;
 	
-	private Bot( float pDiru ) {
-		super(pDiru);
+	private Bot() {
+		super();
 		this.probazkoOntziakJarri();
 	}
 	public static Bot getNireBot() {
 		if(nireBot==null) {
-			nireBot=new Bot(1000);			// 1000 = dirua
+			nireBot=new Bot();
 		}
 		return nireBot;
 	}
