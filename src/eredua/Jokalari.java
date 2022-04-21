@@ -9,9 +9,8 @@ public abstract class Jokalari extends Observable{
 	protected Tablero ukituak;
 	
 	public Jokalari ( float pDiru ) {
-		
 		dirua=pDiru;
-		armak = new ArmamentuZerrenda(1,0,0);
+		armak = new ArmamentuZerrenda(1,1,1);
 		//TODO
 		ukituak=new Tablero();
 		nireItsasontziak= new Tablero();
@@ -34,8 +33,12 @@ public abstract class Jokalari extends Observable{
 		return nireItsasontziak.ontzirenBatGeratzenDa();
 	}
 	
-	public boolean armaKantitateaEguneratu(Arma arma) {
+	public int armaKantitateaEguneratu(Arma arma) {
 		return armak.armaKantitateaEguneratu(arma);
+	}
+	
+	public int getArmaKop(Arma arma) {
+		return armak.getArmaKop(arma);
 	}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************

@@ -15,9 +15,18 @@ public class ArmamentuZerrenda {
 		this.ezkutuak = new Ezkutua(10,pEzkutuKop);
 	}
 	
-	public boolean armaKantitateaEguneratu(Arma arma) {
-		boolean bueltatzeko = false;
+	public int armaKantitateaEguneratu(Arma arma) {
+		int bueltatzeko = 0;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak.kantitatea1unitateJaitsi();
+		else if(arma instanceof Misil) bueltatzeko = this.misilak.kantitatea1unitateJaitsi();
+		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.kantitatea1unitateJaitsi();
+		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.kantitatea1unitateJaitsi();
+		return bueltatzeko;
+	}
+	
+	public int getArmaKop(Arma arma) {
+		int bueltatzeko = 0;
+		if(arma instanceof Bonba) bueltatzeko = this.bonbak.getKop();
 		else if(arma instanceof Misil) bueltatzeko = this.misilak.kantitatea1unitateJaitsi();
 		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.kantitatea1unitateJaitsi();
 		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.kantitatea1unitateJaitsi();
@@ -32,12 +41,4 @@ public class ArmamentuZerrenda {
 		else if(arma instanceof Ezkutua) bueltatzeko =  this.ezkutuak;
 		return bueltatzeko;
 	}*/
-	
-	public void gehituOrdenatua(Arma pA) { 
-		//Lehenengo misilak eta azkenak bonbak
-		/*if (pA instanceof Misil) {
-			
-		}else if(pA instanceof Bonba) {}*/
-	}
-
-}
+}	

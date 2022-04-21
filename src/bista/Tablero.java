@@ -15,6 +15,9 @@ import eredua.FlotaUrperatu;
 import eredua.JokNormal;
 import eredua.Jokalari;
 import eredua.Misil;
+import eredua.Bonba;
+import eredua.Radarra;
+import eredua.Ezkutua;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -53,14 +56,20 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel lblArmaAukeratu;
 	private JRadioButton rdbtnMisil;
 	private JRadioButton rdbtnBonba;
+	private JRadioButton rdbtnRadar;
+	private JRadioButton rdbtnEzkutu;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel north;
 	private JLabel lblTxanda;
 	private JPanel south;
 	private JLabel lblArazoa;
 	private JLabel lblOntziOsoa; 
-	private JRadioButton rdbtnRadar;
-	private JRadioButton rdbtnEzkutu;
+	private int bonbaKop;
+	private int misilKop;
+	private int radarKop;
+	private int ezkutuKop;
+	
+	
 
 	/**
 	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
@@ -327,7 +336,7 @@ public class Tablero extends JFrame implements Observer{
 	}
 	private JRadioButton getRdbtnBonba() {
 		if (rdbtnBonba == null) {
-			rdbtnBonba = new JRadioButton("Bonba");
+			rdbtnBonba = new JRadioButton("Bonba X" + JokNormal.getNireJok().getArmaKop(new Bonba()));
 			buttonGroup.add(rdbtnBonba);
 			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
 		}
@@ -335,21 +344,21 @@ public class Tablero extends JFrame implements Observer{
 	}
 	private JRadioButton getRdbtnMisil() {
 		if (rdbtnMisil == null) {
-			rdbtnMisil = new JRadioButton("Misil");
+			rdbtnMisil = new JRadioButton("Misil X" + JokNormal.getNireJok().getArmaKop(new Misil()));
 			buttonGroup.add(rdbtnMisil);
 		}
 		return rdbtnMisil;
 	}
 	private JRadioButton getRdbtnRadar() {
 		if (rdbtnRadar == null) {
-			rdbtnRadar = new JRadioButton("Radarra");
+			rdbtnRadar = new JRadioButton("Radarra X" + JokNormal.getNireJok().getArmaKop(new Radarra()));
 			buttonGroup.add(rdbtnRadar);
 		}
 		return rdbtnRadar;
 	}
 	private JRadioButton getRdbtnEzkutu() {
 		if (rdbtnEzkutu == null) {
-			rdbtnEzkutu = new JRadioButton("Ezkutua");
+			rdbtnEzkutu = new JRadioButton("Ezkutua X" + JokNormal.getNireJok().getArmaKop(new Ezkutua()));
 			buttonGroup.add(rdbtnEzkutu);
 		}
 		return rdbtnEzkutu;
@@ -395,15 +404,10 @@ public class Tablero extends JFrame implements Observer{
 				int y = index/10;
 				//arma edozein dela ere, aukeratzen duen JLabel-a gorriz jartzen da eta gero misil batekin jo duen konprobatzen da.
 				if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
-					int arma=0;
+					int arma = 0;
 					//TODO METERLE EL RADAR
-					if(rdbtnMisil.isSelected()) {
-						arma=1;
-						if(!fu.armaErabiliDa(new Misil())) {
-							getRdbtnMisil().setEnabled(false);
-							getRdbtnBonba().setSelected(true);
-						}
-					}
+					if(rdbtnMisil.isSelected()) arma=1;
+					else if(rdbtnRadar.isSelected()) arma = 2;
 					System.out.println("Aukeratutako arma zenbakia (1 misil): "+arma);
 					jokNormal.tiroEgin(x, y, arma);
 					/*if(jokNormal.ukituDuItsasontzia(x, y)) { //botaren ontzi bati eman badio
@@ -468,55 +472,93 @@ public class Tablero extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
-		/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
-		 * 0 -> URA ZEN (URDINA)
-		 * 1 -> UKITU DU(GORRIA)
-		 * 2 -> URPERATU DU (GORRIA+MEZUA)
-		 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
-		 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
-		 * */
 		if(arg != null) {
-			int[] array = (int[]) arg; 
-			switch (array[2]){
-			case 0:
-				if(fu.getTxanda()) {
-					this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
-				}else {
-					xJarri(array[0]+ array[1]*10);
+			int[] array = (int[]) arg;
+			if(array.length == 3) {
+				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
+				 * 0 -> URA ZEN (URDINA)
+				 * 1 -> UKITU DU(GORRIA)
+				 * 2 -> URPERATU DU (GORRIA+MEZUA)
+				 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
+				 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
+				 * */
+				switch (array[2]){
+				case 0:
+					if(fu.getTxanda()) {
+						this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
+					}else {
+						xJarri(array[0]+ array[1]*10);
+					}
+					break;
+				case 1:
+					if(fu.getTxanda()) {
+						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+					}else {
+						xJarri(array[0]+ array[1]*10);
+					}
+					break;
+				case 2:
+					if(fu.getTxanda()) {
+						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+						getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
+					}else {
+						xJarri(array[0]+ array[1]*10);
+						getLblOntziOsoa().setText("Ontzi osoa urperatu du aurkariak!");
+					}
+					break;
+				case 3:
+					if(fu.getTxanda()) {
+						this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
+					}else {
+						//TODO
+					}
+					break;
+				case 4:
+					if(fu.getTxanda()) {
+						this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+					}else {
+						//TODO
+					}
+					break;
+				}	
+			}
+			else if(array.length == 2) { 
+				/*
+				 * Arrayaren lehenengo posizioa eguneratu beharreko arma mota adierazten du:
+				 * 		0 --> Bonba
+				 * 		1 --> Misila
+				 * 		2 --> Radarra
+				 * 		3 --> Ezkutua
+				 * */
+				switch(array[0]) {
+				case 0:
+					getRdbtnBonba().setText("Bonba X" + array[1]);
+					break;
+				case 1:
+					getRdbtnMisil().setText("Misil X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnMisil().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
+				case 2:
+					getRdbtnRadar().setText("Radarra X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnRadar().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
+				case 3:
+					getRdbtnEzkutu().setText("Ezkutua X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnEzkutu().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
 				}
-				break;
-			case 1:
-				if(fu.getTxanda()) {
-					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-				}else {
-					xJarri(array[0]+ array[1]*10);
-				}
-				break;
-			case 2:
-				if(fu.getTxanda()) {
-					this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-					getLblOntziOsoa().setText("Ontzi osoa urperatu duzu!");
-				}else {
-					xJarri(array[0]+ array[1]*10);
-					getLblOntziOsoa().setText("Ontzi osoa urperatu du aurkariak!");
-				}
-				break;
-			case 3:
-				if(fu.getTxanda()) {
-					this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
-				}else {
-					//TODO
-				}
-				break;
-			case 4:
-				if(fu.getTxanda()) {
-					this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
-				}else {
-					//TODO
-				}
-				break;
-			}	
-		}else if(arg == null) {
+			}
+		}
+		else if(arg == null) {
 			if(fu.getTxanda()) this.txandaAldatu(true);
 			else this.txandaAldatu(false);
 		}	

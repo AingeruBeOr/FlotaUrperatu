@@ -240,14 +240,4 @@ public class FlotaUrperatu extends Observable{
 			x++;
 		}
 	}*/
-	
-	/**
-	 * "arma" armari -1 egingo dio kantitatean eta false bueltatuko du arma gehiagorik ez badu
-	 * @param arma erabili den arma mota adierazten da
-	 * @return
-	 */
-	public boolean armaErabiliDa(Arma arma) {
-		return JokNormal.getNireJok().armaKantitateaEguneratu(arma);
-	}
-	
 }
