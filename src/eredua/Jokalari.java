@@ -413,7 +413,7 @@ public abstract class Jokalari extends Observable{
 	
 	
 	//******************************* RADARRA **************************************************************************
-	
+	/*
 	public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
@@ -449,6 +449,7 @@ public abstract class Jokalari extends Observable{
 		setChanged();
 		notifyObservers(new int[] {1,kop});
 	}
+	*/
 	
 	
 	

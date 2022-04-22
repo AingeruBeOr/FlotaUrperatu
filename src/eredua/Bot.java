@@ -185,7 +185,6 @@ public class Bot extends Jokalari{
 				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
 					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
 				}else {
-					
 					gelaxkaUkitutaIpini(x, y);
 				}
 				tiro = true;
@@ -290,8 +289,26 @@ public class Bot extends Jokalari{
 		}
 	}
 	//********************************** RADAR *******************************************************
-	public void radarraKontsultatu() {
-		//TODO
+	public void radarraKontsultatu(int x, int y) {
+		boolean aurkituDu=false;
+		for(int i=x-1; i<=x+1; i++) {
+			for(int j=y-1; j<=y+1; j++) {
+				if(i>=0 && i<=9 && j>=0 && j<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
+					setChanged();
+					notifyObservers(new int[] {i,j,4});
+					aurkituDu=true;	
+				}
+			}
+		}
+		
+		if (!aurkituDu) {
+			setChanged();
+			notifyObservers(new int[] {x,y,6});
+		}
+		//radar kantitatea eguneratu:
+		int kop = armaKantitateaEguneratu(new Radarra());
+		setChanged();
+		notifyObservers(new int[] {1,kop});
 	}
 	//********************************** EZKUTUA *******************************************************
 	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik

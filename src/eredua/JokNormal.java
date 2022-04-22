@@ -153,6 +153,38 @@ public class JokNormal  extends Jokalari{
 			this.behekoakUrperatu( x, y+1);
 		}
 	}
+	
+	
+	
+	
+	//****************************************ONTZI OSOA URPERATU*****************************************************
+	
+	
+	
+	//******************************* RADARRA **************************************************************************
+	
+	public void radarraKontsultatu(int x, int y) {
+		boolean aurkituDu=false;
+		for(int i=x-1; i<=x+1; i++) {
+			for(int j=y-1; j<=y+1; j++) {
+				if(i>=0 && i<=9 && j>=0 && j<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
+					setChanged();
+					notifyObservers(new int[] {i,j,4});
+					aurkituDu=true;	
+				}
+			}
+		}
+		if (!aurkituDu) {
+			setChanged();
+			notifyObservers(new int[] {x,y,6});
+		}
+		//radar kantitatea eguneratu:
+		int kop = armaKantitateaEguneratu(new Radarra());
+		setChanged();
+		notifyObservers(new int[] {1,kop});
+	}
+
+	
 	//********************************* EZKUTUA **************************************************
 	/**
 	 * Jokalariak (x,y) posizioan ezkutu bat jarri nahi dela adierazi du. 
