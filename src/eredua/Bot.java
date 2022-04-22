@@ -9,6 +9,8 @@ public class Bot extends Jokalari{
 	private Bot() {
 		super();
 		this.probazkoOntziakJarri();
+		//this.txandaJokatu();
+		
 	}
 	public static Bot getNireBot() {
 		if(nireBot==null) {
@@ -27,7 +29,10 @@ public class Bot extends Jokalari{
 	}
 	*/
 	public void txandaJokatu() {
-		//gertaeraLortu();
+		/*while (nireItsasontziak.ontzirenBatGeratzenDa())
+		{			
+			this.gertaeraLortu();
+		}*/
 	}
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
@@ -282,23 +287,35 @@ public class Bot extends Jokalari{
 		//Zenbakia 
 		
 		int x, y;
-		x = 0;
-		y = 0;
 		
-		if (zenb == 4) {	
-			misilTiroa(x, y);
-	
-		}else if (zenb == 7){
-			radarraKontsultatu(x, y);
+		Random r = new Random();
+	 	
+		x=0;
+	 	y=0;
+	 	
+	 	if (zenb >0){
+			x = r.nextInt(10);
+			y = r.nextInt(10);
+		
+			if (zenb == 4) {	
+				misilTiroa(x, y);
+		
+			}
 			
-		}else if (zenb == 10) {
-			ezkutuaKokatu(x, y);
+			if (zenb == 7){
+				radarraKontsultatu(x, y);
+			}
 			
-		}else {
-			tiroEgin();
-		}
-	}
-	
+			if (zenb == 10) {
+				ezkutuaKokatu(x, y);
+				
+			} 
+			
+			if (zenb !=4 && zenb !=7 && zenb !=10){
+				tiroEgin();
+			}
+	 		}
+	 	}
 	
 	
 	//*********************************************** TIROA *******************************************************
