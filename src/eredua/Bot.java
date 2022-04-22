@@ -16,10 +16,10 @@ public class Bot extends Jokalari{
 		}
 		return nireBot;
 	}
-	public void zenbakiRandom() {
+	/*public void zenbakiRandom() {
 		Random zenbakia = new Random();
 		//TODO
-	}
+	}*/
 	/*Maider --> Metodo bat egin dut tableroa hasieratzeko bere ontziekin
 	
 	public void hasieratuTablero() {
@@ -262,6 +262,43 @@ public class Bot extends Jokalari{
 		}	
 		return aurkitua;
 	}
+	
+	//************************************ GERTAERA RANDOM ***************************************************
+	//TODO MÉTODO PARA OBTENER NÚMEROS RANDOM Y QUE DEPENDIENDO DEL NÚMERO SE UTILICE UN ARMA DIFERENTE
+	
+	public void gertaeraLortu() {
+		//limiteak ezarri
+		int min = 1;
+		//int max = 10;
+		
+		//Zenbaki bat lortu
+		Random rand = new Random();
+		int zenb = min + rand.nextInt(10);
+		
+		System.out.println("Lortutako zenbakia: " + zenb);
+	
+		//Zenbakia 
+		
+		int x, y;
+		x = 0;
+		y = 0;
+		
+		if (zenb == 4) {	
+			misilTiroa(x, y);
+	
+		}else if (zenb == 7){
+			radarraKontsultatu(x, y);
+			
+		}else if (zenb == 10) {
+			ezkutuaKokatu(x, y);
+			
+		}else {
+			tiroEgin();
+		}
+	}
+	
+	
+	
 	//*********************************************** TIROA *******************************************************
 	public void tiroEgin() {
 		/*
@@ -284,6 +321,7 @@ public class Bot extends Jokalari{
 					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
 				}else {
 					gelaxkaUkitutaIpini(x, y);
+					System.out.println("Bot-ak ezkutu bat bonba du (" + x + ", " + y + ") koordenatuetan");
 				}
 				tiro = true;
 			}
@@ -318,6 +356,7 @@ public class Bot extends Jokalari{
 	public void misilTiroa( int x, int y) {
 		if(ukituDuItsasontzia(x,y)) {
 			gelaxkaUrperatu(x,y);
+			System.out.println("Bot-ak misil bat kokatu du (" + x + ", " + y + ") koordenatuetan");
 			if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 				this.ezkerrekoakUrperatu( x-1, y); 	
 			}
@@ -395,6 +434,7 @@ public class Bot extends Jokalari{
 					setChanged();
 					notifyObservers(new int[] {i,j,4});
 					aurkituDu=true;	
+					System.out.println("Bot-ak radar bat kokatu du (" + x + ", " + y + ") koordenatuetan");
 				}
 			}
 		}
@@ -412,7 +452,7 @@ public class Bot extends Jokalari{
 	//********************************** EZKUTUA *******************************************************
 	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
 	public void ezkutuaKokatu(int x, int y) {
-		boolean ezkutuKokatua = false;
+		// boolean ezkutuKokatua = false;	Lo pongo comentado porque lo podriamos usar si el eskutu es 1
 		int ezkutuBizitza = 2;
 		int ezkutuKop = 2; 
 		{
@@ -422,8 +462,9 @@ public class Bot extends Jokalari{
 					if (!super.ezkutuaDago(x, y)) {
 						if (!nireItsasontziak.urperatutaDago(x, y)) {
 							super.ezkutuaIpini(x, y, ezkutuBizitza);
-							ezkutuKokatua = true;
+							// ezkutuKokatua = true; 	Lo pongo comentado porque lo podriamos usar si el eskutu es 1
 							ezkutuKop = ezkutuKop --;
+							System.out.println("Bot-ak ezkutu bat kokatu du (" + x + ", " + y + ") koordenatuetan");
 							
 						}else {
 							//System.out.println("Itsasontzi hau urperatuta dago. Beste lekua aukeratu.");
@@ -439,7 +480,6 @@ public class Bot extends Jokalari{
 				}
 			}
 		}
-		//TODO
 	}
 	
 	//********************************** EROSKETAK *******************************************************
