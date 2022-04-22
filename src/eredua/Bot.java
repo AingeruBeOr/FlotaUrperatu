@@ -408,14 +408,26 @@ public class Bot extends Jokalari{
 		setChanged();
 		notifyObservers(new int[] {1,kop});
 	}
+
 	//********************************** EZKUTUA *******************************************************
 	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
-	public void ezkutuaKokatu() {
+	public void ezkutuaKokatu(int x, int y) {
 		boolean ezkutuKokatua = false;
+		int ezkutuBizitza = 2;
 		{
-			do {
+			if (super.itsasontziaDaukat(x, y)) {
+				if (ezkutuKokatua = false) {
+					if (!nireItsasontziak.urperatutaDago(x, y)) {
+						super.ezkutuaIpini(x, y, ezkutuBizitza);
+						ezkutuKokatua = true;
+						
+					}
+				}
+			}
+			
+			/*do {
 				//TODO el true lo he puesto para q no de error
-			} while (true);
+			} while (true);*/
 		}
 		//TODO
 	}
