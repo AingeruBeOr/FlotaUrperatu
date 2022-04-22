@@ -414,20 +414,30 @@ public class Bot extends Jokalari{
 	public void ezkutuaKokatu(int x, int y) {
 		boolean ezkutuKokatua = false;
 		int ezkutuBizitza = 2;
+		int ezkutuKop = 2; 
 		{
-			if (super.itsasontziaDaukat(x, y)) {
-				if (ezkutuKokatua = false) {
-					if (!nireItsasontziak.urperatutaDago(x, y)) {
-						super.ezkutuaIpini(x, y, ezkutuBizitza);
-						ezkutuKokatua = true;
-						
+			while (ezkutuKop > 0) {
+				
+				if (super.itsasontziaDaukat(x, y)) {
+					if (!super.ezkutuaDago(x, y)) {
+						if (!nireItsasontziak.urperatutaDago(x, y)) {
+							super.ezkutuaIpini(x, y, ezkutuBizitza);
+							ezkutuKokatua = true;
+							ezkutuKop = ezkutuKop --;
+							
+						}else {
+							//System.out.println("Itsasontzi hau urperatuta dago. Beste lekua aukeratu.");
+							break;
+						} 
+					}else {
+						//System.out.println("Leku honetan ezkutu bat dago jada");
+						break;
 					}
+				}else {
+					//System.out.println("Hemen ez dago itsasontzirik");
+					break;
 				}
 			}
-			
-			/*do {
-				//TODO el true lo he puesto para q no de error
-			} while (true);*/
 		}
 		//TODO
 	}
