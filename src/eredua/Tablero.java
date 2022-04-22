@@ -48,7 +48,7 @@ public class Tablero extends Observable{
 	}
 	public void gelaxkaUrperatutaIpini(int x, int y) {
 		//TODO UN IF PARA VER SI ES URPERATUTA
-		System.out.println("Urperatuta gelaxka");
+		//System.out.println("Urperatuta gelaxka");
 		tablero[x][y].aldatuEgoera(Egoera.URPERATUTA);
 	}
 	public void gelaxkaUkituaIpini(int x, int y) {

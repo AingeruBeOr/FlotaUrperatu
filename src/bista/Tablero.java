@@ -460,7 +460,7 @@ public class Tablero extends JFrame implements Observer{
 				setVisible(false);
 			}
 			else if(!fu.getTxanda()){
-				Bot.getNireBot().tiroEgin();
+				Bot.getNireBot().txandaJokatu();
 				fu.aldatuTxanda();
 				if(fu.jokoaAmaituDa()) {
 					Irabazlea.main(null);
@@ -526,7 +526,8 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				case 3:
 					if(fu.getTxanda()) {
-						this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
+						if(array[3]==1) {this.koordenatuBatenLaukiariKoloreAldaketa(Color.green, array[0], array[1]);}
+						else if(array[3]==0) {this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);}
 					}else {
 						if (array[3]==1) {ezkutuBakarraJarri(array[0]+ array[1]*10);}
 						else if(array[3]==0) {nireTableroariIrudiaKendu(array[0], array[1]);}

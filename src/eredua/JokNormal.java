@@ -40,20 +40,7 @@ public class JokNormal  extends Jokalari{
 		boolean behekoak=false;
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
-		
-		/*pruebaaa de que las casillas se ukituan como tiene k ser
-		for (int i=0; i<=9;i++) {
-			for (int j=0; j<=9;j++) {
-				System.out.println("JOKALARIA:");
-				System.out.println(i+ " "+ j+" " +Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j));
-				System.out.println(i+ " "+ j+" " +JokNormal.getNireJok().ukituak.ukitutaEdoUrperatutaZegoen(i, j));
-				System.out.println("BOT:");
-				System.out.println(i+ " "+ j+" " +JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j));
-				System.out.println(i+ " "+ j+" " +Bot.getNireBot().ukituak.ukitutaEdoUrperatutaZegoen(i, j));
-			}
-		}
-		
-		*/
+
 		if(ukituDuItsasontzia(x,y)) {
 			
 			if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
@@ -145,33 +132,30 @@ public class JokNormal  extends Jokalari{
 	 */
 	public void tiroEgin(int x, int y,int pArma) {
 		if (pArma == 0){
-			
-			if(Bot.getNireBot().ezkutuaDago(x, y)) {
-				//TODO ESTO ESTA MAL
-				Bot.getNireBot().ezkutuaIpini(x, y, 1);
-			}else {
-				gelaxkaUkitutaIpini(x, y);
-				if (ontziOsoaUkituDu(x,y)){ 
-					ontziaUrperatu(x,y);
-				}
+			gelaxkaUkitutaIpini(x, y);
+			if (ontziOsoaUkituDu(x,y)){ 
+				ontziaUrperatu(x,y);
 			}
 		}else if (pArma == 1){ 
-			System.out.println("Misila erabiliko da");
 			misilTiroa(x,y);
 		}else if (pArma == 2) {
 			radarraKontsultatu(x,y);
 		}	
 	}
 	public void gelaxkaUkitutaIpini(int x, int y) {
-		if(ukituDuItsasontzia(x,y)) {
-			setChanged();
-			notifyObservers(new int[] {x,y,1});
+		if(Bot.getNireBot().ezkutuaDago(x, y)) {
+			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);;
 		}else {
-			setChanged();
-			notifyObservers(new int[] {x,y,0});
+			if(ukituDuItsasontzia(x,y)) {
+				setChanged();
+				notifyObservers(new int[] {x,y,1});
+			}else {
+				setChanged();
+				notifyObservers(new int[] {x,y,0});
+			}
+			Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+			JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
 		}
-		Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-		JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
 	}
 	
 	public void gelaxkaUrperatu(int x, int y) {
@@ -182,27 +166,32 @@ public class JokNormal  extends Jokalari{
 	}
 	//********************************** MISIL TIROA *******************************************************
 	public void misilTiroa( int x, int y) {	
-		if(ukituDuItsasontzia(x,y)) {
-			gelaxkaUrperatu(x,y);
-			if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-				this.ezkerrekoakUrperatu( x-1, y); 	
-			}
-			if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-				this.eskumakoakUrperatu( x+1, y);	
-			}
-						
-			if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-				this.goikoakUrperatu( x, y-1);	
-			}
-			if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-				this.behekoakUrperatu( x, y+1);
-			}
+		if(Bot.getNireBot().ezkutuaDago(x, y)) {
+			Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);;
 		}else {
-			setChanged();
-			notifyObservers(new int[] {x,y,0});
-			Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-			this.ukituak.gelaxkaUkituaIpini(x,y);
+			if(ukituDuItsasontzia(x,y)) {
+				gelaxkaUrperatu(x,y);
+				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+					this.ezkerrekoakUrperatu( x-1, y); 	
+				}
+				if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+					this.eskumakoakUrperatu( x+1, y);	
+				}
+							
+				if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+					this.goikoakUrperatu( x, y-1);	
+				}
+				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+					this.behekoakUrperatu( x, y+1);
+				}
+			}else {
+				setChanged();
+				notifyObservers(new int[] {x,y,0});
+				Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+				this.ukituak.gelaxkaUkituaIpini(x,y);
+			}	
 		}
+		
 		//misil kantitatea eguneratu:
 		int kop = armaKantitateaEguneratu(new Misil());
 		setChanged();
