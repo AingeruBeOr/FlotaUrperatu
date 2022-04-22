@@ -252,7 +252,7 @@ public abstract class Jokalari extends Observable{
 	 * @param y
 	 * @return true (x,y) posizioan dagoen itsasontzia ondoratuta badago
 	 */
-	public boolean ontziOsoaUkituDu(int x, int y) {
+	/*public boolean ontziOsoaUkituDu(int x, int y) {
 		boolean urperatuta=false;
 		boolean goikoak=false;
 		boolean behekoak=false;
@@ -274,7 +274,7 @@ public abstract class Jokalari extends Observable{
 		*/
 		
 
-		if(ukituDuItsasontzia(x,y)) {
+		/*if(ukituDuItsasontzia(x,y)) {
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 			if(!fu.getTxanda()) {
 				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
@@ -325,7 +325,7 @@ public abstract class Jokalari extends Observable{
 	 * @param y
 	 * @return 
 	 */
-	private boolean goikoakAztertu(int x, int y) { 
+	/*private boolean goikoakAztertu(int x, int y) { 
 		boolean aurkitua=false;
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
@@ -407,7 +407,7 @@ public abstract class Jokalari extends Observable{
 			}
 		}
 		return aurkitua;
-	}
+	}*/
 	
 	
 	

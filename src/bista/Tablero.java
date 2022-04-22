@@ -391,8 +391,11 @@ public class Tablero extends JFrame implements Observer{
 		String sy = String.valueOf(y);
 		String sindex = sy + sx;
 		int index = Integer.parseInt(sindex);
-		zerrendaJok.get(index).setIcon(null);
-		
+		if (Bot.getNireBot().ukitutaZegoen(x, y)) {
+			xJarri(index);
+		}else {
+			zerrendaJok.get(index).setIcon(null);
+		}
 	}
 	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
@@ -426,6 +429,7 @@ public class Tablero extends JFrame implements Observer{
 					int x = index%10;
 					int y = index/10;
 					jokNormal.ezkutuaJarri(x,y);
+					fu.aldatuTxanda();
 				}
 				else {
 					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
@@ -441,6 +445,7 @@ public class Tablero extends JFrame implements Observer{
 						if(rdbtnMisil.isSelected()) arma=1;
 						else if(rdbtnRadar.isSelected()) arma = 2;
 						jokNormal.tiroEgin(x, y, arma);
+						fu.aldatuTxanda();
 					}
 					else {
 						getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
@@ -450,12 +455,11 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 				}
 			}
-			fu.aldatuTxanda();
 			if(fu.jokoaAmaituDa()) {
 				Irabazlea.main(null);
 				setVisible(false);
 			}
-			else {
+			else if(!fu.getTxanda()){
 				Bot.getNireBot().tiroEgin();
 				fu.aldatuTxanda();
 				if(fu.jokoaAmaituDa()) {
