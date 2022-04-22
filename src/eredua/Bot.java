@@ -26,7 +26,9 @@ public class Bot extends Jokalari{
 		setTablero(new Tablero());
 	}
 	*/
-	public void txandaJokatu() {}
+	public void txandaJokatu() {
+		//gertaeraLortu();
+	}
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
 		nireItsasontziak.botariOntziakJarri();
@@ -321,7 +323,7 @@ public class Bot extends Jokalari{
 					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
 				}else {
 					gelaxkaUkitutaIpini(x, y);
-					System.out.println("Bot-ak ezkutu bat bonba du (" + x + ", " + y + ") koordenatuetan");
+					System.out.println("Bot-ak bonba bat bota du (" + x + ", " + y + ") koordenatuetan");
 				}
 				tiro = true;
 			}
