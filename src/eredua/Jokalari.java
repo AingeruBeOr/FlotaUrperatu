@@ -247,17 +247,32 @@ public abstract class Jokalari extends Observable{
 	}*/
 	
 	/**
-	 * (x,y) posizioan dagoen ontzi osoa ureperatuta dagoen ala adierziko du
+	 * (x,y) posizioan dagoen ontzi osoa ukituta dagoen ala ez adierziko du
 	 * @param x
 	 * @param y
 	 * @return true (x,y) posizioan dagoen itsasontzia ondoratuta badago
 	 */
-	public boolean ontziOsoaUrperatuDu(int x, int y) {
+	public boolean ontziOsoaUkituDu(int x, int y) {
 		boolean urperatuta=false;
 		boolean goikoak=false;
 		boolean behekoak=false;
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
+		
+		/*pruebaaa de que las casillas se ukituan como tiene k ser
+		for (int i=0; i<=9;i++) {
+			for (int j=0; j<=9;j++) {
+				System.out.println("JOKALARIA:");
+				System.out.println(i+ " "+ j+" " +Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j));
+				System.out.println(i+ " "+ j+" " +JokNormal.getNireJok().ukituak.ukitutaEdoUrperatutaZegoen(i, j));
+				System.out.println("BOT:");
+				System.out.println(i+ " "+ j+" " +JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j));
+				System.out.println(i+ " "+ j+" " +Bot.getNireBot().ukituak.ukitutaEdoUrperatutaZegoen(i, j));
+			}
+		}
+		
+		*/
+		
 
 		if(ukituDuItsasontzia(x,y)) {
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
@@ -277,7 +292,6 @@ public abstract class Jokalari extends Observable{
 					behekoak=this.behekoakAztertu( x, y+1);
 				}	
 			}else {
-				
 				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 					ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
 				}
@@ -306,12 +320,12 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	/**
-	 * 
+	 *  true urperatuta ez dagoen gelaxka aurkitzen badu
 	 * @param x
 	 * @param y
 	 * @return 
 	 */
-	private boolean goikoakAztertu(int x, int y) { //true urperatuta ez dagoen gelaxka aurkitzen badu
+	private boolean goikoakAztertu(int x, int y) { 
 		boolean aurkitua=false;
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(!fu.getTxanda()) {
@@ -402,16 +416,30 @@ public abstract class Jokalari extends Observable{
 	
 	public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
-		for(int i=x-1; i<=x+1; i++) {
-			for(int j=y-1; j<=y+1; j++) {
-				if(i>=0 && i<=9 && j>=0 && j<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
-					setChanged();
-					notifyObservers(new int[] {i,j,4});
-					aurkituDu=true;
-					
+		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		if(!fu.getTxanda()) {
+			for(int i=x-1; i<=x+1; i++) {
+				for(int j=y-1; j<=y+1; j++) {
+					if(i>=0 && i<=9 && j>=0 && j<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
+						setChanged();
+						notifyObservers(new int[] {i,j,4});
+						aurkituDu=true;	
+					}
 				}
 			}
 		}
+		else {
+			for(int i=x-1; i<=x+1; i++) {
+				for(int j=y-1; j<=y+1; j++) {
+					if(i>=0 && i<=9 && j>=0 && j<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
+						setChanged();
+						notifyObservers(new int[] {i,j,4});
+						aurkituDu=true;	
+					}
+				}
+			}
+		}
+		
 		if (!aurkituDu) {
 			setChanged();
 			notifyObservers(new int[] {x,y,6});

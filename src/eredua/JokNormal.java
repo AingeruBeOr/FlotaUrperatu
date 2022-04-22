@@ -52,7 +52,7 @@ public class JokNormal  extends Jokalari{
 				Bot.getNireBot().ezkutuaIpini(x, y, 1);
 			}else {
 				gelaxkaUkitutaIpini(x, y);
-				if (ontziOsoaUrperatuDu(x,y)){ 
+				if (ontziOsoaUkituDu(x,y)){ 
 					ontziaUrperatu(x,y);
 				}
 			}

@@ -185,7 +185,8 @@ public class Bot extends Jokalari{
 				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
 					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
 				}else {
-					JokNormal.getNireJok().gelaxkaUkitutaIpini(x, y);
+					
+					gelaxkaUkitutaIpini(x, y);
 				}
 				tiro = true;
 			}

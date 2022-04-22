@@ -95,9 +95,11 @@ public class Tablero extends Observable{
 		}
 	}
 	public boolean ukitutaEdoUrperatutaZegoen(int x, int y) {
-		System.out.println("ukitutaEdoUrperatuta x "+x+" eta y "+y);
+		
 		if(tablero[x][y].ukitutaDu() || tablero[x][y].urperatutaDu())
-		{return true;}
+		{
+			//System.out.println("ukitutaEdoUrperatuta x "+x+" eta y "+y);
+			return true;}
 		return false;
 	}
 	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDagoZegoen();}
