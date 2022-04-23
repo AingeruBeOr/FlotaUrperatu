@@ -53,7 +53,7 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel bot;
 	private JPanel matrizeEzk;
 	private JPanel matrizeEsk;
-	private JLabel info;
+	private JLabel lblDirua;
 	private JPanel datuak;
 	private Kontroladore kontroladore;
 	private ArrayList<JLabel> zerrendaBot;
@@ -69,10 +69,6 @@ public class Tablero extends JFrame implements Observer{
 	private JPanel south;
 	private JLabel lblArazoa;
 	private JLabel lblOntziOsoa; 
-	private int bonbaKop;
-	private int misilKop;
-	private int radarKop;
-	private int ezkutuKop;
 	
 	
 
@@ -209,12 +205,12 @@ public class Tablero extends JFrame implements Observer{
 			gbl_bErdia.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 			gbl_bErdia.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 			bErdia.setLayout(gbl_bErdia);
-			GridBagConstraints gbc_info = new GridBagConstraints();
-			gbc_info.fill = GridBagConstraints.BOTH;
-			gbc_info.insets = new Insets(0, 0, 5, 0);
-			gbc_info.gridx = 0;
-			gbc_info.gridy = 0;
-			bErdia.add(getInfo(), gbc_info);
+			GridBagConstraints gbc_lblDirua = new GridBagConstraints();
+			gbc_lblDirua.fill = GridBagConstraints.BOTH;
+			gbc_lblDirua.insets = new Insets(0, 0, 5, 0);
+			gbc_lblDirua.gridx = 0;
+			gbc_lblDirua.gridy = 0;
+			bErdia.add(getLblDirua(), gbc_lblDirua);
 			GridBagConstraints gbc_datuak = new GridBagConstraints();
 			gbc_datuak.fill = GridBagConstraints.BOTH;
 			gbc_datuak.gridx = 0;
@@ -315,12 +311,12 @@ public class Tablero extends JFrame implements Observer{
 		return lblOntziOsoa;
 	}
 	
-	private JLabel getInfo() {
-		if (info == null) {
-			info = new JLabel("INFO");
-			info.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblDirua() {
+		if (lblDirua == null) {
+			lblDirua = new JLabel("Dirua: " + JokNormal.getNireJok().getDirua());
+			lblDirua.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return info;
+		return lblDirua;
 	}
 	private JPanel getDatuak() {
 		if (datuak == null) {
@@ -413,11 +409,7 @@ public class Tablero extends JFrame implements Observer{
 		String sy = String.valueOf(y);
 		String sindex = sy + sx;
 		int index = Integer.parseInt(sindex);
-		/*if (JokNormal.getNireJok().ukitutaZegoen(x, y)) {
-			xJarri(index);
-		}else {*/
 		zerrendaBot.get(index).setIcon(null);
-		//}
 	}
 	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
@@ -425,6 +417,9 @@ public class Tablero extends JFrame implements Observer{
 		String sindex = sy + sx;
 		int index = Integer.parseInt(sindex);
 		zerrendaBot.get(index).setBackground(c);
+	}
+	private void diruaEguneratu() {
+		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
 	}
 	
 	
@@ -529,8 +524,8 @@ public class Tablero extends JFrame implements Observer{
 				 * 6 -> 
 				 * 7 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA ITSASONTZIA BAT DU POSIZIO HORRETAN
 				 * 8 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA EZ DU ITSASONTZIRIK POSIZIO HORRETAN
-				 * 9 ->
-				 * 10 ->
+				 * 9 ->	EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN BADAGO ITSASONTZI BAT EZKUTUAREKIN
+				 * 10 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN URPERATUTA DAGOEN ITSASONTZI BAT DAGO
 				 * */
 				switch (array[2]){
 				case 0:
@@ -556,10 +551,20 @@ public class Tablero extends JFrame implements Observer{
 						getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
 					}
 					break;
-				case 3:
+				case 3: //jokalariren bat ezkutua jotzen badu
 					if(fu.getTxanda()) {
-						if(array[3]==1) this.ezkutuBakarraJarri(array[0] + array[1]*10, false); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.green, array[0], array[1]);
-						else if(array[3]==0) this.botTableroariIrudiaKendu(array[0], array[1]); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
+						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
+						if(array[3]==1) { 
+							this.ezkutuBakarraJarri(array[0] + array[1]*10, false);
+							this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
+						}
+						//bizitzarik gabe geratu bada itsaontzia:
+						else if(array[3] == 0) {
+							this.botTableroariIrudiaKendu(array[0], array[1]);
+							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
+						}
+						else if(array[3] == 2) this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
 					}else {
 						if (array[3]==1) ezkutuBakarraJarri(array[0]+ array[1]*10, true);
 						else if(array[3]==0) nireTableroariIrudiaKendu(array[0], array[1]);
@@ -613,6 +618,8 @@ public class Tablero extends JFrame implements Observer{
 				 * 		0 --> Misila
 				 * 		1 --> Radarra
 				 * 		2 --> Ezkutua
+				 * Hirugarren aukera dirua eguneratzeko balio du:
+				 * 		3 --> Dirua eguneratu behar da
 				 * */
 				switch(array[0]) {
 				case 0:
@@ -635,6 +642,9 @@ public class Tablero extends JFrame implements Observer{
 						getRdbtnEzkutu().setEnabled(false);
 						getRdbtnBonba().setSelected(true);
 					}
+					break;
+				case 3:
+					diruaEguneratu();
 					break;
 				}
 			}

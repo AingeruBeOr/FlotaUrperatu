@@ -276,6 +276,14 @@ public class JokNormal  extends Jokalari{
 	}
 	
 	
+	
+	
+	
+	
+	
+	//****************************************ONTZI OSOA URPERATU*****************************************************
+	
+	
 	public void ontziaUrperatu(int x, int y) {
 		gelaxkaUrperatu(x,y);
 		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
@@ -296,7 +304,8 @@ public class JokNormal  extends Jokalari{
 	
 	
 	
-	//****************************************ONTZI OSOA URPERATU*****************************************************
+	
+	
 	
 	
 	

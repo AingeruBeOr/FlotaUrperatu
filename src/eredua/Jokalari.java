@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.*;
 
 public abstract class Jokalari extends Observable{
-	protected float dirua;
+	protected int dirua;
 	protected ArmamentuZerrenda armak;
 	protected Tablero nireItsasontziak;
 	protected Tablero ukituak;
@@ -45,6 +45,8 @@ public abstract class Jokalari extends Observable{
 	 */
 	public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
 	
+	public int getDirua() {return this.dirua;}
+	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	
 	/**
@@ -77,6 +79,8 @@ public abstract class Jokalari extends Observable{
 			else return false;
 		}
 	}
+	
+	
 	
 	/*public void gelaxkaUrperatu(int x, int y) {
 		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();

@@ -466,6 +466,10 @@ public class Bot extends Jokalari{
 		int level = this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
 		setChanged();
 		notifyObservers(new int[] {x, y, 3, level});
+		if(level == 0) { //itsasontzia kendu eta gero klik egin zaion azken posizioari horiz ipintzeko erabiltzen da.
+			setChanged();
+			notifyObservers(new int[] {x,y,3,2});
+		}
 		y--;
 		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
