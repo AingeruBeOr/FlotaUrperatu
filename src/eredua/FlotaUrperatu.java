@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.util.Observable;
 
 import bista.Tablero;
+import java.util.*;
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
 	//Matrize hauek true balioa badute, jada bertan misil bat erori da (eta ez da konponketarik egon)

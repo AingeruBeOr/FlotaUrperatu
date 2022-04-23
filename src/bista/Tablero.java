@@ -36,6 +36,11 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.*;
+import java.util.*;
+import bista.Tablero.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Tablero extends JFrame implements Observer{
 
@@ -499,6 +504,8 @@ public class Tablero extends JFrame implements Observer{
 				 * 6 -> 
 				 * 7 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA ITSASONTZIA BAT DU POSIZIO HORRETAN
 				 * 8 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA EZ DU ITSASONTZIRIK POSIZIO HORRETAN
+				 * 9 ->
+				 * 10 ->
 				 * */
 				switch (array[2]){
 				case 0:

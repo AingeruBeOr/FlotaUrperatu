@@ -34,6 +34,10 @@ import eredua.JokNormal;
 
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.*;
+import java.util.*;
+import bista.Hasieraketak.*;
+import java.awt.event.*;
 
 
 public class Hasieraketak extends JFrame implements Observer{

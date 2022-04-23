@@ -15,14 +15,24 @@ public class JokNormal  extends Jokalari{
 	}
 	
 	public void txandaJokatu() {}
+	
+	
+	
 	//************************** ITSASONTZIAK KOKATU**************************************************
+	
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
 	}
+	
+	
+	
+	
+	
 	//********************************** UKITUAK *******************************************************
+	
 	/**
 	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
 	 * @param x: x koordenatua
@@ -34,6 +44,12 @@ public class JokNormal  extends Jokalari{
 		else return false;
 	}
 	
+	/**
+	 * (x,y) posizioan dagoen itsasontzia urperatuta dagoen ala ez konprobatuko da.
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @return true itsasontzia urperatuta badago eta false bestela.
+	 */
 	public boolean ontziOsoaUkituDu(int x, int y) {
 		boolean urperatuta=false;
 		boolean goikoak=false;
@@ -71,10 +87,10 @@ public class JokNormal  extends Jokalari{
 	}
 	
 	/**
-	 *  true urperatuta ez dagoen gelaxka aurkitzen badu
-	 * @param x
-	 * @param y
-	 * @return 
+	 * (x,y) posiziotik gora, itsasontzia duten gelaxkak badadude, hauek ukituta dauden ala ez aztertuko du. 
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
 	 */
 	private boolean goikoakAztertu(int x, int y) { 
 		boolean aurkitua=false;
@@ -87,6 +103,12 @@ public class JokNormal  extends Jokalari{
 		return aurkitua;
 	}
 	
+	/**
+	 * (x,y) posiziotik behera, itsasontzia duten gelaxkak badadude, hauek ukituta dauden ala ez aztertuko du. 
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
+	 */
 	private boolean behekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
@@ -98,6 +120,12 @@ public class JokNormal  extends Jokalari{
 		return aurkitua;
 	}
 	
+	/**
+	 * (x,y) posiziotik ezkerrera, itsasontzia duten gelaxkak badadude, hauek ukituta dauden ala ez aztertuko du. 
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
+	 */
 	private boolean ezkerrekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && x>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
@@ -109,6 +137,12 @@ public class JokNormal  extends Jokalari{
 		return aurkitua;
 	}
 	
+	/**
+	 * (x,y) posiziotik eskuinera, itsasontzia duten gelaxkak badadude, hauek ukituta dauden ala ez aztertuko du. 
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
+	 */
 	private boolean eskumakoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
@@ -142,6 +176,7 @@ public class JokNormal  extends Jokalari{
 			radarraKontsultatu(x,y);
 		}	
 	}
+	
 	public void gelaxkaUkitutaIpini(int x, int y) {
 		if(Bot.getNireBot().ezkutuaDago(x, y)) {
 			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);;
@@ -274,6 +309,7 @@ public class JokNormal  extends Jokalari{
 
 	
 	//********************************* EZKUTUA **************************************************
+	
 	/**
 	 * Jokalariak (x,y) posizioan ezkutu bat jarri nahi dela adierazi du. 
 	 * Bertan ezkutu bat jarri dezakeen konprobatuko da. Hala bada, ezkutua

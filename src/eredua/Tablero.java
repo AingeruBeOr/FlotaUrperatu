@@ -2,6 +2,7 @@ package eredua;
 
 import java.util.Observable;
 import java.util.Arrays;
+import java.util.*;
 
 public class Tablero extends Observable{
 	private Gelaxka[][] tablero;

@@ -1,6 +1,7 @@
 package eredua;
 
 import java.util.Observable;
+import java.util.*;
 
 public abstract class Jokalari extends Observable{
 	protected float dirua;
@@ -491,28 +492,28 @@ public abstract class Jokalari extends Observable{
 	public void ezkutuaIpini(int x,int y, int level) {
 		int hX=x;
 		int hY=y;
-		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //gorantz begiratu
 			this.nireItsasontziak.setEzkutua(x, y, level);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			y--;
 		}
 		y=hY+1;
-		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //beherantz begiratu
 			this.nireItsasontziak.setEzkutua(x, y, level);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			y++;
 		}
 		y=hY;
-		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //ezkerrerantz begiratu
 			this.nireItsasontziak.setEzkutua(x, y, level);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			x--;
 		}
 		x=hX+1;
-		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //eskuinerantz begiratu
 			this.nireItsasontziak.setEzkutua(x, y, level);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
