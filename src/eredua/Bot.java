@@ -9,9 +9,6 @@ public class Bot extends Jokalari{
 	private Bot() {
 		super();
 		txanda=0;
-		//misilKop=2;
-		//radarKop=2;
-		//ezkutuKop=2;
 		this.probazkoOntziakJarri();
 		//this.txandaJokatu();
 		
@@ -278,10 +275,10 @@ public class Bot extends Jokalari{
 		}else if(txanda==0){
 			ezkutuaKokatu();
 		}else{
-			if (zenb == 4 && getArmaKop(new Misil()) >0) {misilTiroa(x, y);}
-			else if (zenb == 7 && getArmaKop(new Radarra()) >0){radarraKontsultatu(x, y);}
-			else if (zenb == 10 && getArmaKop(new Ezkutua()) >0) {ezkutuaKokatu();} 
-			else {tiroEgin();}
+			if (zenb == 4 && getArmaKop(new Misil()) >0) misilTiroa(x, y);
+			else if (zenb == 7 && getArmaKop(new Radarra()) >0) radarraKontsultatu(x, y);
+			else if (zenb == 10 && getArmaKop(new Ezkutua()) >0) ezkutuaKokatu();
+			else tiroEgin();
 		}
 		txanda++;
 	 }

@@ -57,32 +57,32 @@ public class JokNormal  extends Jokalari{
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
 
-		if(ukituDuItsasontzia(x,y)) {
+		/*if(ukituDuItsasontzia(x,y)) {*/
 			
-			if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-				ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
-			}
-			
-			if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-				eskumakoak=this.eskumakoakAztertu( x+1, y);	
-			}
-						
-			if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-				goikoak=this.goikoakAztertu( x, y-1);	
-			}
-			
-			if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-				behekoak=this.behekoakAztertu( x, y+1);
-			}
-			
-			if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
-				urperatuta=true;
-			}
-			if (urperatuta) {
-				setChanged();
-				notifyObservers(new int[] {x,y,5});
-			}			
+		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
 		}
+		
+		if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+			eskumakoak=this.eskumakoakAztertu( x+1, y);	
+		}
+					
+		if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+			goikoak=this.goikoakAztertu( x, y-1);	
+		}
+		
+		if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+			behekoak=this.behekoakAztertu( x, y+1);
+		}
+		
+		if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
+			urperatuta=true;
+		}
+		if (urperatuta) {
+			setChanged();
+			notifyObservers(new int[] {x,y,5});
+		}			
+		//}
 		return urperatuta;
 	}
 	
@@ -171,25 +171,23 @@ public class JokNormal  extends Jokalari{
 	 * @param pArma arma mota
 	 */
 	public void tiroEgin(int x, int y,int pArma) {
-		if (pArma == 0){
-			gelaxkaUkitutaIpini(x, y);
-			if (ontziOsoaUkituDu(x,y)){ 
-				ontziaUrperatu(x,y);
-			}
-		}else if (pArma == 1){ 
-			misilTiroa(x,y);
-		}else if (pArma == 2) {
-			radarraKontsultatu(x,y);
-		}	
+		if (pArma == 0) bonbaTiroa(x, y);
+		else if (pArma == 1) misilTiroa(x,y);
+		else if (pArma == 2) radarraKontsultatu(x,y);	
 	}
 	
-	public void gelaxkaUkitutaIpini(int x, int y) {
+	public void bonbaTiroa(int x, int y) {
 		if(Bot.getNireBot().ezkutuaDago(x, y)) {
 			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
 		}else {
 			if(ukituDuItsasontzia(x,y)) {
-				setChanged();
-				notifyObservers(new int[] {x,y,1});
+				if (ontziOsoaUkituDu(x,y)){ 
+					ontziaUrperatu(x,y);
+				}
+				else {
+					setChanged();
+					notifyObservers(new int[] {x,y,1});
+				}
 			}else {
 				setChanged();
 				notifyObservers(new int[] {x,y,0});
@@ -218,10 +216,11 @@ public class JokNormal  extends Jokalari{
 	//********************************** MISIL TIROA *******************************************************
 	public void misilTiroa( int x, int y) {	
 		if(Bot.getNireBot().ezkutuaDago(x, y)) {
-			Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);;
+			Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);
 		}else {
 			if(ukituDuItsasontzia(x,y)) {
-				gelaxkaUrperatu(x,y);
+				ontziaUrperatu(x, y);
+				/*gelaxkaUrperatu(x,y);
 				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 					this.ezkerrekoakUrperatu( x-1, y); 	
 				}
@@ -234,7 +233,7 @@ public class JokNormal  extends Jokalari{
 				}
 				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
 					this.behekoakUrperatu( x, y+1);
-				}
+				}*/
 			}else {
 				setChanged();
 				notifyObservers(new int[] {x,y,0});
@@ -292,7 +291,6 @@ public class JokNormal  extends Jokalari{
 		if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
 			this.eskumakoakUrperatu( x+1, y);	
 		}
-					
 		if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
 			this.goikoakUrperatu( x, y-1);	
 		}
