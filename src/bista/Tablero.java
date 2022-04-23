@@ -515,9 +515,9 @@ public class Tablero extends JFrame implements Observer{
 			int[] array = (int[]) arg;
 			if(array.length == 3 || array.length==4) {
 				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
-				 * 0 -> URA ZEN (URDINA)
-				 * 1 -> UKITU DU(GORRIA)
-				 * 2 -> URPERATU DU (GORRIA+MEZUA)
+				 * 0 -> URA UKITU DU (URDINA)
+				 * 1 -> ITSASONTZIA UKITU DU (GORRIA)
+				 * 2 -> URPERATU DU (GORRIA + MEZUA)
 				 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
 				 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
 				 * 5 ->
