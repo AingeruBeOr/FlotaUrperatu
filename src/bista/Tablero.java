@@ -379,14 +379,20 @@ public class Tablero extends JFrame implements Observer{
 		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(crossAdj);
 	}
-	private void ezkutuaJarri(int index) {
-		JLabel jl = zerrendaJok.get(index);
+	private void ezkutuaJarri(int index, boolean tablero) {
+		ArrayList<JLabel> zerrenda;
+		if(tablero) zerrenda = zerrendaJok;
+		else zerrenda = zerrendaBot;
+		JLabel jl = zerrenda.get(index);
 		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu1.png"));
 		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(ezkutuAdj);
 	}
-	private void ezkutuBakarraJarri(int index) {
-		JLabel jl = zerrendaJok.get(index);
+	private void ezkutuBakarraJarri(int index, boolean tablero) {
+		ArrayList<JLabel> zerrenda;
+		if(tablero) zerrenda = zerrendaJok;
+		else zerrenda = zerrendaBot;
+		JLabel jl = zerrenda.get(index);
 		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu2.png"));
 		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(ezkutuAdj);
@@ -402,6 +408,17 @@ public class Tablero extends JFrame implements Observer{
 			zerrendaJok.get(index).setIcon(null);
 		}
 	}
+	private void botTableroariIrudiaKendu(int x, int y) {
+		String sx = String.valueOf(x);
+		String sy = String.valueOf(y);
+		String sindex = sy + sx;
+		int index = Integer.parseInt(sindex);
+		/*if (JokNormal.getNireJok().ukitutaZegoen(x, y)) {
+			xJarri(index);
+		}else {*/
+		zerrendaBot.get(index).setIcon(null);
+		//}
+	}
 	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
 		String sy = String.valueOf(y);
@@ -409,6 +426,12 @@ public class Tablero extends JFrame implements Observer{
 		int index = Integer.parseInt(sindex);
 		zerrendaBot.get(index).setBackground(c);
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	//********************** KONTROLADOREA ****************************************
@@ -483,10 +506,12 @@ public class Tablero extends JFrame implements Observer{
 	// ************************************** OBSERVER ************************************************************
 	
 	/**
-	 * Observer-ak jasotzen duena:
-	 * Hurrengoak konprobatuko dira:
-	 * 		· Txanda aldatu da --> mezua eguneratu
-	 * 		· Jokalariak misil gabe --> misil aukeara desgaitu
+	 * Hiru parametro mota jaso dezake:
+	 * <ol>
+	 * 		<li> int[] motako objektua 3 edo 4 posiziekin --> laukiren bat eguneratu behar da. </li>
+	 * 		<li> int[] motako objektua 2 posizioekin --> Jokalariaren arma kantitatea eguneratu behar da. </li>
+	 * 		<li> null parametro bezala --> txandaren mezua aldatu behar da. </li>
+	 * </ol> 
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -533,11 +558,11 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				case 3:
 					if(fu.getTxanda()) {
-						if(array[3]==1) {this.koordenatuBatenLaukiariKoloreAldaketa(Color.green, array[0], array[1]);}
-						else if(array[3]==0) {this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);}
+						if(array[3]==1) this.ezkutuBakarraJarri(array[0] + array[1]*10, false); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.green, array[0], array[1]);
+						else if(array[3]==0) this.botTableroariIrudiaKendu(array[0], array[1]); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.GREEN, array[0], array[1]);
 					}else {
-						if (array[3]==1) {ezkutuBakarraJarri(array[0]+ array[1]*10);}
-						else if(array[3]==0) {nireTableroariIrudiaKendu(array[0], array[1]);}
+						if (array[3]==1) ezkutuBakarraJarri(array[0]+ array[1]*10, true);
+						else if(array[3]==0) nireTableroariIrudiaKendu(array[0], array[1]);
 					}
 					break;
 				case 4: //radarra erabiliz ontzia aurkitu du
@@ -568,7 +593,7 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				case 7:
 					if (fu.getTxanda()) {
-						ezkutuaJarri(array[0]+ array[1]*10);
+						ezkutuaJarri(array[0]+ array[1]*10, true);
 					}
 					break;
 				case 8:

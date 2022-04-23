@@ -153,6 +153,12 @@ public class JokNormal  extends Jokalari{
 		}
 		return aurkitua;
 	}
+	
+	
+	
+	
+	
+	
 	//********************************** TIROA *******************************************************
 	
 	/**
@@ -179,7 +185,7 @@ public class JokNormal  extends Jokalari{
 	
 	public void gelaxkaUkitutaIpini(int x, int y) {
 		if(Bot.getNireBot().ezkutuaDago(x, y)) {
-			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);;
+			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
 		}else {
 			if(ukituDuItsasontzia(x,y)) {
 				setChanged();
@@ -199,6 +205,16 @@ public class JokNormal  extends Jokalari{
 		Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 		JokNormal.getNireJok().ukituak.gelaxkaUrperatutaIpini(x, y);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//********************************** MISIL TIROA *******************************************************
 	public void misilTiroa( int x, int y) {	
 		if(Bot.getNireBot().ezkutuaDago(x, y)) {
@@ -321,7 +337,7 @@ public class JokNormal  extends Jokalari{
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
 				if(!nireItsasontziak.urperatutaDago(x, y)) { //!super.ontziOsoaUrperatuDu(x, y)
-					super.ezkutuaIpini(x, y, 2);
+					super.ezkutuaIpini(x, y);
 					
 					//ezkutu kantitatea eguneratu:
 					int kop = armaKantitateaEguneratu(new Ezkutua());
@@ -345,7 +361,41 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,8});
 		}
-		
+	}
+	
+	
+	@Override
+	public void ezkutuaXTxikitu(int x, int y, int k) {
+		int hX=x;
+		int hY=y;
+		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x, y, 3, level});
+			y--;
+		}
+		y=hY+1;
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x, y, 3, level});
+			y++;
+		}
+		y=hY;
+		x=hX-1;
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x,y,3, level});
+			x--;
+		}
+		x=hX+1;
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			setChanged();
+			notifyObservers(new int[] {x,y,3, level});
+			x++;
+		}
 	}
 	//************************** EROSKETAK **************************************************
 	public void armamentuaErosi() {}

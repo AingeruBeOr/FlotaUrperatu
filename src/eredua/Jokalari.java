@@ -31,8 +31,18 @@ public abstract class Jokalari extends Observable{
 	
 	public boolean ontzirenBatGeratzenDa() {return nireItsasontziak.ontzirenBatGeratzenDa();}
 	
+	/**
+	 * Parametro bezala adierazitako arma motaren kantitatea -1 txikituko du
+	 * @param arma eguneratuko duen arma mota
+	 * @return arma mota horreatako zenbat unitate geratzen zaizkion
+	 */
 	public int armaKantitateaEguneratu(Arma arma) {return armak.armaKantitateaEguneratu(arma);}
 	
+	/**
+	 * Parametro bezala pasatzen zaion arma kantitatea itzuliko du
+	 * @param arma ezagutu nahi den arma motaren unitate kopurua
+	 * @return 
+	 */
 	public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
@@ -457,64 +467,46 @@ public abstract class Jokalari extends Observable{
 	
 	//************************** EZKUTUA **********************************************************************************
 	
-	public void ezkutuaXTxikitu(int x, int y, int k) {
-		int hX=x;
-		int hY=y;
-		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			setChanged();
-			notifyObservers(new int[] {x, y, 3, level});
-			y--;
-		}
-		y=hY+1;
-		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			setChanged();
-			notifyObservers(new int[] {x, y, 3, level});
-			y++;
-		}
-		y=hY;
-		x=hX-1;
-		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			setChanged();
-			notifyObservers(new int[] {x,y,3, level});
-			x--;
-		}
-		x=hX+1;
-		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			int level=this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			setChanged();
-			notifyObservers(new int[] {x,y,3, level});
-			x++;
-		}
-	}
-	public void ezkutuaIpini(int x,int y, int level) {
+	/**
+	 * Adierazitako (x,y) posizioan dagoen itsasontzia k aldiz txikituko da bere bizitza.
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @param k ezkutua txikituko den balio kopurua
+	 */
+	public abstract void ezkutuaXTxikitu(int x, int y, int k);
+	
+	/**
+	 * (x,y) posizioan level motako ezkutua jarriko da.
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @param level ezktuari jarriko zaion bizitza
+	 */
+	public void ezkutuaIpini(int x,int y) {
 		int hX=x;
 		int hY=y;
 		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //gorantz begiratu
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			this.nireItsasontziak.setEzkutua(x, y, 2);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			y--;
 		}
 		y=hY+1;
 		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //beherantz begiratu
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			this.nireItsasontziak.setEzkutua(x, y, 2);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			y++;
 		}
 		y=hY;
 		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //ezkerrerantz begiratu
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			this.nireItsasontziak.setEzkutua(x, y, 2);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			x--;
 		}
 		x=hX+1;
 		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //eskuinerantz begiratu
-			this.nireItsasontziak.setEzkutua(x, y, level);
+			this.nireItsasontziak.setEzkutua(x, y, 2);
 			setChanged();
 			notifyObservers(new int[] {x,y,7});
 			x++;

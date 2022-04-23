@@ -4,17 +4,14 @@ import java.util.Random;
 
 public class Bot extends Jokalari{
 	int txanda;
-	int misilKop;
-	int radarKop;
-	int ezkutuKop;
 	private static Bot nireBot;
 	
 	private Bot() {
 		super();
 		txanda=0;
-		misilKop=2;
-		radarKop=2;
-		ezkutuKop=2;
+		//misilKop=2;
+		//radarKop=2;
+		//ezkutuKop=2;
 		this.probazkoOntziakJarri();
 		//this.txandaJokatu();
 		
@@ -281,9 +278,9 @@ public class Bot extends Jokalari{
 		}else if(txanda==0){
 			ezkutuaKokatu();
 		}else{
-			if (zenb == 4 && misilKop>0) {misilTiroa(x, y);}
-			else if (zenb == 7 && radarKop>0){radarraKontsultatu(x, y);}
-			else if (zenb == 10 && ezkutuKop>0) {ezkutuaKokatu();} 
+			if (zenb == 4 && getArmaKop(new Misil()) >0) {misilTiroa(x, y);}
+			else if (zenb == 7 && getArmaKop(new Radarra()) >0){radarraKontsultatu(x, y);}
+			else if (zenb == 10 && getArmaKop(new Ezkutua()) >0) {ezkutuaKokatu();} 
 			else {tiroEgin();}
 		}
 		txanda++;
@@ -371,7 +368,7 @@ public class Bot extends Jokalari{
 			}
 		}
 		//misil kantitatea eguneratu:
-		misilKop--;
+		armaKantitateaEguneratu(new Misil());
 	}
 	
 	private void goikoakUrperatu ( int x, int y) {
@@ -435,7 +432,7 @@ public class Bot extends Jokalari{
 			notifyObservers(new int[] {x,y,6});
 		}
 		//radar kantitatea eguneratu:
-		radarKop--;
+		armaKantitateaEguneratu(new Radarra());
 	}
 
 	//********************************** EZKUTUA *******************************************************
@@ -451,8 +448,9 @@ public class Bot extends Jokalari{
 			if (super.itsasontziaDaukat(x, y)) {
 				if (!super.ezkutuaDago(x, y)) {
 					if (!nireItsasontziak.urperatutaDago(x, y)) {
-						super.ezkutuaIpini(x, y, ezkutuKop);
-						ezkutuKop = ezkutuKop --;
+						super.ezkutuaIpini(x, y);
+						armaKantitateaEguneratu(new Ezkutua());
+						//ezkutuKop = ezkutuKop --;
 						System.out.println("Bot-ak ezkutu bat kokatu du (" + x + ", " + y + ") koordenatuetan");
 						ezkutuKokatua=true;
 					}
@@ -461,6 +459,51 @@ public class Bot extends Jokalari{
 		}while(!ezkutuKokatua);
 	}
 	
+	@Override
+	public void ezkutuaXTxikitu(int x, int y, int k) {
+		int hX=x;
+		int hY=y;
+		int level = this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+		setChanged();
+		notifyObservers(new int[] {x, y, 3, level});
+		y--;
+		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			if(level == 0) {
+				setChanged();
+				notifyObservers(new int[] {x, y, 3, level});
+			}
+			y--;
+		}
+		y=hY+1;
+		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			if(level == 0) {
+				setChanged();
+				notifyObservers(new int[] {x, y, 3, level});
+			}
+			y++;
+		}
+		y=hY;
+		x=hX-1;
+		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			if(level == 0) {
+				setChanged();
+				notifyObservers(new int[] {x, y, 3, level});
+			}
+			x--;
+		}
+		x=hX+1;
+		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
+			if(level == 0) {
+				setChanged();
+				notifyObservers(new int[] {x, y, 3, level});
+			}
+			x++;
+		}
+	}
 	//********************************** EROSKETAK *******************************************************
 		public void armamentuaErosi() {}
 		

@@ -96,11 +96,10 @@ public class Tablero extends Observable{
 		}
 	}
 	public boolean ukitutaEdoUrperatutaZegoen(int x, int y) {
-		
-		if(tablero[x][y].ukitutaDu() || tablero[x][y].urperatutaDu())
-		{
+		if(tablero[x][y].ukitutaDu() || tablero[x][y].urperatutaDu()){
 			//System.out.println("ukitutaEdoUrperatuta x "+x+" eta y "+y);
-			return true;}
+			return true;
+		}
 		return false;
 	}
 	public boolean itsasontziaDuGelaxka(int x, int y) {return tablero[x][y].itsasontziaDagoZegoen();}
