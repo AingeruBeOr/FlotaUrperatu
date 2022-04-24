@@ -121,7 +121,7 @@ public class Menu extends JFrame {
 			botoi4 = new JButton("Arauak ikusi");
 			botoi4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi4.addActionListener(getKontroladore());
-			botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
+			//botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
 		}
 		return botoi4;
 	}
@@ -151,12 +151,14 @@ public class Menu extends JFrame {
 				setVisible(false);
 			}
 			else if(e.getSource().equals(botoi2)) {
+				
 				//TODO
 			}
 			else if(e.getSource().equals(botoi3)) {
 				//TODO
 			}
 			else if(e.getSource().equals(botoi4)) {
+				Arauak.main(null);
 				//TODO
 			}
 			else {
