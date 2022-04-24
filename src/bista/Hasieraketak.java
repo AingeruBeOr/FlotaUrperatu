@@ -3,26 +3,17 @@ package bista;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-
-
-import javax.swing.JLabel;
 import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -32,8 +23,6 @@ import java.awt.event.MouseEvent;
 import eredua.FlotaUrperatu;
 import eredua.JokNormal;
 
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.*;
 import java.util.*;
 import bista.Hasieraketak.*;
@@ -257,6 +246,9 @@ public class Hasieraketak extends JFrame implements Observer{
 		matrizeGelaxka.setOpaque(true);
 		matrizeGelaxka.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		matrizeGelaxka.setBackground(Color.BLUE);
+		ImageIcon ura = new ImageIcon(this.getClass().getResource("Ura.jpg"));
+		ImageIcon uraAdj = new ImageIcon(ura.getImage().getScaledInstance(70, 43,Image.SCALE_DEFAULT));
+		matrizeGelaxka.setIcon(uraAdj);
 		matrizeGelaxka.addMouseListener(getKontroladore());
 		return matrizeGelaxka;
 	}
@@ -266,6 +258,13 @@ public class Hasieraketak extends JFrame implements Observer{
 			label2.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return label2;
+	}
+	private void itsasontziaIpini(int index) {
+		JLabel jl = zerrenda.get(index);
+		jl.setBackground(Color.BLACK);
+		ImageIcon ura_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi.png"));
+		ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(70, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(ura_itsasAdj);
 	}
 
 
@@ -323,7 +322,8 @@ public class Hasieraketak extends JFrame implements Observer{
 				int pX=x;
 				int pY=y;
 				while(kont>0) {
-					center.getComponent(pY*10+pX).setBackground(Color.BLACK);
+					itsasontziaIpini(pY*10+pX);
+					//center.getComponent(pY*10+pX).setBackground(Color.BLACK);
 					kont--;
 					if(horizontalean) pX++;
 					else pY++;

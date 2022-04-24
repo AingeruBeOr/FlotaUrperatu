@@ -118,7 +118,17 @@ public class Tablero extends JFrame implements Observer{
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
 				JLabel jokLauki = getJokLaukia();
-				jokLauki.setBackground(pZ.get(l*10+z).getBackground());
+				if(pZ.get(l*10+z).getBackground().equals(Color.BLUE)) {
+					ImageIcon ura = new ImageIcon(this.getClass().getResource("Ura.jpg"));
+					ImageIcon uraAdj = new ImageIcon(ura.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+					jokLauki.setIcon(uraAdj);
+				}
+				else {
+					ImageIcon ura_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi.png"));
+					ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+					jokLauki.setIcon(ura_itsasAdj);
+				}
+				//jokLauki.setIcon();
 				matrizeEzk.add(jokLauki);
 				zerrendaJok.add(jokLauki);
 				
