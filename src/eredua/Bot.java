@@ -19,33 +19,17 @@ public class Bot extends Jokalari{
 		}
 		return nireBot;
 	}
-	/*public void zenbakiRandom() {
-		Random zenbakia = new Random();
-		//TODO
-	}*/
-	/*Maider --> Metodo bat egin dut tableroa hasieratzeko bere ontziekin
 	
-	public void hasieratuTablero() {
-		setTablero(new Tablero());
-	}
-	*/
 	public void txandaJokatu() {		
 		this.gertaeraLortu();
 	}
 	
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
-		//nireItsasontziak.botariOntziakJarri();
 		botarenItsasontziakKokatu();
 	}
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
-		//Random r = new Random();
-	 	//int pX=0;
-	 	//int pY=0;
-		/*//TODO while (pX > 0 and pX<=10) do {
-			
-		} */
 	}
 	
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
@@ -290,15 +274,7 @@ public class Bot extends Jokalari{
 	
 	
 	//*********************************************** TIROA *******************************************************
-	private void tiroEgin() {
-		/*
-		txanda++;
-		int x=txanda%10;
-		int y=txanda/10;
-		JokNormal.getNireJok().ontziaUkitutaIpini(x, y);
-		return txanda;
-		*/
-		
+	private void tiroEgin() {		
 	 	Random r = new Random();
 	 	int x=0;
 	 	int y=0;
