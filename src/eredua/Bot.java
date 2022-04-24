@@ -326,38 +326,41 @@ public class Bot extends Jokalari{
 	}
 	
 	
-	public boolean tiroaOndoEginDu() {return true;}
 	
 	//********************************** MISIL TIROA *******************************************************
 	private void misilTiroa( int x, int y) {
 		System.out.println("Bot-ak misil bat kokatu du (" + x + ", " + y + ") koordenatuetan");
-		if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
-			JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 2);
-		}else {
-			if(ukituDuItsasontzia(x,y)) {
-				gelaxkaUrperatu(x,y);
-				if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-					this.ezkerrekoakUrperatu( x-1, y); 	
-				}
-				if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-					this.eskumakoakUrperatu( x+1, y);	
-				}
-							
-				if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-					this.goikoakUrperatu( x, y-1);	
-				}
-				if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-					this.behekoakUrperatu( x, y+1);
-				}
-			}else {
-				setChanged();
-				notifyObservers(new int[] {x,y,0});
-				JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-				this.ukituak.gelaxkaUkituaIpini(x,y);
-			}
+		if(JokNormal.getNireJok().ezkutuaDago(x, y)) JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 2);
+		else if(ukituDuItsasontzia(x,y)) ontziaUrperatu(x,y);
+		else {
+			setChanged();
+			notifyObservers(new int[] {x,y,0});
+			JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+			this.ukituak.gelaxkaUkituaIpini(x,y);
 		}
 		//misil kantitatea eguneratu:
 		armaKantitateaEguneratu(new Misil());
+	}
+	
+
+	
+	//****************************************ONTZI OSOA URPERATU*****************************************************
+	
+	public void ontziaUrperatu(int x, int y) {
+		gelaxkaUrperatu(x,y);
+		if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+			this.ezkerrekoakUrperatu( x-1, y); 	
+		}
+		if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+			this.eskumakoakUrperatu( x+1, y);	
+		}
+					
+		if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+			this.goikoakUrperatu( x, y-1);	
+		}
+		if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+			this.behekoakUrperatu( x, y+1);
+		}
 	}
 	
 	private void goikoakUrperatu ( int x, int y) {
@@ -387,24 +390,8 @@ public class Bot extends Jokalari{
 	}
 	
 	
-	public void ontziaUrperatu(int x, int y) {
-		gelaxkaUrperatu(x,y);
-		if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-			this.ezkerrekoakUrperatu( x-1, y); 	
-		}
-		if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-			this.eskumakoakUrperatu( x+1, y);	
-		}
-					
-		if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-			this.goikoakUrperatu( x, y-1);	
-		}
-		if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-			this.behekoakUrperatu( x, y+1);
-		}
-	}
 	//********************************** RADAR *******************************************************
-	private void radarraKontsultatu(int x, int y) {
+	public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {

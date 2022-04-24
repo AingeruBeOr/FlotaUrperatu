@@ -4,8 +4,8 @@ import java.util.Observable;
 import java.util.*;
 
 public abstract class Jokalari extends Observable{
-	protected int dirua;
-	protected ArmamentuZerrenda armak;
+	private int dirua;
+	private ArmamentuZerrenda armak;
 	protected Tablero nireItsasontziak;
 	protected Tablero ukituak;
 	
@@ -17,7 +17,6 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	protected abstract void txandaJokatu();
-	protected abstract boolean tiroaOndoEginDu();
 	protected abstract void armamentuaErosi();
 	protected abstract void ontziaKonpondu();
 	
@@ -43,8 +42,8 @@ public abstract class Jokalari extends Observable{
 	
 	/**
 	 * true bueltatuko du jadanik bertan jo badu edo false bestela
-	 * @param x: x koordenatua
-	 * @param y: y koordenatua
+	 * @param x x koordenatua
+	 * @param y y koordenatua
 	 * @return 
 	 */
 	public boolean ukitutaZegoen(int x, int y) {
@@ -57,20 +56,11 @@ public abstract class Jokalari extends Observable{
 	
 	/**
 	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
-	 * @param x: x koordenatua
-	 * @param y: y koordenatua
+	 * @param x x koordenatua
+	 * @param y y koordenatua
 	 * @return
 	 */
-	public boolean ukituDuItsasontzia(int x, int y) {
-		FlotaUrperatu fu =FlotaUrperatu.getNireFlotaUrperatu();
-		if(!fu.getTxanda()) {
-			if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
-			else return false;
-		}else {
-			if(Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
-			else return false;
-		}
-	}
+	public abstract boolean ukituDuItsasontzia(int x, int y);
 	
 	//************************** ITSASONTZIAK KOKATU**************************************************
 	
@@ -80,6 +70,9 @@ public abstract class Jokalari extends Observable{
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
 	}
+	
+	//************************** RADARRA **********************************************************************************
+	protected abstract void radarraKontsultatu(int x, int y);
 	
 	//************************** EZKUTUA **********************************************************************************
 	

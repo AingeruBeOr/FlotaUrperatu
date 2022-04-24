@@ -33,12 +33,7 @@ public class JokNormal  extends Jokalari{
 	
 	//********************************** UKITUAK *******************************************************
 	
-	/**
-	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
-	 * @param x: x koordenatua
-	 * @param y: y koordenatua
-	 * @return
-	 */
+	@Override
 	public boolean ukituDuItsasontzia(int x, int y) {
 		if(Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
 		else return false;
@@ -213,37 +208,45 @@ public class JokNormal  extends Jokalari{
 	
 	//********************************** MISIL TIROA *******************************************************
 	public void misilTiroa( int x, int y) {	
-		if(Bot.getNireBot().ezkutuaDago(x, y)) {
-			Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);
-		}else {
-			if(ukituDuItsasontzia(x,y)) {
-				ontziaUrperatu(x, y);
-				/*gelaxkaUrperatu(x,y);
-				if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-					this.ezkerrekoakUrperatu( x-1, y); 	
-				}
-				if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-					this.eskumakoakUrperatu( x+1, y);	
-				}
-							
-				if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-					this.goikoakUrperatu( x, y-1);	
-				}
-				if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-					this.behekoakUrperatu( x, y+1);
-				}*/
-			}else {
+		if(Bot.getNireBot().ezkutuaDago(x, y)) Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);
+		else if(ukituDuItsasontzia(x,y)) ontziaUrperatu(x, y);
+			else {
 				setChanged();
 				notifyObservers(new int[] {x,y,0});
 				Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
 				this.ukituak.gelaxkaUkituaIpini(x,y);
 			}	
-		}
-		
 		//misil kantitatea eguneratu:
 		int kop = armaKantitateaEguneratu(new Misil());
 		setChanged();
 		notifyObservers(new int[] {0,kop}); 
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	//****************************************ONTZI OSOA URPERATU*****************************************************
+	
+	
+	public void ontziaUrperatu(int x, int y) {
+		gelaxkaUrperatu(x,y);
+		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
+			this.ezkerrekoakUrperatu( x-1, y); 	
+		}
+		if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
+			this.eskumakoakUrperatu( x+1, y);	
+		}
+		if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
+			this.goikoakUrperatu( x, y-1);	
+		}
+		if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
+			this.behekoakUrperatu( x, y+1);
+		}
 	}
 	
 	private void goikoakUrperatu ( int x, int y) {
@@ -271,32 +274,6 @@ public class JokNormal  extends Jokalari{
 			x++;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	//****************************************ONTZI OSOA URPERATU*****************************************************
-	
-	
-	public void ontziaUrperatu(int x, int y) {
-		gelaxkaUrperatu(x,y);
-		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-			this.ezkerrekoakUrperatu( x-1, y); 	
-		}
-		if (x<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-			this.eskumakoakUrperatu( x+1, y);	
-		}
-		if (y>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-			this.goikoakUrperatu( x, y-1);	
-		}
-		if (y<9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-			this.behekoakUrperatu( x, y+1);
-		}
-	}
-	
 	
 	
 	
@@ -416,10 +393,5 @@ public class JokNormal  extends Jokalari{
 	//************************** EROSKETAK **************************************************
 	public void armamentuaErosi() {}
 	public void ontziaKonpondu() {}
-	protected boolean tiroaOndoEginDu() {
-		
-		return true;
-	}
-	
 
 }
