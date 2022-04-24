@@ -379,6 +379,12 @@ public class Tablero extends JFrame implements Observer{
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
 		else getLblTxanda().setText("Botaren txanda da.");
 	}
+	
+	
+	
+	
+	
+	
 	//********************************************IRUDIAK**********************************************************
 	/*private void xJarri(int index) {
 		JLabel jl = zerrendaJok.get(index);
@@ -641,20 +647,16 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.getTxanda()) {
 						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
 						if(array[3]==1) { 
-							//this.ezkutuBakarraJarri(array[0] + array[1]*10, false);
-							//this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
 							this.ezkutuBakarJarri(index, false);
 							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
 						}
 						//bizitzarik gabe geratu bada itsaontzia:
 						else if(array[3] == 0) {
-							//this.botTableroariIrudiaKendu(array[0], array[1]);
-							//TODO COMO HACER ESTO?????????????????????????????????????????????????????????????????????????????
-							
-							this.itsasontziaIpini(index, false);
+							//posizioak jadanik irudia badu, lehenen ikutu delako izan da eta posizio hori radarra jarri behar diogu, bakarrik horri
+							if (zerrendaBot.get(index).getIcon() != null) this.itsasontziaIpini(index, false);
 							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
 						}
-						else if(array[3] == 2) this.radarraJarri(index); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						else if(array[3] == 2) this.itsasontziaIpini(index,false); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
 					}else {
 						if (array[3]==1) this.ezkutuBakarJarri(index, true);//ezkutuBakarraJarri(array[0]+ array[1]*10, true);
 						else if(array[3]==0) this.itsasontziaIpini(index, true); //nireTableroariIrudiaKendu(array[0], array[1]);
@@ -662,7 +664,6 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				case 4: //radarra erabiliz ontzia aurkitu du
 					if(fu.getTxanda()) {
-						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
 						this.radarraJarri(index);
 						getLblOntzia().setText("Ontzia aurkitu duzu!");
 					}else {

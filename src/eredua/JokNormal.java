@@ -177,13 +177,10 @@ public class JokNormal  extends Jokalari{
 	}
 	
 	public void bonbaTiroa(int x, int y) {
-		if(Bot.getNireBot().ezkutuaDago(x, y)) {
-			Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
-		}else {
+		if(Bot.getNireBot().ezkutuaDago(x, y)) Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
+		else {
 			if(ukituDuItsasontzia(x,y)) {
-				if (ontziOsoaUkituDu(x,y)){ 
-					ontziaUrperatu(x,y);
-				}
+				if (ontziOsoaUkituDu(x,y)) ontziaUrperatu(x,y);
 				else {
 					setChanged();
 					notifyObservers(new int[] {x,y,1});
@@ -322,6 +319,8 @@ public class JokNormal  extends Jokalari{
 					else if(!Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
 						setChanged();
 						notifyObservers(new int[] {i,j,0});
+						Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(i, j);
+						this.ukituak.gelaxkaUkituaIpini(i, j);
 					}
 						
 				}
