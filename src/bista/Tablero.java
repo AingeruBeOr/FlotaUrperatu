@@ -379,13 +379,14 @@ public class Tablero extends JFrame implements Observer{
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
 		else getLblTxanda().setText("Botaren txanda da.");
 	}
-	private void xJarri(int index) {
+	//********************************************IRUDIAK**********************************************************
+	/*private void xJarri(int index) {
 		JLabel jl = zerrendaJok.get(index);
 		ImageIcon cross = new ImageIcon(this.getClass().getResource("RedCross.png"));
 		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(crossAdj);
 	}
-	private void ezkutuaJarri(int index, boolean tablero) {
+	/*private void ezkutuaJarri(int index, boolean tablero) {
 		ArrayList<JLabel> zerrenda;
 		if(tablero) zerrenda = zerrendaJok;
 		else zerrenda = zerrendaBot;
@@ -402,8 +403,74 @@ public class Tablero extends JFrame implements Observer{
 		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu2.png"));
 		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(ezkutuAdj);
+	}*/
+	private void uraJarri(int index) {
+		JLabel jl = zerrendaBot.get(index);
+		ImageIcon cross = new ImageIcon(this.getClass().getResource("Ura.jpg"));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(crossAdj);
 	}
-	private void nireTableroariIrudiaKendu(int x, int y) {
+	private void uraUkituaJarri(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon cross = new ImageIcon(this.getClass().getResource("ura_cross.png"));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(crossAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(crossAdj);
+		}
+	}
+	private void itsasontziaIpini(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon ura_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi.png"));
+		ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(ura_itsasAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(ura_itsasAdj);
+		}
+	}
+	private void itsasontziariXIpini(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon x_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_cross.png"));
+		ImageIcon x_itsasAdj = new ImageIcon(x_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(x_itsasAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(x_itsasAdj);
+		}
+	}
+	private void ezkutuBikoitzaJarri(int index) {
+		JLabel jl = zerrendaJok.get(index);
+		ImageIcon ezk2 = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_ezkutu2.png"));
+		ImageIcon ezk2Adj = new ImageIcon(ezk2.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(ezk2Adj);
+	}
+	private void ezkutuBakarJarri(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon ezk1 = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_ezkutu1.png"));
+		ImageIcon ezk1Adj = new ImageIcon(ezk1.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(ezk1Adj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(ezk1Adj);
+		}
+	}
+	private void radarraJarri(int index) {
+		JLabel jl = zerrendaBot.get(index);
+		ImageIcon radar = new ImageIcon(this.getClass().getResource("Ura_radar.jpg"));
+		ImageIcon radarAdj = new ImageIcon(radar.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(radarAdj);
+	}
+	/*private void nireTableroariIrudiaKendu(int x, int y) {
 		String sx = String.valueOf(x);
 		String sy = String.valueOf(y);
 		String sindex = sy + sx;
@@ -421,13 +488,14 @@ public class Tablero extends JFrame implements Observer{
 		int index = Integer.parseInt(sindex);
 		zerrendaBot.get(index).setIcon(null);
 	}
-	private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
+	/*private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
 		String sx = String.valueOf(x);
 		String sy = String.valueOf(y);
 		String sindex = sy + sx;
 		int index = Integer.parseInt(sindex);
 		zerrendaBot.get(index).setBackground(c);
-	}
+	}*/
+	//********************************************IRUDIEN AMAIERA**********************************************************
 	private void diruaEguneratu() {
 		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
 	}
@@ -537,52 +605,64 @@ public class Tablero extends JFrame implements Observer{
 				 * 9 ->	EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN BADAGO ITSASONTZI BAT EZKUTUAREKIN
 				 * 10 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN URPERATUTA DAGOEN ITSASONTZI BAT DAGO
 				 * */
+				String sx = String.valueOf(array[0]);
+				String sy = String.valueOf(array[1]);
+				String sindex = sy + sx;
+				int index = Integer.parseInt(sindex);
 				switch (array[2]){
 				case 0:
 					if(fu.getTxanda()) {
-						this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
+						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
+						this.uraJarri(index);
 					}else {
-						xJarri(array[0]+ array[1]*10);
+						//xJarri(array[0]+ array[1]*10);
+						this.uraUkituaJarri(index, true);
 					}
 					break;
 				case 1:
-					if(fu.getTxanda()) {
+					/*if(fu.getTxanda()) {
 						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
 					}else {
 						xJarri(array[0]+ array[1]*10);
-					}
+					}*/
+					this.itsasontziariXIpini(index, !fu.getTxanda());
 					break;
 				case 2:
 					if(fu.getTxanda()) {
-						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
+						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
 						getLblOntzia().setText("Ontzi osoa urperatu duzu!");
 					}else {
-						xJarri(array[0]+ array[1]*10);
+						//xJarri(array[0]+ array[1]*10);
 						getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
 					}
+					this.itsasontziariXIpini(index, !fu.getTxanda());
 					break;
 				case 3: //jokalariren bat ezkutua jotzen badu
 					if(fu.getTxanda()) {
 						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
 						if(array[3]==1) { 
-							this.ezkutuBakarraJarri(array[0] + array[1]*10, false);
-							this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+							//this.ezkutuBakarraJarri(array[0] + array[1]*10, false);
+							//this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+							this.ezkutuBakarJarri(index, false);
 							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
 						}
 						//bizitzarik gabe geratu bada itsaontzia:
 						else if(array[3] == 0) {
-							this.botTableroariIrudiaKendu(array[0], array[1]);
+							//this.botTableroariIrudiaKendu(array[0], array[1]);
+							//TODO COMO HACER ESTO?????????????????????????????????????????????????????????????????????????????
+							this.itsasontziaIpini(index, false);
 							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
 						}
-						else if(array[3] == 2) this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						else if(array[3] == 2) this.radarraJarri(index); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
 					}else {
-						if (array[3]==1) ezkutuBakarraJarri(array[0]+ array[1]*10, true);
-						else if(array[3]==0) nireTableroariIrudiaKendu(array[0], array[1]);
+						if (array[3]==1) this.ezkutuBakarJarri(index, true);//ezkutuBakarraJarri(array[0]+ array[1]*10, true);
+						else if(array[3]==0) this.itsasontziaIpini(index, true); //nireTableroariIrudiaKendu(array[0], array[1]);
 					}
 					break;
 				case 4: //radarra erabiliz ontzia aurkitu du
 					if(fu.getTxanda()) {
-						this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						this.radarraJarri(index);
 						getLblOntzia().setText("Ontzia aurkitu duzu!");
 					}else {
 						//TODO
@@ -608,7 +688,8 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				case 7:
 					if (fu.getTxanda()) {
-						ezkutuaJarri(array[0]+ array[1]*10, true);
+						this.ezkutuBikoitzaJarri(index);
+						//ezkutuaJarri(array[0]+ array[1]*10, true);
 					}
 					break;
 				case 8:
