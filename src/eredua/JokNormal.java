@@ -145,7 +145,7 @@ public class JokNormal  extends Jokalari{
 	 */
 	private boolean eskumakoakAztertu(int x, int y) {
 		boolean aurkitua=false;
-		while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while (!aurkitua && x<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
 			}
@@ -346,7 +346,8 @@ public class JokNormal  extends Jokalari{
 	 * @param x koordenatua
 	 * @param y koordenatua
 	 */
-	public void ezkutuaJarri(int x, int y) {
+	public boolean ezkutuaJarri(int x, int y) {
+		
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
 				if(!nireItsasontziak.urperatutaDago(x, y)) { //!super.ontziOsoaUrperatuDu(x, y)
@@ -356,6 +357,7 @@ public class JokNormal  extends Jokalari{
 					int kop = armaKantitateaEguneratu(new Ezkutua());
 					setChanged();
 					notifyObservers(new int[] {2,kop}); 
+					return true;
 				}
 				else {
 					//posizio horretan dagoen itsasontzia ondoratuta dago:
@@ -374,6 +376,7 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,8});
 		}
+		return false;
 	}
 	
 	

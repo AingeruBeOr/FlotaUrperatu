@@ -384,33 +384,8 @@ public class Tablero extends JFrame implements Observer{
 	
 	
 	
-	
-	
 	//********************************************IRUDIAK**********************************************************
-	/*private void xJarri(int index) {
-		JLabel jl = zerrendaJok.get(index);
-		ImageIcon cross = new ImageIcon(this.getClass().getResource("RedCross.png"));
-		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
-		jl.setIcon(crossAdj);
-	}
-	/*private void ezkutuaJarri(int index, boolean tablero) {
-		ArrayList<JLabel> zerrenda;
-		if(tablero) zerrenda = zerrendaJok;
-		else zerrenda = zerrendaBot;
-		JLabel jl = zerrenda.get(index);
-		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu1.png"));
-		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
-		jl.setIcon(ezkutuAdj);
-	}
-	private void ezkutuBakarraJarri(int index, boolean tablero) {
-		ArrayList<JLabel> zerrenda;
-		if(tablero) zerrenda = zerrendaJok;
-		else zerrenda = zerrendaBot;
-		JLabel jl = zerrenda.get(index);
-		ImageIcon ezkutu = new ImageIcon(this.getClass().getResource("Ezkutu2.png"));
-		ImageIcon ezkutuAdj = new ImageIcon(ezkutu.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
-		jl.setIcon(ezkutuAdj);
-	}*/
+	
 	private void uraJarri(int index) {
 		JLabel jl = zerrendaBot.get(index);
 		ImageIcon cross = new ImageIcon(this.getClass().getResource("Ura.jpg"));
@@ -477,42 +452,24 @@ public class Tablero extends JFrame implements Observer{
 		ImageIcon radarAdj = new ImageIcon(radar.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		jl.setIcon(radarAdj);
 	}
-	/*private void nireTableroariIrudiaKendu(int x, int y) {
-		String sx = String.valueOf(x);
-		String sy = String.valueOf(y);
-		String sindex = sy + sx;
-		int index = Integer.parseInt(sindex);
-		if (Bot.getNireBot().ukitutaZegoen(x, y)) {
-			xJarri(index);
+	
+	private void urperatutaJarri(int index, boolean jokTablero) {
+		//TODO METER LA IMAGEN
+		JLabel jl;
+		ImageIcon boom = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_cross.png"));
+		ImageIcon boomAdj = new ImageIcon(boom.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(boomAdj);
 		}else {
-			zerrendaJok.get(index).setIcon(null);
+			jl = zerrendaBot.get(index);
+			jl.setIcon(boomAdj);
 		}
 	}
-	private void botTableroariIrudiaKendu(int x, int y) {
-		String sx = String.valueOf(x);
-		String sy = String.valueOf(y);
-		String sindex = sy + sx;
-		int index = Integer.parseInt(sindex);
-		zerrendaBot.get(index).setIcon(null);
-	}
-	/*private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
-		String sx = String.valueOf(x);
-		String sy = String.valueOf(y);
-		String sindex = sy + sx;
-		int index = Integer.parseInt(sindex);
-		zerrendaBot.get(index).setBackground(c);
-	}*/
 	//********************************************IRUDIEN AMAIERA**********************************************************
 	private void diruaEguneratu() {
 		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	//********************** KONTROLADOREA ****************************************
 	private Kontroladore getKontroladore() {
@@ -536,8 +493,8 @@ public class Tablero extends JFrame implements Observer{
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
-					jokNormal.ezkutuaJarri(x,y);
-					fu.aldatuTxanda();
+					boolean jarriDu=jokNormal.ezkutuaJarri(x,y);
+					if(jarriDu) fu.aldatuTxanda();
 				}
 				else {
 					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
@@ -552,6 +509,7 @@ public class Tablero extends JFrame implements Observer{
 						int arma = 0;
 						if(rdbtnMisil.isSelected()) arma=1;
 						else if(rdbtnRadar.isSelected()) arma = 2;
+						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 						jokNormal.tiroEgin(x, y, arma);
 						fu.aldatuTxanda();
 					}
@@ -618,31 +576,16 @@ public class Tablero extends JFrame implements Observer{
 				int index = Integer.parseInt(sindex);
 				switch (array[2]){
 				case 0:
-					if(fu.getTxanda()) {
-						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.BLUE, array[0], array[1]);
-						this.uraJarri(index);
-					}else {
-						//xJarri(array[0]+ array[1]*10);
-						this.uraUkituaJarri(index, true);
-					}
+					if(fu.getTxanda()) this.uraJarri(index);
+					else this.uraUkituaJarri(index, true);
 					break;
 				case 1:
-					/*if(fu.getTxanda()) {
-						this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-					}else {
-						xJarri(array[0]+ array[1]*10);
-					}*/
 					this.itsasontziariXIpini(index, !fu.getTxanda());
 					break;
 				case 2:
-					if(fu.getTxanda()) {
-						//this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED, array[0], array[1]);
-						getLblOntzia().setText("Ontzi osoa urperatu duzu!");
-					}else {
-						//xJarri(array[0]+ array[1]*10);
-						getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
-					}
-					this.itsasontziariXIpini(index, !fu.getTxanda());
+					if(fu.getTxanda()) getLblOntzia().setText("Ontzi osoa urperatu duzu!");
+					else getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
+					this.urperatutaJarri(index, !fu.getTxanda());
 					break;
 				case 3: //jokalariren bat ezkutua jotzen badu
 					if(fu.getTxanda()) {
@@ -657,10 +600,10 @@ public class Tablero extends JFrame implements Observer{
 							if (zerrendaBot.get(index).getIcon() != null) this.itsasontziaIpini(index, false);
 							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
 						}
-						else if(array[3] == 2) this.itsasontziaIpini(index,false); //this.koordenatuBatenLaukiariKoloreAldaketa(Color.YELLOW, array[0], array[1]);
+						else if(array[3] == 2) this.itsasontziaIpini(index,false); 
 					}else {
-						if (array[3]==1) this.ezkutuBakarJarri(index, true);//ezkutuBakarraJarri(array[0]+ array[1]*10, true);
-						else if(array[3]==0) this.itsasontziaIpini(index, true); //nireTableroariIrudiaKendu(array[0], array[1]);
+						if (array[3]==1) this.ezkutuBakarJarri(index, true);
+						else if(array[3]==0) this.itsasontziaIpini(index, true); 
 					}
 					break;
 				case 4: //radarra erabiliz ontzia aurkitu du
@@ -692,7 +635,6 @@ public class Tablero extends JFrame implements Observer{
 				case 7:
 					if (fu.getTxanda()) {
 						this.ezkutuBikoitzaJarri(index);
-						//ezkutuaJarri(array[0]+ array[1]*10, true);
 					}
 					break;
 				case 8:

@@ -250,7 +250,7 @@ public class Bot extends Jokalari{
 	
 	private boolean eskumakoakAztertu(int x, int y) {
 		boolean aurkitua=false;
-		while (!aurkitua && y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
+		while (!aurkitua && x<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
 			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
 			}
@@ -310,7 +310,19 @@ public class Bot extends Jokalari{
 				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
 					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
 				}else {
-					gelaxkaUkitutaIpini(x, y);
+					if(ukituDuItsasontzia(x,y)) {
+						if (ontziOsoaUkituDu(x,y)) ontziaUrperatu(x,y);
+						else {
+							setChanged();
+							notifyObservers(new int[] {x,y,1});
+						}
+					}else {
+						setChanged();
+						notifyObservers(new int[] {x,y,0});
+					}
+					JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
+					Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
+					//gelaxkaUkitutaIpini(x, y);
 				}
 				tiro = true;
 				System.out.println("Bot-ak bonba bat bota du (" + x + ", " + y + ") koordenatuetan");
@@ -318,7 +330,7 @@ public class Bot extends Jokalari{
 		}
 		while(!tiro);
 	}
-	public void gelaxkaUkitutaIpini(int x, int y) {
+	/*public void gelaxkaUkitutaIpini(int x, int y) {
 		if(ukituDuItsasontzia(x,y)) {
 			setChanged();
 			notifyObservers(new int[] {x,y,1});
@@ -329,7 +341,7 @@ public class Bot extends Jokalari{
 		JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
 		Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
 		
-	}
+	}*/
 	
 	public void gelaxkaUrperatu(int x, int y) {
 		setChanged();
