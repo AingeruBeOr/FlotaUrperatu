@@ -346,7 +346,7 @@ public class JokNormal  extends Jokalari{
 	 * @param x koordenatua
 	 * @param y koordenatua
 	 */
-	public boolean ezkutuaJarri(int x, int y) {
+	public void ezkutuaJarri(int x, int y) {
 		
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
@@ -357,7 +357,7 @@ public class JokNormal  extends Jokalari{
 					int kop = armaKantitateaEguneratu(new Ezkutua());
 					setChanged();
 					notifyObservers(new int[] {2,kop}); 
-					return true;
+					FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 				}
 				else {
 					//posizio horretan dagoen itsasontzia ondoratuta dago:
@@ -376,7 +376,6 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,8});
 		}
-		return false;
 	}
 	
 	

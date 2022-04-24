@@ -137,9 +137,4 @@ public abstract class Jokalari extends Observable{
 	/*public Arma getArma(Arma arma) {
 		return this.armak.getArma(arma);
 	}*/
-	
-	/*protected void armamentuaHasieratu() {
-		Misil a = new Misil();
-		armak.gehituOrdenatua(a);
-	}*/
 }

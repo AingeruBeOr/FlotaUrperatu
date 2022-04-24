@@ -454,9 +454,8 @@ public class Tablero extends JFrame implements Observer{
 	}
 	
 	private void urperatutaJarri(int index, boolean jokTablero) {
-		//TODO METER LA IMAGEN
 		JLabel jl;
-		ImageIcon boom = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_cross.png"));
+		ImageIcon boom = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_boom.png"));
 		ImageIcon boomAdj = new ImageIcon(boom.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 		if(jokTablero) {
 			jl = zerrendaJok.get(index);
@@ -493,12 +492,9 @@ public class Tablero extends JFrame implements Observer{
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
-					boolean jarriDu=jokNormal.ezkutuaJarri(x,y);
-					if(jarriDu) fu.aldatuTxanda();
+					jokNormal.ezkutuaJarri(x,y);
 				}
-				else {
-					getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
-				}
+				else getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
 			}
 			else {
 				int index = zerrendaBot.indexOf(jl);
@@ -513,13 +509,9 @@ public class Tablero extends JFrame implements Observer{
 						jokNormal.tiroEgin(x, y, arma);
 						fu.aldatuTxanda();
 					}
-					else {
-						getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
-					}
+					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
-				else {
-					getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
-				}
+				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
 			if(fu.jokoaAmaituDa()) {
 				Irabazlea.main(null);
