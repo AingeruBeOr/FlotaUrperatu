@@ -313,10 +313,17 @@ public class JokNormal  extends Jokalari{
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
-				if(i>=0 && i<=9 && j>=0 && j<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
-					setChanged();
-					notifyObservers(new int[] {i,j,4});
-					aurkituDu=true;	
+				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
+					if (Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)){
+						setChanged();
+						notifyObservers(new int[] {i,j,4});
+						aurkituDu=true;
+					}
+					else if(!Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
+						setChanged();
+						notifyObservers(new int[] {i,j,0});
+					}
+						
 				}
 			}
 		}

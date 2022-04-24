@@ -416,10 +416,17 @@ public class Bot extends Jokalari{
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
-				if(i>=0 && i<=9 && j>=0 && j<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)) {
-					setChanged();
-					notifyObservers(new int[] {i,j,4});
-					aurkituDu=true;
+				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
+					if (JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)){
+						setChanged();
+						notifyObservers(new int[] {i,j,4});
+						aurkituDu=true;
+					}
+					else if(!JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
+						setChanged();
+						notifyObservers(new int[] {i,j,0});
+					}
+						
 				}
 			}
 		}
