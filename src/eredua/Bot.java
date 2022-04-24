@@ -35,7 +35,8 @@ public class Bot extends Jokalari{
 	
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
-		nireItsasontziak.botariOntziakJarri();
+		//nireItsasontziak.botariOntziakJarri();
+		botarenItsasontziakKokatu();
 	}
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
@@ -66,38 +67,38 @@ public class Bot extends Jokalari{
 
 	private void hegazkinOntziaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt(10);
-		int y = r.nextInt(10);
 		int luzera = 4;
-		int horber = r.nextInt();
+		int horber =  r.nextInt(2);
+
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-			if (horber % 2 == 0){
+			int x = r.nextInt(10);
+			int y = r.nextInt(10);
+			if (horber == 0){
 				horizontal = true;
 			}
-
 			else{
 				horizontal = false;
 			}
-			
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
+				System.out.println("Bot-ak hegazkinOntzia kokatu du : X--> "+x+" eta Y--> "+y);
 			}
 		}
 	}
 
 	private void itsaspekoaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt(10);
-		int y = r.nextInt(10);
 		int luzera = 3;
-		int horber = r.nextInt();
+		int horber =  r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-			if (horber % 2 == 0){
+			int x = r.nextInt(10);
+			int y = r.nextInt(10);
+			if (horber == 0){
 				horizontal = true;
 			}
 
@@ -108,20 +109,21 @@ public class Bot extends Jokalari{
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
+				System.out.println("Bot-ak itsaspekoa kokatu du : X--> "+x+" eta Y--> "+y);
 			}
 		}
 	}
 
 	private void suntzitzaileaKokatu(){
 		Random r = new Random();
-		int x = r.nextInt(10);
-		int y = r.nextInt(10);
 		int luzera = 2;
-		int horber = r.nextInt();
+		int horber =  r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-			if (horber % 2 == 0){
+			int x = r.nextInt(10);
+			int y = r.nextInt(10);
+			if (horber == 0){
 				horizontal = true;
 			}
 
@@ -132,20 +134,21 @@ public class Bot extends Jokalari{
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
+				System.out.println("Bot-ak suntzitzailea kokatu du : X--> "+x+" eta Y--> "+y);
 			}
 		}
 	}
 
 	private void fragataKokatu(){
 		Random r = new Random();
-		int x = r.nextInt(10);
-		int y = r.nextInt(10);
 		int luzera = 1;
-		int horber = r.nextInt();
+		int horber =  r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
-			if (horber % 2 == 0){
+			int x = r.nextInt(10);
+			int y = r.nextInt(10);
+			if (horber == 0){
 				horizontal = true;
 			}
 
@@ -156,6 +159,8 @@ public class Bot extends Jokalari{
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
+				System.out.println("Bot-ak fragata kokatu du : X--> "+x+" eta Y--> "+y);
+				
 			}
 		}
 	}

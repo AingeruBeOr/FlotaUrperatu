@@ -11,7 +11,7 @@ public abstract class Jokalari extends Observable{
 	
 	public Jokalari () {
 		dirua=1000;
-		armak = new ArmamentuZerrenda(2,2,2); //2 misil, 2 radar eta 2 ezkutu
+		armak = new ArmamentuZerrenda(2,1,2); //2 misil, 1 radar eta 2 ezkutu
 		//TODO
 		ukituak=new Tablero();
 		nireItsasontziak= new Tablero();
