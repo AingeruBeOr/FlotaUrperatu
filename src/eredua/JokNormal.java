@@ -19,13 +19,13 @@ public class JokNormal  extends Jokalari{
 	
 	
 	//************************** ITSASONTZIAK KOKATU**************************************************
-	
-	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+	//TODO, esta comentado porque lo he puesto en super porque es común
+	/*public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
 	}
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
-	}
+	}*/
 	
 	
 	
@@ -173,7 +173,8 @@ public class JokNormal  extends Jokalari{
 	public void tiroEgin(int x, int y,int pArma) {
 		if (pArma == 0) bonbaTiroa(x, y);
 		else if (pArma == 1) misilTiroa(x,y);
-		else if (pArma == 2) radarraKontsultatu(x,y);	
+		else if (pArma == 2) radarraKontsultatu(x,y);
+		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
 	
 	public void bonbaTiroa(int x, int y) {

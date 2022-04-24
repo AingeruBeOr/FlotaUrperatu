@@ -72,7 +72,14 @@ public abstract class Jokalari extends Observable{
 		}
 	}
 	
+	//************************** ITSASONTZIAK KOKATU**************************************************
 	
+	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
+	}
+	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
+		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
+	}
 	
 	//************************** EZKUTUA **********************************************************************************
 	

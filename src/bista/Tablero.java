@@ -380,6 +380,7 @@ public class Tablero extends JFrame implements Observer{
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
 		else getLblTxanda().setText("Botaren txanda da.");
 	}
+	private void bistaEzkutatu() {setVisible(false);}
 	
 	
 	
@@ -507,24 +508,23 @@ public class Tablero extends JFrame implements Observer{
 						else if(rdbtnRadar.isSelected()) arma = 2;
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 						jokNormal.tiroEgin(x, y, arma);
-						fu.aldatuTxanda();
 					}
 					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
 				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
-			if(fu.jokoaAmaituDa()) {
+			/*if(fu.jokoaAmaituDa()) {
 				Irabazlea.main(null);
 				setVisible(false);
-			}
-			else if(!fu.getTxanda()){
+			}*/
+			/*else if(!fu.getTxanda()){
 				Bot.getNireBot().txandaJokatu();
 				fu.aldatuTxanda();
 				if(fu.jokoaAmaituDa()) {
 					Irabazlea.main(null);
 					setVisible(false);
 				}
-			}
+			}*/
 		}
 	}
 	
@@ -675,6 +675,9 @@ public class Tablero extends JFrame implements Observer{
 					diruaEguneratu();
 					break;
 				}
+			}
+			else if(array.length == 1) {
+				setVisible(false);
 			}
 		}
 		else if(arg == null) {

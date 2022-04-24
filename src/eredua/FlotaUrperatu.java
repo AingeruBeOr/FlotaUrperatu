@@ -2,6 +2,7 @@ package eredua;
 import java.awt.Color;
 import java.util.Observable;
 
+import bista.Irabazlea;
 import bista.Tablero;
 import java.util.*;
 public class FlotaUrperatu extends Observable{
@@ -24,6 +25,16 @@ public class FlotaUrperatu extends Observable{
 		txanda=!txanda;
 		setChanged();
 		notifyObservers(null);
+		if(jokoaAmaituDa()) {
+			Irabazlea.main(null);
+			//Tableroa kendu:
+			setChanged();
+			notifyObservers(new int[] {0});
+		}
+		else if(!txanda){
+			Bot.getNireBot().txandaJokatu();
+		}
+		
 	}
 	
 	public void botTxanda() { 
@@ -32,11 +43,7 @@ public class FlotaUrperatu extends Observable{
 	
 
 	public boolean jokoaAmaituDa() {
-		boolean amaitu=false;
-		if (!ontzirenBatGeratzenDa()) { 	
-			amaitu=true;
-		}
-		return amaitu;
+		return !ontzirenBatGeratzenDa();
 	}
 	
 	private boolean ontzirenBatGeratzenDa() {

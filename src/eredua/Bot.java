@@ -22,19 +22,20 @@ public class Bot extends Jokalari{
 	
 	public void txandaJokatu() {		
 		this.gertaeraLortu();
+		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
 	
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
 		botarenItsasontziakKokatu();
 	}
-	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
+	/*public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
 		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
 	}
 	
-	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
+	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {f
 		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
-	}
+	}*/
 	
 	private void botarenItsasontziakKokatu(){
 		hegazkinOntziaKokatu();
@@ -259,11 +260,9 @@ public class Bot extends Jokalari{
 		System.out.println("Lortutako zenbakia: " + zenb);
 		x = r.nextInt(10);
 		y = r.nextInt(10);
-		if (txanda==1) {
-			misilTiroa(0,0);
-		}else if(txanda==0){
-			ezkutuaKokatu();
-		}else{
+		if (txanda==1) misilTiroa(0,0);
+		else if(txanda==0)	ezkutuaKokatu();
+		else{
 			if (zenb == 4 && getArmaKop(new Misil()) >0) misilTiroa(x, y);
 			else if (zenb == 7 && getArmaKop(new Radarra()) >0) radarraKontsultatu(x, y);
 			else if (zenb == 10 && getArmaKop(new Ezkutua()) >0) ezkutuaKokatu();
