@@ -36,7 +36,7 @@ public class Arauak extends JFrame {
 		initialize();
 	}
 	private void initialize() {
-		setTitle("Arauak");
+		setTitle("Nola jokatu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,7 +49,72 @@ public class Arauak extends JFrame {
 	private JTextArea getTxtrLoremIpsumDolor() {
 		if (txtrLoremIpsumDolor == null) {
 			txtrLoremIpsumDolor = new JTextArea();
-			txtrLoremIpsumDolor.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut luctus dolor quam, vitae\\n lobortis tellus vestibulum ut. Pellentesque at massa interdum lorem pellentesque vulputate. \\n Mauris dapibus blandit nisl quis consequat. Maecenas ut blandit ipsum, vitae molestie\\n nibh. Cras in eleifend diam. In semper, ex ac lacinia blandit, erat urna mollis sem, sit amet finibus quam turpis sit amet tellus. Proin finibus facilisis aliquam. Vestibulum nibh lectus, ornare ut lectus a, egestas pulvinar felis. Curabitur dictum bibendum urna, ut lacinia justo pulvinar sed. Donec suscipit turpis vel tortor tristique tempus. Proin eu vulputate nulla, at rhoncus erat. Duis blandit ipsum erat, in rhoncus tellus egestas in. Aliquam bibendum aliquam neque at dapibus. Mauris quis sollicitudin odio, vel dapibus nibh. Nam vulputate mattis nunc in sagittis.\r\n\r\nDonec vestibulum condimentum porttitor. Quisque tempus, metus eget consequat molestie, nisi ex mattis mi, pellentesque dignissim massa nisl at arcu. Cras elementum libero ut eros ultricies, sed porta elit ullamcorper. Ut interdum suscipit lectus vulputate cursus. Sed et enim sed nisi vehicula porttitor. Duis quis est at lectus cursus aliquet. Mauris eleifend eget magna accumsan ultrices. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque dapibus ligula et dui semper scelerisque. Aliquam gravida ultricies rhoncus. Sed consectetur ullamcorper dolor at laoreet.\r\n\r\nPellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse non iaculis turpis, nec dapibus ipsum. Mauris ullamcorper purus at leo iaculis mattis. Nunc nec leo sed nisi ultrices vehicula. Maecenas vel purus mattis, scelerisque enim ut, ultrices leo. Nam ullamcorper est et lorem accumsan euismod. Sed vel tortor nisl. In rutrum rhoncus convallis. Morbi ullamcorper imperdiet purus ac semper. Nam at laoreet risus. Quisque feugiat mollis turpis, ac ultricies sapien tempus et.\r\n\r\nDuis feugiat at quam eu viverra. Donec bibendum, nisl nec auctor egestas, erat arcu commodo mi, id pretium est orci eget nibh. Fusce sit amet elementum velit, eu porttitor lectus. Morbi non ipsum venenatis, efficitur turpis quis, semper libero. Mauris vitae pharetra eros. Ut in dui turpis. Curabitur vehicula ante a est mollis, sed semper felis pellentesque. Cras porta, ligula id ultrices commodo, mi nunc laoreet ante, interdum volutpat dui quam nec massa. Suspendisse accumsan et nisl non dignissim. Praesent imperdiet felis nec odio dictum imperdiet. Nam non lobortis felis.\r\n\r\nOrci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum dapibus dolor ac tempor suscipit. Praesent semper mollis nisi faucibus vulputate. Nam varius, massa vitae commodo cursus, massa elit cursus augue, ut ultrices elit felis in arcu. Nam pretium velit non neque scelerisque consequat nec vitae libero. Proin auctor nunc in justo dictum, vitae imperdiet arcu cursus. Vestibulum vulputate tortor eget orci scelerisque, vitae congue dui viverra. Praesent fringilla auctor mattis. Nullam id purus at nulla sagittis aliquet quis eget lorem. Nullam id euismod ante. Duis ante ligula, pellentesque at lorem ac, volutpat facilisis tellus. Etiam eget nisl eget nulla venenatis placerat.");
+			txtrLoremIpsumDolor.setText("Ongi etorri “Flota urperatu” jokora! Zure zortea eta estrategia probatzeko prest zaude? "
+									+ "\n "
+									+ "\n    Arauak aipatu baino lehen, garrantzitsua da jolasa garatzen den ingurunea aipatzea. "
+									+ "\n Borroka bi taula independentez osatutako tablero batean gertatzen da, taula bat "
+								  	+ "\n jokalariarentzat eta bestea aurkariarentzat izanda. Gainera, jokalari bakoitzak hamar ontziz "
+									+ "\n osatutako flota independente bat du. "
+									+ "\n "
+									+ "\n    Jolasa hasieratu bezain laster, menu bat ikusiko dugu. \"Joko berria\" aukera hautatu "
+									+ "\n ondoren, gure taulan (10x10 tamainakoa) hamar ontzi jartzea beharrezkoa da.\r\n"
+									+ "\n "
+									+ "\n    \"Hasieraketak\" izeneko leihoa agertuko zaigu, eta bertan ontziak horizontalki eta "
+									+ "\n bertikalean kokatu beharko ditugu (aukera hau eskuineko botoietan klik eginez hauta dezakegu, "
+									+ "\n berdea unean hautatutako aukera izanik). Jarraian, kokatu nahi dugun itsasontzi mota hautatu "
+									+ "\n behar dugu. Hauek dira ontzien ezaugarriak: "
+									+ "\n    - Hegazkin-ontzia: lau tarte hartzen dituen itsasontzi bat. "
+									+ "\n    - Itsaspekoa: hiru tarte hartzen dituzten bi itsasontzi. "
+									+ "\n    - Suntzitzailea: bi tarte hartzen dituzten hiru itsasontzi. "
+									+ "\n    - Fragata: tarte bat hartzen duten lau itsasontzi. "
+									+ "\n "
+									+ "\n"
+									+ "\n    Ontzi guztiak kokatu ondoren, tableroa agertuko da gure aurrean. Ezkerrean gure "
+									+ "\n itsasoa ikus dezakegu eta eskuinan aurkariarena. Erdian eskura ditugun armak ikus ditzakegu:\r\n"
+									+ "\n    - Bonba: posizio bakarra suntsitu dezakete. Bonben kopurua infinitua da."
+									+ "\n    - Misila: ontzi bat ikutuz gero, ontzi osoa suntzitzen dute. Misilen kopurua bi da."
+									+ "\n    - Radarra: posizio batean kokatuz gero, ingurunean dauden itsasontzien posizioak "
+									+ "\n                      ikusiko ditugu. Radarren kopurua bi da."
+									+ "\n    - Ezkutua: gainerako tresnak ez bezala, ezkutua gure taula gainean jarri behar da, eta"
+									+ "\n                      honek ontzia babesten du misil batetik edo bi bonbetatik. Ezkutuen kopurua bi da."
+									+ "\n"
+									+ "\n    Kontuan hartu beharreko oinarrizko kontzeptu batzuk ezagututa, jolasa nola garatzen "
+									+ "\n den hitz egitera pasa gaitezke. Txandaka, jokalari bakoitzak bere aurkariaren tableroan tiro egin"
+									+ "\n behar du posizio batean, erabili nahi duen arma aldez aurretik aukeratuz. Izan ere, Ezkutuaren"
+									+ "\n kasuan, jokalariak bere tableroan dagoen ontzi baten gainean kokatu egin behar du tresna hau."
+									+ "\n Hau egin ondoren, hainbat gauza gerta daiteke."
+									+ "\n"
+									+ "\n    Alde batetik, bonba bat erabiliz, ontzi bat ikutuz gero, ikutu dugun posizioan X gorria"
+									+ "\n duen itsasontzi bat agertuko da eta tarte bateko itsasontzia izanez gero “Ontzi osoa urperatu"
+									+ "\n duzu!” mezua agertuko zaigu pantailan. Misil bat erabiliz gero, bonbekin ez bezala, itsasontzi"
+									+ "\n osoa hondoratu egingo da. Bestalde, ezkutu bat ikutuz gero, ezkutu baten ikono morea agertuko"
+									+ "\n zaigu pantailan itsasontziaren gainean. Bonba batekin berriro emanez gero, ezkutua"
+									+ "\n desagertuko da, baina ontzia ez da hondoratuko. Misil bat erabiliz gero, ordea, ontzia suntsituko"
+									+ "\n da. Bukatzeko, tirokatutako posizioan ura egonez gero, posizioan ura  ikusiko dugu bakarrik."
+									+ "\n"
+									+ "\n    Bonbak eta misilak erabiltzeaz gain, radarrak ere erabili ahal ditugu gure aukariaren"
+									+ "\n tableroaren gainean. Aukeratutako posizioan edo ingurunekoetan itsasontzirik egonez gero,"
+									+ "\n hauek okupatzen dituzten laukientan radar bat ikusiko dugu uraren gaienan, eta “Ontzia aurkitu"
+									+ "\n duzu!” mezua agertuko zaigu. Ingurunean itsasontzirik ez badago, ordea, ura agertuko zaigu"
+									+ "\n tableroan, eta aurkariaren txanda izango da."
+									+ "\n "
+									+ "\n Bukatzeko, ezkutuak erabili ahal ditugu gure itsasontziak babesteko. Ezkutua aukeratuz"
+									+ "\n gero babestu nahi dugun itsasontziaren gainean klikatu egin behar dugu. Itsasontziaren"
+									+ "\n gaienean kolore moreko ezkutu baten ikonoa agertuko zaigu, bere barnean izar bat duena."
+									+ "\n Aurkariak bonba batekin ezkutua joz gero, izartxoa desagertuko da, eta bakarrik ezkutuaren"
+									+ "\n silueta agertuko zaigu itsasontziaren gainean. Berriro erasotua izanez gero, ordea, ezkutua"
+									+ "\n hautsiko da, eta gure ontziak babes hori galduko du."
+									+ "\n "
+									+ "\n    Aurkariaren itsasoan ezkutu bat ikutuz gero, hautatutako posizioan ezkutu baten ikonoa"
+									+ "\n agertuko zaigu (ezkutu batek hor egoteak bertan itsasontzi bat dagoela adierazi nahi du). "
+									+ "\n Ezkutuaren bizitza eta iraupena berdina izango da jokalari guztientzat."
+									+ "\n "
+									+ "\n "
+									+ "\n "
+									+ "\n Jokoaren helburu nagusia, bere izenak adierazten duen bezala, etsaiaren flota"
+									+ "\n hondoratzea da. Horretarako, estrategia bat garatu behar dugu gure armak eta asmamena ahalik"
+									+ "\n eta modu eraginkorrenean erabiliz." );
+		
 		}
 		return txtrLoremIpsumDolor;
 	}

@@ -118,7 +118,7 @@ public class Menu extends JFrame {
 	}
 	private JButton getBotoi4() {
 		if (botoi4 == null) {
-			botoi4 = new JButton("Arauak ikusi");
+			botoi4 = new JButton("Nola jokatu");
 			botoi4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi4.addActionListener(getKontroladore());
 			//botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
