@@ -119,6 +119,8 @@ public class Menu extends JFrame {
 	private JButton getBotoi4() {
 		if (botoi4 == null) {
 			botoi4 = new JButton("Nola jokatu");
+			botoi4.addActionListener(new ActionListener() {
+			});
 			botoi4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi4.addActionListener(getKontroladore());
 			//botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
@@ -128,6 +130,8 @@ public class Menu extends JFrame {
 	private JButton getBotoi5() {
 		if (botoi5 == null) {
 			botoi5 = new JButton("Atera");
+			botoi5.addActionListener(new ActionListener() {
+			});
 			botoi5.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi5.addActionListener(getKontroladore());
 		}

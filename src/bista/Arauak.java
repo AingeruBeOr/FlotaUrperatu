@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
+import java.awt.ScrollPane;
+import javax.swing.JScrollBar;
 
 public class Arauak extends JFrame {
 
@@ -38,12 +40,15 @@ public class Arauak extends JFrame {
 	private void initialize() {
 		setTitle("Nola jokatu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 801, 459);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getTxtrLoremIpsumDolor(), BorderLayout.CENTER);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		contentPane.add(scrollBar, BorderLayout.EAST);
 	}
 
 	private JTextArea getTxtrLoremIpsumDolor() {
@@ -118,4 +123,45 @@ public class Arauak extends JFrame {
 		}
 		return txtrLoremIpsumDolor;
 	}
+	
+	
+	
+	// Scroll Bar
+	/*
+	   	public void adjustmentValueChanged(AdjustmentEvent e)
+	{
+		
+		if(e.getSource()== rojo)
+		{
+			crojo= rojo.getValue();	
+		}
+		if(e.getSource()== verde)
+		{
+			cverde= verde.getValue();
+		}
+		if(e.getSource()== azul)
+		{
+			cazul= azul.getValue();
+		}
+		mostrar();
+		
+		
+	}
+	public void mostrar()
+	{
+		getContentPane().setBackground( new Color( crojo,cverde,cazul));
+		lRojo.setText(" Rojo ="+rojo.getValue());
+		lVerde.setText(" Verde ="+verde.getValue());
+		lAzul.setText(" Azul ="+azul.getValue());
+	}
+	public static void main(String args[])
+	{
+		Barras x;
+		x = new Barras();
+	}
+	  
+	 
+	 */
+	
+	
 }
