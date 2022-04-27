@@ -676,9 +676,7 @@ public class Tablero extends JFrame implements Observer{
 					break;
 				}
 			}
-			else if(array.length == 1) {
-				setVisible(false);
-			}
+			else if(array.length == 1) setVisible(false);
 		}
 		else if(arg == null) {
 			if(fu.getTxanda()) this.txandaAldatu(true);
