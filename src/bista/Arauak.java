@@ -9,8 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.ScrollPane;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
-public class Arauak extends JFrame {
+public class Arauak extends JFrame /*implements AdjustmentListener*/{
 
 	private JPanel contentPane;
 	private JTextArea txtrLoremIpsumDolor;
@@ -47,8 +48,9 @@ public class Arauak extends JFrame {
 		setContentPane(contentPane);
 		contentPane.add(getTxtrLoremIpsumDolor(), BorderLayout.CENTER);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		contentPane.add(scrollBar, BorderLayout.EAST);
+		//JScrollPane scrollPane = new JScrollPane();
+		//contentPane.add(scrollPane, BorderLayout.NORTH);
+		//scrollPane.setBounds(5,  112, 360, 200);
 	}
 
 	private JTextArea getTxtrLoremIpsumDolor() {
