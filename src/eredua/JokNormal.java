@@ -172,7 +172,7 @@ public class JokNormal  extends Jokalari{
 		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
 	
-	public void bonbaTiroa(int x, int y) {
+	private void bonbaTiroa(int x, int y) {
 		if(Bot.getNireBot().ezkutuaDago(x, y)) Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
 		else {
 			if(ukituDuItsasontzia(x,y)) {
@@ -207,7 +207,7 @@ public class JokNormal  extends Jokalari{
 	
 	
 	//********************************** MISIL TIROA *******************************************************
-	public void misilTiroa( int x, int y) {	
+	private void misilTiroa( int x, int y) {	
 		if(Bot.getNireBot().ezkutuaDago(x, y)) Bot.getNireBot().ezkutuaXTxikitu(x, y, 2);
 		else if(ukituDuItsasontzia(x,y)) ontziaUrperatu(x, y);
 			else {
@@ -233,7 +233,7 @@ public class JokNormal  extends Jokalari{
 	//****************************************ONTZI OSOA URPERATU*****************************************************
 	
 	
-	public void ontziaUrperatu(int x, int y) {
+	private void ontziaUrperatu(int x, int y) {
 		gelaxkaUrperatu(x,y);
 		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 			this.ezkerrekoakUrperatu( x-1, y); 	
