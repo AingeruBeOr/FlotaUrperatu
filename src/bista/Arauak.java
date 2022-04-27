@@ -1,6 +1,7 @@
 package bista;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,7 +15,8 @@ import javax.swing.JScrollPane;
 public class Arauak extends JFrame /*implements AdjustmentListener*/{
 
 	private JPanel contentPane;
-	private JTextArea txtrLoremIpsumDolor;
+	private JTextArea arauak;
+	private JScrollPane sP;
 
 	/**
 	 * Launch the application.
@@ -40,23 +42,32 @@ public class Arauak extends JFrame /*implements AdjustmentListener*/{
 	}
 	private void initialize() {
 		setTitle("Nola jokatu");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 801, 459);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		JScrollPane scrollPane = new JScrollPane(this.getArauak());
+		
+		setPreferredSize(new Dimension(300, 300));
+		
+		add(scrollPane, BorderLayout.CENTER);
+		
+		/*
 		contentPane.add(getTxtrLoremIpsumDolor(), BorderLayout.CENTER);
 		
-		//JScrollPane scrollPane = new JScrollPane();
-		//contentPane.add(scrollPane, BorderLayout.NORTH);
-		//scrollPane.setBounds(5,  112, 360, 200);
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.NORTH);
+		scrollPane.setBounds(5,  112, 360, 200);
+		*/
 	}
 
-	private JTextArea getTxtrLoremIpsumDolor() {
-		if (txtrLoremIpsumDolor == null) {
-			txtrLoremIpsumDolor = new JTextArea();
-			txtrLoremIpsumDolor.setText("Ongi etorri “Flota urperatu” jokora! Zure zortea eta estrategia probatzeko prest zaude? "
+	private JTextArea getArauak() {
+		if (arauak == null) {
+			arauak = new JTextArea();
+			arauak.setText("Ongi etorri “Flota urperatu” jokora! Zure zortea eta estrategia probatzeko prest zaude? "
 									+ "\n "
 									+ "\n    Arauak aipatu baino lehen, garrantzitsua da jolasa garatzen den ingurunea aipatzea. "
 									+ "\n Borroka bi taula independentez osatutako tablero batean gertatzen da, taula bat "
@@ -123,7 +134,7 @@ public class Arauak extends JFrame /*implements AdjustmentListener*/{
 									+ "\n eta modu eraginkorrenean erabiliz." );
 		
 		}
-		return txtrLoremIpsumDolor;
+		return arauak;
 	}
 	
 	
