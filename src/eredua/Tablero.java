@@ -36,6 +36,17 @@ public class Tablero extends Observable{
 	public boolean urperatutaDago(int x, int y) {
 		return tablero[x][y].urperatutaDu();
 	}
+	
+	
+	public boolean ukitutaDago(int x, int y) {
+		return tablero[x][y].ukitutaDu();
+	}
+	
+	public void gelaxkaKonpondu(int x, int y) { //gelaxka ez ukituta (itsasontzia) ipini
+		tablero[x][y].aldatuEgoera(Egoera.ITSASONTZIA);
+	}
+	
+	
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		boolean kokatu=true;
 		int kont=pLuz;

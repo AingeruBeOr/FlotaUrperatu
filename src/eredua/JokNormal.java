@@ -392,6 +392,37 @@ public class JokNormal  extends Jokalari{
 	}
 	//************************** EROSKETAK **************************************************
 	public void armamentuaErosi() {}
-	public void ontziaKonpondu() {}
+	
+	
+	
+	//************************** EROSKETAK **************************************************
+		public void ontziaKonpondu(int x, int y) {
+			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
+				nireItsasontziak.gelaxkaKonpondu(x, y);
+				setChanged();
+				notifyObservers(new int[] {x,y,11,0});
+			}
+			else{
+				//System.out.println("Ezin duzu gelaxka hori konpondu");
+				setChanged();
+				notifyObservers(new int[] {x,y,12});
+			}
+			
+		}
+		/*
+		 * case 11:
+		 * if (array[3]==0){ //jokalaria
+		 * 	this.itsasontziaIpini(index,true);
+		 * }
+		 * else if (array[3]==1){ //bot
+		 * 	this.itsasontziaIpini(index,false);
+		 * }
+		 * break;
+		 * 
+		 * case 12:
+		 * getLblArazoa().setText("Ezin duzu gelaxka hori konpondu");
+		 * break;
+		 */
+
 
 }

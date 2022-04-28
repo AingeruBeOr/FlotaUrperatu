@@ -493,7 +493,22 @@ public class Bot extends Jokalari{
 	}
 	//********************************** EROSKETAK *******************************************************
 		public void armamentuaErosi() {}
+	
 		
-		public void ontziaKonpondu() {}
+		
+	//************************** EROSKETAK **************************************************
+		public void ontziaKonpondu(int x, int y) {
+			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
+				nireItsasontziak.gelaxkaKonpondu(x, y);
+				setChanged();
+				notifyObservers(new int[] {x,y,11,1});
+			}
+			else{
+				//System.out.println("Ezin duzu gelaxka hori konpondu");
+				setChanged();
+				notifyObservers(new int[] {x,y,12});
+			}
+			
+		}
 
 }
