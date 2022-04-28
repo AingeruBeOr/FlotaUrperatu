@@ -69,6 +69,11 @@ public class Tablero extends JFrame implements Observer{
 	private JPanel south;
 	private JLabel lblArazoa;
 	private JLabel lblOntziOsoa; 
+	private JRadioButton rdbtnKonponketak;
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JButton btnNewButton;
 	
 	
 
@@ -212,9 +217,9 @@ public class Tablero extends JFrame implements Observer{
 			bErdia = new JPanel();
 			GridBagLayout gbl_bErdia = new GridBagLayout();
 			gbl_bErdia.columnWidths = new int[]{95, 0};
-			gbl_bErdia.rowHeights = new int[] {40, 460, 0};
+			gbl_bErdia.rowHeights = new int[] {40, 460, 0, 0};
 			gbl_bErdia.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-			gbl_bErdia.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+			gbl_bErdia.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			bErdia.setLayout(gbl_bErdia);
 			GridBagConstraints gbc_lblDirua = new GridBagConstraints();
 			gbc_lblDirua.fill = GridBagConstraints.BOTH;
@@ -223,6 +228,7 @@ public class Tablero extends JFrame implements Observer{
 			gbc_lblDirua.gridy = 0;
 			bErdia.add(getLblDirua(), gbc_lblDirua);
 			GridBagConstraints gbc_datuak = new GridBagConstraints();
+			gbc_datuak.insets = new Insets(0, 0, 5, 0);
 			gbc_datuak.fill = GridBagConstraints.BOTH;
 			gbc_datuak.gridx = 0;
 			gbc_datuak.gridy = 1;
@@ -338,6 +344,10 @@ public class Tablero extends JFrame implements Observer{
 			datuak.add(getRdbtnMisil());
 			datuak.add(getRdbtnRadar());
 			datuak.add(getRdbtnEzkutu());
+			datuak.add(getRdbtnKonponketak());
+			datuak.add(getLblNewLabel());
+			datuak.add(getLblNewLabel_1());
+			datuak.add(getBtnNewButton());
 		}
 		return datuak;
 	}
@@ -350,31 +360,92 @@ public class Tablero extends JFrame implements Observer{
 	private JRadioButton getRdbtnBonba() {
 		if (rdbtnBonba == null) {
 			rdbtnBonba = new JRadioButton("Bonba");
-			buttonGroup.add(rdbtnBonba);
+			buttonGroup_1.add(rdbtnBonba);
 			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
 		}
 		return rdbtnBonba;
 	}
 	private JRadioButton getRdbtnMisil() {
 		if (rdbtnMisil == null) {
-			rdbtnMisil = new JRadioButton("Misil X" + JokNormal.getNireJok().getArmaKop(new Misil()));
-			buttonGroup.add(rdbtnMisil);
+			rdbtnMisil = new JRadioButton();
+			updateBtnMisil();
+			buttonGroup_1.add(rdbtnMisil);
 		}
 		return rdbtnMisil;
 	}
+	private void updateBtnMisil() {
+		int kop = JokNormal.getNireJok().getArmaKop(new Misil());
+		getRdbtnMisil().setText("Misil X" + kop);
+		if(kop == 0) {
+			getRdbtnMisil().setEnabled(false);
+			getRdbtnBonba().setSelected(true);
+		}
+		//return kop;
+	}
 	private JRadioButton getRdbtnRadar() {
 		if (rdbtnRadar == null) {
-			rdbtnRadar = new JRadioButton("Radarra X" + JokNormal.getNireJok().getArmaKop(new Radarra()));
-			buttonGroup.add(rdbtnRadar);
+			rdbtnRadar = new JRadioButton();
+			updateBtnRadar();
+			buttonGroup_1.add(rdbtnRadar);
 		}
 		return rdbtnRadar;
 	}
+	private void updateBtnRadar() {
+		int kop = JokNormal.getNireJok().getArmaKop(new Radarra());
+		getRdbtnRadar().setText("Radarra X" + kop);
+		if(kop == 0) {
+			getRdbtnRadar().setEnabled(false);
+			getRdbtnBonba().setSelected(true);
+
+		}
+		//return kop;
+	}
 	private JRadioButton getRdbtnEzkutu() {
 		if (rdbtnEzkutu == null) {
-			rdbtnEzkutu = new JRadioButton("Ezkutua X" + JokNormal.getNireJok().getArmaKop(new Ezkutua()));
-			buttonGroup.add(rdbtnEzkutu);
+			rdbtnEzkutu = new JRadioButton();
+			updateBtnEzkutu();
+			buttonGroup_1.add(rdbtnEzkutu);
 		}
 		return rdbtnEzkutu;
+	}
+	private void updateBtnEzkutu() {
+		int kop = JokNormal.getNireJok().getArmaKop(new Ezkutua());
+		getRdbtnEzkutu().setText("Ezkutua X" + kop);
+		if(kop == 0) {
+			getRdbtnEzkutu().setEnabled(false);
+			getRdbtnBonba().setSelected(true);
+		}
+		//return kop;
+	}
+	private JRadioButton getRdbtnKonponketak() {
+		if (rdbtnKonponketak == null) {
+			rdbtnKonponketak = new JRadioButton("Konpondu");
+			buttonGroup_1.add(rdbtnKonponketak);
+		}
+		return rdbtnKonponketak;
+	}
+	private void updateKonponketak() {
+		if(JokNormal.getNireJok().getDirua() < 75) getRdbtnKonponketak().setEnabled(false);
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("");
+		}
+		return lblNewLabel;
+	}
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("");
+		}
+		return lblNewLabel_1;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("DENDA");
+			btnNewButton.setBackground(Color.CYAN);
+			
+		}
+		return btnNewButton;
 	}
 	private void txandaAldatu(boolean txanda) {
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
@@ -625,9 +696,7 @@ public class Tablero extends JFrame implements Observer{
 					}
 					break;
 				case 7:
-					if (fu.getTxanda()) {
-						this.ezkutuBikoitzaJarri(index);
-					}
+					if (fu.getTxanda()) this.ezkutuBikoitzaJarri(index);
 					break;
 				case 8:
 					getLblArazoa().setText("Klik egin ezazu itsasontzi bat duzun posizioan");
@@ -651,36 +720,25 @@ public class Tablero extends JFrame implements Observer{
 				 * */
 				switch(array[0]) {
 				case 0:
-					getRdbtnMisil().setText("Misil X" + array[1]);
-					if(array[1] == 0) {
-						getRdbtnMisil().setEnabled(false);
-						getRdbtnBonba().setSelected(true);
-					}
+					updateBtnMisil();
 					break;
 				case 1:
-					getRdbtnRadar().setText("Radarra X" + array[1]);
-					if(array[1] == 0) {
-						getRdbtnRadar().setEnabled(false);
-						getRdbtnBonba().setSelected(true);
-					}
+					updateBtnRadar();
 					break;
 				case 2:
-					getRdbtnEzkutu().setText("Ezkutua X" + array[1]);
-					if(array[1] == 0) {
-						getRdbtnEzkutu().setEnabled(false);
-						getRdbtnBonba().setSelected(true);
-					}
+					updateBtnEzkutu();
 					break;
 				case 3:
 					diruaEguneratu();
 					break;
 				}
 			}
-			else if(array.length == 1) setVisible(false);
+			else if(array.length == 1) bistaEzkutatu();
 		}
 		else if(arg == null) {
 			if(fu.getTxanda()) this.txandaAldatu(true);
 			else this.txandaAldatu(false);
 		}	
 	}
+	
 }

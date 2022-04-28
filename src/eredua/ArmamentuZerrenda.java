@@ -8,11 +8,11 @@ public class ArmamentuZerrenda {
 	private Radarra radarrak;
 	private Ezkutua ezkutuak;
 	
-	public ArmamentuZerrenda(int pMisilKop,int pRadarKop, int pEzkutuKop) {
+	public ArmamentuZerrenda() {
 		this.bonbak = new Bonba();
-		this.misilak = new Misil(pMisilKop);
-		this.radarrak = new Radarra(pRadarKop);
-		this.ezkutuak = new Ezkutua(pEzkutuKop);
+		this.misilak = new Misil(0);
+		this.radarrak = new Radarra(0);
+		this.ezkutuak = new Ezkutua(0);
 	}
 	
 	public int armaKantitateaEguneratu(Arma arma) {

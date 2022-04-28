@@ -11,14 +11,14 @@ public abstract class Jokalari extends Observable{
 	
 	public Jokalari () {
 		dirua=1000;
-		armak = new ArmamentuZerrenda(2,1,2); //2 misil, 1 radar eta 2 ezkutu
+		armak = new ArmamentuZerrenda();
 		ukituak=new Tablero();
 		nireItsasontziak= new Tablero();
 	}
 	
 	protected abstract void txandaJokatu();
 	protected abstract void armamentuaErosi();
-	protected abstract void ontziaKonpondu();
+	protected abstract void ontziaKonpondu(int x, int y);
 	
 	public boolean ontzirenBatGeratzenDa() {return nireItsasontziak.ontzirenBatGeratzenDa();}
 	
