@@ -1,4 +1,4 @@
- package bista;
+package bista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -13,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.*;
+import bista.Menu.*;
+import java.awt.event.*;
 
 public class Menu extends JFrame {
 
@@ -115,10 +118,10 @@ public class Menu extends JFrame {
 	}
 	private JButton getBotoi4() {
 		if (botoi4 == null) {
-			botoi4 = new JButton("Arauak ikusi");
+			botoi4 = new JButton("Nola jokatu");
 			botoi4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 			botoi4.addActionListener(getKontroladore());
-			botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
+			//botoi4.setEnabled(false); //TODO kendu behar de funtzioa inplementatzerakoan
 		}
 		return botoi4;
 	}
@@ -131,7 +134,7 @@ public class Menu extends JFrame {
 		return botoi5;
 	}
 	
-	//Kontroladore//
+	/********************** KONTROLADOREA ****************************************/
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();
@@ -148,12 +151,14 @@ public class Menu extends JFrame {
 				setVisible(false);
 			}
 			else if(e.getSource().equals(botoi2)) {
+				
 				//TODO
 			}
 			else if(e.getSource().equals(botoi3)) {
 				//TODO
 			}
 			else if(e.getSource().equals(botoi4)) {
+				Arauak.main(null);
 				//TODO
 			}
 			else {

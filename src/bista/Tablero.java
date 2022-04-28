@@ -10,18 +10,37 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import eredua.Bot;
 import eredua.FlotaUrperatu;
+import eredua.JokNormal;
+import eredua.Jokalari;
+import eredua.Misil;
+import eredua.Bonba;
+import eredua.Radarra;
+import eredua.Ezkutua;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.*;
+import java.util.*;
+import bista.Tablero.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Tablero extends JFrame implements Observer{
 
@@ -34,14 +53,27 @@ public class Tablero extends JFrame implements Observer{
 	private JLabel bot;
 	private JPanel matrizeEzk;
 	private JPanel matrizeEsk;
-	private JLabel info;
+	private JLabel lblDirua;
 	private JPanel datuak;
 	private Kontroladore kontroladore;
 	private ArrayList<JLabel> zerrendaBot;
 	private ArrayList<JLabel> zerrendaJok;
+	private JLabel lblArmaAukeratu;
+	private JRadioButton rdbtnMisil;
+	private JRadioButton rdbtnBonba;
+	private JRadioButton rdbtnRadar;
+	private JRadioButton rdbtnEzkutu;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPanel north;
+	private JLabel lblTxanda;
+	private JPanel south;
+	private JLabel lblArazoa;
+	private JLabel lblOntziOsoa; 
+	
+	
 
 	/**
-	 * Launch the application.
+	 * @param: "pZ" hasieraketetan lortu dugun JLabel zerrenda da. 
 	 */
 	public static void main(ArrayList<JLabel> pZ) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,38 +92,68 @@ public class Tablero extends JFrame implements Observer{
 	 * Create the frame.
 	 */
 	public Tablero(ArrayList<JLabel> pZ) {
-		zerrendaJok=pZ;
-		initialize();
+		setTitle("Flota Urperatu");
+		initialize(pZ);
+		FlotaUrperatu.getNireFlotaUrperatu().addObserver(this);
+		JokNormal.getNireJok().addObserver(this);
+		Bot.getNireBot().addObserver(this);
 	}
 	
-	private void initialize() {
+	private void initialize(ArrayList<JLabel> pZ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 558);
+		setBounds(100, 100, 1000, 604);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getErdia(), BorderLayout.CENTER);
+		contentPane.add(getNorth(), BorderLayout.NORTH);
+		contentPane.add(getSouth(), BorderLayout.SOUTH);
+		this.zerrendaJok = new ArrayList<>();
 		this.zerrendaBot = new ArrayList<>();
-		matrizeaSortu();
+		matrizeaSortu(pZ);
 		setLocationRelativeTo(null);
 	}
 
-	private void matrizeaSortu() {
-		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-		int kont=0;
+	private void matrizeaSortu(ArrayList<JLabel> pZ) {
 		for(int l = 0;l < 10;l++) {
 			for(int z = 0;z < 10;z++) {
-				JLabel jokLauki=getBotLaukia();
-				jokLauki.setBackground(zerrendaJok.get(l*10+z).getBackground());
+				JLabel jokLauki = getJokLaukia();
+				if(pZ.get(l*10+z).getBackground().equals(Color.BLUE)) {
+					ImageIcon ura = new ImageIcon(this.getClass().getResource("Ura.jpg"));
+					ImageIcon uraAdj = new ImageIcon(ura.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+					jokLauki.setIcon(uraAdj);
+				}
+				else {
+					ImageIcon ura_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi.png"));
+					ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+					jokLauki.setIcon(ura_itsasAdj);
+				}
+				//jokLauki.setIcon();
 				matrizeEzk.add(jokLauki);
+				zerrendaJok.add(jokLauki);
+				
 				JLabel botlauki = getBotLaukia(); 
 				matrizeEsk.add(botlauki);
 				zerrendaBot.add(botlauki);
 			}
 		}
 	}
-	
+	private JPanel getNorth() {
+		if (north == null) {
+			north = new JPanel();
+			north.add(getLblTxanda());
+		}
+		return north;
+	}
+	private JPanel getSouth() {
+		if (south == null) {
+			south = new JPanel();
+			south.add(getLblArazoa());
+			south.add(getLblOntzia());   
+		}
+		return south;
+	}
 	private JPanel getErdia() {
 		if (erdia == null) {
 			erdia = new JPanel();
@@ -154,12 +216,12 @@ public class Tablero extends JFrame implements Observer{
 			gbl_bErdia.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 			gbl_bErdia.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 			bErdia.setLayout(gbl_bErdia);
-			GridBagConstraints gbc_info = new GridBagConstraints();
-			gbc_info.fill = GridBagConstraints.BOTH;
-			gbc_info.insets = new Insets(0, 0, 5, 0);
-			gbc_info.gridx = 0;
-			gbc_info.gridy = 0;
-			bErdia.add(getInfo(), gbc_info);
+			GridBagConstraints gbc_lblDirua = new GridBagConstraints();
+			gbc_lblDirua.fill = GridBagConstraints.BOTH;
+			gbc_lblDirua.insets = new Insets(0, 0, 5, 0);
+			gbc_lblDirua.gridx = 0;
+			gbc_lblDirua.gridy = 0;
+			bErdia.add(getLblDirua(), gbc_lblDirua);
 			GridBagConstraints gbc_datuak = new GridBagConstraints();
 			gbc_datuak.fill = GridBagConstraints.BOTH;
 			gbc_datuak.gridx = 0;
@@ -191,36 +253,6 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return bEskuin;
 	}
-	private JLabel getJokLaukia() {
-		JLabel lauki = new JLabel("");
-		lauki.setOpaque(true);
-		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		lauki.setBackground(Color.LIGHT_GRAY);
-		return lauki;
-	}
-	private JLabel getBotLaukia() {
-		JLabel lauki = new JLabel("");
-		lauki.setOpaque(true);
-		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		lauki.setBackground(Color.LIGHT_GRAY);
-		lauki.addMouseListener(getKontroladore());
-		return lauki;
-	}
-	
-	private JLabel getJok() {
-		if (jok == null) {
-			jok = new JLabel("JOKALARI FLOTA");
-			jok.setHorizontalAlignment(SwingConstants.CENTER);
-		}
-		return jok;
-	}
-	private JLabel getBot() {
-		if (bot == null) {
-			bot = new JLabel("BOTAREN FLOTA");
-			bot.setHorizontalAlignment(SwingConstants.CENTER);
-		}
-		return bot;
-	}
 	private JPanel getMatrizeEzk() {
 		if (matrizeEzk == null) {
 			matrizeEzk = new JPanel();
@@ -235,24 +267,211 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return matrizeEsk;
 	}
-	private JLabel getInfo() {
-		if (info == null) {
-			info = new JLabel("INFO");
-			info.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getJokLaukia() {
+		JLabel lauki = new JLabel("");
+		lauki.setOpaque(true);
+		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lauki.setBackground(Color.LIGHT_GRAY);
+		lauki.addMouseListener(getKontroladore());
+		return lauki;
+	}
+	private JLabel getBotLaukia() {
+		JLabel lauki = new JLabel("");
+		lauki.setOpaque(true);
+		lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lauki.setBackground(Color.LIGHT_GRAY);
+		lauki.addMouseListener(getKontroladore());
+		return lauki;
+	}
+	
+	private JLabel getJok() {
+		if (jok == null) {
+			jok = new JLabel("JOKALARI FLOTA");
+			jok.setFont(new Font("Tahoma", Font.BOLD, 20));
+			jok.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return info;
+		return jok;
+	}
+	private JLabel getBot() {
+		if (bot == null) {
+			bot = new JLabel("BOTAREN FLOTA");
+			bot.setFont(new Font("Tahoma", Font.BOLD, 20));
+			bot.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return bot;
+	}
+	private JLabel getLblTxanda() {
+		if (lblTxanda == null) {
+			lblTxanda = new JLabel("Zure txanda da.");
+		}
+		return lblTxanda;
+	}
+	private JLabel getLblArazoa() {
+		if (lblArazoa == null) {
+			lblArazoa = new JLabel("");
+			lblArazoa.setForeground(Color.RED);
+		}
+		return lblArazoa;
+	}
+	
+	private JLabel getLblOntzia() {		
+		if (lblOntziOsoa == null) {
+			lblOntziOsoa = new JLabel("");
+			lblOntziOsoa.setForeground(Color.GREEN);
+		}
+		return lblOntziOsoa;
+	}
+	
+	private JLabel getLblDirua() {
+		if (lblDirua == null) {
+			lblDirua = new JLabel("Dirua: " + JokNormal.getNireJok().getDirua());
+			lblDirua.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return lblDirua;
 	}
 	private JPanel getDatuak() {
 		if (datuak == null) {
 			datuak = new JPanel();
-			datuak.setLayout(new GridLayout(15, 2, 0, 0));
+			datuak.setLayout(new GridLayout(10, 1, 0, 0));
+			datuak.add(getLblArmaAukeratu());
+			datuak.add(getRdbtnBonba());
+			datuak.add(getRdbtnMisil());
+			datuak.add(getRdbtnRadar());
+			datuak.add(getRdbtnEzkutu());
 		}
 		return datuak;
 	}
+	private JLabel getLblArmaAukeratu() {
+		if (lblArmaAukeratu == null) {
+			lblArmaAukeratu = new JLabel("Arma mota aukeratu:");
+		}
+		return lblArmaAukeratu;
+	}
+	private JRadioButton getRdbtnBonba() {
+		if (rdbtnBonba == null) {
+			rdbtnBonba = new JRadioButton("Bonba");
+			buttonGroup.add(rdbtnBonba);
+			rdbtnBonba.setSelected(true); //pantaila kargatzen denean Bonba aukeratu aukeratuta agertuko da.
+		}
+		return rdbtnBonba;
+	}
+	private JRadioButton getRdbtnMisil() {
+		if (rdbtnMisil == null) {
+			rdbtnMisil = new JRadioButton("Misil X" + JokNormal.getNireJok().getArmaKop(new Misil()));
+			buttonGroup.add(rdbtnMisil);
+		}
+		return rdbtnMisil;
+	}
+	private JRadioButton getRdbtnRadar() {
+		if (rdbtnRadar == null) {
+			rdbtnRadar = new JRadioButton("Radarra X" + JokNormal.getNireJok().getArmaKop(new Radarra()));
+			buttonGroup.add(rdbtnRadar);
+		}
+		return rdbtnRadar;
+	}
+	private JRadioButton getRdbtnEzkutu() {
+		if (rdbtnEzkutu == null) {
+			rdbtnEzkutu = new JRadioButton("Ezkutua X" + JokNormal.getNireJok().getArmaKop(new Ezkutua()));
+			buttonGroup.add(rdbtnEzkutu);
+		}
+		return rdbtnEzkutu;
+	}
+	private void txandaAldatu(boolean txanda) {
+		if(txanda) getLblTxanda().setText("Zure txanda da.");
+		else getLblTxanda().setText("Botaren txanda da.");
+	}
+	private void bistaEzkutatu() {setVisible(false);}
 	
 	
 	
-	//KONTROLADOREA:
+	
+	//********************************************IRUDIAK**********************************************************
+	
+	private void uraJarri(int index) {
+		JLabel jl = zerrendaBot.get(index);
+		ImageIcon cross = new ImageIcon(this.getClass().getResource("Ura.jpg"));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(crossAdj);
+	}
+	private void uraUkituaJarri(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon cross = new ImageIcon(this.getClass().getResource("ura_cross.png"));
+		ImageIcon crossAdj = new ImageIcon(cross.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(crossAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(crossAdj);
+		}
+	}
+	private void itsasontziaIpini(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon ura_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi.png"));
+		ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(ura_itsasAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(ura_itsasAdj);
+		}
+	}
+	private void itsasontziariXIpini(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon x_itsas = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_cross.png"));
+		ImageIcon x_itsasAdj = new ImageIcon(x_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(x_itsasAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(x_itsasAdj);
+		}
+	}
+	private void ezkutuBikoitzaJarri(int index) {
+		JLabel jl = zerrendaJok.get(index);
+		ImageIcon ezk2 = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_ezkutu2.png"));
+		ImageIcon ezk2Adj = new ImageIcon(ezk2.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(ezk2Adj);
+	}
+	private void ezkutuBakarJarri(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon ezk1 = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_ezkutu1.png"));
+		ImageIcon ezk1Adj = new ImageIcon(ezk1.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(ezk1Adj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(ezk1Adj);
+		}
+	}
+	private void radarraJarri(int index) {
+		JLabel jl = zerrendaBot.get(index);
+		ImageIcon radar = new ImageIcon(this.getClass().getResource("Ura_radar.jpg"));
+		ImageIcon radarAdj = new ImageIcon(radar.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		jl.setIcon(radarAdj);
+	}
+	
+	private void urperatutaJarri(int index, boolean jokTablero) {
+		JLabel jl;
+		ImageIcon boom = new ImageIcon(this.getClass().getResource("Ura_itsasontzi_boom.png"));
+		ImageIcon boomAdj = new ImageIcon(boom.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
+		if(jokTablero) {
+			jl = zerrendaJok.get(index);
+			jl.setIcon(boomAdj);
+		}else {
+			jl = zerrendaBot.get(index);
+			jl.setIcon(boomAdj);
+		}
+	}
+	//********************************************IRUDIEN AMAIERA**********************************************************
+	private void diruaEguneratu() {
+		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
+	}
+	
+	//********************** KONTROLADOREA ****************************************
 	private Kontroladore getKontroladore() {
 		if(kontroladore == null) {
 			kontroladore = new Kontroladore();
@@ -263,95 +482,49 @@ public class Tablero extends JFrame implements Observer{
 	
 	private class Kontroladore extends MouseAdapter{
 		public void mouseClicked(MouseEvent e) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+			getLblArazoa().setText("");
+			getLblOntzia().setText("");
+			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+			JokNormal jokNormal = JokNormal.getNireJok();
 			JLabel jl = (JLabel) e.getComponent();
-			int index = zerrendaBot.indexOf(jl);
-			int x = index%10;
-			int y = index/10;
-				//sea cual sea el arma, donde seleccione se pone rojo  depues se miran los de alrededor
-				if(!fu.botMatrizeUkituta(x, y)) { 
-					if(fu.botMatrizeOntziaDu(x, y)) {
-						jl.setBackground(Color.RED);
-						fu.botarenOntziaUkituDu(x, y); //botaren matrizeak eguneratu
-						
-						
-						//BOTONES DE ARMAS HACER CON SWITCH
-						//si es un misil mirar los de alrededdor, si es bonba ya esta
-						//Zein arma aukeratu duen esango duen metodoa (public pArma zeinArmaAukeratu())
-						
-						/*Arma pArma= zeinArmaAukeratu();
-						if (pArma  instanceof Misil) {
-							this.misilTiroa(x,y);
-						}
-						*/
-						
-					}else{
-						jl.setBackground(Color.BLUE);
-					}
+			
+			if(rdbtnEzkutu.isSelected()) {
+				int index = zerrendaJok.indexOf(jl);
+				if(index != -1) {
+					int x = index%10;
+					int y = index/10;
+					jokNormal.ezkutuaJarri(x,y);
 				}
-			
-			
-			
-			
-		}
-
-		private void misilTiroa( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			if (x>0 && fu.botMatrizeOntziaDu(x-1, y) ) { 
-				this.goikoakAztertu( x-1, y); 
-				
+				else getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
 			}
-			else if (x<9 && fu.botMatrizeOntziaDu(x+1, y)) {
-				this.behekoakAztertu( x+1, y);
+			else {
+				int index = zerrendaBot.indexOf(jl);
+				if(index != -1) {
+					int x = index%10;
+					int y = index/10;
+					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
+						int arma = 0;
+						if(rdbtnMisil.isSelected()) arma=1;
+						else if(rdbtnRadar.isSelected()) arma = 2;
+						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
+						jokNormal.tiroEgin(x, y, arma);
+					}
+					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
+				}
+				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
-						
-			else if (y>0 && fu.botMatrizeOntziaDu(x, y-1)) {
-				this.ezkerrekoakAztertu( x, y-1);
-			}
-			else if (y<9 && fu.botMatrizeOntziaDu(x, y+1)) {
-				this.eskumakoakAztertu( x, y+1);
-			}
-			
-			
-		}
-		private void goikoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (x>=0 && fu.botMatrizeOntziaDu(x, y)) {  
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				x--;
-			}
-		}
-		private void behekoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (x<=9 && fu.botMatrizeOntziaDu(x, y)) { 
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				x++;
-			}
-		}
-		private void ezkerrekoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (y>=0 && fu.botMatrizeOntziaDu(x, y)) {
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				y--;
-			}
-		}
-		
-		private void eskumakoakAztertu ( int x, int y) {
-			FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
-			while (y<=9 && fu.botMatrizeOntziaDu(x, y)) {
-				this.koordenatuBatenLaukiariKoloreAldaketa(Color.RED,x,y);
-				fu.botarenOntziaUkituDu(x, y);
-				y++;
-			}
-		}
-		
-		
-		
-		private void koordenatuBatenLaukiariKoloreAldaketa(Color c, int x, int y) {
-			matrizeEsk.getComponent(y*10+x).setBackground(c);
+			/*if(fu.jokoaAmaituDa()) {
+				Irabazlea.main(null);
+				setVisible(false);
+			}*/
+			/*else if(!fu.getTxanda()){
+				Bot.getNireBot().txandaJokatu();
+				fu.aldatuTxanda();
+				if(fu.jokoaAmaituDa()) {
+					Irabazlea.main(null);
+					setVisible(false);
+				}
+			}*/
 		}
 	}
 	
@@ -360,14 +533,154 @@ public class Tablero extends JFrame implements Observer{
 
 	
 	
-
-	//Observer-ak jasotzen duena:
+	// ************************************** OBSERVER ************************************************************
+	
+	/**
+	 * Hiru parametro mota jaso dezake:
+	 * <ol>
+	 * 		<li> int[] motako objektua 3 edo 4 posiziekin --> laukiren bat eguneratu behar da. </li>
+	 * 		<li> int[] motako objektua 2 posizioekin --> Jokalariaren arma kantitatea eguneratu behar da. </li>
+	 * 		<li> null parametro bezala --> txandaren mezua aldatu behar da. </li>
+	 * </ol> 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
+		if(arg != null) {
+			int[] array = (int[]) arg;
+			if(array.length == 3 || array.length==4) {
+				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
+				 * 0 -> URA UKITU DU (URDINA)
+				 * 1 -> ITSASONTZIA UKITU DU (GORRIA)
+				 * 2 -> URPERATU DU (GORRIA + MEZUA)
+				 * 3 -> EZKUTU BAT UKITU DU (BERDEA)
+				 * 4 -> RADARRAREKIN ITSASONTZIREN BAT UKITU DU (HORIA)
+				 * 5 ->
+				 * 6 -> 
+				 * 7 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA ITSASONTZIA BAT DU POSIZIO HORRETAN
+				 * 8 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA EZ DU ITSASONTZIRIK POSIZIO HORRETAN
+				 * 9 ->	EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN BADAGO ITSASONTZI BAT EZKUTUAREKIN
+				 * 10 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN URPERATUTA DAGOEN ITSASONTZI BAT DAGO
+				 * */
+				String sx = String.valueOf(array[0]);
+				String sy = String.valueOf(array[1]);
+				String sindex = sy + sx;
+				int index = Integer.parseInt(sindex);
+				switch (array[2]){
+				case 0:
+					if(fu.getTxanda()) this.uraJarri(index);
+					else this.uraUkituaJarri(index, true);
+					break;
+				case 1:
+					this.itsasontziariXIpini(index, !fu.getTxanda());
+					break;
+				case 2:
+					if(fu.getTxanda()) getLblOntzia().setText("Ontzi osoa urperatu duzu!");
+					else getLblOntzia().setText("Ontzi osoa urperatu du aurkariak!");
+					this.urperatutaJarri(index, !fu.getTxanda());
+					break;
+				case 3: //jokalariren bat ezkutua jotzen badu
+					if(fu.getTxanda()) {
+						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
+						if(array[3]==1) { 
+							this.ezkutuBakarJarri(index, false);
+							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
+						}
+						//bizitzarik gabe geratu bada itsaontzia:
+						else if(array[3] == 0) {
+							//posizioak jadanik irudia badu, lehenen ikutu delako izan da eta posizio hori radarra jarri behar diogu, bakarrik horri
+							if (zerrendaBot.get(index).getIcon() != null) this.itsasontziaIpini(index, false);
+							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
+						}
+						else if(array[3] == 2) this.itsasontziaIpini(index,false); 
+					}else {
+						if (array[3]==1) this.ezkutuBakarJarri(index, true);
+						else if(array[3]==0) this.itsasontziaIpini(index, true); 
+					}
+					break;
+				case 4: //radarra erabiliz ontzia aurkitu du
+					if(fu.getTxanda()) {
+						this.radarraJarri(index);
+						getLblOntzia().setText("Ontzia aurkitu duzu!");
+					}else {
+						//TODO
+					}
+					break;
+				case 5: //ontzi osoa urperatzea bonbak erabiliz (lo dejo??)
+					if (fu.getTxanda()) {
+						getLblOntzia().setText("Ontzi osoa urperatu duzu!");
+						
+					}
+					else {
+						//TODO
+					}
+					break;
+				case 6: //radarra erabiliz EZ du ontzia aurkitu 
+					if (fu.getTxanda()) {
+						getLblOntzia().setText("Ez duzu ontzirik aurkitu!");
+						
+					}
+					else {
+						//TODO
+					}
+					break;
+				case 7:
+					if (fu.getTxanda()) {
+						this.ezkutuBikoitzaJarri(index);
+					}
+					break;
+				case 8:
+					getLblArazoa().setText("Klik egin ezazu itsasontzi bat duzun posizioan");
+					break;
+				case 9:
+					getLblArazoa().setText("Jadanik badago ezkutu bat bertan.");
+					break;
+				case 10:
+					getLblArazoa().setText("Ondoratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
+					break;
+				}
+			}
+			else if(array.length == 2) { 
+				/*
+				 * Arrayaren lehenengo posizioa eguneratu beharreko arma mota adierazten du:
+				 * 		0 --> Misila
+				 * 		1 --> Radarra
+				 * 		2 --> Ezkutua
+				 * Hirugarren aukera dirua eguneratzeko balio du:
+				 * 		3 --> Dirua eguneratu behar da
+				 * */
+				switch(array[0]) {
+				case 0:
+					getRdbtnMisil().setText("Misil X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnMisil().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
+				case 1:
+					getRdbtnRadar().setText("Radarra X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnRadar().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
+				case 2:
+					getRdbtnEzkutu().setText("Ezkutua X" + array[1]);
+					if(array[1] == 0) {
+						getRdbtnEzkutu().setEnabled(false);
+						getRdbtnBonba().setSelected(true);
+					}
+					break;
+				case 3:
+					diruaEguneratu();
+					break;
+				}
+			}
+			else if(array.length == 1) setVisible(false);
+		}
+		else if(arg == null) {
+			if(fu.getTxanda()) this.txandaAldatu(true);
+			else this.txandaAldatu(false);
+		}	
 	}
-	
-	
-	
 }

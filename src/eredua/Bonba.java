@@ -1,9 +1,8 @@
 package eredua;
 
-public class Bonba extends ArmamentuSuntsitzaile {
-	public Bonba() {
-		super();
-		super.prezioa=20;
-	}
+public class Bonba extends Arma {
+	
+	public Bonba() {super();}
+	
 	public void suntsitu() {}
 }
