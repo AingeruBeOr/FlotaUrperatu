@@ -2,10 +2,10 @@ package eredua;
 
 public class Radarra extends Arma{
 	
-	public Radarra() {super();}
+	public Radarra() {super(400);}
 	
 	public Radarra(int pKantitatea) {
-		super(10, pKantitatea);
+		super(400, pKantitatea);
 	}
 	
 	/*public int ezarriKontsultak() {

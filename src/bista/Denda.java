@@ -6,11 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import eredua.Ezkutua;
+import eredua.Misil;
+import eredua.Radarra;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Denda extends JFrame {
 
@@ -24,21 +34,29 @@ public class Denda extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JLabel lblNewLabel_11;
+	private JLabel lblMisilPrezioa;
+	private JLabel lblEzkutuPrezioa;
+	private JLabel lblEzkutuKop;
 	private JLabel lblNewLabel_12;
-	private JLabel lblNewLabel_13;
+	private JLabel lblRadarPrezioa;
 	private JLabel lblNewLabel_14;
-	private JLabel lblNewLabel_15;
+	private JLabel lblRadarKop;
 	private JLabel lblNewLabel_18;
-	private JLabel lblNewLabel_19;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	private JButton btnNewButton_4;
-	private JButton btnNewButton_5;
+	private JLabel lblMisilKop;
+	private JButton btnMisilKendu;
+	private JButton btnEzkutuGehitu;
+	private JButton btnEzktuKendu;
+	private JButton btnRadarGehitu;
+	private JButton btnRadarKendu;
+	private JButton btnMisilGehitu;
+	private JPanel south;
+	private JLabel lblTotala;
+	private JButton btnNewButton_6;
+	private int misilKop;
+	private int ezkutuKop;
+	private int radarKop;
+	private Kontroladore kontroladore;
+	
 
 	/**
 	 * Launch the application.
@@ -61,41 +79,150 @@ public class Denda extends JFrame {
 	 */
 	public Denda() {
 		initialize();
+		misilKop = 0;
+		ezkutuKop = 0;
+		radarKop = 0;
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 645, 317);
+		setBounds(100, 100, 522, 371);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getCenter(), BorderLayout.CENTER);
 		contentPane.add(getNorth(), BorderLayout.NORTH);
+		contentPane.add(getSouth(), BorderLayout.SOUTH);
+		setLocationRelativeTo(null);
 	}
 	private JPanel getCenter() {
 		if (center == null) {
 			center = new JPanel();
-			center.setLayout(new GridLayout(4, 5, 0, 0));
-			center.add(getLblNewLabel());
-			center.add(getLblNewLabel_1());
-			center.add(getLblNewLabel_2());
-			center.add(getLblNewLabel_12());
-			center.add(getLblNewLabel_3());
-			center.add(getLblNewLabel_14());
-			center.add(getLblNewLabel_8());
-			center.add(getBtnNewButton());
-			center.add(getLblNewLabel_19());
-			center.add(getBtnNewButton_5());
-			center.add(getLblNewLabel_7());
-			center.add(getLblNewLabel_9());
-			center.add(getBtnNewButton_2());
-			center.add(getLblNewLabel_11());
-			center.add(getBtnNewButton_1());
-			center.add(getLblNewLabel_18());
-			center.add(getLblNewLabel_13());
-			center.add(getBtnNewButton_4());
-			center.add(getLblNewLabel_15());
-			center.add(getBtnNewButton_3());
+			GridBagLayout gbl_center = new GridBagLayout();
+			gbl_center.columnWidths = new int[] {124, 124, 56, 130, 56, 0};
+			gbl_center.rowHeights = new int[]{49, 49, 49, 49, 0};
+			gbl_center.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_center.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			center.setLayout(gbl_center);
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.gridx = 0;
+			gbc_lblNewLabel.gridy = 0;
+			center.add(getLblNewLabel(), gbc_lblNewLabel);
+			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+			gbc_lblNewLabel_1.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_1.gridx = 1;
+			gbc_lblNewLabel_1.gridy = 0;
+			center.add(getLblNewLabel_1(), gbc_lblNewLabel_1);
+			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+			gbc_lblNewLabel_2.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_2.gridx = 2;
+			gbc_lblNewLabel_2.gridy = 0;
+			center.add(getLblNewLabel_2(), gbc_lblNewLabel_2);
+			GridBagConstraints gbc_lblNewLabel_12 = new GridBagConstraints();
+			gbc_lblNewLabel_12.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_12.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_12.gridx = 3;
+			gbc_lblNewLabel_12.gridy = 0;
+			center.add(getLblNewLabel_12(), gbc_lblNewLabel_12);
+			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+			gbc_lblNewLabel_3.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
+			gbc_lblNewLabel_3.gridx = 4;
+			gbc_lblNewLabel_3.gridy = 0;
+			center.add(getLblNewLabel_3(), gbc_lblNewLabel_3);
+			GridBagConstraints gbc_lblNewLabel_14 = new GridBagConstraints();
+			gbc_lblNewLabel_14.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_14.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_14.gridx = 0;
+			gbc_lblNewLabel_14.gridy = 1;
+			center.add(getLblNewLabel_14(), gbc_lblNewLabel_14);
+			GridBagConstraints gbc_lblMisilPrezioa = new GridBagConstraints();
+			gbc_lblMisilPrezioa.fill = GridBagConstraints.BOTH;
+			gbc_lblMisilPrezioa.insets = new Insets(0, 0, 5, 5);
+			gbc_lblMisilPrezioa.gridx = 1;
+			gbc_lblMisilPrezioa.gridy = 1;
+			center.add(getLblMisilPrezioa(), gbc_lblMisilPrezioa);
+			GridBagConstraints gbc_btnMisilKendu = new GridBagConstraints();
+			gbc_btnMisilKendu.fill = GridBagConstraints.BOTH;
+			gbc_btnMisilKendu.insets = new Insets(0, 0, 5, 5);
+			gbc_btnMisilKendu.gridx = 2;
+			gbc_btnMisilKendu.gridy = 1;
+			center.add(getBtnMisilKendu(), gbc_btnMisilKendu);
+			GridBagConstraints gbc_lblMisilKop = new GridBagConstraints();
+			gbc_lblMisilKop.fill = GridBagConstraints.BOTH;
+			gbc_lblMisilKop.insets = new Insets(0, 0, 5, 5);
+			gbc_lblMisilKop.gridx = 3;
+			gbc_lblMisilKop.gridy = 1;
+			center.add(getLblMisilKop(), gbc_lblMisilKop);
+			GridBagConstraints gbc_btnMisilGehitu = new GridBagConstraints();
+			gbc_btnMisilGehitu.fill = GridBagConstraints.BOTH;
+			gbc_btnMisilGehitu.insets = new Insets(0, 0, 5, 0);
+			gbc_btnMisilGehitu.gridx = 4;
+			gbc_btnMisilGehitu.gridy = 1;
+			center.add(getBtnMisilGehitu(), gbc_btnMisilGehitu);
+			GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
+			gbc_lblNewLabel_7.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_7.gridx = 0;
+			gbc_lblNewLabel_7.gridy = 2;
+			center.add(getLblNewLabel_7(), gbc_lblNewLabel_7);
+			GridBagConstraints gbc_lblEzkutuPrezioa = new GridBagConstraints();
+			gbc_lblEzkutuPrezioa.fill = GridBagConstraints.BOTH;
+			gbc_lblEzkutuPrezioa.insets = new Insets(0, 0, 5, 5);
+			gbc_lblEzkutuPrezioa.gridx = 1;
+			gbc_lblEzkutuPrezioa.gridy = 2;
+			center.add(getLblEzkutuPrezioa(), gbc_lblEzkutuPrezioa);
+			GridBagConstraints gbc_btnEzktuKendu = new GridBagConstraints();
+			gbc_btnEzktuKendu.fill = GridBagConstraints.BOTH;
+			gbc_btnEzktuKendu.insets = new Insets(0, 0, 5, 5);
+			gbc_btnEzktuKendu.gridx = 2;
+			gbc_btnEzktuKendu.gridy = 2;
+			center.add(getBtnEzktuKendu(), gbc_btnEzktuKendu);
+			GridBagConstraints gbc_lblEzkutuKop = new GridBagConstraints();
+			gbc_lblEzkutuKop.fill = GridBagConstraints.BOTH;
+			gbc_lblEzkutuKop.insets = new Insets(0, 0, 5, 5);
+			gbc_lblEzkutuKop.gridx = 3;
+			gbc_lblEzkutuKop.gridy = 2;
+			center.add(getLblEzkutuKop(), gbc_lblEzkutuKop);
+			GridBagConstraints gbc_btnEzkutuGehitu = new GridBagConstraints();
+			gbc_btnEzkutuGehitu.fill = GridBagConstraints.BOTH;
+			gbc_btnEzkutuGehitu.insets = new Insets(0, 0, 5, 0);
+			gbc_btnEzkutuGehitu.gridx = 4;
+			gbc_btnEzkutuGehitu.gridy = 2;
+			center.add(getBtnEzkutuGehitu(), gbc_btnEzkutuGehitu);
+			GridBagConstraints gbc_lblNewLabel_18 = new GridBagConstraints();
+			gbc_lblNewLabel_18.fill = GridBagConstraints.BOTH;
+			gbc_lblNewLabel_18.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_18.gridx = 0;
+			gbc_lblNewLabel_18.gridy = 3;
+			center.add(getLblNewLabel_18(), gbc_lblNewLabel_18);
+			GridBagConstraints gbc_lblRadarPrezioa = new GridBagConstraints();
+			gbc_lblRadarPrezioa.fill = GridBagConstraints.BOTH;
+			gbc_lblRadarPrezioa.insets = new Insets(0, 0, 0, 5);
+			gbc_lblRadarPrezioa.gridx = 1;
+			gbc_lblRadarPrezioa.gridy = 3;
+			center.add(getLblRadarPrezioa(), gbc_lblRadarPrezioa);
+			GridBagConstraints gbc_btnRadarKendu = new GridBagConstraints();
+			gbc_btnRadarKendu.fill = GridBagConstraints.BOTH;
+			gbc_btnRadarKendu.insets = new Insets(0, 0, 0, 5);
+			gbc_btnRadarKendu.gridx = 2;
+			gbc_btnRadarKendu.gridy = 3;
+			center.add(getBtnRadarKendu(), gbc_btnRadarKendu);
+			GridBagConstraints gbc_lblRadarKop = new GridBagConstraints();
+			gbc_lblRadarKop.fill = GridBagConstraints.BOTH;
+			gbc_lblRadarKop.insets = new Insets(0, 0, 0, 5);
+			gbc_lblRadarKop.gridx = 3;
+			gbc_lblRadarKop.gridy = 3;
+			center.add(getLblRadarKop(), gbc_lblRadarKop);
+			GridBagConstraints gbc_btnRadarGehitu = new GridBagConstraints();
+			gbc_btnRadarGehitu.fill = GridBagConstraints.BOTH;
+			gbc_btnRadarGehitu.gridx = 4;
+			gbc_btnRadarGehitu.gridy = 3;
+			center.add(getBtnRadarGehitu(), gbc_btnRadarGehitu);
 		}
 		return center;
 	}
@@ -119,7 +246,7 @@ public class Denda extends JFrame {
 	private JLabel getLblDirua() {
 		if (lblDirua == null) {
 			lblDirua = new JLabel("Dirua:");
-			lblDirua.setFont(new Font("Tahoma", Font.PLAIN, 10));
+			lblDirua.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblDirua.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return lblDirua;
@@ -160,29 +287,29 @@ public class Denda extends JFrame {
 		}
 		return lblNewLabel_7;
 	}
-	private JLabel getLblNewLabel_8() {
-		if (lblNewLabel_8 == null) {
-			lblNewLabel_8 = new JLabel("New label");
-			lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblMisilPrezioa() {
+		if (lblMisilPrezioa == null) {
+			lblMisilPrezioa = new JLabel(String.valueOf(new Misil().getPrezioa()));
+			lblMisilPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblMisilPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_8;
+		return lblMisilPrezioa;
 	}
-	private JLabel getLblNewLabel_9() {
-		if (lblNewLabel_9 == null) {
-			lblNewLabel_9 = new JLabel("New label");
-			lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblEzkutuPrezioa() {
+		if (lblEzkutuPrezioa == null) {
+			lblEzkutuPrezioa = new JLabel(String.valueOf(new Ezkutua().getPrezioa()));
+			lblEzkutuPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblEzkutuPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_9;
+		return lblEzkutuPrezioa;
 	}
-	private JLabel getLblNewLabel_11() {
-		if (lblNewLabel_11 == null) {
-			lblNewLabel_11 = new JLabel("New label");
-			lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_11.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblEzkutuKop() {
+		if (lblEzkutuKop == null) {
+			lblEzkutuKop = new JLabel("0");
+			lblEzkutuKop.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblEzkutuKop.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_11;
+		return lblEzkutuKop;
 	}
 	private JLabel getLblNewLabel_12() {
 		if (lblNewLabel_12 == null) {
@@ -192,13 +319,13 @@ public class Denda extends JFrame {
 		}
 		return lblNewLabel_12;
 	}
-	private JLabel getLblNewLabel_13() {
-		if (lblNewLabel_13 == null) {
-			lblNewLabel_13 = new JLabel("New label");
-			lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_13.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblRadarPrezioa() {
+		if (lblRadarPrezioa == null) {
+			lblRadarPrezioa = new JLabel(String.valueOf(new Radarra().getPrezioa()));
+			lblRadarPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblRadarPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_13;
+		return lblRadarPrezioa;
 	}
 	private JLabel getLblNewLabel_14() {
 		if (lblNewLabel_14 == null) {
@@ -208,13 +335,13 @@ public class Denda extends JFrame {
 		}
 		return lblNewLabel_14;
 	}
-	private JLabel getLblNewLabel_15() {
-		if (lblNewLabel_15 == null) {
-			lblNewLabel_15 = new JLabel("New label");
-			lblNewLabel_15.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_15.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblRadarKop() {
+		if (lblRadarKop == null) {
+			lblRadarKop = new JLabel("0");
+			lblRadarKop.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblRadarKop.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_15;
+		return lblRadarKop;
 	}
 	private JLabel getLblNewLabel_18() {
 		if (lblNewLabel_18 == null) {
@@ -224,48 +351,130 @@ public class Denda extends JFrame {
 		}
 		return lblNewLabel_18;
 	}
-	private JLabel getLblNewLabel_19() {
-		if (lblNewLabel_19 == null) {
-			lblNewLabel_19 = new JLabel("New label");
-			lblNewLabel_19.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			lblNewLabel_19.setHorizontalAlignment(SwingConstants.CENTER);
+	private JLabel getLblMisilKop() {
+		if (lblMisilKop == null) {
+			lblMisilKop = new JLabel("0");
+			lblMisilKop.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			lblMisilKop.setHorizontalAlignment(SwingConstants.CENTER);
 		}
-		return lblNewLabel_19;
+		return lblMisilKop;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("+");
+	private JButton getBtnMisilKendu() {
+		if (btnMisilKendu == null) {
+			btnMisilKendu = new JButton("-");
+			btnMisilKendu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnMisilKendu.addActionListener(getKontroladore());
+			btnMisilKendu.setEnabled(false);
 		}
-		return btnNewButton;
+		return btnMisilKendu;
 	}
-	private JButton getBtnNewButton_1() {
-		if (btnNewButton_1 == null) {
-			btnNewButton_1 = new JButton("-");
+	private JButton getBtnEzkutuGehitu() {
+		if (btnEzkutuGehitu == null) {
+			btnEzkutuGehitu = new JButton("+");
+			btnEzkutuGehitu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnEzkutuGehitu.addActionListener(getKontroladore());
 		}
-		return btnNewButton_1;
+		return btnEzkutuGehitu;
 	}
-	private JButton getBtnNewButton_2() {
-		if (btnNewButton_2 == null) {
-			btnNewButton_2 = new JButton("+");
+	private JButton getBtnEzktuKendu() {
+		if (btnEzktuKendu == null) {
+			btnEzktuKendu = new JButton("-");
+			btnEzktuKendu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnEzktuKendu.addActionListener(getKontroladore());
+			btnEzktuKendu.setEnabled(false);
 		}
-		return btnNewButton_2;
+		return btnEzktuKendu;
 	}
-	private JButton getBtnNewButton_3() {
-		if (btnNewButton_3 == null) {
-			btnNewButton_3 = new JButton("-");
+	private JButton getBtnRadarGehitu() {
+		if (btnRadarGehitu == null) {
+			btnRadarGehitu = new JButton("+");
+			btnRadarGehitu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnRadarGehitu.addActionListener(getKontroladore());
 		}
-		return btnNewButton_3;
+		return btnRadarGehitu;
 	}
-	private JButton getBtnNewButton_4() {
-		if (btnNewButton_4 == null) {
-			btnNewButton_4 = new JButton("+");
+	private JButton getBtnRadarKendu() {
+		if (btnRadarKendu == null) {
+			btnRadarKendu = new JButton("-");
+			btnRadarKendu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnRadarKendu.addActionListener(getKontroladore());
+			btnRadarKendu.setEnabled(false);
 		}
-		return btnNewButton_4;
+		return btnRadarKendu;
 	}
-	private JButton getBtnNewButton_5() {
-		if (btnNewButton_5 == null) {
-			btnNewButton_5 = new JButton("-");
+	private JButton getBtnMisilGehitu() {
+		if (btnMisilGehitu == null) {
+			btnMisilGehitu = new JButton("+");
+			btnMisilGehitu.setFont(new Font("Tahoma", Font.PLAIN, 25));
+			btnMisilGehitu.addActionListener(getKontroladore());
 		}
-		return btnNewButton_5;
+		return btnMisilGehitu;
 	}
+	private JPanel getSouth() {
+		if (south == null) {
+			south = new JPanel();
+			south.setLayout(new GridLayout(2, 1, 0, 0));
+			south.add(getLblTotala());
+			south.add(getBtnNewButton_6());
+		}
+		return south;
+	}
+	private JLabel getLblTotala() {
+		if (lblTotala == null) {
+			lblTotala = new JLabel("Totala: ");
+			lblTotala.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblTotala.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return lblTotala;
+	}
+	private JButton getBtnNewButton_6() {
+		if (btnNewButton_6 == null) {
+			btnNewButton_6 = new JButton("Erosi");
+		}
+		return btnNewButton_6;
+	}
+	
+	
+	
+	
+	
+	/************* KONTROLADOREA *****************************/
+	private Kontroladore getKontroladore() {
+		if(kontroladore == null) {
+			kontroladore = new Kontroladore();
+		}
+		return kontroladore;
+	}
+	
+	private class Kontroladore implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton botoi = (JButton) e.getSource();
+			if(botoi.equals(btnMisilKendu)) {
+				getLblMisilKop().setText(String.valueOf(--misilKop));
+				if(misilKop == 0) botoi.setEnabled(false);
+			}
+			else if(botoi.equals(btnMisilGehitu)) {
+				getLblMisilKop().setText(String.valueOf(++misilKop));
+				if(misilKop > 0) getBtnMisilKendu().setEnabled(true);
+			}
+			else if(botoi.equals(btnEzktuKendu)) {
+				getLblEzkutuKop().setText(String.valueOf(--ezkutuKop));
+				if(ezkutuKop == 0) botoi.setEnabled(false);
+			}
+			else if(botoi.equals(btnEzkutuGehitu)) {
+				getLblEzkutuKop().setText(String.valueOf(++ezkutuKop));
+				if(ezkutuKop > 0) getBtnEzktuKendu().setEnabled(true);
+			}
+			else if(botoi.equals(btnRadarKendu)) {
+				getLblRadarKop().setText(String.valueOf(--radarKop));
+				if(radarKop == 0) botoi.setEnabled(false);
+			}
+			else if(botoi.equals(btnRadarGehitu)) {
+				getLblRadarKop().setText(String.valueOf(++radarKop));
+				if(radarKop > 0) getBtnRadarKendu().setEnabled(true);
+			}
+		}
+	}
+
 }

@@ -1,10 +1,14 @@
 package eredua;
 
 public abstract class Arma {
-	protected float prezioa;
+	protected int prezioa;
 	protected int kantitatea;
 	
 	public Arma() {}
+	
+	public Arma(int pPrezioa) {
+		prezioa = pPrezioa;
+	}
 	
 	public Arma(int pPrezioa, int pKantitatea) {
 		this.prezioa = pPrezioa;
@@ -17,5 +21,9 @@ public abstract class Arma {
 	
 	public int getKop() {
 		return kantitatea;
+	}
+	
+	public int getPrezioa() {
+		return prezioa;
 	}
 }

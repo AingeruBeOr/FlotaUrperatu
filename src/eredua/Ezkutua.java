@@ -2,9 +2,9 @@ package eredua;
 
 public class Ezkutua extends Arma{
 
-	public Ezkutua() {super();}
+	public Ezkutua() {super(300);}
 	
 	public Ezkutua(int pKantitatea) {
-		super(10,pKantitatea);
+		super(300,pKantitatea);
 	}
 }
