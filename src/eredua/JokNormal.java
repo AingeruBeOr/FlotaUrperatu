@@ -14,7 +14,30 @@ public class JokNormal  extends Jokalari{
 		return nireJok;
 	}
 	
-	public void txandaJokatu() {}
+	/*
+	 * Tablerotik adierazitako arma erabiltzen saiatuko da, lortzekotan txanda aldatu egingo da,
+	 * eta arma kopurua eguneratuko du bere baliabideetan, bestela tableroari (beste metodo 
+	 * batean) observable bidez jakinaraziko dio ezin dela arma bertan erabili eta txanda 
+	 * mantenduko da.
+	 * Arma mota beti izango du, bestela tablero bistan ezingo zelako klikatu
+	 * */
+	public void txandaJokatu(int x, int y, Arma pArma) {
+		boolean erabiliDa;
+		if(pArma instanceof Ezkutua) {
+			erabiliDa=pArma.erabili(x, y, this.nireItsasontziak);
+		}else {
+			erabiliDa=pArma.erabili(x, y, Bot.getNireBot().nireItsasontziak); //BOOLEAN HORI ESANGO DU EA ARMA ERABILI DEN ALA EZ
+			if((pArma instanceof Bonba || pArma instanceof Misil) && erabiliDa) {
+				FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
+				//this.ukituak[x][y]=true;
+			}
+		}
+		if(erabiliDa) {
+			int kop = this.baliabideak.armaKantitateaEguneratu(pArma);
+			setChanged();
+			notifyObservers(new int[] {0,kop}); 
+		}
+	}
 	
 	
 	
@@ -217,7 +240,7 @@ public class JokNormal  extends Jokalari{
 				ukituak[x][y]=true; //this.ukituak.gelaxkaUkituaIpini(x,y);
 			}	
 		//misil kantitatea eguneratu:
-		int kop = armaKantitateaEguneratu(new Misil());
+		int kop = this.baliabideak.armaKantitateaEguneratu(new Misil());
 		setChanged();
 		notifyObservers(new int[] {0,kop}); 
 	}
@@ -309,7 +332,7 @@ public class JokNormal  extends Jokalari{
 			notifyObservers(new int[] {x,y,6});
 		}
 		//radar kantitatea eguneratu:
-		int kop = armaKantitateaEguneratu(new Radarra());
+		int kop = this.baliabideak.armaKantitateaEguneratu(new Radarra());
 		setChanged();
 		notifyObservers(new int[] {1,kop});
 	}
@@ -332,7 +355,7 @@ public class JokNormal  extends Jokalari{
 					super.ezkutuaIpini(x, y);
 					
 					//ezkutu kantitatea eguneratu:
-					int kop = armaKantitateaEguneratu(new Ezkutua());
+					int kop = this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
 					setChanged();
 					notifyObservers(new int[] {2,kop}); 
 					FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();

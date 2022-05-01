@@ -4,19 +4,19 @@ import java.util.Observable;
 import java.util.*;
 
 public abstract class Jokalari extends Observable{
-	protected int dirua;
-	private ArmamentuZerrenda armak;
+	//protected int dirua;
+	//private ArmamentuZerrenda armak;
+	protected Flota baliabideak;
 	protected Tablero nireItsasontziak;
 	protected boolean [][]  ukituak;
 	
 	public Jokalari () {
-		dirua=1000;
-		armak = new ArmamentuZerrenda();
+		//dirua=1000;
+		//armak = new ArmamentuZerrenda();
 		ukituak=new boolean[10][10]; //falsen daude
 		nireItsasontziak= new Tablero();
 	}
 	
-	protected abstract void txandaJokatu();
 	
 	protected abstract void ontziaKonpondu(int x, int y);
 	
@@ -27,35 +27,37 @@ public abstract class Jokalari extends Observable{
 	 * @param arma eguneratuko duen arma mota
 	 * @return arma mota horreatako zenbat unitate geratzen zaizkion
 	 */
-	public int armaKantitateaEguneratu(Arma arma) {return armak.armaKantitateaEguneratu(arma);}
+	
+	//public int armaKantitateaEguneratu(Arma arma) {return armak.armaKantitateaEguneratu(arma);}
 	
 	/**
 	 * Parametro bezala pasatzen zaion arma kantitatea itzuliko du
 	 * @param arma ezagutu nahi den arma motaren unitate kopurua
 	 * @return 
 	 */
-	public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
+	
+	//public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
 	
 	/**
 	 * Armamentua erostean, arma kantitatea eguneratu behar da.
 	 * @param pArma eguneratuko den arma mota
 	 * @param pKop erositako arma kopurua
 	 */
-	public void armamentuaErosi(Arma pArma, int pKop) {
+	/*public void armamentuaErosi(Arma pArma, int pKop) {
 		armak.armamentuaErosi(pArma, pKop);
-	}
+	}*/
 	
 	/**
 	 * Jokalariaren dirua bueltatzen du
 	 * @return
 	 */
-	public int getDirua() {return this.dirua;}
+	//public int getDirua() {return this.dirua;}
 	
 	/**
 	 * Jokalariraren dirua eguneratzen du
 	 * @param pDiru geratuko den ditu kantitate berria
 	 */
-	public void setDirua(int pDiru) {this.dirua = pDiru;}
+	//public void setDirua(int pDiru) {this.dirua = pDiru;}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	

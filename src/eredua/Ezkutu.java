@@ -6,7 +6,7 @@ public class Ezkutu implements EgoeraState{
 	public Ezkutu() {
 		bizitza=2;
 	}
-
+	
 	public void egoeraKlik(Itsasontzi pItsasontzi, Arma pArma) {
 		if(pArma instanceof Bonba) {
 			bizitza--;

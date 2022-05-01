@@ -8,5 +8,7 @@ public class Misil extends Arma {
 		super(250, pKantitatea);
 	}
 	
-	public void suntsitu() {}
+	public boolean erabili(int x, int y, Tablero tablero) {
+		return true;
+	}
 }

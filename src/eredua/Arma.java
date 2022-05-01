@@ -1,6 +1,7 @@
 package eredua;
+import java.util.Observable;
 
-public abstract class Arma {
+public abstract class Arma extends Observable {
 	protected int prezioa;
 	protected int kantitatea;
 	
@@ -28,4 +29,5 @@ public abstract class Arma {
 	public int getPrezioa() {
 		return prezioa;
 	}
+	public abstract boolean erabili(int x, int y, Tablero tablero);
 }

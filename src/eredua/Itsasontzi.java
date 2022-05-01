@@ -17,8 +17,21 @@ public abstract class Itsasontzi {
 	//protected float kalulatuIrabazia(Itsasontzi pI) {
 		//return pI.luzera*suntziketaIrabazia;
 	//}
+	public boolean ukitutaDago() {
+		if(egoera instanceof Ukituta) return true;
+		return false;
+	}
 	
+	public boolean urperatutaDago() {
+		if(egoera instanceof Urperatuta) return true;
+		return false;
+	}
 	
+	public boolean ezkututaDago() {
+		if(egoera instanceof Ezkutu) return true;
+		return false;
+	}
+
 	public void egoeraAldatu (EgoeraState pEgoera){ //usarlo para poner un barco entero urperatuta
 		egoera=pEgoera;	
 	}
