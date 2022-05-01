@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import eredua.Ezkutua;
+import eredua.JokNormal;
 import eredua.Misil;
 import eredua.Radarra;
 
@@ -51,10 +52,14 @@ public class Denda extends JFrame {
 	private JButton btnMisilGehitu;
 	private JPanel south;
 	private JLabel lblTotala;
-	private JButton btnNewButton_6;
+	private JButton btnErosi;
 	private int misilKop;
 	private int ezkutuKop;
 	private int radarKop;
+	private int misilPrezio;
+	private int ezkutuPrezio;
+	private int radarPrezio;
+	private int geratzenDirua;
 	private Kontroladore kontroladore;
 	
 
@@ -78,10 +83,14 @@ public class Denda extends JFrame {
 	 * Create the frame.
 	 */
 	public Denda() {
-		initialize();
+		geratzenDirua = JokNormal.getNireJok().getDirua();
 		misilKop = 0;
 		ezkutuKop = 0;
 		radarKop = 0;
+		misilPrezio = new Misil().getPrezioa();
+		ezkutuPrezio = new Ezkutua().getPrezioa();
+		radarPrezio = new Radarra().getPrezioa();
+		initialize();
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -245,7 +254,7 @@ public class Denda extends JFrame {
 	}
 	private JLabel getLblDirua() {
 		if (lblDirua == null) {
-			lblDirua = new JLabel("Dirua:");
+			lblDirua = new JLabel("Dirua: " + geratzenDirua);
 			lblDirua.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblDirua.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -289,7 +298,7 @@ public class Denda extends JFrame {
 	}
 	private JLabel getLblMisilPrezioa() {
 		if (lblMisilPrezioa == null) {
-			lblMisilPrezioa = new JLabel(String.valueOf(new Misil().getPrezioa()));
+			lblMisilPrezioa = new JLabel(String.valueOf(misilPrezio));
 			lblMisilPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblMisilPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -297,7 +306,7 @@ public class Denda extends JFrame {
 	}
 	private JLabel getLblEzkutuPrezioa() {
 		if (lblEzkutuPrezioa == null) {
-			lblEzkutuPrezioa = new JLabel(String.valueOf(new Ezkutua().getPrezioa()));
+			lblEzkutuPrezioa = new JLabel(String.valueOf(ezkutuPrezio));
 			lblEzkutuPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblEzkutuPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -321,7 +330,7 @@ public class Denda extends JFrame {
 	}
 	private JLabel getLblRadarPrezioa() {
 		if (lblRadarPrezioa == null) {
-			lblRadarPrezioa = new JLabel(String.valueOf(new Radarra().getPrezioa()));
+			lblRadarPrezioa = new JLabel(String.valueOf(radarPrezio));
 			lblRadarPrezioa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			lblRadarPrezioa.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -415,7 +424,7 @@ public class Denda extends JFrame {
 			south = new JPanel();
 			south.setLayout(new GridLayout(2, 1, 0, 0));
 			south.add(getLblTotala());
-			south.add(getBtnNewButton_6());
+			south.add(getBtnErosi());
 		}
 		return south;
 	}
@@ -427,11 +436,26 @@ public class Denda extends JFrame {
 		}
 		return lblTotala;
 	}
-	private JButton getBtnNewButton_6() {
-		if (btnNewButton_6 == null) {
-			btnNewButton_6 = new JButton("Erosi");
+	private JButton getBtnErosi() {
+		if (btnErosi == null) {
+			btnErosi = new JButton("Erosi");
 		}
-		return btnNewButton_6;
+		return btnErosi;
+	}
+	private void eguneratu() {
+		int dirua = JokNormal.getNireJok().getDirua();
+		int gastatutakoDirua = (misilKop*misilPrezio) + (ezkutuKop*ezkutuPrezio) + (radarKop*radarPrezio);
+		geratzenDirua = dirua - (gastatutakoDirua);
+		getLblDirua().setText("Dirua: " + geratzenDirua);
+		getLblTotala().setText("Totala: "+ gastatutakoDirua);
+		
+		//botoiak eguneratu:
+		if(geratzenDirua < misilPrezio) getBtnMisilGehitu().setEnabled(false);
+		else getBtnMisilGehitu().setEnabled(true);
+		if(geratzenDirua < ezkutuPrezio) getBtnEzkutuGehitu().setEnabled(false);
+		else getBtnEzkutuGehitu().setEnabled(true);
+		if(geratzenDirua < radarPrezio) getBtnRadarGehitu().setEnabled(false);
+		else getBtnRadarGehitu().setEnabled(true);
 	}
 	
 	
@@ -456,7 +480,7 @@ public class Denda extends JFrame {
 			}
 			else if(botoi.equals(btnMisilGehitu)) {
 				getLblMisilKop().setText(String.valueOf(++misilKop));
-				if(misilKop > 0) getBtnMisilKendu().setEnabled(true);
+				getBtnMisilKendu().setEnabled(true);
 			}
 			else if(botoi.equals(btnEzktuKendu)) {
 				getLblEzkutuKop().setText(String.valueOf(--ezkutuKop));
@@ -464,7 +488,7 @@ public class Denda extends JFrame {
 			}
 			else if(botoi.equals(btnEzkutuGehitu)) {
 				getLblEzkutuKop().setText(String.valueOf(++ezkutuKop));
-				if(ezkutuKop > 0) getBtnEzktuKendu().setEnabled(true);
+				getBtnEzktuKendu().setEnabled(true);
 			}
 			else if(botoi.equals(btnRadarKendu)) {
 				getLblRadarKop().setText(String.valueOf(--radarKop));
@@ -472,8 +496,16 @@ public class Denda extends JFrame {
 			}
 			else if(botoi.equals(btnRadarGehitu)) {
 				getLblRadarKop().setText(String.valueOf(++radarKop));
-				if(radarKop > 0) getBtnRadarKendu().setEnabled(true);
+				getBtnRadarKendu().setEnabled(true);
 			}
+			else if(botoi.equals(btnErosi)) {
+				JokNormal.getNireJok().setDirua(geratzenDirua);
+				JokNormal.getNireJok().armamentuaErosi(new Misil(), misilKop);
+				JokNormal.getNireJok().armamentuaErosi(new Ezkutua(), ezkutuKop);
+				JokNormal.getNireJok().armamentuaErosi(new Radarra(), radarKop);
+				//TODO
+			}
+			eguneratu();
 		}
 	}
 

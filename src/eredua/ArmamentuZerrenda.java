@@ -15,6 +15,15 @@ public class ArmamentuZerrenda {
 		this.ezkutuak = new Ezkutua(0);
 	}
 	
+	public int getArmaKop(Arma arma) {
+		int bueltatzeko = 0;
+		if(arma instanceof Bonba) bueltatzeko = this.bonbak.getKop();
+		else if(arma instanceof Misil) bueltatzeko = this.misilak.getKop();
+		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.getKop();
+		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.getKop();
+		return bueltatzeko;
+	}
+	
 	public int armaKantitateaEguneratu(Arma arma) {
 		int bueltatzeko = 0;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak.kantitatea1unitateJaitsi();
@@ -24,13 +33,11 @@ public class ArmamentuZerrenda {
 		return bueltatzeko;
 	}
 	
-	public int getArmaKop(Arma arma) {
-		int bueltatzeko = 0;
-		if(arma instanceof Bonba) bueltatzeko = this.bonbak.getKop();
-		else if(arma instanceof Misil) bueltatzeko = this.misilak.getKop();
-		else if(arma instanceof Radarra) bueltatzeko = this.radarrak.getKop();
-		else if(arma instanceof Ezkutua) bueltatzeko = this.ezkutuak.getKop();
-		return bueltatzeko;
+	public void armamentuaErosi(Arma pArma,int pKop) {
+		if(pArma instanceof Bonba) this.bonbak.setKop(getArmaKop(pArma) + pKop);
+		else if(pArma instanceof Misil) this.misilak.setKop(getArmaKop(pArma) + pKop);
+		else if(pArma instanceof Radarra) this.radarrak.setKop(getArmaKop(pArma) + pKop);
+		else if(pArma instanceof Ezkutua) this.ezkutuak.setKop(getArmaKop(pArma) + pKop);
 	}
 	
 	/*public Arma getArma(Arma arma) {

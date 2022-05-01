@@ -390,8 +390,6 @@ public class JokNormal  extends Jokalari{
 			x++;
 		}
 	}
-	//************************** EROSKETAK **************************************************
-	public void armamentuaErosi() {}
 	
 	
 	

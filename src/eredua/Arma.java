@@ -23,6 +23,8 @@ public abstract class Arma {
 		return kantitatea;
 	}
 	
+	public void setKop(int pKop) {this.kantitatea = pKop;}
+	
 	public int getPrezioa() {
 		return prezioa;
 	}

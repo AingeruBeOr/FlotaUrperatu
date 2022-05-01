@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.*;
 
 public abstract class Jokalari extends Observable{
-	private int dirua;
+	protected int dirua;
 	private ArmamentuZerrenda armak;
 	protected Tablero nireItsasontziak;
 	protected boolean [][]  ukituak;
@@ -17,7 +17,7 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	protected abstract void txandaJokatu();
-	protected abstract void armamentuaErosi();
+	
 	protected abstract void ontziaKonpondu(int x, int y);
 	
 	public boolean ontzirenBatGeratzenDa() {return nireItsasontziak.ontzirenBatGeratzenDa();}
@@ -36,7 +36,26 @@ public abstract class Jokalari extends Observable{
 	 */
 	public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
 	
+	/**
+	 * Armamentua erostean, arma kantitatea eguneratu behar da.
+	 * @param pArma eguneratuko den arma mota
+	 * @param pKop erositako arma kopurua
+	 */
+	public void armamentuaErosi(Arma pArma, int pKop) {
+		armak.armamentuaErosi(pArma, pKop);
+	}
+	
+	/**
+	 * Jokalariaren dirua bueltatzen du
+	 * @return
+	 */
 	public int getDirua() {return this.dirua;}
+	
+	/**
+	 * Jokalariraren dirua eguneratzen du
+	 * @param pDiru geratuko den ditu kantitate berria
+	 */
+	public void setDirua(int pDiru) {this.dirua = pDiru;}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	
