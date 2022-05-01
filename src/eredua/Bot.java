@@ -296,7 +296,7 @@ public class Bot extends Jokalari{
 						notifyObservers(new int[] {x,y,0});
 					}
 					JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-					Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
+					ukituak[x][y]=true;
 					//gelaxkaUkitutaIpini(x, y);
 				}
 				tiro = true;
@@ -322,7 +322,7 @@ public class Bot extends Jokalari{
 		setChanged();
 		notifyObservers(new int[] {x,y,2});
 		JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
-		Bot.getNireBot().ukituak.gelaxkaUrperatutaIpini(x, y);
+		ukituak[x][y]=true; //--> Bot.getNireBot().ukituak.gelaxkaUrperatutaIpini(x, y);
 	}
 	
 	
@@ -336,7 +336,7 @@ public class Bot extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,0});
 			JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-			this.ukituak.gelaxkaUkituaIpini(x,y);
+			ukituak[x][y]=true;
 		}
 		//misil kantitatea eguneratu:
 		armaKantitateaEguneratu(new Misil());

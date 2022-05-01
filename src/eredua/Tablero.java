@@ -11,7 +11,7 @@ public class Tablero extends Observable{
 		tablero=new Gelaxka[10][10];
 		for (int i=0; i<10; i++) {
 			for (int j=0; j<10; j++) {
-				tablero[i][j]=new Gelaxka(0);
+				tablero[i][j]=new Gelaxka();
 			}
 		}
 	}
@@ -20,27 +20,31 @@ public class Tablero extends Observable{
 		boolean ema=false;
 			for (int i=0; i<10; i++) {
 				for (int j=0; j<10; j++) {
-					if (tablero[i][j].itsasontziaDu()) {
+					if (!tablero[i][j].uraDu()) { //tablero[i][j].itsasontziaDu()
 						ema=true;
 					}
 				}
 			}
 		return ema;
 	}
+	
+	/*
 	public void gelaxkaUrperatutaIpini(int x, int y) {
 		tablero[x][y].aldatuEgoera(Egoera.URPERATUTA);
 	}
 	public void gelaxkaUkituaIpini(int x, int y) {
 		tablero[x][y].aldatuEgoera(Egoera.UKITUA);
 	}
+	*/
+	
 	public boolean urperatutaDago(int x, int y) {
 		return tablero[x][y].urperatutaDu();
 	}
 	
-	
 	public boolean ukitutaDago(int x, int y) {
 		return tablero[x][y].ukitutaDu();
 	}
+	
 	
 	public void gelaxkaKonpondu(int x, int y) { //gelaxka ez ukituta (itsasontzia) ipini
 		tablero[x][y].aldatuEgoera(Egoera.ITSASONTZIA);
@@ -55,7 +59,7 @@ public class Tablero extends Observable{
 		while(pX>=0 && pX<10 && pY>=0 && pY<10 && kokatu && kont>0) {
 			for(int i=x-1; i<=x+1; i++) {
 				for(int j=y-1; j<=y+1; j++) {
-					if(i>=0 && i<10 && j>=0 && j<10 && tablero[i][j].itsasontziaDu()) {
+					if(i>=0 && i<10 && j>=0 && j<10 && !tablero[i][j].uraDu()) {
 						kokatu=false;
 					}
 				}

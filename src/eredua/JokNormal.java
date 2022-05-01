@@ -186,7 +186,7 @@ public class JokNormal  extends Jokalari{
 				notifyObservers(new int[] {x,y,0});
 			}
 			Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-			JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
+			ukituak[x][y]=true; //JokNormal.getNireJok().ukituak.gelaxkaUkituaIpini(x, y);
 		}
 	}
 	
@@ -194,7 +194,7 @@ public class JokNormal  extends Jokalari{
 		setChanged();
 		notifyObservers(new int[] {x,y,2});
 		Bot.getNireBot().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
-		JokNormal.getNireJok().ukituak.gelaxkaUrperatutaIpini(x, y);
+		ukituak[x][y]=true; //JokNormal.getNireJok().ukituak.gelaxkaUrperatutaIpini(x, y);
 	}
 	
 	
@@ -214,7 +214,7 @@ public class JokNormal  extends Jokalari{
 				setChanged();
 				notifyObservers(new int[] {x,y,0});
 				Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-				this.ukituak.gelaxkaUkituaIpini(x,y);
+				ukituak[x][y]=true; //this.ukituak.gelaxkaUkituaIpini(x,y);
 			}	
 		//misil kantitatea eguneratu:
 		int kop = armaKantitateaEguneratu(new Misil());
@@ -298,7 +298,7 @@ public class JokNormal  extends Jokalari{
 						setChanged();
 						notifyObservers(new int[] {i,j,0});
 						Bot.getNireBot().nireItsasontziak.gelaxkaUkituaIpini(i, j);
-						this.ukituak.gelaxkaUkituaIpini(i, j);
+						ukituak[x][y]=true; //this.ukituak.gelaxkaUkituaIpini(i, j);
 					}
 						
 				}

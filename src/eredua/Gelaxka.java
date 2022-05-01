@@ -1,10 +1,25 @@
 package eredua;
 
 public class Gelaxka{
-	private Egoera egoera;
 	private Itsasontzi itsasontzi;
-	private int ezkutua; // 0 --> ezkuturik ez ; 1 --> ezkutu erdia ; 2 --> ezkutu osoa
 	
+	//private Egoera egoera;
+	
+	//private int ezkutua; // 0 --> ezkuturik ez ; 1 --> ezkutu erdia ; 2 --> ezkutu osoa
+	
+	public Gelaxka() {
+		
+	}
+	
+	public boolean uraDu() {
+		if (itsasontzi==null) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/*
 	public Gelaxka( int pItsasontzi) {
 		if(pItsasontzi==0) {
 			egoera=Egoera.URA;
@@ -14,6 +29,7 @@ public class Gelaxka{
 		}
 		ezkutua = 0;
 	}
+	
 	public boolean itsasontziaDu() { //este metodo te dice si la egoera es = itsasontzi
 		//TODO no se si esto da bien asi
 		if(egoera.equals(Egoera.ITSASONTZIA)) {return true;}
@@ -46,10 +62,7 @@ public class Gelaxka{
 		}
 	}
 	
-	/**
-	 * este metodo te dice si hay/habia barco
-	 * @return
-	 */
+	
 	public boolean itsasontziaDagoZegoen() { 
 		if (itsasontzi!=null) {
 			return true;
@@ -70,4 +83,6 @@ public class Gelaxka{
 		if(ezkutua == 1 || ezkutua == 2) return true;
 		else return false;
 	}
+	
+	*/
 }

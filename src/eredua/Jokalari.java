@@ -7,12 +7,12 @@ public abstract class Jokalari extends Observable{
 	private int dirua;
 	private ArmamentuZerrenda armak;
 	protected Tablero nireItsasontziak;
-	protected Tablero ukituak;
+	protected boolean [][]  ukituak;
 	
 	public Jokalari () {
 		dirua=1000;
 		armak = new ArmamentuZerrenda();
-		ukituak=new Tablero();
+		ukituak=new boolean[10][10]; //falsen daude
 		nireItsasontziak= new Tablero();
 	}
 	
@@ -47,7 +47,7 @@ public abstract class Jokalari extends Observable{
 	 * @return 
 	 */
 	public boolean ukitutaZegoen(int x, int y) {
-		return ukituak.ukitutaEdoUrperatutaZegoen(x, y);
+		return ukituak[x][y];
 	}
 	
 	public boolean itsasontziaDaukat(int x,int y) {
