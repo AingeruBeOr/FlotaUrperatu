@@ -12,6 +12,7 @@ public class Bonba extends Arma {
 				m.erabili(x, y, tablero);
 			}
 			else {
+				tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 				//fu.bistanEkintzaBurutu(x, y,1);
 				setChanged();
 				notifyObservers(new int[] {x,y,1});
@@ -21,7 +22,6 @@ public class Bonba extends Arma {
 			setChanged();
 			notifyObservers(new int[] {x,y,0});
 		}
-		tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
 			JokNormal.getNireJok().ukituak[x][y]=true; 
 		}else {
