@@ -156,7 +156,7 @@ public class Bot extends Jokalari{
 	 * @param y: y koordenatua
 	 * @return
 	 */
-	public boolean ukituDuItsasontzia(int x, int y) {
+	/*public boolean ukituDuItsasontzia(int x, int y) {
 		if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
 		else return false;
 	}
@@ -200,7 +200,7 @@ public class Bot extends Jokalari{
 	 * @param y
 	 * @return 
 	 */
-	private boolean goikoakAztertu(int x, int y) { 
+	/*private boolean goikoakAztertu(int x, int y) { 
 		boolean aurkitua=false;
 		while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
 			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
@@ -242,12 +242,12 @@ public class Bot extends Jokalari{
 			x++;
 		}	
 		return aurkitua;
-	}
+	}*/
 	
 	//************************************ GERTAERA RANDOM ***************************************************
 	//TODO MÉTODO PARA OBTENER NÚMEROS RANDOM Y QUE DEPENDIENDO DEL NÚMERO SE UTILICE UN ARMA DIFERENTE
 	
-	private void gertaeraLortu() {
+	/*private void gertaeraLortu() {
 		//limiteak ezarri
 		Random r= new Random();
 		int x, y;
@@ -258,53 +258,68 @@ public class Bot extends Jokalari{
 		int zenb = min + r.nextInt(10);
 		
 		System.out.println("Lortutako zenbakia: " + zenb);
-		x = r.nextInt(10);
-		y = r.nextInt(10);
-		if (txanda==1) misilTiroa(0,0);
-		else if(txanda==0)	ezkutuaKokatu();
-		else{
-			if (zenb == 4 && getArmaKop(new Misil()) >0) misilTiroa(x, y);
-			else if (zenb == 7 && getArmaKop(new Radarra()) >0) radarraKontsultatu(x, y);
-			else if (zenb == 10 && getArmaKop(new Ezkutua()) >0) ezkutuaKokatu();
-			else tiroEgin();
-		}
-		txanda++;
-	 }
-	
-	
-	//*********************************************** TIROA *******************************************************
-	private void tiroEgin() {		
-	 	Random r = new Random();
-	 	int x=0;
-	 	int y=0;
-		boolean tiro = false;
-		do{
+		boolean tiro=false;
+		do {
 			x = r.nextInt(10);
 			y = r.nextInt(10);
-			if (!this.ukitutaZegoen(x, y)) {
-				if(JokNormal.getNireJok().ezkutuaDago(x, y)) {
-					JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 1);
-				}else {
-					if(ukituDuItsasontzia(x,y)) {
-						if (ontziOsoaUkituDu(x,y)) ontziaUrperatu(x,y);
-						else {
-							setChanged();
-							notifyObservers(new int[] {x,y,1});
-						}
-					}else {
-						setChanged();
-						notifyObservers(new int[] {x,y,0});
-					}
-					JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-					ukituak[x][y]=true;
-					//gelaxkaUkitutaIpini(x, y);
-				}
-				tiro = true;
-				System.out.println("Bot-ak bonba bat bota du (" + x + ", " + y + ") koordenatuetan");
+			if (zenb == 10 && getArmaKop(new Ezkutua()) >0) ezkutuaErabili(x,y);
+			else if(!ukituak[x][y]) {
+				if (zenb == 4 && getArmaKop(new Misil()) >0) misilErabili(x, y);
+				else if (zenb == 7 && getArmaKop(new Radarra()) >0) radarraErabili(x, y);
+				else tiroEgin();
+				tiro=true;
 			}
-		}
-		while(!tiro);
+		}while(!tiro);
+		txanda++;
+	 }*/
+	private void gertaeraLortu() {
+		Random r= new Random();
+		int x, y;
+		int zenb = r.nextInt(10);
+		System.out.println("Lortutako zenbakia: " + zenb);
+		boolean tiro=false;
+		do {
+			x = r.nextInt(10);
+			y = r.nextInt(10);
+			if (zenb == 9) {
+				if(getArmaKop(new Ezkutua()) >0) tiro=ezkutuaErabili(x,y);
+				else zenb=r.nextInt(9);
+			}else if(!ukituak[x][y]) {
+				if (zenb == 8) {
+					if(getArmaKop(new Misil()) >0) misilErabili(x, y);
+					else zenb=r.nextInt(10);
+				}
+				else if (zenb == 7) {
+					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
+					else zenb=r.nextInt(10);
+				} 
+				else new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+				tiro=true;
+			}
+		}while(!tiro);
+		//txanda++;
+	 }
+	
+	//*********************************************** TIROAK *******************************************************
+		
+	public void misilErabili(int x, int y) {
+		new Misil().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+		this.baliabideak.armaKantitateaEguneratu(new Misil());
 	}
+	
+	public void radarraErabili(int x, int y) {
+		new Radarra().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+		this.baliabideak.armaKantitateaEguneratu(new Radarra());
+	}
+	
+	public boolean ezkutuaErabili(int x, int y) {
+		boolean erabili=new Ezkutua().erabili(x, y, nireItsasontziak);
+		if(erabili) {
+			this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
+		}
+		return erabili;
+	}
+
 	/*public void gelaxkaUkitutaIpini(int x, int y) {
 		if(ukituDuItsasontzia(x,y)) {
 			setChanged();
@@ -318,17 +333,17 @@ public class Bot extends Jokalari{
 		
 	}*/
 	
-	public void gelaxkaUrperatu(int x, int y) {
+	/*public void gelaxkaUrperatu(int x, int y) {
 		setChanged();
 		notifyObservers(new int[] {x,y,2});
 		JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
 		ukituak[x][y]=true; //--> Bot.getNireBot().ukituak.gelaxkaUrperatutaIpini(x, y);
-	}
+	}*/
 	
 	
 	
 	//********************************** MISIL TIROA *******************************************************
-	private void misilTiroa( int x, int y) {
+	/*private void misilTiroa( int x, int y) {
 		System.out.println("Bot-ak misil bat kokatu du (" + x + ", " + y + ") koordenatuetan");
 		if(JokNormal.getNireJok().ezkutuaDago(x, y)) JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 2);
 		else if(ukituDuItsasontzia(x,y)) ontziaUrperatu(x,y);
@@ -340,13 +355,13 @@ public class Bot extends Jokalari{
 		}
 		//misil kantitatea eguneratu:
 		armaKantitateaEguneratu(new Misil());
-	}
+	}*/
 	
 
 	
 	//****************************************ONTZI OSOA URPERATU*****************************************************
 	
-	public void ontziaUrperatu(int x, int y) {
+	/*public void ontziaUrperatu(int x, int y) {
 		gelaxkaUrperatu(x,y);
 		if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 			this.ezkerrekoakUrperatu( x-1, y); 	
@@ -387,11 +402,11 @@ public class Bot extends Jokalari{
 			gelaxkaUrperatu(x,y);
 			x++;
 		}
-	}
+	}*/
 	
 	
 	//********************************** RADAR *******************************************************
-	public void radarraKontsultatu(int x, int y) {
+	/*public void radarraKontsultatu(int x, int y) {
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
@@ -416,11 +431,11 @@ public class Bot extends Jokalari{
 		}
 		//radar kantitatea eguneratu:
 		armaKantitateaEguneratu(new Radarra());
-	}
+	}*/
 
 	//********************************** EZKUTUA *******************************************************
 	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
-	private void ezkutuaKokatu() {
+	/*private void ezkutuaKokatu() {
 		int x;
 		int y;
 		Random r=new Random();
@@ -440,10 +455,10 @@ public class Bot extends Jokalari{
 				}
 			}
 		}while(!ezkutuKokatua);
-	}
+	}*/
 	
 	@Override
-	public void ezkutuaXTxikitu(int x, int y, int k) {
+	/*public void ezkutuaXTxikitu(int x, int y, int k) {
 		int hX=x;
 		int hY=y;
 		int level = this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
@@ -490,9 +505,9 @@ public class Bot extends Jokalari{
 			}
 			x++;
 		}
-	}
+	}*/
 	//********************************** EROSKETAK *******************************************************
-		public void armamentuaErosi() {}
+		//public void armamentuaErosi() {}
 	
 		
 		

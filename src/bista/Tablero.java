@@ -564,7 +564,8 @@ public class Tablero extends JFrame implements Observer{
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
-					jokNormal.ezkutuaJarri(x,y);
+					//jokNormal.ezkutuaJarri(x,y);
+					jokNormal.txandaJokatu(x, y, new Ezkutua());
 				}
 				else getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
 			}
@@ -574,11 +575,10 @@ public class Tablero extends JFrame implements Observer{
 					int x = index%10;
 					int y = index/10;
 					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
-						int arma = 0;
-						if(rdbtnMisil.isSelected()) arma=1;
-						else if(rdbtnRadar.isSelected()) arma = 2;
+						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Ezkutua());
+						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
+						else jokNormal.txandaJokatu(x, y, new Bonba());
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
-						jokNormal.tiroEgin(x, y, arma);
 					}
 					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}

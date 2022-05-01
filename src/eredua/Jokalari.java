@@ -13,6 +13,7 @@ public abstract class Jokalari extends Observable{
 	public Jokalari () {
 		//dirua=1000;
 		//armak = new ArmamentuZerrenda();
+		baliabideak=new Flota();
 		ukituak=new boolean[10][10]; //falsen daude
 		nireItsasontziak= new Tablero();
 	}
@@ -36,28 +37,28 @@ public abstract class Jokalari extends Observable{
 	 * @return 
 	 */
 	
-	//public int getArmaKop(Arma arma) {return armak.getArmaKop(arma);}
+	public int getArmaKop(Arma arma) {return baliabideak.getArmaKop(arma);}
 	
 	/**
 	 * Armamentua erostean, arma kantitatea eguneratu behar da.
 	 * @param pArma eguneratuko den arma mota
 	 * @param pKop erositako arma kopurua
 	 */
-	/*public void armamentuaErosi(Arma pArma, int pKop) {
-		armak.armamentuaErosi(pArma, pKop);
-	}*/
+	public void armamentuaErosi(Arma pArma, int pKop) {
+		baliabideak.armamentuaErosi(pArma, pKop);
+	}
 	
 	/**
 	 * Jokalariaren dirua bueltatzen du
 	 * @return
 	 */
-	//public int getDirua() {return this.dirua;}
+	public int getDirua() {return baliabideak.getDirua();}
 	
 	/**
 	 * Jokalariraren dirua eguneratzen du
 	 * @param pDiru geratuko den ditu kantitate berria
 	 */
-	//public void setDirua(int pDiru) {this.dirua = pDiru;}
+	public void setDirua(int pDiru) {baliabideak.setDirua(pDiru);}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	
@@ -81,7 +82,7 @@ public abstract class Jokalari extends Observable{
 	 * @param y y koordenatua
 	 * @return
 	 */
-	public abstract boolean ukituDuItsasontzia(int x, int y);
+	//public abstract boolean ukituDuItsasontzia(int x, int y);
 	
 	//************************** ITSASONTZIAK KOKATU**************************************************
 	
@@ -93,7 +94,7 @@ public abstract class Jokalari extends Observable{
 	}
 	
 	//************************** RADARRA **********************************************************************************
-	protected abstract void radarraKontsultatu(int x, int y);
+	//protected abstract void radarraKontsultatu(int x, int y);
 	
 	//************************** EZKUTUA **********************************************************************************
 	
@@ -103,15 +104,14 @@ public abstract class Jokalari extends Observable{
 	 * @param y koordenatua
 	 * @param k ezkutua txikituko den balio kopurua
 	 */
-	public abstract void ezkutuaXTxikitu(int x, int y, int k);
+	//public abstract void ezkutuaXTxikitu(int x, int y, int k);
 	
 	/**
 	 * (x,y) posizioan level motako ezkutua jarriko da.
 	 * @param x koordenatua
 	 * @param y koordenatua
 	 * @param level ezktuari jarriko zaion bizitza
-	 */
-	public void ezkutuaIpini(int x,int y) {
+	/*public void ezkutuaIpini(int x,int y) {
 		int hX=x;
 		int hY=y;
 		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) { //gorantz begiratu

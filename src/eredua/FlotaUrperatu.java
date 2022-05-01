@@ -20,6 +20,18 @@ public class FlotaUrperatu extends Observable{
 		return nireFlota;
 	}
 	
+	public void bistanEkintzaBurutu(int pArma, int pKop) {
+		setChanged();
+		notifyObservers(new int[] {pArma, pKop});
+	}
+	public void bistanEkintzaBurutu(int x, int y, int pCase) {
+		setChanged();
+		notifyObservers(new int[] {x, y, pCase});
+	}
+	public void bistanEkintzaBurutu(int x, int y, int pCase, int level) {
+		setChanged();
+		notifyObservers(new int[] {x, y, pCase, level});
+	}
 	public boolean getTxanda() {return this.txanda;}
 	public void aldatuTxanda() {
 		txanda=!txanda;

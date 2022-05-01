@@ -57,7 +57,7 @@ public class JokNormal  extends Jokalari{
 	//********************************** UKITUAK *******************************************************
 	
 	@Override
-	public boolean ukituDuItsasontzia(int x, int y) {
+	/*public boolean ukituDuItsasontzia(int x, int y) {
 		if(Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
 		else return false;
 	}
@@ -68,14 +68,14 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @return true itsasontzia urperatuta badago eta false bestela.
 	 */
-	public boolean ontziOsoaUkituDu(int x, int y) {
+	/*public boolean ontziOsoaUkituDu(int x, int y) {
 		boolean urperatuta=false;
 		boolean goikoak=false;
 		boolean behekoak=false;
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
 
-		/*if(ukituDuItsasontzia(x,y)) {*/
+		
 			
 		if (x>0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
 			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
@@ -100,9 +100,9 @@ public class JokNormal  extends Jokalari{
 			setChanged();
 			notifyObservers(new int[] {x,y,5});
 		}			
-		//}
+		
 		return urperatuta;
-	}
+	}*/
 	
 	/**
 	 * (x,y) posiziotik gora, itsasontzia duten gelaxkak badadude, hauek ukituta dauden ala ez aztertuko du. 
@@ -110,7 +110,7 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
 	 */
-	private boolean goikoakAztertu(int x, int y) { 
+	/*private boolean goikoakAztertu(int x, int y) { 
 		boolean aurkitua=false;
 		while (!aurkitua && y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
@@ -127,7 +127,7 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
 	 */
-	private boolean behekoakAztertu(int x, int y) {
+	/*private boolean behekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && y<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
@@ -144,7 +144,7 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
 	 */
-	private boolean ezkerrekoakAztertu(int x, int y) {
+	/*private boolean ezkerrekoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && x>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
@@ -161,7 +161,7 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @return true ukituta ez dagoen gelaxka aurkitzen badu edo false bestela.
 	 */
-	private boolean eskumakoakAztertu(int x, int y) {
+	/*private boolean eskumakoakAztertu(int x, int y) {
 		boolean aurkitua=false;
 		while (!aurkitua && x<=9 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
 			if (!Bot.getNireBot().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
@@ -188,14 +188,15 @@ public class JokNormal  extends Jokalari{
 	 * @param y koordenatua
 	 * @param pArma arma mota
 	 */
-	public void tiroEgin(int x, int y,int pArma) {
+	
+	/*public void tiroEgin(int x, int y,int pArma) {
 		if (pArma == 0) bonbaTiroa(x, y);
 		else if (pArma == 1) misilTiroa(x,y);
 		else if (pArma == 2) radarraKontsultatu(x,y);
 		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
 	
-	private void bonbaTiroa(int x, int y) {
+	/*private void bonbaTiroa(int x, int y) {
 		if(Bot.getNireBot().ezkutuaDago(x, y)) Bot.getNireBot().ezkutuaXTxikitu(x, y, 1);
 		else {
 			if(ukituDuItsasontzia(x,y)) {
@@ -347,7 +348,7 @@ public class JokNormal  extends Jokalari{
 	 * @param x koordenatua
 	 * @param y koordenatua
 	 */
-	public void ezkutuaJarri(int x, int y) {
+	/*public void ezkutuaJarri(int x, int y) {
 		
 		if(super.itsasontziaDaukat(x, y)) {
 			if(!super.ezkutuaDago(x, y)) {
@@ -412,7 +413,7 @@ public class JokNormal  extends Jokalari{
 			notifyObservers(new int[] {x,y,3, level});
 			x++;
 		}
-	}
+	}*/
 	
 	
 	

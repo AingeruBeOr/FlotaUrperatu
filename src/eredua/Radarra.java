@@ -9,6 +9,7 @@ public class Radarra extends Arma{
 	}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
+		//FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {

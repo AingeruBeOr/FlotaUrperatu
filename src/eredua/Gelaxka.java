@@ -32,6 +32,20 @@ public class Gelaxka{
 		if(itsasontzi.urperatutaDago()) {return true;}
 		return false;
 	}
+	public boolean ezkutuaDago() {
+		if(itsasontzi.ezkututaDago()) {return true;}
+		return false;
+	}
+	public void erreparatu() {
+		this.itsasontzi.egoeraAldatu(new Osoa());
+	}
+	public void aldatuItsasontzia(int pL) {
+		if(pL==0) {
+			itsasontzi=null;
+		}else {
+			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
+		}
+	}
 	/*
 	public Gelaxka( int pItsasontzi) {
 		if(pItsasontzi==0) {
