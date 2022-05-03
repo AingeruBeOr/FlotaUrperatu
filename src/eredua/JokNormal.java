@@ -34,8 +34,11 @@ public class JokNormal  extends Jokalari{
 		}
 		if(erabiliDa) {
 			int kop = this.baliabideak.armaKantitateaEguneratu(pArma);
+			int arma=0;
+			if (pArma instanceof Radarra) arma=1;
+			else if(pArma instanceof Ezkutua) arma=2;
 			setChanged();
-			notifyObservers(new int[] {0,kop}); 
+			notifyObservers(new int[] {arma,kop}); 
 		}
 	}
 	

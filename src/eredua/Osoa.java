@@ -8,8 +8,9 @@ public class Osoa implements EgoeraState{
 		}
 		else if (pArma instanceof Misil) {
 			pItsasontzi.egoeraAldatu(new Urperatuta());
+		}else if(pArma instanceof Ezkutua) {
+			pItsasontzi.egoeraAldatu(new Ezkutu());		
 		}
-		
 	}
 
 }

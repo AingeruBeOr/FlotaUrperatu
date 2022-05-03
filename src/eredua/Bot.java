@@ -278,6 +278,7 @@ public class Bot extends Jokalari{
 		int zenb = r.nextInt(10);
 		System.out.println("Lortutako zenbakia: " + zenb);
 		boolean tiro=false;
+		if(txanda==1) new Bonba().erabili(0, 0, JokNormal.getNireJok().nireItsasontziak);
 		do {
 			x = r.nextInt(10);
 			y = r.nextInt(10);
@@ -297,7 +298,7 @@ public class Bot extends Jokalari{
 				tiro=true;
 			}
 		}while(!tiro);
-		//txanda++;
+		txanda++;
 	 }
 	
 	//*********************************************** TIROAK *******************************************************

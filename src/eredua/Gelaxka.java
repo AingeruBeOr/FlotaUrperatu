@@ -19,7 +19,7 @@ public class Gelaxka{
 	}
 	
 	public void armaAplikatu(Arma pArma) {
-		itsasontzi.egoeraKlik(pArma);
+		if(itsasontzi!=null) itsasontzi.egoeraKlik(pArma);
 	}
 	
 	public boolean itsasontziaDago() {return !uraDu();}
