@@ -12,8 +12,8 @@ public class Misil extends Arma {
 		if(tablero.itsasontziaDuGelaxka(x, y)) ontziaUrperatu(x, y, tablero);
 			else {
 				FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 0);
-				setChanged();
-				notifyObservers(new int[] {x,y,0});
+				/*setChanged();
+				notifyObservers(new int[] {x,y,0});*/
 				tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 				if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
 					JokNormal.getNireJok().ukituak[x][y]=true; 
@@ -67,9 +67,9 @@ public class Misil extends Arma {
 	}
 	
 	public void gelaxkaUrperatu(int x, int y, Tablero tablero) {
-		//FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 2);;
-		setChanged();
-		notifyObservers(new int[] {x,y,2});
+		FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 2);;
+		/*setChanged();
+		notifyObservers(new int[] {x,y,2});*/
 		tablero.gelaxkariArmaAplikatu(x, y, new Misil());
 		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
 			JokNormal.getNireJok().ukituak[x][y]=true; 

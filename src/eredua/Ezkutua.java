@@ -17,7 +17,7 @@ public class Ezkutua extends Arma{
 	 */
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
-		//FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(!tablero.ezkutuaDago(x, y)) {
 				if(!tablero.urperatutaDago(x, y)) { //!super.ontziOsoaUrperatuDu(x, y)
@@ -25,23 +25,23 @@ public class Ezkutua extends Arma{
 					return true;
 				}else {
 					//posizio horretan dagoen itsasontzia ondoratuta dago:
-					//fu.bistanEkintzaBurutu(x, y, 10);
-					setChanged();
-					notifyObservers(new int[] {x,y,10});
+					fu.bistanEkintzaBurutu(x, y, 10);
+					/*setChanged();
+					notifyObservers(new int[] {x,y,10});*/
 				}
 			}
 			else {
 				//posizio horretan jadanik dago ezkutu bat:
-				//fu.bistanEkintzaBurutu(x, y, 9);
-				setChanged();
-				notifyObservers(new int[] {x,y,9});
+				fu.bistanEkintzaBurutu(x, y, 9);
+				/*setChanged();
+				notifyObservers(new int[] {x,y,9});*/
 			}
 		}
 		else {
 			//posizio horretan ezkutu bat ezin du ipini:
-			//fu.bistanEkintzaBurutu(x, y, 8);
-			setChanged();
-			notifyObservers(new int[] {x,y,8});
+			fu.bistanEkintzaBurutu(x, y, 8);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,8});*/
 		}
 		return false;
 	}
@@ -53,39 +53,39 @@ public class Ezkutua extends Arma{
 	 * @param level ezktuari jarriko zaion bizitza
 	 */
 	private void ezkutuaIpini(int x,int y, Tablero tablero) {
-		//FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		int hX=x;
 		int hY=y;
 		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) { //gorantz begiratu
 			//this.nireItsasontziak.setEzkutua(x, y, 2);
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
-			//fu.bistanEkintzaBurutu(x, y, 7);
-			setChanged();
-			notifyObservers(new int[] {x,y,7});
+			fu.bistanEkintzaBurutu(x, y, 7);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,7});*/
 			y--;
 		}
 		y=hY+1;
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) { //beherantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
-			//fu.bistanEkintzaBurutu(x, y, 7);
-			setChanged();
-			notifyObservers(new int[] {x,y,7});
+			fu.bistanEkintzaBurutu(x, y, 7);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,7});*/
 			y++;
 		}
 		y=hY;
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) { //ezkerrerantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
-			//fu.bistanEkintzaBurutu(x, y, 7);
-			setChanged();
-			notifyObservers(new int[] {x,y,7});
+			fu.bistanEkintzaBurutu(x, y, 7);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,7});*/
 			x--;
 		}
 		x=hX+1;
 		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) { //eskuinerantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
-			//fu.bistanEkintzaBurutu(x, y, 7);
-			setChanged();
-			notifyObservers(new int[] {x,y,7});
+			fu.bistanEkintzaBurutu(x, y, 7);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,7});*/
 			x++;
 		}
 	}

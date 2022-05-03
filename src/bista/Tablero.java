@@ -575,7 +575,7 @@ public class Tablero extends JFrame implements Observer{
 					int x = index%10;
 					int y = index/10;
 					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
-						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Ezkutua());
+						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Misil());
 						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
 						else jokNormal.txandaJokatu(x, y, new Bonba());
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);

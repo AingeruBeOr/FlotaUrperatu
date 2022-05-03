@@ -5,7 +5,7 @@ public class Bonba extends Arma {
 	public Bonba() {super();}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
-		//FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if (ontziOsoaUkituDu(x,y, tablero)) {
 				Arma m=new Misil();
@@ -13,14 +13,14 @@ public class Bonba extends Arma {
 			}
 			else {
 				tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-				//fu.bistanEkintzaBurutu(x, y,1);
-				setChanged();
-				notifyObservers(new int[] {x,y,1});
+				fu.bistanEkintzaBurutu(x, y,1);
+				/*setChanged();
+				notifyObservers(new int[] {x,y,1});*/
 			}
 		}else {
-			//fu.bistanEkintzaBurutu(x, y, 0);
-			setChanged();
-			notifyObservers(new int[] {x,y,0});
+			fu.bistanEkintzaBurutu(x, y, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,0});*/
 		}
 		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
 			JokNormal.getNireJok().ukituak[x][y]=true; 
@@ -63,9 +63,9 @@ public class Bonba extends Arma {
 			urperatuta=true;
 		}
 		if (urperatuta) {
-			//FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 5);
-			setChanged();
-			notifyObservers(new int[] {x,y,5});
+			FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 5);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,5});*/
 		}			
 		return urperatuta;
 	}

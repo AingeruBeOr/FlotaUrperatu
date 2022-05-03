@@ -9,19 +9,21 @@ public class Radarra extends Arma{
 	}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
-		//FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		boolean aurkituDu=false;
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
 				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
 					if (tablero.itsasontziaDuGelaxka(i, j) && !tablero.ukitutaEdoUrperatutaZegoen(i, j)){
-						setChanged();
-						notifyObservers(new int[] {i,j,4});
+						fu.bistanEkintzaBurutu(i,j,4);
+						/*setChanged();
+						notifyObservers(new int[] {i,j,4});*/
 						aurkituDu=true;
 					}
 					else if(!tablero.itsasontziaDuGelaxka(i, j)) {
-						setChanged();
-						notifyObservers(new int[] {i,j,0});
+						fu.bistanEkintzaBurutu(i,j,0);
+						/*setChanged();
+						notifyObservers(new int[] {i,j,0});*/
 						tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
 							JokNormal.getNireJok().ukituak[x][y]=true; 
@@ -33,8 +35,9 @@ public class Radarra extends Arma{
 			}
 		}
 		if (!aurkituDu) {
-			setChanged();
-			notifyObservers(new int[] {x,y,6});
+			fu.bistanEkintzaBurutu(x,y,4);
+			/*setChanged();
+			notifyObservers(new int[] {x,y,6});*/
 		}
 		return true;
 	}

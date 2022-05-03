@@ -7,7 +7,7 @@ public class Flota {
 	
 	public Flota() {
 		dirua=1000;
-		armak=new ArmamentuZerrenda();
+		armak=new ArmamentuZerrenda(1,1,1);
 	}
 	/**
 	 * Parametro bezala adierazitako arma motaren kantitatea -1 txikituko du
