@@ -13,6 +13,16 @@ public class JokNormal  extends Jokalari{
 		}
 		return nireJok;
 	}
+	public void inprimatuU() {
+		for(int i=0; i<10; i++) {
+			for(int j=0; j<10; j++) {
+				if(ukituak[j][i]) System.out.print("X");
+				else System.out.print("~");
+			}
+			System.out.println("");
+		}
+		System.out.println("");
+	}
 	
 	/*
 	 * Tablerotik adierazitako arma erabiltzen saiatuko da, lortzekotan txanda aldatu egingo da,
@@ -26,10 +36,10 @@ public class JokNormal  extends Jokalari{
 		if(pArma instanceof Ezkutua) {
 			erabiliDa=pArma.erabili(x, y, this.nireItsasontziak);
 		}else {
+			this.inprimatuU();
 			erabiliDa=pArma.erabili(x, y, Bot.getNireBot().nireItsasontziak); //BOOLEAN HORI ESANGO DU EA ARMA ERABILI DEN ALA EZ
 			if((pArma instanceof Bonba || pArma instanceof Misil) && erabiliDa) {
 				FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
-				//this.ukituak[x][y]=true;
 			}
 		}
 		if(erabiliDa) {

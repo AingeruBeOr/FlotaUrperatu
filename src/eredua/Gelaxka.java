@@ -22,7 +22,9 @@ public class Gelaxka{
 		if(itsasontzi!=null) itsasontzi.egoeraKlik(pArma);
 	}
 	
-	public boolean itsasontziaDago() {return !uraDu();}
+	public boolean itsasontziaDago() {
+		return !uraDu();
+	}
 	
 	public boolean ukitutaDu() {
 		if(itsasontzi.ukitutaDago()) {return true;}
