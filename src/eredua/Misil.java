@@ -9,8 +9,10 @@ public class Misil extends Arma {
 	}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
-		if(tablero.itsasontziaDuGelaxka(x, y)) ontziaUrperatu(x, y, tablero);
-			else {
+		if(tablero.itsasontziaDuGelaxka(x, y)) {
+			if(tablero.ezkutuaDago(x, y)) ezkutuaKendu(x,y, tablero);
+			else ontziaUrperatu(x, y, tablero);
+		}else {
 				FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 0);
 				/*setChanged();
 				notifyObservers(new int[] {x,y,0});*/
@@ -75,6 +77,43 @@ public class Misil extends Arma {
 			JokNormal.getNireJok().ukituak[x][y]=true; 
 		}else {
 			Bot.getNireBot().ukituak[x][y]=true;
+		}
+	}
+	private void ezkutuaKendu(int x, int y, Tablero tablero) {
+		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		int hX=x;
+		int hY=y;
+		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			y--;
+		}
+		y=hY+1;
+		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			y++;
+		}
+		y=hY;
+		x=hX-1;
+		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			x--;
+		}
+		x=hX+1;
+		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			x++;
 		}
 	}
 }

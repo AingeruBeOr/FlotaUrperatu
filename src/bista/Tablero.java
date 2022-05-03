@@ -73,7 +73,7 @@ public class Tablero extends JFrame implements Observer{
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
+	private JButton btnDenda;
 	
 	
 
@@ -347,7 +347,7 @@ public class Tablero extends JFrame implements Observer{
 			datuak.add(getRdbtnKonponketak());
 			datuak.add(getLblNewLabel());
 			datuak.add(getLblNewLabel_1());
-			datuak.add(getBtnNewButton());
+			datuak.add(getbtnDenda());
 		}
 		return datuak;
 	}
@@ -439,13 +439,13 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return lblNewLabel_1;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("DENDA");
-			btnNewButton.setBackground(Color.CYAN);
-			
+	private JButton getbtnDenda() {
+		if (btnDenda == null) {
+			btnDenda = new JButton("DENDA");
+			btnDenda.setBackground(Color.CYAN);
+			btnDenda.addActionListener(getKontroladore());
 		}
-		return btnNewButton;
+		return btnDenda;
 	}
 	private void txandaAldatu(boolean txanda) {
 		if(txanda) getLblTxanda().setText("Zure txanda da.");
@@ -551,7 +551,13 @@ public class Tablero extends JFrame implements Observer{
 	}
 	
 	
-	private class Kontroladore extends MouseAdapter{
+	private class Kontroladore extends MouseAdapter implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(btnDenda)) {
+				setVisible(false);
+				Denda.main(null);
+			}
+		}
 		public void mouseClicked(MouseEvent e) {
 			getLblArazoa().setText("");
 			getLblOntzia().setText("");

@@ -100,8 +100,6 @@ public class Tablero extends Observable{
 		return false;
 	}
 	public boolean itsasontziaDuGelaxka(int x, int y) {
-		System.out.println(x+ " gelaxka "+y);
-		JokNormal.getNireJok().inprimatuU();
 		return tablero[x][y].itsasontziaDago();
 		}
 	

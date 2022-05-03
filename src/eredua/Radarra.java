@@ -14,24 +14,24 @@ public class Radarra extends Arma{
 		for(int i=x-1; i<=x+1; i++) {
 			for(int j=y-1; j<=y+1; j++) {
 				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
-					if (tablero.itsasontziaDuGelaxka(i, j) && !tablero.ukitutaEdoUrperatutaZegoen(i, j)){
+					if (tablero.itsasontziaDuGelaxka(i,j) && !tablero.ukitutaEdoUrperatutaZegoen(i,j)){
 						fu.bistanEkintzaBurutu(i,j,4);
-						JokNormal.getNireJok().inprimatuU();
-						tablero.gelaxkariArmaAplikatu(x, y, new Radarra());
+						
+						//tablero.gelaxkariArmaAplikatu(i, j, new Radarra());
 						
 						/*setChanged();
 						notifyObservers(new int[] {i,j,4});*/
 						aurkituDu=true;
 					}
-					else if(!tablero.itsasontziaDuGelaxka(i, j)) {
+					else if(!tablero.itsasontziaDuGelaxka(i,j)) {
 						fu.bistanEkintzaBurutu(i,j,0);
 						/*setChanged();
 						notifyObservers(new int[] {i,j,0});*/
 						//tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-							JokNormal.getNireJok().ukituak[x][y]=true; 
+							JokNormal.getNireJok().ukituak[i][j]=true; 
 						}else {
-							Bot.getNireBot().ukituak[x][y]=true;
+							Bot.getNireBot().ukituak[i][j]=true;
 						}
 					}
 				}			

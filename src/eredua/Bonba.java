@@ -7,16 +7,21 @@ public class Bonba extends Arma {
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
-			if (ontziOsoaUkituDu(x,y, tablero)) {
-				Arma m=new Misil();
-				m.erabili(x, y, tablero);
+			if(tablero.ezkutuaDago(x, y)) {
+				this.ezkutuaTxikitu(x, y, tablero);
+			}else {
+				if (ontziOsoaUkituDu(x,y, tablero)) {
+					Arma m=new Misil();
+					m.erabili(x, y, tablero);
+				}
+				else {
+					tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+					fu.bistanEkintzaBurutu(x, y,1);
+					/*setChanged();
+					notifyObservers(new int[] {x,y,1});*/
+				}
 			}
-			else {
-				tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-				fu.bistanEkintzaBurutu(x, y,1);
-				/*setChanged();
-				notifyObservers(new int[] {x,y,1});*/
-			}
+			
 		}else {
 			fu.bistanEkintzaBurutu(x, y, 0);
 			/*setChanged();
@@ -138,4 +143,45 @@ public class Bonba extends Arma {
 		return aurkitua;
 	}
 	
+	private void ezkutuaTxikitu(int x, int y, Tablero tablero) {
+		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		int hX=x;
+		int hY=y;
+		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
+			else fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			y--;
+		}
+		y=hY+1;
+		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
+			else fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			y++;
+		}
+		y=hY;
+		x=hX-1;
+		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
+			else fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			x--;
+		}
+		x=hX+1;
+		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
+			else fu.bistanEkintzaBurutu(x, y, 3, 0);
+			/*setChanged();
+			notifyObservers(new int[] {x, y, 3, level});*/
+			x++;
+		}
+	}
 }

@@ -440,6 +440,7 @@ public class Denda extends JFrame {
 		if (btnErosi == null) {
 			btnErosi = new JButton("Erosi");
 		}
+		btnErosi.addActionListener(getKontroladore());
 		return btnErosi;
 	}
 	private void eguneratu() {
@@ -503,7 +504,9 @@ public class Denda extends JFrame {
 				JokNormal.getNireJok().armamentuaErosi(new Misil(), misilKop);
 				JokNormal.getNireJok().armamentuaErosi(new Ezkutua(), ezkutuKop);
 				JokNormal.getNireJok().armamentuaErosi(new Radarra(), radarKop);
-				//TODO
+			//TODO
+				setVisible(false);
+				
 			}
 			eguneratu();
 		}
