@@ -20,7 +20,7 @@ public class Tablero extends Observable{
 		boolean ema=false;
 			for (int i=0; i<10; i++) {
 				for (int j=0; j<10; j++) {
-					if (tablero[i][j].ukitutaDu()||tablero[i][j].ezkutuaDago()||tablero[i][j].osoaDago()) { //tablero[i][j].itsasontziaDu()
+					if (!(tablero[i][j].urperatutaDu()||tablero[i][j].uraDu())) { //tablero[i][j].itsasontziaDu()
 						ema=true;
 					}
 				}
