@@ -56,8 +56,8 @@ public class Gelaxka{
 	}
 	
 	
-	public float kalkulatuIrabazi() {
-		float prezioa=0;
+	public int kalkulatuIrabazi() {
+		int prezioa=0;
 		if (itsasontzi!=null) {
 			prezioa=itsasontzi.kalkulatuIrabazia();
 		}

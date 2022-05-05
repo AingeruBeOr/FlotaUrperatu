@@ -32,7 +32,7 @@ public class Misil extends Arma {
 		//esto hay k cambiarrrr
 		
 		if (FlotaUrperatu.getNireFlotaUrperatu().getTxanda()){
-			Int dirua=JokNormal.getNireJok().getDirua()+tablero.kalkulatuIrabazi(x, y);
+			int dirua=JokNormal.getNireJok().getDirua()+tablero.kalkulatuIrabazi(x, y);
 			JokNormal.getNireJok().setDirua(dirua);
 		}
 		else {
