@@ -44,4 +44,12 @@ public class Flota {
 	 */
 	public void setDirua(int pDiru) {this.dirua = pDiru;}
 	
+
+	public void erosketaPrezioaKendu(){ 
+			  dirua = dirua - 75;
+	}
+		
+	public void suntziketaPrezioaGehitu(){ 
+			  dirua = dirua + 50;
+	}
 }

@@ -576,6 +576,7 @@ public class Tablero extends JFrame implements Observer{
 					}
 					else if (rdbtnKonponketak.isSelected()) {
 						jokNormal.ontziaKonpondu(x, y);
+						diruaEguneratu();
 					}
 					
 				}

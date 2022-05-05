@@ -425,6 +425,7 @@ public class JokNormal  extends Jokalari{
 			System.out.println(x+"<--X, "+y+"<--Y");
 			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
 				nireItsasontziak.gelaxkaKonpondu(x, y);
+				baliabideak.erosketaPrezioaKendu(); 
 				setChanged();
 				notifyObservers(new int[] {x,y,11,0});
 			}
