@@ -4,6 +4,7 @@ public abstract class Itsasontzi {
 	protected float konponketaPrezioa;
 	protected float suntziketaIrabazia;
 	private EgoeraState egoera;
+	protected int luzera;
 	
 	public Itsasontzi() {
 		this.konponketaPrezioa = 75;
@@ -11,12 +12,21 @@ public abstract class Itsasontzi {
 		this.egoera=new Osoa();
 	}
 	
-	protected float kalkulatuKonponketa(int zatiKop) {
+	/*protected float kalkulatuKonponketa(int zatiKop) {
 		return zatiKop*konponketaPrezioa;
 	}
-	//protected float kalulatuIrabazia(Itsasontzi pI) {
-		//return pI.luzera*suntziketaIrabazia;
-	//}
+	
+	
+	protected float kalulatuIrabazia(Itsasontzi pI) {
+		return pI.luzera*suntziketaIrabazia;
+	}
+	*/
+	
+	
+	public int getLuzera() {
+		return luzera;
+	}
+	
 	public boolean ukitutaDago() {
 		if(egoera instanceof Ukituta) return true;
 		return false;
