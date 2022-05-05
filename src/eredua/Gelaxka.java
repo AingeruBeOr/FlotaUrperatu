@@ -38,6 +38,7 @@ public class Gelaxka{
 	public boolean ezkutuaDago() {
 		if(itsasontzi.ezkututaDago()) {return true;}
 		return false;
+		
 	}
 	public boolean osoaDago() {
 		if(itsasontzi.osoaDago()) {return true;}
