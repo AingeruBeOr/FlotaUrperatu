@@ -117,4 +117,8 @@ public class Tablero extends Observable{
 		return tablero[x][y].ezkutuaDago();
 	}
 	
+	
+	public float kalkulatuIrabazi(int x, int y) {
+		return tablero[x][y].kalkulatuIrabazi();
+	}
 }

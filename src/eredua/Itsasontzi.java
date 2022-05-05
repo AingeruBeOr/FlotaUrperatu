@@ -16,11 +16,12 @@ public abstract class Itsasontzi {
 		return zatiKop*konponketaPrezioa;
 	}
 	
-	
-	protected float kalulatuIrabazia(Itsasontzi pI) {
-		return pI.luzera*suntziketaIrabazia;
-	}
 	*/
+	
+	protected float kalulatuIrabazia() {
+		return luzera*suntziketaIrabazia;
+	}
+	
 	
 	
 	public int getLuzera() {

@@ -54,6 +54,15 @@ public class Gelaxka{
 			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
 		}
 	}
+	
+	
+	public float kalkulatuIrabazi() {
+		float prezioa=0;
+		if (itsasontzi!=null) {
+			prezioa=itsasontzi.kalkulatuIrabazia();
+		}
+		return prezioa;
+	}
 	/*
 	public Gelaxka( int pItsasontzi) {
 		if(pItsasontzi==0) {

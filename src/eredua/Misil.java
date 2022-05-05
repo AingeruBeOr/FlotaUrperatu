@@ -28,6 +28,18 @@ public class Misil extends Arma {
 	
 	private void ontziaUrperatu(int x, int y, Tablero tablero) {
 		gelaxkaUrperatu(x,y, tablero);
+		
+		//esto hay k cambiarrrr
+		
+		if (FlotaUrperatu.getNireFlotaUrperatu().getTxanda()){
+			Int dirua=JokNormal.getNireJok().getDirua()+tablero.kalkulatuIrabazi(x, y);
+			JokNormal.getNireJok().setDirua(dirua);
+		}
+		else {
+			
+		}
+	
+		
 		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
 			this.ezkerrekoakUrperatu( x-1, y, tablero); 	
 		}
