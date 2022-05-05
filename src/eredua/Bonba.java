@@ -6,9 +6,11 @@ public class Bonba extends Arma {
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		boolean ezk=false;
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(tablero.ezkutuaDago(x, y)) {
 				this.ezkutuaTxikitu(x, y, tablero);
+				ezk=true;
 			}else {
 				if (ontziOsoaUkituDu(x,y, tablero)) {
 					Arma m=new Misil();
@@ -27,11 +29,13 @@ public class Bonba extends Arma {
 			/*setChanged();
 			notifyObservers(new int[] {x,y,0});*/
 		}
-		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-			JokNormal.getNireJok().ukituak[x][y]=true; 
-		}else {
-			Bot.getNireBot().ukituak[x][y]=true;
-		} 
+		if(!ezk) {
+			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
+				JokNormal.getNireJok().ukituak[x][y]=true; 
+			}else {
+				Bot.getNireBot().ukituak[x][y]=true;
+			} 
+		}
 		return true;
 	}
 	
