@@ -6,9 +6,11 @@ public class Bonba extends Arma {
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		boolean ezk=false;
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(tablero.ezkutuaDago(x, y)) {
 				this.ezkutuaTxikitu(x, y, tablero);
+				ezk=true;
 			}else {
 				if (ontziOsoaUkituDu(x,y, tablero)) {
 					Arma m=new Misil();
@@ -27,11 +29,13 @@ public class Bonba extends Arma {
 			/*setChanged();
 			notifyObservers(new int[] {x,y,0});*/
 		}
-		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-			JokNormal.getNireJok().ukituak[x][y]=true; 
-		}else {
-			Bot.getNireBot().ukituak[x][y]=true;
-		} 
+		if(!ezk) {
+			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
+				JokNormal.getNireJok().ukituak[x][y]=true; 
+			}else {
+				Bot.getNireBot().ukituak[x][y]=true;
+			} 
+		}
 		return true;
 	}
 	
@@ -147,14 +151,10 @@ public class Bonba extends Arma {
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
 		int hX=x;
 		int hY=y;
-		if(tablero.itsasontziaDuGelaxka(x, y)) {
-			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
-			else fu.bistanEkintzaBurutu(x, y, 3, 0);
-		}
-		y--;
 		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(hX, hY, 3, 1);
+			else fu.bistanEkintzaBurutu(hX, hY, 3, 0);
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			y--;
@@ -162,6 +162,7 @@ public class Bonba extends Arma {
 		y=hY+1;
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			y++;
@@ -170,6 +171,7 @@ public class Bonba extends Arma {
 		x=hX-1;
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			x--;
@@ -177,6 +179,7 @@ public class Bonba extends Arma {
 		x=hX+1;
 		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
+			
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			x++;
