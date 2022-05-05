@@ -63,7 +63,6 @@ public class Tablero extends JFrame implements Observer{
 	private JRadioButton rdbtnBonba;
 	private JRadioButton rdbtnRadar;
 	private JRadioButton rdbtnEzkutu;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel north;
 	private JLabel lblTxanda;
 	private JPanel south;

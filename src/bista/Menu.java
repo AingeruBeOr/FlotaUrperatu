@@ -1,6 +1,7 @@
 package bista;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.*;
@@ -158,8 +161,12 @@ public class Menu extends JFrame {
 				//TODO
 			}
 			else if(e.getSource().equals(botoi4)) {
-				Arauak.main(null);
-				//TODO
+				try {
+					File objetofile = new File ("./fitxategiak/ARAUAK.pdf");
+					Desktop.getDesktop().open(objetofile);
+				}catch (IOException ex) {
+					System.out.println(ex);
+				}
 			}
 			else {
 				System.exit(0);
