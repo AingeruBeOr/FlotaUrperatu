@@ -521,9 +521,9 @@ public class Bot extends Jokalari{
 				baliabideak.erosketaPrezioaKendu(); 
 				System.out.println("Holaaaaaaaaaaaaaa"+x+" x da eta hau y "+y);
 				setChanged();
-				notifyObservers(new int[] {x,y,11,1});
-				
+				notifyObservers(new int[] {x,y,11,1});	
 			}
+			
 			
 		}
 
