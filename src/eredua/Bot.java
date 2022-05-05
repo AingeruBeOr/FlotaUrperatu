@@ -293,6 +293,8 @@ public class Bot extends Jokalari{
 				else if (zenb == 7) {
 					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
 					else zenb=r.nextInt(10);
+				} else if (zenb == 6) {
+					this.ontziaKonpondu(x, y);
 				} 
 				else new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
 				tiro=true;
@@ -519,11 +521,7 @@ public class Bot extends Jokalari{
 				setChanged();
 				notifyObservers(new int[] {x,y,11,1});
 			}
-			else{
-				//System.out.println("Ezin duzu gelaxka hori konpondu");
-				setChanged();
-				notifyObservers(new int[] {x,y,12});
-			}
+			
 			
 		}
 
