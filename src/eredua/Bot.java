@@ -512,7 +512,7 @@ public class Bot extends Jokalari{
 	
 		
 		
-	//************************** EROSKETAK **************************************************
+	//************************** KONPONKETAK **************************************************
 		public void ontziaKonpondu(int x, int y) {
 			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
 				nireItsasontziak.gelaxkaKonpondu(x, y);
@@ -520,9 +520,9 @@ public class Bot extends Jokalari{
 				notifyObservers(new int[] {x,y,11,1});
 			}
 			else{
-				//System.out.println("Ezin duzu gelaxka hori konpondu");
+				
 				setChanged();
-				notifyObservers(new int[] {x,y,12});
+				notifyObservers(new int[] {x,y,12}); //System.out.println("Ezin duzu gelaxka hori konpondu");
 			}
 			
 		}
