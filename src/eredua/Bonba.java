@@ -147,10 +147,14 @@ public class Bonba extends Arma {
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
 		int hX=x;
 		int hY=y;
-		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
 			else fu.bistanEkintzaBurutu(x, y, 3, 0);
+		}
+		y--;
+		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
+			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			y--;
@@ -158,8 +162,6 @@ public class Bonba extends Arma {
 		y=hY+1;
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
-			else fu.bistanEkintzaBurutu(x, y, 3, 0);
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			y++;
@@ -168,8 +170,6 @@ public class Bonba extends Arma {
 		x=hX-1;
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
-			else fu.bistanEkintzaBurutu(x, y, 3, 0);
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			x--;
@@ -177,8 +177,6 @@ public class Bonba extends Arma {
 		x=hX+1;
 		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1);
-			else fu.bistanEkintzaBurutu(x, y, 3, 0);
 			/*setChanged();
 			notifyObservers(new int[] {x, y, 3, level});*/
 			x++;
