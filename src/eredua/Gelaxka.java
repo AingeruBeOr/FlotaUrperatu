@@ -30,12 +30,18 @@ public class Gelaxka{
 		if(itsasontzi.ukitutaDago()) {return true;}
 		return false;
 	}
+	
 	public boolean urperatutaDu() {
 		if(itsasontzi.urperatutaDago()) {return true;}
 		return false;
 	}
 	public boolean ezkutuaDago() {
 		if(itsasontzi.ezkututaDago()) {return true;}
+		return false;
+		
+	}
+	public boolean osoaDago() {
+		if(itsasontzi.osoaDago()) {return true;}
 		return false;
 	}
 	public void erreparatu() {

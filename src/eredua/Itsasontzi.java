@@ -21,6 +21,10 @@ public abstract class Itsasontzi {
 		if(egoera instanceof Ukituta) return true;
 		return false;
 	}
+	public boolean osoaDago() {
+		if(egoera instanceof Osoa) return true;
+		return false;
+	}
 	
 	public boolean urperatutaDago() {
 		if(egoera instanceof Urperatuta) return true;
