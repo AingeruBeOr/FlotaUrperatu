@@ -518,10 +518,12 @@ public class Bot extends Jokalari{
 		public void ontziaKonpondu(int x, int y) {
 			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
 				nireItsasontziak.gelaxkaKonpondu(x, y);
+				System.out.println("Hola"+x+" x da eta hau y "+y);
 				setChanged();
 				notifyObservers(new int[] {x,y,11,1});
+				
 			}
-
+			
 		}
 
 }
