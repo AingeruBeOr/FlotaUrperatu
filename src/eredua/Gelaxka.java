@@ -27,25 +27,25 @@ public class Gelaxka{
 	}
 	
 	public boolean ukitutaDu() {
-		if(itsasontzi.ukitutaDago()) {return true;}
+		if(itsasontzi!=null &&itsasontzi.ukitutaDago()) {return true;}
 		return false;
 	}
 	
 	public boolean urperatutaDu() {
-		if(itsasontzi.urperatutaDago()) {return true;}
+		if(itsasontzi!=null && itsasontzi.urperatutaDago()) {return true;}
 		return false;
 	}
 	public boolean ezkutuaDago() {
-		if(itsasontzi.ezkututaDago()) {return true;}
+		if(itsasontzi!=null &&itsasontzi.ezkututaDago()) {return true;}
 		return false;
 		
 	}
 	public boolean osoaDago() {
-		if(itsasontzi.osoaDago()) {return true;}
+		if(itsasontzi!=null &&itsasontzi.osoaDago()) {return true;}
 		return false;
 	}
 	public void erreparatu() {
-		this.itsasontzi.egoeraAldatu(new Osoa());
+		if(itsasontzi!=null) this.itsasontzi.egoeraAldatu(new Osoa());
 	}
 	public void aldatuItsasontzia(int pL) {
 		if(pL==0) {
