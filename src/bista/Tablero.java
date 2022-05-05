@@ -565,15 +565,22 @@ public class Tablero extends JFrame implements Observer{
 			JokNormal jokNormal = JokNormal.getNireJok();
 			JLabel jl = (JLabel) e.getComponent();
 			
-			if(rdbtnEzkutu.isSelected()) {
+			if(rdbtnEzkutu.isSelected() || rdbtnKonponketak.isSelected()) { //zure matrizean klik
 				int index = zerrendaJok.indexOf(jl);
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
 					//jokNormal.ezkutuaJarri(x,y);
-					jokNormal.txandaJokatu(x, y, new Ezkutua());
+					if (rdbtnEzkutu.isSelected()) {
+						jokNormal.txandaJokatu(x, y, new Ezkutua());
+					}
+					else if (rdbtnKonponketak.isSelected()) {
+						jokNormal.ontziaKonpondu(x, y);
+					}
+					
 				}
-				else getLblArazoa().setText("Ezkutua erabiltzeko, zure tableroan klik egin behar duzu.");
+				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
+				
 			}
 			else {
 				int index = zerrendaBot.indexOf(jl);
@@ -583,6 +590,7 @@ public class Tablero extends JFrame implements Observer{
 					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
 						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Misil());
 						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
+				
 						else jokNormal.txandaJokatu(x, y, new Bonba());
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 					}
@@ -638,6 +646,8 @@ public class Tablero extends JFrame implements Observer{
 				 * 8 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA EZ DU ITSASONTZIRIK POSIZIO HORRETAN
 				 * 9 ->	EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN BADAGO ITSASONTZI BAT EZKUTUAREKIN
 				 * 10 -> EZKUTUA JARTZEA ERABAKI DU POSIZIO BATEAN ETA POSIZIO HORRETAN URPERATUTA DAGOEN ITSASONTZI BAT DAGO
+				 * 11 -> ITSASONTZIA KONPONTZEN DU (jokalari/bot)
+				 * 12->	EZIN DU GELAXKA HORI KONPONDU 
 				 * */
 				String sx = String.valueOf(array[0]);
 				String sy = String.valueOf(array[1]);
@@ -713,7 +723,21 @@ public class Tablero extends JFrame implements Observer{
 				case 10:
 					getLblArazoa().setText("Ondoratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
 					break;
+				
+				case 11:
+				 if (array[3]==0){ //jokalaria
+				  	this.itsasontziaIpini(index,true);
+				  }
+				  else if (array[3]==1){ //bot
+				  	this.itsasontziaIpini(index,false);
+				  }
+				  break;
+			 
+				case 12:
+				  getLblArazoa().setText("Ezin duzu gelaxka hori konpondu");
+				  break;
 				}
+				
 			}
 			else if(array.length == 2) { 
 				/*
