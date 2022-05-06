@@ -32,6 +32,10 @@ public class FlotaUrperatu extends Observable{
 		setChanged();
 		notifyObservers(new int[] {x, y, pCase, level});
 	}
+	public void bistanEkintzaBurutu(int x, int y, int pCase, int level, int lehena) {
+		setChanged();
+		notifyObservers(new int[] {x, y, pCase, level, lehena});
+	}
 	public boolean getTxanda() {return this.txanda;}
 	public void aldatuTxanda() {
 		txanda=!txanda;

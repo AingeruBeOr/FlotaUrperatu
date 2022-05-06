@@ -318,6 +318,7 @@ public class Bot extends Jokalari{
 	public boolean ezkutuaErabili(int x, int y) {
 		boolean erabili=new Ezkutua().erabili(x, y, nireItsasontziak);
 		if(erabili) {
+			System.out.println("Ezkutua jarri du BOT-a x "+x+" eta y "+y);
 			this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
 		}
 		return erabili;

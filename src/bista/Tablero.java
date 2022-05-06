@@ -625,7 +625,7 @@ public class Tablero extends JFrame implements Observer{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(arg != null) {
 			int[] array = (int[]) arg;
-			if(array.length == 3 || array.length==4) {
+			if(array.length == 3 || array.length==4|| array.length==5) {
 				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
 				 * 0 -> URA UKITU DU (URDINA)
 				 * 1 -> ITSASONTZIA UKITU DU (GORRIA)
@@ -667,6 +667,7 @@ public class Tablero extends JFrame implements Observer{
 						}
 						//bizitzarik gabe geratu bada itsaontzia:
 						else if(array[3] == 0) {
+							if(array[4]==0)this.itsasontziaIpini(index, false);
 							//posizioak jadanik irudia badu, lehenen ikutu delako izan da eta posizio hori radarra jarri behar diogu, bakarrik horri
 							if (zerrendaBot.get(index).getIcon() != null) this.itsasontziaIpini(index, false);
 							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
@@ -713,7 +714,7 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Jadanik badago ezkutu bat bertan.");
 					break;
 				case 10:
-					getLblArazoa().setText("Ondoratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
+					getLblArazoa().setText("Osoa ez dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
 					break;
 				
 				case 11:
