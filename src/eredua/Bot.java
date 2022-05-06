@@ -304,7 +304,7 @@ public class Bot extends Jokalari{
 			System.out.println("Erabiliko dut koordenatua: x "+x+" eta y "+y);
 		}
 		do {		
-			if (zenb == 9) {
+			if (zenb == 9 || zenb==5) {
 				if(getArmaKop(new Ezkutua()) >0) tiro=ezkutuaErabili(x,y);
 			}else if(!ukituak[x][y]) {
 				if (zenb == 8) {

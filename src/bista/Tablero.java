@@ -378,7 +378,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnMisil().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-		}
+		}else getRdbtnMisil().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnRadar() {
@@ -395,8 +395,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnRadar().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-
-		}
+		}else getRdbtnRadar().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnEzkutu() {
@@ -413,7 +412,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnEzkutu().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-		}
+		}else getRdbtnEzkutu().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnKonponketak() {
@@ -553,7 +552,7 @@ public class Tablero extends JFrame implements Observer{
 	private class Kontroladore extends MouseAdapter implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btnDenda)) {
-				setVisible(false);
+				//setVisible(false);
 				Denda.main(null);
 			}
 		}
@@ -662,7 +661,7 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.getTxanda()) {
 						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
 						if(array[3]==1) { 
-							this.ezkutuBakarJarri(index, false);
+							if(array[4]==0)this.ezkutuBakarJarri(index, false);
 							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
 						}
 						//bizitzarik gabe geratu bada itsaontzia:
