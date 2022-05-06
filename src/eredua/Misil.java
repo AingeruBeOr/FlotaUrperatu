@@ -9,9 +9,12 @@ public class Misil extends Arma {
 	}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
-			if(tablero.ezkutuaDago(x, y)) ezkutuaKendu(x,y, tablero);
-			else ontziaUrperatu(x, y, tablero);
+			if(tablero.ezkutuaDago(x, y)) {
+				if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(x, y);
+				ezkutuaKendu(x,y, tablero);
+			}else ontziaUrperatu(x, y, tablero);
 		}else {
 				FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 0);
 				/*setChanged();

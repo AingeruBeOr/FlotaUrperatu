@@ -16,7 +16,7 @@ public class Radarra extends Arma{
 				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
 					if (tablero.itsasontziaDuGelaxka(i,j) && !tablero.ukitutaEdoUrperatutaZegoen(i,j)){
 						fu.bistanEkintzaBurutu(i,j,4);
-						
+						if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(i, j);
 						//tablero.gelaxkariArmaAplikatu(i, j, new Radarra());
 						
 						/*setChanged();
@@ -29,6 +29,7 @@ public class Radarra extends Arma{
 						notifyObservers(new int[] {i,j,0});*/
 						//tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
+							System.out.println("Ukitu dudan kasilla: x "+i+" eta y "+j);
 							JokNormal.getNireJok().ukituak[i][j]=true; 
 						}else {
 							Bot.getNireBot().ukituak[i][j]=true;
