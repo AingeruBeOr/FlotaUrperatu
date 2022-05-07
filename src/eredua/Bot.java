@@ -316,7 +316,6 @@ public class Bot extends Jokalari{
 				else if (zenb == 7) {
 					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
 				} else if (zenb == 6) {
-					//ontziaKonpontzenSaiatu();
 					ontziaKonpondu(x,y);
 				}else {
 					new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
@@ -552,28 +551,6 @@ public class Bot extends Jokalari{
 		
 	//************************** KONPONKETAK **************************************************
 
-	private void ontziaKonpontzenSaiatu () {
-		boolean konpondua=false;
-		int i=0;
-		int j=0;
-		while(i<=9 && !konpondua) {
-			while(j<=9 && !konpondua) {
-				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
-					nireItsasontziak.gelaxkaKonpondu(i, j);
-					baliabideak.erosketaPrezioaKendu(); 
-					System.out.println("Bot-ak konpondu du X --> "+i+" eta  Y --> "+j);
-					setChanged();
-					notifyObservers(new int[] {i,j,11,1});	
-					konpondua=true;
-				}
-				j++;
-			}
-			j=0;
-			i++;
-			
-		}
-	
-	}
 	
 	//x eta y pasatu eta posizio horretarik aurrera konpontzen saiatzen du
 	
