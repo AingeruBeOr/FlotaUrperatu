@@ -316,7 +316,8 @@ public class Bot extends Jokalari{
 				else if (zenb == 7) {
 					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
 				} else if (zenb == 6) {
-					this.ontziaKonpondu(x, y);
+					//ontziaKonpontzenSaiatu();
+					ontziaKonpondu(x,y);
 				}else {
 					new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
 					tiro=true;
@@ -328,6 +329,14 @@ public class Bot extends Jokalari{
 			zenb=r.nextInt(10);
 		}while(!tiro);
 	 }
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//*********************************************** TIROAK *******************************************************
 		
@@ -487,7 +496,7 @@ public class Bot extends Jokalari{
 		}while(!ezkutuKokatua);
 	}*/
 	
-	@Override
+	//@Override
 	/*public void ezkutuaXTxikitu(int x, int y, int k) {
 		int hX=x;
 		int hY=y;
@@ -542,16 +551,58 @@ public class Bot extends Jokalari{
 		
 		
 	//************************** KONPONKETAK **************************************************
-		public void ontziaKonpondu(int x, int y) {
-			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
-				nireItsasontziak.gelaxkaKonpondu(x, y);
-				baliabideak.erosketaPrezioaKendu(); 
-				System.out.println("Holaaaaaaaaaaaaaa"+x+" x da eta hau y "+y);
-				setChanged();
-				notifyObservers(new int[] {x,y,11,1});	
+
+	private void ontziaKonpontzenSaiatu () {
+		boolean konpondua=false;
+		int i=0;
+		int j=0;
+		while(i<=9 && !konpondua) {
+			while(j<=9 && !konpondua) {
+				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
+					nireItsasontziak.gelaxkaKonpondu(i, j);
+					baliabideak.erosketaPrezioaKendu(); 
+					System.out.println("Bot-ak konpondu du X --> "+i+" eta  Y --> "+j);
+					setChanged();
+					notifyObservers(new int[] {i,j,11,1});	
+					konpondua=true;
+				}
+				j++;
 			}
-			
+			j=0;
+			i++;
 			
 		}
+	
+	}
+	
+	//x eta y pasatu eta posizio horretarik aurrera konpontzen saiatzen du
+	
+	public void ontziaKonpondu (int x, int y) {
+		boolean konpondua=false;
+		int i=x;
+		int j=y;
+		System.out.println("Bot-ak HASI konponketa hemen:  X --> "+i+" eta  Y --> "+j);
+		while(i<=9 && !konpondua) {
+			while(j<=9 && !konpondua) {
+				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
+					nireItsasontziak.gelaxkaKonpondu(i, j);
+					baliabideak.erosketaPrezioaKendu(); 
+					System.out.println("Bot-ak konpondu du X --> "+i+" eta  Y --> "+j);
+					setChanged();
+					notifyObservers(new int[] {i,j,11,1});	
+					konpondua=true;
+				}
+				j++;
+			}
+			j=0;
+			i++;
+			
+		}
+	
+	}
+	
+	
+	
+	
 
 }

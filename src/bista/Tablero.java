@@ -719,9 +719,12 @@ public class Tablero extends JFrame implements Observer{
 				case 11:
 				 if (array[3]==0){ //jokalaria
 				  	this.itsasontziaIpini(index,true);
+				  	getLblOntzia().setText("Konponketa bat egin duzu!");
+				  	
 				  }
 				  else if (array[3]==1){ //bot
 				  	this.itsasontziaIpini(index,false);
+				  	getLblOntzia().setText("Bot-ak konponketa bat egin du!");
 				  }
 				  break;
 			 

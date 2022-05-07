@@ -423,7 +423,7 @@ public class JokNormal  extends Jokalari{
 	//************************** KONPONKETAK **************************************************
 		public void ontziaKonpondu(int x, int y) {
 			System.out.println(x+"<--X, "+y+"<--Y");
-			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
+			if(nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
 				nireItsasontziak.gelaxkaKonpondu(x, y);
 				baliabideak.erosketaPrezioaKendu(); 
 				setChanged();
