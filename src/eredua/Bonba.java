@@ -91,7 +91,6 @@ public class Bonba extends Arma {
 		while (!aurkitua && y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			if (!tablero.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
-				if(!FlotaUrperatu.getNireFlotaUrperatu().getTxanda())Bot.getNireBot().koordenatuakGogoratu(x, y);
 			}
 			y--;
 		}
@@ -109,7 +108,6 @@ public class Bonba extends Arma {
 		while (!aurkitua && y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			if (!tablero.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
-				if(!FlotaUrperatu.getNireFlotaUrperatu().getTxanda())Bot.getNireBot().koordenatuakGogoratu(x, y);
 			}
 			y++;
 		}
@@ -127,7 +125,6 @@ public class Bonba extends Arma {
 		while (!aurkitua && x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			if (!tablero.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
-				if(!FlotaUrperatu.getNireFlotaUrperatu().getTxanda())Bot.getNireBot().koordenatuakGogoratu(x, y);
 			}
 			x--;
 		}
@@ -145,7 +142,6 @@ public class Bonba extends Arma {
 		while (!aurkitua && x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			if (!tablero.ukitutaEdoUrperatutaZegoen(x, y)) {
 				aurkitua=true;
-				if(!FlotaUrperatu.getNireFlotaUrperatu().getTxanda())Bot.getNireBot().koordenatuakGogoratu(x, y);
 			}
 			x++;
 		}
