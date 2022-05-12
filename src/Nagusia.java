@@ -7,5 +7,6 @@ public class Nagusia {
 		// TODO Auto-generated method stub
 		Menu.main(null);
 	}
+	//prueba
 
 }
