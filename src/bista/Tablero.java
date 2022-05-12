@@ -535,9 +535,21 @@ public class Tablero extends JFrame implements Observer{
 			jl.setIcon(boomAdj);
 		}
 	}
+	
+	public void dendaIrekiItxi(boolean pIrekiItxi) {
+		if(pIrekiItxi) {
+			Denda.main(this);
+			setEnabled(false);
+		}
+		else {
+			setEnabled(true);
+			setVisible(true);
+		}
+	}
 	//********************************************IRUDIEN AMAIERA**********************************************************
 	private void diruaEguneratu() {
 		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
+		updateKonponketak();
 	}
 	
 	//********************** KONTROLADOREA ****************************************
@@ -551,11 +563,9 @@ public class Tablero extends JFrame implements Observer{
 	
 	private class Kontroladore extends MouseAdapter implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(btnDenda)) {
-				//setVisible(false);
-				Denda.main(null);
-			}
+			if(e.getSource().equals(btnDenda)) dendaIrekiItxi(true);
 		}
+
 		public void mouseClicked(MouseEvent e) {
 			getLblArazoa().setText("");
 			getLblOntzia().setText("");
@@ -600,7 +610,6 @@ public class Tablero extends JFrame implements Observer{
 				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
 			diruaEguneratu();
-			
 		}
 	}
 	

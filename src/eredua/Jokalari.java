@@ -4,17 +4,13 @@ import java.util.Observable;
 import java.util.*;
 
 public abstract class Jokalari extends Observable{
-	//protected int dirua;
-	//private ArmamentuZerrenda armak;
 	protected Flota baliabideak;
 	protected Tablero nireItsasontziak;
 	protected boolean [][]  ukituak;
 	
 	public Jokalari () {
-		//dirua=1000;
-		//armak = new ArmamentuZerrenda();
-		baliabideak=new Flota();
-		ukituak=new boolean[10][10]; //falsen daude
+		baliabideak = new Flota();
+		ukituak = new boolean[10][10]; //falsen daude
 		nireItsasontziak= new Tablero();
 	}
 	

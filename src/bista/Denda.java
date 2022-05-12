@@ -61,16 +61,16 @@ public class Denda extends JFrame {
 	private int radarPrezio;
 	private int geratzenDirua;
 	private Kontroladore kontroladore;
-	
+	private Tablero nagusia;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(Tablero pNagusia) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Denda frame = new Denda();
+					Denda frame = new Denda(pNagusia);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,7 +82,8 @@ public class Denda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Denda() {
+	public Denda(Tablero pNagusia) {
+		nagusia = pNagusia;
 		geratzenDirua = JokNormal.getNireJok().getDirua();
 		misilKop = 0;
 		ezkutuKop = 0;
@@ -506,7 +507,7 @@ public class Denda extends JFrame {
 				JokNormal.getNireJok().armamentuaErosi(new Radarra(), radarKop);
 			//TODO
 				setVisible(false);
-				
+				nagusia.dendaIrekiItxi(false);
 			}
 			eguneratu();
 		}
