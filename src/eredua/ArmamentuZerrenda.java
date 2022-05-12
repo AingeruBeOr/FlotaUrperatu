@@ -34,10 +34,22 @@ public class ArmamentuZerrenda {
 	}
 	
 	public void armamentuaErosi(Arma pArma,int pKop) {
-		if(pArma instanceof Bonba) this.bonbak.setKop(getArmaKop(pArma) + pKop);
-		else if(pArma instanceof Misil) this.misilak.setKop(getArmaKop(pArma) + pKop);
-		else if(pArma instanceof Radarra) this.radarrak.setKop(getArmaKop(pArma) + pKop);
-		else if(pArma instanceof Ezkutua) this.ezkutuak.setKop(getArmaKop(pArma) + pKop);
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
+		if(pArma instanceof Bonba) {
+			this.bonbak.setKop(getArmaKop(pArma) + pKop);
+		}
+		else if(pArma instanceof Misil) {
+			this.misilak.setKop(getArmaKop(pArma) + pKop);
+			fu.bistanEkintzaBurutu(0, pKop);
+		} 
+		else if(pArma instanceof Radarra) {
+			this.radarrak.setKop(getArmaKop(pArma) + pKop);
+			fu.bistanEkintzaBurutu(1, pKop);
+		} 
+		else if(pArma instanceof Ezkutua) {
+			this.ezkutuak.setKop(getArmaKop(pArma) + pKop);
+			fu.bistanEkintzaBurutu(2, pKop);
+		}
 	}
 	
 	/*public Arma getArma(Arma arma) {

@@ -63,7 +63,6 @@ public class Tablero extends JFrame implements Observer{
 	private JRadioButton rdbtnBonba;
 	private JRadioButton rdbtnRadar;
 	private JRadioButton rdbtnEzkutu;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel north;
 	private JLabel lblTxanda;
 	private JPanel south;
@@ -379,7 +378,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnMisil().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-		}
+		}else getRdbtnMisil().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnRadar() {
@@ -396,8 +395,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnRadar().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-
-		}
+		}else getRdbtnRadar().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnEzkutu() {
@@ -414,7 +412,7 @@ public class Tablero extends JFrame implements Observer{
 		if(kop == 0) {
 			getRdbtnEzkutu().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
-		}
+		}else getRdbtnEzkutu().setEnabled(true);
 		//return kop;
 	}
 	private JRadioButton getRdbtnKonponketak() {
@@ -554,7 +552,7 @@ public class Tablero extends JFrame implements Observer{
 	private class Kontroladore extends MouseAdapter implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btnDenda)) {
-				setVisible(false);
+				//setVisible(false);
 				Denda.main(null);
 			}
 		}
@@ -576,7 +574,7 @@ public class Tablero extends JFrame implements Observer{
 					}
 					else if (rdbtnKonponketak.isSelected()) {
 						jokNormal.ontziaKonpondu(x, y);
-						diruaEguneratu();
+						//diruaEguneratu();
 					}
 					
 				}
@@ -592,25 +590,17 @@ public class Tablero extends JFrame implements Observer{
 						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Misil());
 						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
 				
-						else jokNormal.txandaJokatu(x, y, new Bonba());
+						else {
+							jokNormal.txandaJokatu(x, y, new Bonba());
+						}
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 					}
 					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}
 				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
-			/*if(fu.jokoaAmaituDa()) {
-				Irabazlea.main(null);
-				setVisible(false);
-			}*/
-			/*else if(!fu.getTxanda()){
-				Bot.getNireBot().txandaJokatu();
-				fu.aldatuTxanda();
-				if(fu.jokoaAmaituDa()) {
-					Irabazlea.main(null);
-					setVisible(false);
-				}
-			}*/
+			diruaEguneratu();
+			
 		}
 	}
 	
@@ -634,7 +624,7 @@ public class Tablero extends JFrame implements Observer{
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		if(arg != null) {
 			int[] array = (int[]) arg;
-			if(array.length == 3 || array.length==4) {
+			if(array.length == 3 || array.length==4|| array.length==5) {
 				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
 				 * 0 -> URA UKITU DU (URDINA)
 				 * 1 -> ITSASONTZIA UKITU DU (GORRIA)
@@ -671,11 +661,12 @@ public class Tablero extends JFrame implements Observer{
 					if(fu.getTxanda()) {
 						//baldin 1 bizitzako ezkutua geratzen bazaio klik egin eta gero:
 						if(array[3]==1) { 
-							this.ezkutuBakarJarri(index, false);
+							if(array[4]==0)this.ezkutuBakarJarri(index, false);
 							getLblOntzia().setText("Ezkutua duen ontzi bat jo duzu.");
 						}
 						//bizitzarik gabe geratu bada itsaontzia:
 						else if(array[3] == 0) {
+							if(array[4]==0)this.itsasontziaIpini(index, false);
 							//posizioak jadanik irudia badu, lehenen ikutu delako izan da eta posizio hori radarra jarri behar diogu, bakarrik horri
 							if (zerrendaBot.get(index).getIcon() != null) this.itsasontziaIpini(index, false);
 							getLblOntzia().setText("Itsasontziari ezkutua kendu diozu.");
@@ -722,15 +713,18 @@ public class Tablero extends JFrame implements Observer{
 					getLblArazoa().setText("Jadanik badago ezkutu bat bertan.");
 					break;
 				case 10:
-					getLblArazoa().setText("Ondoratuta dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
+					getLblArazoa().setText("Osoa ez dagoen itsasontzi bat aukeratu duzu. Mesedez, aukeratu beste bat.");
 					break;
 				
 				case 11:
 				 if (array[3]==0){ //jokalaria
 				  	this.itsasontziaIpini(index,true);
+				  	getLblOntzia().setText("Konponketa bat egin duzu!");
+				  	
 				  }
 				  else if (array[3]==1){ //bot
 				  	this.itsasontziaIpini(index,false);
+				  	getLblOntzia().setText("Bot-ak konponketa bat egin du!");
 				  }
 				  break;
 			 

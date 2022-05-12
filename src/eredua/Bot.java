@@ -3,12 +3,18 @@ package eredua;
 import java.util.Random;
 
 public class Bot extends Jokalari{
-	int txanda;
+	//private int txanda;
+	private int xR;
+	private int yR;
+	private boolean itsasontziaAurkitu;
 	private static Bot nireBot;
 	
 	private Bot() {
 		super();
-		txanda=0;
+		//txanda=0;
+		xR=10;
+		yR=10;
+		this.itsasontziaAurkitu=false;
 		this.probazkoOntziakJarri();
 		//this.txandaJokatu();
 		
@@ -272,36 +278,64 @@ public class Bot extends Jokalari{
 		}while(!tiro);
 		txanda++;
 	 }*/
+	
+	public void koordenatuakGogoratu(int x,int y) {
+		System.out.println("Gorde dut koordenatua: x "+x+" eta y "+y);
+		xR=x;
+		yR=y;
+		this.itsasontziaAurkitu=true;
+	}
+	
 	private void gertaeraLortu() {
 		Random r= new Random();
 		int x, y;
 		int zenb = r.nextInt(10);
+		x = r.nextInt(10);
+		y = r.nextInt(10);
 		System.out.println("Lortutako zenbakia: " + zenb);
 		boolean tiro=false;
-		if(txanda==1) new Bonba().erabili(0, 0, JokNormal.getNireJok().nireItsasontziak);
-		do {
-			x = r.nextInt(10);
-			y = r.nextInt(10);
-			if (zenb == 9) {
+		if(itsasontziaAurkitu) {
+			zenb=0;
+			x=xR;
+			y=yR;
+			yR=10;
+			xR=10;
+			itsasontziaAurkitu=false;
+			System.out.println("Erabiliko dut koordenatua: x "+x+" eta y "+y);
+		}
+		do {		
+			if (zenb == 9 || zenb==5) {
 				if(getArmaKop(new Ezkutua()) >0) tiro=ezkutuaErabili(x,y);
-				else zenb=r.nextInt(9);
 			}else if(!ukituak[x][y]) {
 				if (zenb == 8) {
-					if(getArmaKop(new Misil()) >0) misilErabili(x, y);
-					else zenb=r.nextInt(10);
+					if(getArmaKop(new Misil()) >0) {
+						misilErabili(x, y);
+						tiro=true;
+					} 
 				}
 				else if (zenb == 7) {
 					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
-					else zenb=r.nextInt(10);
 				} else if (zenb == 6) {
-					this.ontziaKonpondu(x, y);
-				} 
-				else new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
-				tiro=true;
+					ontziaKonpondu(x,y);
+				}else {
+					new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+					tiro=true;
+					System.out.println("Bonba bota dut koordenatua: x "+x+" eta y "+y);
+				}
 			}
+			x = r.nextInt(10);
+			y = r.nextInt(10);
+			zenb=r.nextInt(10);
 		}while(!tiro);
-		txanda++;
 	 }
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//*********************************************** TIROAK *******************************************************
 		
@@ -318,6 +352,7 @@ public class Bot extends Jokalari{
 	public boolean ezkutuaErabili(int x, int y) {
 		boolean erabili=new Ezkutua().erabili(x, y, nireItsasontziak);
 		if(erabili) {
+			System.out.println("Ezkutua jarri du BOT-a x "+x+" eta y "+y);
 			this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
 		}
 		return erabili;
@@ -460,7 +495,7 @@ public class Bot extends Jokalari{
 		}while(!ezkutuKokatua);
 	}*/
 	
-	@Override
+	//@Override
 	/*public void ezkutuaXTxikitu(int x, int y, int k) {
 		int hX=x;
 		int hY=y;
@@ -515,16 +550,36 @@ public class Bot extends Jokalari{
 		
 		
 	//************************** KONPONKETAK **************************************************
-		public void ontziaKonpondu(int x, int y) {
-			if(!nireItsasontziak.urperatutaDago(x,y) && nireItsasontziak.itsasontziaDuGelaxka(x, y) && nireItsasontziak.ukitutaDago(x, y)) {
-				nireItsasontziak.gelaxkaKonpondu(x, y);
-				baliabideak.erosketaPrezioaKendu(); 
-				System.out.println("Holaaaaaaaaaaaaaa"+x+" x da eta hau y "+y);
-				setChanged();
-				notifyObservers(new int[] {x,y,11,1});	
+
+	
+	//x eta y pasatu eta posizio horretarik aurrera konpontzen saiatzen du
+	
+	public void ontziaKonpondu (int x, int y) {
+		boolean konpondua=false;
+		int i=x;
+		int j=y;
+		System.out.println("Bot-ak HASI konponketa hemen:  X --> "+i+" eta  Y --> "+j);
+		while(i<=9 && !konpondua) {
+			while(j<=9 && !konpondua) {
+				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
+					nireItsasontziak.gelaxkaKonpondu(i, j);
+					baliabideak.erosketaPrezioaKendu(); 
+					System.out.println("Bot-ak konpondu du X --> "+i+" eta  Y --> "+j);
+					setChanged();
+					notifyObservers(new int[] {i,j,11,1});	
+					konpondua=true;
+				}
+				j++;
 			}
-			
+			j=0;
+			i++;
 			
 		}
+	
+	}
+	
+	
+	
+	
 
 }

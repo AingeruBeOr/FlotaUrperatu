@@ -9,9 +9,12 @@ public class Misil extends Arma {
 	}
 	
 	public boolean erabili(int x, int y, Tablero tablero) {
+		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
-			if(tablero.ezkutuaDago(x, y)) ezkutuaKendu(x,y, tablero);
-			else ontziaUrperatu(x, y, tablero);
+			if(tablero.ezkutuaDago(x, y)) {
+				if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(x, y);
+				ezkutuaKendu(x,y, tablero);
+			}else ontziaUrperatu(x, y, tablero);
 		}else {
 				FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 0);
 				/*setChanged();
@@ -28,6 +31,18 @@ public class Misil extends Arma {
 	
 	private void ontziaUrperatu(int x, int y, Tablero tablero) {
 		gelaxkaUrperatu(x,y, tablero);
+		
+		//esto hay k cambiarrrr
+		
+		if (FlotaUrperatu.getNireFlotaUrperatu().getTxanda()){
+			int dirua=JokNormal.getNireJok().getDirua()+tablero.kalkulatuIrabazi(x, y);
+			JokNormal.getNireJok().setDirua(dirua);
+		}
+		else {
+			
+		}
+	
+		
 		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
 			this.ezkerrekoakUrperatu( x-1, y, tablero); 	
 		}

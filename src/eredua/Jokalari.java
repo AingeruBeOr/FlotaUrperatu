@@ -58,7 +58,11 @@ public abstract class Jokalari extends Observable{
 	 * Jokalariraren dirua eguneratzen du
 	 * @param pDiru geratuko den ditu kantitate berria
 	 */
-	public void setDirua(int pDiru) {baliabideak.setDirua(pDiru);}
+	public void setDirua(int pDiru) {
+		baliabideak.setDirua(pDiru);
+		setChanged();
+		notifyObservers(new int[] {3,0});
+	}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	

@@ -44,6 +44,9 @@ public class Tablero extends Observable{
 	public boolean ukitutaDago(int x, int y) {
 		return tablero[x][y].ukitutaDu();
 	}
+	public boolean osoaDago(int x, int y) {
+		return tablero[x][y].osoaDago();
+	}
 	
 	
 	public void gelaxkaKonpondu(int x, int y) { //gelaxka ez ukituta (itsasontzia) ipini
@@ -117,4 +120,8 @@ public class Tablero extends Observable{
 		return tablero[x][y].ezkutuaDago();
 	}
 	
+	
+	public int kalkulatuIrabazi(int x, int y) {
+		return tablero[x][y].kalkulatuIrabazi();
+	}
 }
