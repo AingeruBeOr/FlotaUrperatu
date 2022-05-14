@@ -36,7 +36,15 @@ public class FlotaUrperatu extends Observable{
 		setChanged();
 		notifyObservers(new int[] {x, y, pCase, level, lehena});
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getTxanda() {return this.txanda;}
+	
+	/**
+	 * 
+	 */
 	public void aldatuTxanda() {
 		txanda=!txanda;
 		setChanged();
@@ -47,10 +55,7 @@ public class FlotaUrperatu extends Observable{
 			setChanged();
 			notifyObservers(new int[] {0});
 		}
-		else if(!txanda){
-			Bot.getNireBot().txandaJokatu();
-		}
-		
+		else if(!txanda) Bot.getNireBot().txandaJokatu();
 	}
 	
 	public void botTxanda() { 

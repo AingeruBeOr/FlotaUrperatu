@@ -572,37 +572,24 @@ public class Tablero extends JFrame implements Observer{
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 			JokNormal jokNormal = JokNormal.getNireJok();
 			JLabel jl = (JLabel) e.getComponent();
-			
-			if(rdbtnEzkutu.isSelected() || rdbtnKonponketak.isSelected()) { //zure matrizean klik
-				int index = zerrendaJok.indexOf(jl);
+			int index = zerrendaJok.indexOf(jl);
+			if(rdbtnEzkutu.isSelected() || rdbtnKonponketak.isSelected()) { //true bada, jokalariaren matrizean klik egin behar da
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
-					//jokNormal.ezkutuaJarri(x,y);
-					if (rdbtnEzkutu.isSelected()) {
-						jokNormal.txandaJokatu(x, y, new Ezkutua());
-					}
-					else if (rdbtnKonponketak.isSelected()) {
-						jokNormal.ontziaKonpondu(x, y);
-						//diruaEguneratu();
-					}
-					
+					if (rdbtnEzkutu.isSelected()) jokNormal.txandaJokatu(x, y, new Ezkutua());
+					else if (rdbtnKonponketak.isSelected()) jokNormal.ontziaKonpondu(x, y);
 				}
 				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
-				
 			}
-			else {
-				int index = zerrendaBot.indexOf(jl);
+			else { //bestela, bot-aren matrizean klik egin behar du
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
 					if(!jokNormal.ukitutaZegoen(x, y)) { //jadanik puntu horretan tiro egin ez badu
 						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Misil());
 						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
-				
-						else {
-							jokNormal.txandaJokatu(x, y, new Bonba());
-						}
+						else jokNormal.txandaJokatu(x, y, new Bonba());
 						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 					}
 					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");

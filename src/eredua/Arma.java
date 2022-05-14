@@ -29,5 +29,13 @@ public abstract class Arma extends Observable {
 	public int getPrezioa() {
 		return prezioa;
 	}
+	
+	/**
+	 * 
+	 * @param x arma erabiliko den tableoaren gaineko x koordenatua
+	 * @param y arma erabiliko den tableraren gaineko y koordenatua
+	 * @param tablero Tablero klasearen instantzia bat da non arma berearen gainean erabili beharko den
+	 * @return true bueltatuko du arma erabiltzea lortu bada eta false bestela
+	 */
 	public abstract boolean erabili(int x, int y, Tablero tablero);
 }

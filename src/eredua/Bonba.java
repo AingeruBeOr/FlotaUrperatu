@@ -4,15 +4,28 @@ public class Bonba extends Arma {
 	
 	public Bonba() {super();}
 	
+	/**
+	 * Hurrengoa egiten da:
+	 * <ol>
+	 * 		<li>Parametroaren tableroan (x,y) kooordenatuan itsasontzia badago:
+	 * 		<ol>
+	 * 			<li>(x,y) koordenatuan tableroa badago:</li>
+	 * 		</ol>
+	 * 		</li>
+	 * 		<li>Parametroaren tableroan (x,y) kooordenatuan itsasontzia ez badago:</li>
+	 * 		
+	 * </ol>
+	 */
 	public boolean erabili(int x, int y, Tablero tablero) {
-		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 		boolean ezk=false;
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(tablero.ezkutuaDago(x, y)) {
 				if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(x, y);
 				this.ezkutuaTxikitu(x, y, tablero);
 				ezk=true;
-			}else {
+			}
+			else {
 				if (ontziOsoaUkituDu(x,y, tablero)) {
 					Arma m=new Misil();
 					m.erabili(x, y, tablero);
@@ -25,7 +38,8 @@ public class Bonba extends Arma {
 				}
 			}
 			
-		}else {
+		}
+		else {
 			fu.bistanEkintzaBurutu(x, y, 0);
 			/*setChanged();
 			notifyObservers(new int[] {x,y,0});*/
