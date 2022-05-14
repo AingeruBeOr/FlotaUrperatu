@@ -572,8 +572,8 @@ public class Tablero extends JFrame implements Observer{
 			FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
 			JokNormal jokNormal = JokNormal.getNireJok();
 			JLabel jl = (JLabel) e.getComponent();
-			int index = zerrendaJok.indexOf(jl);
 			if(rdbtnEzkutu.isSelected() || rdbtnKonponketak.isSelected()) { //true bada, jokalariaren matrizean klik egin behar da
+				int index = zerrendaJok.indexOf(jl);
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
@@ -583,6 +583,7 @@ public class Tablero extends JFrame implements Observer{
 				else getLblArazoa().setText("Klik egin botaren tableroaren lauki batean, mesedez.");
 			}
 			else { //bestela, bot-aren matrizean klik egin behar du
+				int index = zerrendaBot.indexOf(jl);
 				if(index != -1) {
 					int x = index%10;
 					int y = index/10;
