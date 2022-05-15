@@ -1,4 +1,5 @@
 package eredua;
+import java.util.Random;
 
 public class Bonba extends Arma {
 	
@@ -46,11 +47,11 @@ public class Bonba extends Arma {
 		}
 		if(!ezk) {
 			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-				//JokNormal.getNireJok().ukituak[x][y]=true; 
-				JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
+				JokNormal.getNireJok().ukituak[x][y]=true; 
+				//JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
 			}else {
-				//Bot.getNireBot().ukituak[x][y]=true;
-				Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
+				Bot.getNireBot().ukituak[x][y]=true;
+				//Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
 			} 
 		}
 		return true;
@@ -68,21 +69,36 @@ public class Bonba extends Arma {
 		boolean behekoak=false;
 		boolean ezkerrekoak=false;
 		boolean eskumakoak=false;
-			
+		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
+		Random r=new Random();
+		int gogoratu=r.nextInt(10);
+		
 		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
 			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y, tablero); 	
+			if(!fu.getTxanda() && gogoratu==1) {
+				Bot.getNireBot().koordenatuakGogoratu(x-1, y);
+			}
 		}
 		
 		if (x<9 && tablero.itsasontziaDuGelaxka(x+1, y)) {
-			eskumakoak=this.eskumakoakAztertu( x+1, y, tablero);	
+			eskumakoak=this.eskumakoakAztertu( x+1, y, tablero);
+			if(!fu.getTxanda() && gogoratu==1) {
+				Bot.getNireBot().koordenatuakGogoratu(x+1, y);
+			}
 		}
 					
 		if (y>0 && tablero.itsasontziaDuGelaxka(x, y-1)) {
 			goikoak=this.goikoakAztertu( x, y-1, tablero);	
+			if(!fu.getTxanda() && gogoratu==1) {
+				Bot.getNireBot().koordenatuakGogoratu(x, y-1);
+			}
 		}
 		
 		if (y<9 && tablero.itsasontziaDuGelaxka(x, y+1)) {
 			behekoak=this.behekoakAztertu( x, y+1, tablero);
+			if(!fu.getTxanda() && gogoratu==1) {
+				Bot.getNireBot().koordenatuakGogoratu(x, y+1);
+			}
 		}
 		
 		if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago

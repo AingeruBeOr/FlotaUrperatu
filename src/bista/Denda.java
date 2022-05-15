@@ -104,6 +104,7 @@ public class Denda extends JFrame {
 		contentPane.add(getNorth(), BorderLayout.NORTH);
 		contentPane.add(getSouth(), BorderLayout.SOUTH);
 		setLocationRelativeTo(null);
+		eguneratu();
 	}
 	private JPanel getCenter() {
 		if (center == null) {

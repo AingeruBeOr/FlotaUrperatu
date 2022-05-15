@@ -29,19 +29,18 @@ public class Radarra extends Arma{
 						notifyObservers(new int[] {i,j,0});*/
 						//tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-							System.out.println("Ukitu dudan kasilla: x "+i+" eta y "+j);
-							//JokNormal.getNireJok().ukituak[i][j]=true; 
-							JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
+							JokNormal.getNireJok().ukituak[i][j]=true; 
+							//JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(i, j);
 						}else {
-							//Bot.getNireBot().ukituak[i][j]=true;
-							Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
+							Bot.getNireBot().ukituak[i][j]=true;
+							//Bot.getNireBot().nireUkituetanGelaxkaAldatu(i, j);
 						}
 					}
 				}			
 			}
 		}
 		if (!aurkituDu) {
-			fu.bistanEkintzaBurutu(x,y,4);
+			fu.bistanEkintzaBurutu(x,y,6);
 			/*setChanged();
 			notifyObservers(new int[] {x,y,6});*/
 		}
