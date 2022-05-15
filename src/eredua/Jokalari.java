@@ -63,6 +63,10 @@ public abstract class Jokalari extends Observable{
 		return ukituak[x][y];
 	}
 	
+	public void nireUkituetanGelaxkaAldatu(int x, int y) {
+		this.ukituak[x][y]=true;
+	}
+	
 	public boolean itsasontziaDaukat(int x,int y) {
 		return this.nireItsasontziak.itsasontziaDuGelaxka(x, y);
 	}

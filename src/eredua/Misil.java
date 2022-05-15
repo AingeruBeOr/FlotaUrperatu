@@ -21,9 +21,11 @@ public class Misil extends Arma {
 				notifyObservers(new int[] {x,y,0});*/
 				tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
 				if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-					JokNormal.getNireJok().ukituak[x][y]=true; 
+					//JokNormal.getNireJok().ukituak[x][y]=true; 
+					JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
 				}else {
-					Bot.getNireBot().ukituak[x][y]=true;
+					//Bot.getNireBot().ukituak[x][y]=true;
+					Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
 				}
 			}	
 		return true;
@@ -89,9 +91,11 @@ public class Misil extends Arma {
 		notifyObservers(new int[] {x,y,2});*/
 		tablero.gelaxkariArmaAplikatu(x, y, new Misil());
 		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-			JokNormal.getNireJok().ukituak[x][y]=true; 
+			//JokNormal.getNireJok().ukituak[x][y]=true; 
+			JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
 		}else {
-			Bot.getNireBot().ukituak[x][y]=true;
+			//Bot.getNireBot().ukituak[x][y]=true;
+			Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
 		}
 	}
 	private void ezkutuaKendu(int x, int y, Tablero tablero) {

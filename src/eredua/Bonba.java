@@ -46,9 +46,11 @@ public class Bonba extends Arma {
 		}
 		if(!ezk) {
 			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-				JokNormal.getNireJok().ukituak[x][y]=true; 
+				//JokNormal.getNireJok().ukituak[x][y]=true; 
+				JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
 			}else {
-				Bot.getNireBot().ukituak[x][y]=true;
+				//Bot.getNireBot().ukituak[x][y]=true;
+				Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
 			} 
 		}
 		return true;
