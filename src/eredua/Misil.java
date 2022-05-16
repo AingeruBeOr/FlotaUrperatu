@@ -1,5 +1,8 @@
 package eredua;
 
+import java.util.Arrays;
+
+
 public class Misil extends Arma {
 	
 	public Misil() {super(250);}
@@ -60,16 +63,19 @@ public class Misil extends Arma {
 	}
 	
 	private void goikoakUrperatu ( int x, int y, Tablero tablero) {
-		while (y>=0 && Bot.getNireBot().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
+		while (y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			gelaxkaUrperatu(x,y, tablero);
 			y--;
 		}
+		
+	
 	}
 	private void behekoakUrperatu ( int x, int y, Tablero tablero) {
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			gelaxkaUrperatu(x,y, tablero);
 			y++;
 		}
+		
 	}
 	private void ezkerrekoakUrperatu ( int x, int y, Tablero tablero) {
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
