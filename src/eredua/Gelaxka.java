@@ -3,18 +3,12 @@ package eredua;
 public class Gelaxka{
 	private Itsasontzi itsasontzi;
 	
-	//private Egoera egoera;
-	
-	//private int ezkutua; // 0 --> ezkuturik ez ; 1 --> ezkutu erdia ; 2 --> ezkutu osoa
-	
 	public Gelaxka() {
 		
 	}
 	
 	public boolean uraDu() {
-		if (itsasontzi==null) {
-			return true;
-		}
+		if (itsasontzi==null) return true;
 		return false;
 	}
 	
@@ -22,111 +16,50 @@ public class Gelaxka{
 		if(itsasontzi!=null) itsasontzi.egoeraKlik(pArma);
 	}
 	
+	/**
+	 * Gekaxkan itsasontzia dagoen ala ez jakiteko erabiltzen da.
+	 * @return true itsasontzia badago eta false bestela.
+	 */
 	public boolean itsasontziaDago() {
 		return !uraDu();
 	}
-	
+	/**
+	 * Gelaxkan itsasontzia badago, ukitua dagoen adieraziko du.
+	 * @return true itsasontzia badago eta ukituta badago, false beste kasu guztietan.
+	 */
 	public boolean ukitutaDu() {
-		if(itsasontzi!=null &&itsasontzi.ukitutaDago()) {return true;}
+		if(itsasontzi!=null && itsasontzi.ukitutaDago()) return true;
 		return false;
 	}
 	
 	public boolean urperatutaDu() {
-		if(itsasontzi!=null && itsasontzi.urperatutaDago()) {return true;}
+		if(itsasontzi!=null && itsasontzi.urperatutaDago()) return true;
 		return false;
 	}
 	public boolean ezkutuaDago() {
-		if(itsasontzi!=null &&itsasontzi.ezkututaDago()) {return true;}
+		if(itsasontzi!=null && itsasontzi.ezkututaDago()) return true;
 		return false;
-		
 	}
+	/**
+	 * Gelaxkan itsasontzia badago, gelaxka hori ukitu gabe dagoen adieraziko du.
+	 * @return 
+	 */
 	public boolean osoaDago() {
-		if(itsasontzi!=null &&itsasontzi.osoaDago()) {return true;}
+		if(itsasontzi!=null && itsasontzi.osoaDago()) return true;
 		return false;
 	}
 	public void erreparatu() {
 		if(itsasontzi!=null) this.itsasontzi.egoeraAldatu(new Osoa());
 	}
 	public void aldatuItsasontzia(int pL) {
-		if(pL==0) {
-			itsasontzi=null;
-		}else {
-			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
-		}
+		if(pL==0) itsasontzi=null;
+		else itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
 	}
 	
 	
 	public int kalkulatuIrabazi() {
 		int prezioa=0;
-		if (itsasontzi!=null) {
-			prezioa=itsasontzi.kalkulatuIrabazia();
-		}
+		if (itsasontzi!=null) prezioa=itsasontzi.kalkulatuIrabazia();
 		return prezioa;
 	}
-	/*
-	public Gelaxka( int pItsasontzi) {
-		if(pItsasontzi==0) {
-			egoera=Egoera.URA;
-		}else {
-			egoera=Egoera.ITSASONTZIA;
-			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pItsasontzi);
-		}
-		ezkutua = 0;
-	}
-	
-	public boolean itsasontziaDu() { //este metodo te dice si la egoera es = itsasontzi
-		//TODO no se si esto da bien asi
-		if(egoera.equals(Egoera.ITSASONTZIA)) {return true;}
-		return false;
-	}
-	public boolean uraDu() {
-		//TODO no se si esto da bien asi
-		if(egoera.equals(Egoera.URA)) {return true;}
-		return false;
-	}
-	public boolean ukitutaDu() {
-		//TODO no se si esto da bien asi
-		if(egoera.equals(Egoera.UKITUA)) {return true;}
-		return false;
-	}
-	public boolean urperatutaDu() {
-		//TODO no se si esto da bien asi
-		if(egoera.equals(Egoera.URPERATUTA)) {return true;}
-		return false;
-	}
-	public void aldatuEgoera(Egoera pE) {egoera=pE;}
-	
-	public void aldatuItsasontzia(int pL) {
-		if(pL==0) {
-			egoera=Egoera.URA;
-			itsasontzi=null;
-		}else {
-			egoera=Egoera.ITSASONTZIA;
-			itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
-		}
-	}
-	
-	
-	public boolean itsasontziaDagoZegoen() { 
-		if (itsasontzi!=null) {
-			return true;
-		}
-		return false;
-	}
-	
-	public void setEzkutua(int level) {
-		ezkutua = level;
-	}
-	public int ezkutuaXTxikitu(int k) {
-		if(k==2) ezkutua=0;
-		else ezkutua--;
-		return ezkutua;
-	}
-	
-	public boolean ezkutuaDago() {
-		if(ezkutua == 1 || ezkutua == 2) return true;
-		else return false;
-	}
-	
-	*/
 }

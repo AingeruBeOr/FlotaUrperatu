@@ -15,33 +15,26 @@ public class Ezkutua extends Arma{
 	 * @param x koordenatua
 	 * @param y koordenatua
 	 */
-	
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(!tablero.ezkutuaDago(x, y)) {
-				if(this.ontziaOsoaDago(x, y, tablero)) { //!super.ontziOsoaUrperatuDu(x, y)
+				if(this.ontziaOsoaDago(x, y, tablero)) {
 					ezkutuaIpini(x, y, tablero);
 					return true;
 				}else {
 					//posizio horretan dagoen itsasontzia ondoratuta dago:
 					fu.bistanEkintzaBurutu(x, y, 10);
-					/*setChanged();
-					notifyObservers(new int[] {x,y,10});*/
 				}
 			}
 			else {
 				//posizio horretan jadanik dago ezkutu bat:
 				fu.bistanEkintzaBurutu(x, y, 9);
-				/*setChanged();
-				notifyObservers(new int[] {x,y,9});*/
 			}
 		}
 		else {
-			//posizio horretan ezkutu bat ezin du ipini:
+			//posizio horretan ezkutu bat ezin du ipini itsasontzirik ez dagoelako
 			fu.bistanEkintzaBurutu(x, y, 8);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,8});*/
 		}
 		return false;
 	}
@@ -57,67 +50,45 @@ public class Ezkutua extends Arma{
 		int hX=x;
 		int hY=y;
 		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) { //gorantz begiratu
-			//this.nireItsasontziak.setEzkutua(x, y, 2);
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
 			fu.bistanEkintzaBurutu(x, y, 7);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,7});*/
 			y--;
 		}
 		y=hY+1;
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) { //beherantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
 			fu.bistanEkintzaBurutu(x, y, 7);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,7});*/
 			y++;
 		}
 		y=hY;
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) { //ezkerrerantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
 			fu.bistanEkintzaBurutu(x, y, 7);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,7});*/
 			x--;
 		}
 		x=hX+1;
 		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) { //eskuinerantz begiratu
 			tablero.gelaxkariArmaAplikatu(x, y, new Ezkutua());
 			fu.bistanEkintzaBurutu(x, y, 7);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,7});*/
 			x++;
 		}
 	}
 	
+	/**
+	 * Aurrebaldintza: badakigu (x,y) posizioan badagoela itsasontzi bat.
+	 * (x,y) posizioan dagoen ontzia osoa dagoen edo punturen batean ukitua daogen jakiteko erabiltzen da.
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 * @param tablero
+	 * @return
+	 */
 	private boolean ontziaOsoaDago(int x, int y, Tablero tablero) {
-		boolean osoa=true;
-		boolean goikoak=true;
-		boolean behekoak=true;
-		boolean ezkerrekoak=true;
-		boolean eskumakoak=true;
-			
-		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
-			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y, tablero); 
-		}
-		
-		if (x<9 && tablero.itsasontziaDuGelaxka(x+1, y)) {
-			eskumakoak=this.eskumakoakAztertu( x+1, y, tablero);
-		}
-					
-		if (y>0 && tablero.itsasontziaDuGelaxka(x, y-1)) {
-			goikoak=this.goikoakAztertu( x, y-1, tablero);	
-		}
-		
-		if (y<9 && tablero.itsasontziaDuGelaxka(x, y+1)) {
-			behekoak=this.behekoakAztertu( x, y+1, tablero);
-		}
-		
-		if (ezkerrekoak && eskumakoak && goikoak && behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
-			osoa=true;
-		}else osoa=false;
-				
-		return osoa;
+		if(!tablero.osoaDago(x, y)) return false;
+		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) if(!ezkerrekoakAztertu(x-1, y, tablero)) return false;
+		if (x<9 && tablero.itsasontziaDuGelaxka(x+1, y)) if(!eskumakoakAztertu(x+1, y, tablero)) return false;
+		if (y>0 && tablero.itsasontziaDuGelaxka(x, y-1)) if(!goikoakAztertu(x, y-1, tablero)) return false;
+		if (y<9 && tablero.itsasontziaDuGelaxka(x, y+1)) if(!behekoakAztertu(x, y+1, tablero)) return false;
+		return true;
 	}
 	
 	/**
@@ -129,9 +100,7 @@ public class Ezkutua extends Arma{
 	private boolean goikoakAztertu(int x, int y, Tablero tablero) { 
 		boolean aurkitua=true;
 		while (aurkitua && y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
-			if (!tablero.osoaDago(x, y)) {
-				aurkitua=false;
-			}
+			if (!tablero.osoaDago(x, y)) aurkitua=false;
 			y--;
 		}
 		return aurkitua;
@@ -146,9 +115,7 @@ public class Ezkutua extends Arma{
 	private boolean behekoakAztertu(int x, int y, Tablero tablero) {
 		boolean aurkitua=true;
 		while (aurkitua && y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
-			if (!tablero.osoaDago(x, y)) {
-				aurkitua=false;
-			}
+			if (!tablero.osoaDago(x, y)) aurkitua=false;
 			y++;
 		}
 		return aurkitua;
@@ -163,9 +130,7 @@ public class Ezkutua extends Arma{
 	private boolean ezkerrekoakAztertu(int x, int y, Tablero tablero) {
 		boolean aurkitua=true;
 		while (aurkitua && x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
-			if (!tablero.osoaDago(x, y)) {
-				aurkitua=false;
-			}
+			if (!tablero.osoaDago(x, y)) aurkitua=false;
 			x--;
 		}
 		return aurkitua;
@@ -180,9 +145,7 @@ public class Ezkutua extends Arma{
 	private boolean eskumakoakAztertu(int x, int y, Tablero tablero) {
 		boolean aurkitua=true;
 		while (aurkitua && x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
-			if (!tablero.osoaDago(x, y)) {
-				aurkitua=false;
-			}
+			if (!tablero.osoaDago(x, y)) aurkitua = false;
 			x++;
 		}
 		return aurkitua;

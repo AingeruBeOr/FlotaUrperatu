@@ -7,15 +7,10 @@ public class Ezkutu implements EgoeraState{
 		bizitza=2;
 	}
 	
+	@Override
 	public void egoeraKlik(Itsasontzi pItsasontzi, Arma pArma) {
-		if(pArma instanceof Bonba) {
-			bizitza--;
-		}
-		else if (pArma instanceof Misil) {
-			bizitza=0;
-		}
-		if (bizitza==0) {
-			pItsasontzi.egoeraAldatu(new Osoa());
-		}
+		if(pArma instanceof Bonba) bizitza--;
+		else if (pArma instanceof Misil) bizitza=0;
+		if (bizitza==0) pItsasontzi.egoeraAldatu(new Osoa());
 	}
 }
