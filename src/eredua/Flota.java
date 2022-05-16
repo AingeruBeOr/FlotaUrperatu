@@ -46,10 +46,10 @@ public class Flota {
 	
 
 	public void erosketaPrezioaKendu(){ 
-			  dirua = dirua - 75;
+		dirua = dirua - 75;
 	}
 		
-	public void suntziketaPrezioaGehitu(){ 
-			  dirua = dirua + 50;
+	public void suntziketaPrezioaGehitu(){ //TODO donde se utiliza esto???
+		dirua = dirua + 50;
 	}
 }

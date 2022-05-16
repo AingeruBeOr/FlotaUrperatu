@@ -14,6 +14,8 @@ public class Ezkutua extends Arma{
 	 * jarriko zaio bertan dagoen itsaontzi osoari.
 	 * @param x koordenatua
 	 * @param y koordenatua
+	 * @param tablero
+	 * @return true bueltatuko du arma erabiltzea lortu badu eta false bestela
 	 */
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();

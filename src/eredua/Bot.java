@@ -31,9 +31,6 @@ public class Bot extends Jokalari{
 		this.gertaeraLortu();
 		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
-	public void nireUkituetanGelaxkaAldatu(int x, int y) {
-		this.ukituak[x][y]=true;
-	}
 	//********************************** ITSASONTZIAK IPINI *******************************************************
 	public void probazkoOntziakJarri() {
 		botarenItsasontziakKokatu();

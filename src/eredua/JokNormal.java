@@ -14,9 +14,6 @@ public class JokNormal  extends Jokalari{
 		return nireJok;
 	}
 	
-	public void nireUkituetanGelaxkaAldatu(int x, int y) {
-		this.ukituak[x][y]=true;
-	}
 	/**
 	 * Tablerotik adierazitako arma erabiltzen saiatuko da, lortzekotan txanda aldatu egingo da,
 	 * eta arma kopurua eguneratuko du bere baliabideetan, bestela tableroari (beste metodo 

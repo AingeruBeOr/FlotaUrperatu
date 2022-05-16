@@ -17,14 +17,15 @@ public class Bonba extends Arma {
 	 * 		
 	 * </ol>
 	 */
+	@Override
 	public boolean erabili(int x, int y, Tablero tablero) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
-		boolean ezk=false;
+		boolean ezkutuaDago = false;
 		if(tablero.itsasontziaDuGelaxka(x, y)) {
 			if(tablero.ezkutuaDago(x, y)) {
+				ezkutuaDago = true;
 				if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(x, y);
 				this.ezkutuaTxikitu(x, y, tablero);
-				ezk=true;
 			}
 			else {
 				if (ontziOsoaUkituDu(x,y, tablero)) {
@@ -34,25 +35,15 @@ public class Bonba extends Arma {
 				else {
 					tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 					fu.bistanEkintzaBurutu(x, y,1);
-					/*setChanged();
-					notifyObservers(new int[] {x,y,1});*/
 				}
 			}
-			
 		}
 		else {
 			fu.bistanEkintzaBurutu(x, y, 0);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,0});*/
 		}
-		if(!ezk) {
-			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-				//JokNormal.getNireJok().ukituak[x][y]=true; 
-				JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(x, y);
-			}else {
-				//Bot.getNireBot().ukituak[x][y]=true;
-				Bot.getNireBot().nireUkituetanGelaxkaAldatu(x, y);
-			} 
+		if(!ezkutuaDago) {
+			if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) JokNormal.getNireJok().gelaxkaUkituaJarri(x, y);
+			else Bot.getNireBot().gelaxkaUkituaJarri(x, y);
 		}
 		return true;
 	}
@@ -106,8 +97,6 @@ public class Bonba extends Arma {
 		}
 		if (urperatuta) {
 			FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 5);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,5});*/
 		}			
 		return urperatuta;
 	}
@@ -190,8 +179,6 @@ public class Bonba extends Arma {
 			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1, lehena);
 			else fu.bistanEkintzaBurutu(x, y, 3, 0, lehena);
 			lehena++;
-			/*setChanged();
-			notifyObservers(new int[] {x, y, 3, level});*/
 			y--;
 		}
 		y=hY+1;
@@ -199,8 +186,6 @@ public class Bonba extends Arma {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1, lehena);
 			else fu.bistanEkintzaBurutu(x, y, 3, 0, lehena);
-			/*setChanged();
-			notifyObservers(new int[] {x, y, 3, level});*/
 			y++;
 		}
 		y=hY;
@@ -209,8 +194,6 @@ public class Bonba extends Arma {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1, lehena);
 			else fu.bistanEkintzaBurutu(x, y, 3, 0, lehena);
-			/*setChanged();
-			notifyObservers(new int[] {x, y, 3, level});*/
 			x--;
 		}
 		x=hX+1;
@@ -218,8 +201,6 @@ public class Bonba extends Arma {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 			if(tablero.ezkutuaDago(x, y)) fu.bistanEkintzaBurutu(x, y, 3, 1, lehena);
 			else fu.bistanEkintzaBurutu(x, y, 3, 0, lehena);
-			/*setChanged();
-			notifyObservers(new int[] {x, y, 3, level});*/
 			x++;
 		}
 	}

@@ -23,15 +23,6 @@ public class Tablero extends Observable{
 	}
 	
 	public boolean ontzirenBatGeratzenDa() {
-		/*boolean ema=false;
-			for (int i=0; i<10; i++) {
-				for (int j=0; j<10; j++) {
-					if (!(tablero[i][j].urperatutaDu()||tablero[i][j].uraDu())) { //tablero[i][j].itsasontziaDu()
-						ema=true;
-					}
-				}
-			}
-		return ema;*/
 		boolean ema=true;
 		for (int i=0; i<10; i++) {
 			ema=(ema && Arrays.stream(tablero[i])
