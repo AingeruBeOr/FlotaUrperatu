@@ -71,7 +71,7 @@ public class Bonba extends Arma {
 		boolean eskumakoak=false;
 		FlotaUrperatu fu= FlotaUrperatu.getNireFlotaUrperatu();
 		Random r=new Random();
-		int gogoratu=r.nextInt(10);
+		int gogoratu=r.nextInt(5);
 		
 		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
 			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y, tablero); 	
