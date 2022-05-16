@@ -422,9 +422,6 @@ public class Tablero extends JFrame implements Observer{
 		}
 		return rdbtnKonponketak;
 	}
-	private void updateKonponketak() {
-		if(JokNormal.getNireJok().getDirua() < 75) getRdbtnKonponketak().setEnabled(false);
-	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
@@ -549,7 +546,12 @@ public class Tablero extends JFrame implements Observer{
 	//********************************************IRUDIEN AMAIERA**********************************************************
 	private void diruaEguneratu() {
 		getLblDirua().setText("Dirua: " + JokNormal.getNireJok().getDirua());
-		updateKonponketak();
+		//Konponketen botoia bakarrik aukeragarri egongo da dira 75 edo handiagoa bada.
+		if(JokNormal.getNireJok().getDirua() < 75) {
+			getRdbtnKonponketak().setEnabled(false);
+			getRdbtnBonba().setSelected(true);
+		}
+		else getRdbtnKonponketak().setEnabled(true);
 	}
 	
 	//********************** KONTROLADOREA ****************************************
@@ -619,8 +621,37 @@ public class Tablero extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		FlotaUrperatu fu = FlotaUrperatu.getNireFlotaUrperatu();
-		if(arg != null) {
-			int[] array = (int[]) arg;
+		if(arg == null) {
+			if(fu.getTxanda()) this.txandaAldatu(true);
+			else this.txandaAldatu(false);
+		}
+		else if(arg != null) {
+			int[] array = (int[]) arg; //parametro bezala jasotzen den elementua, int motako array bat da.
+			if(array.length == 1) bistaEzkutatu();
+			else if(array.length == 2) { 
+				/*
+				 * Arrayaren lehenengo posizioa, eguneratu beharreko arma mota adierazten du:
+				 * 		0 --> Misila
+				 * 		1 --> Radarra
+				 * 		2 --> Ezkutua
+				 * Hirugarren aukera, dirua eguneratzeko balio du:
+				 * 		3 --> Dirua eguneratu behar da
+				 * */
+				switch(array[0]) {
+				case 0:
+					updateBtnMisil();
+					break;
+				case 1:
+					updateBtnRadar();
+					break;
+				case 2:
+					updateBtnEzkutu();
+					break;
+				case 3:
+					diruaEguneratu();
+					break;
+				}
+			}
 			if(array.length == 3 || array.length==4|| array.length==5) {
 				/*ARRAY-AREN 2. POSIZIOA JARRI BEHARKO ZAION KOLOREA ADIERAZIKO DU:
 				 * 0 -> URA UKITU DU (URDINA)
@@ -731,36 +762,6 @@ public class Tablero extends JFrame implements Observer{
 				}
 				
 			}
-			else if(array.length == 2) { 
-				/*
-				 * Arrayaren lehenengo posizioa eguneratu beharreko arma mota adierazten du:
-				 * 		0 --> Misila
-				 * 		1 --> Radarra
-				 * 		2 --> Ezkutua
-				 * Hirugarren aukera dirua eguneratzeko balio du:
-				 * 		3 --> Dirua eguneratu behar da
-				 * */
-				switch(array[0]) {
-				case 0:
-					updateBtnMisil();
-					break;
-				case 1:
-					updateBtnRadar();
-					break;
-				case 2:
-					updateBtnEzkutu();
-					break;
-				case 3:
-					diruaEguneratu();
-					break;
-				}
-			}
-			else if(array.length == 1) bistaEzkutatu();
 		}
-		else if(arg == null) {
-			if(fu.getTxanda()) this.txandaAldatu(true);
-			else this.txandaAldatu(false);
-		}	
 	}
-	
 }

@@ -55,13 +55,12 @@ public class Tablero extends Observable{
 	}
 	
 	
-	public void gelaxkaKonpondu(int x, int y) { //gelaxka ez ukituta (itsasontzia) ipini
-		//tablero[x][y].aldatuEgoera(Egoera.ITSASONTZIA);
+	public void gelaxkaKonpondu(int x, int y) { 
 		tablero[x][y].erreparatu();
 		if(!FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-			JokNormal.getNireJok().ukituak[x][y]=false; 
+			JokNormal.getNireJok().ukituak[x][y]=false; //gelaxka ez ukituta (itsasontzia) ipini
 		}else {
-			Bot.getNireBot().ukituak[x][y]=false;
+			Bot.getNireBot().ukituak[x][y]=false; //gelaxka ez ukituta (itsasontzia) ipini
 		} 
 	}
 	

@@ -20,8 +20,11 @@ import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Denda extends JFrame {
 
@@ -94,7 +97,8 @@ public class Denda extends JFrame {
 		initialize();
 	}
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new Kontroladore()); //lehioa ixtearen kudeaketa Kontroladore klaseak egingo du
 		setBounds(100, 100, 522, 371);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -460,6 +464,9 @@ public class Denda extends JFrame {
 		if(geratzenDirua < radarPrezio) getBtnRadarGehitu().setEnabled(false);
 		else getBtnRadarGehitu().setEnabled(true);
 	}
+	private void lehioaItxi(){
+	
+	}
 	
 	
 	
@@ -473,7 +480,7 @@ public class Denda extends JFrame {
 		return kontroladore;
 	}
 	
-	private class Kontroladore implements ActionListener{
+	private class Kontroladore extends WindowAdapter implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton botoi = (JButton) e.getSource();
@@ -512,6 +519,15 @@ public class Denda extends JFrame {
 			}
 			eguneratu();
 		}
+		
+		@Override
+		/**
+		 * X botoiari ematean zer egiten den adierazteko erabiltzen da.
+		 */
+		public void windowClosing(WindowEvent event) {
+			setVisible(false);
+			dispose();
+			nagusia.dendaIrekiItxi(false);
+		}
 	}
-
 }
