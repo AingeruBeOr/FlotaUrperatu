@@ -133,7 +133,6 @@ public class Tablero extends JFrame implements Observer{
 					ImageIcon ura_itsasAdj = new ImageIcon(ura_itsas.getImage().getScaledInstance(37, 43,Image.SCALE_DEFAULT));
 					jokLauki.setIcon(ura_itsasAdj);
 				}
-				//jokLauki.setIcon();
 				matrizeEzk.add(jokLauki);
 				zerrendaJok.add(jokLauki);
 				
@@ -379,7 +378,6 @@ public class Tablero extends JFrame implements Observer{
 			getRdbtnMisil().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
 		}else getRdbtnMisil().setEnabled(true);
-		//return kop;
 	}
 	private JRadioButton getRdbtnRadar() {
 		if (rdbtnRadar == null) {
@@ -396,7 +394,6 @@ public class Tablero extends JFrame implements Observer{
 			getRdbtnRadar().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
 		}else getRdbtnRadar().setEnabled(true);
-		//return kop;
 	}
 	private JRadioButton getRdbtnEzkutu() {
 		if (rdbtnEzkutu == null) {
@@ -413,7 +410,6 @@ public class Tablero extends JFrame implements Observer{
 			getRdbtnEzkutu().setEnabled(false);
 			getRdbtnBonba().setSelected(true);
 		}else getRdbtnEzkutu().setEnabled(true);
-		//return kop;
 	}
 	private JRadioButton getRdbtnKonponketak() {
 		if (rdbtnKonponketak == null) {
