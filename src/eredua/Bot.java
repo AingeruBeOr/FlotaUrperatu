@@ -1,6 +1,7 @@
 package eredua;
 
 import java.util.Random;
+import java.util.List;
 
 public class Bot extends Jokalari{
 	//private int txanda;
@@ -560,7 +561,16 @@ public class Bot extends Jokalari{
 		boolean konpondua=false;
 		int i=x;
 		int j=y;
+		/*
+		List <Gelaxka> lista=nireItsasontziak.urperatuak(y);
 		System.out.println("Bot-ak HASI konponketa hemen:  X --> "+i+" eta  Y --> "+j);
+		System.out.println(lista.size()+"bbbbbbbbbbbbbbbbbbbbbbbbbb");
+		if(lista.size()!=0) {
+			System.out.println(lista.get(1)+"BOTAREN KONPONKETAAAAAAAAAAAAAAAAAAA");
+		}
+		*/
+		
+
 		while(i<=9 && !konpondua) {
 			while(j<=9 && !konpondua) {
 				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
@@ -577,6 +587,7 @@ public class Bot extends Jokalari{
 			i++;
 			
 		}
+		
 	
 	}
 	

@@ -1,8 +1,14 @@
 package eredua;
 
+
 import java.util.Observable;
 import java.util.Arrays;
 import java.util.*;
+import java.util.List;
+
+
+
+import static java.util.stream.Collectors.*;
 
 public class Tablero extends Observable{
 	private Gelaxka[][] tablero;
@@ -33,6 +39,7 @@ public class Tablero extends Observable{
 		}
 		return !ema;
 	}
+	
 	
 	/*
 	public void gelaxkaUrperatutaIpini(int x, int y) {
@@ -129,4 +136,23 @@ public class Tablero extends Observable{
 	public int kalkulatuIrabazi(int x, int y) {
 		return tablero[x][y].kalkulatuIrabazi();
 	}
+	
+	
+	
+	
+	/*botaren konponketarako
+	public List<Gelaxka> urperatuak(int y){
+		List<Gelaxka> l = null;
+		for (int i=y; i<10; i++) {
+			 l= Arrays.stream(tablero[i]).filter(p->p.ukitutaDu()).collect(toList());
+			 System.out.println(l.size()+"ajajjjjjjjjjjsdjjdjj");
+			 if (l.size()!=0) {
+				 l.add((Gelaxka) Arrays.stream(tablero[i]).filter(p->p.ukitutaDu()));
+			 }
+			 System.out.println(l.size()+"aaaaaaaaaaaaaa");
+		}
+		System.out.println(l.size());
+		return l;	
+	}
+	*/
 }
