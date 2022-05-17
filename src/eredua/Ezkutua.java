@@ -26,17 +26,17 @@ public class Ezkutua extends Arma{
 					return true;
 				}else {
 					//posizio horretan dagoen itsasontzia ondoratuta dago:
-					fu.bistanEkintzaBurutu(x, y, 10);
+					if(fu.getTxanda()) fu.bistanEkintzaBurutu(x, y, 10);
 				}
 			}
 			else {
 				//posizio horretan jadanik dago ezkutu bat:
-				fu.bistanEkintzaBurutu(x, y, 9);
+				if(fu.getTxanda()) fu.bistanEkintzaBurutu(x, y, 9);
 			}
 		}
 		else {
 			//posizio horretan ezkutu bat ezin du ipini itsasontzirik ez dagoelako
-			fu.bistanEkintzaBurutu(x, y, 8);
+			if(fu.getTxanda()) fu.bistanEkintzaBurutu(x, y, 8);
 		}
 		return false;
 	}

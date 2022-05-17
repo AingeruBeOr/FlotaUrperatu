@@ -14,10 +14,22 @@ public abstract class Jokalari extends Observable{
 		nireItsasontziak= new Tablero();
 	}
 	
-	
+	/**
+	 * (x,y) posizioan dagoen ontzia konpontzeko erabiltzen da
+	 * @param x koordenatua
+	 * @param y koordenatua
+	 */
 	protected abstract void ontziaKonpondu(int x, int y);
 	
+	/**
+	 * 
+	 * @return true urperatu gabeko ontziak geratzen badira eta false bestela
+	 */
 	public boolean ontzirenBatGeratzenDa() {return nireItsasontziak.ontzirenBatGeratzenDa();}
+	
+	public void ontziaUrperatzeanDirua(int pDirua) {
+		baliabideak.suntziketaPrezioaGehitu(pDirua);
+	}
 	
 	/**
 	 * Parametro bezala pasatzen zaion arma kantitatea itzuliko du
@@ -41,15 +53,6 @@ public abstract class Jokalari extends Observable{
 	 */
 	public int getDirua() {return baliabideak.getDirua();}
 	
-	/**
-	 * Jokalariraren dirua eguneratzen du
-	 * @param pDiru geratuko den ditu kantitate berria
-	 */
-	public void setDirua(int pDiru) {
-		baliabideak.setDirua(pDiru);
-		setChanged();
-		notifyObservers(new int[] {3,0});
-	}
 	
 	//************************************ UKITUAK ZEHAZTEKO ***********************************************
 	
@@ -71,14 +74,6 @@ public abstract class Jokalari extends Observable{
 		return this.nireItsasontziak.itsasontziaDuGelaxka(x, y);
 	}
 	
-	/**
-	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
-	 * @param x x koordenatua
-	 * @param y y koordenatua
-	 * @return
-	 */
-	//public abstract boolean ukituDuItsasontzia(int x, int y);
-	
 	//************************** ITSASONTZIAK KOKATU**************************************************
 	
 	public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
@@ -87,24 +82,4 @@ public abstract class Jokalari extends Observable{
 	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {
 		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
 	}
-	
-	//************************** RADARRA **********************************************************************************
-	//protected abstract void radarraKontsultatu(int x, int y);
-	
-	
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @return true bueltatuko du (x,y) posizioan ezkutu bat badago
-	 */
-	public boolean ezkutuaDago(int x, int y) {
-		return this.nireItsasontziak.ezkutuaDago(x, y);
-	}
-	
-	//TODO BESTE
-	
-	/*public Arma getArma(Arma arma) {
-		return this.armak.getArma(arma);
-	}*/
 }

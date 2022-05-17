@@ -30,6 +30,7 @@ public class Flota {
 	 */
 	public void armamentuaErosi(Arma pArma, int pKop) {
 		armak.armamentuaErosi(pArma, pKop);
+		setDirua(getDirua() - pKop*pArma.getPrezioa());
 	}
 	
 	/**
@@ -42,14 +43,17 @@ public class Flota {
 	 * Jokalariraren dirua eguneratzen du
 	 * @param pDiru geratuko den ditu kantitate berria
 	 */
-	public void setDirua(int pDiru) {this.dirua = pDiru;}
+	private void setDirua(int pDiru) {
+		this.dirua = pDiru;
+		if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(3,0);
+	}
 	
 
 	public void erosketaPrezioaKendu(){ 
 		dirua = dirua - 75;
 	}
 		
-	public void suntziketaPrezioaGehitu(){ //TODO donde se utiliza esto???
-		dirua = dirua + 50;
+	public void suntziketaPrezioaGehitu(int pDirua) {
+		setDirua(getDirua() + pDirua);
 	}
 }

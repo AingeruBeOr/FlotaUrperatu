@@ -17,33 +17,17 @@ public class Radarra extends Arma{
 					if (tablero.itsasontziaDuGelaxka(i,j) && !tablero.ukitutaEdoUrperatutaZegoen(i,j)){
 						fu.bistanEkintzaBurutu(i,j,4);
 						if(!fu.getTxanda()) Bot.getNireBot().koordenatuakGogoratu(i, j);
-						//tablero.gelaxkariArmaAplikatu(i, j, new Radarra());
-						
-						/*setChanged();
-						notifyObservers(new int[] {i,j,4});*/
 						aurkituDu=true;
 					}
 					else if(!tablero.itsasontziaDuGelaxka(i,j)) {
 						fu.bistanEkintzaBurutu(i,j,0);
-						/*setChanged();
-						notifyObservers(new int[] {i,j,0});*/
-						//tablero.gelaxkariArmaAplikatu(x, y, new Bonba());
-						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) {
-							JokNormal.getNireJok().ukituak[i][j]=true; 
-							//JokNormal.getNireJok().nireUkituetanGelaxkaAldatu(i, j);
-						}else {
-							Bot.getNireBot().ukituak[i][j]=true;
-							//Bot.getNireBot().nireUkituetanGelaxkaAldatu(i, j);
-						}
+						if(FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) JokNormal.getNireJok().ukituak[i][j]=true; 
+						else Bot.getNireBot().ukituak[i][j]=true;
 					}
 				}			
 			}
 		}
-		if (!aurkituDu) {
-			fu.bistanEkintzaBurutu(x,y,6);
-			/*setChanged();
-			notifyObservers(new int[] {x,y,6});*/
-		}
+		if (!aurkituDu) fu.bistanEkintzaBurutu(x,y,6);
 		return true;
 	}
 }

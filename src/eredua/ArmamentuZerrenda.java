@@ -15,6 +15,11 @@ public class ArmamentuZerrenda {
 		this.ezkutuak = new Ezkutua(e);
 	}
 	
+	/**
+	 * Arma mota baten arma kopurua begiratzeko erabiltzen da
+	 * @param arma arma mota
+	 * @return arma mota kopurua
+	 */
 	public int getArmaKop(Arma arma) {
 		int bueltatzeko = 0;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak.getKop();
@@ -24,6 +29,11 @@ public class ArmamentuZerrenda {
 		return bueltatzeko;
 	}
 	
+	/**
+	 * Adierazitako armari -1 egingo dio kantitatean
+	 * @param arma arma mota
+	 * @return arma mota kopurua
+	 */
 	public int armaKantitateaEguneratu(Arma arma) {
 		int bueltatzeko = 0;
 		if(arma instanceof Bonba) bueltatzeko = this.bonbak.kantitatea1unitateJaitsi();
@@ -51,13 +61,4 @@ public class ArmamentuZerrenda {
 			fu.bistanEkintzaBurutu(2, pKop);
 		}
 	}
-	
-	/*public Arma getArma(Arma arma) {
-		Arma bueltatzeko = null;
-		if(arma instanceof Bonba) bueltatzeko = this.bonbak;
-		else if(arma instanceof Misil) 	bueltatzeko =  this.misilak;
-		else if(arma instanceof Radarra) bueltatzeko = this.radarrak;
-		else if(arma instanceof Ezkutua) bueltatzeko =  this.ezkutuak;
-		return bueltatzeko;
-	}*/
 }	

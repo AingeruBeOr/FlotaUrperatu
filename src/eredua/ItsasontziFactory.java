@@ -14,10 +14,10 @@ public class ItsasontziFactory {
 	
 	public Itsasontzi createItsasontzi(int pMota) {
 		Itsasontzi i=null;
-		if(pMota==1) {i=new Fragata();}
-		else if(pMota==2) {i=new Suntsitzaile();}
-		else if(pMota==3) {i=new Itsaspeko();}
-		else if(pMota==4) {i=new HegazkinOntzi();}
+		if(pMota==1) i=new Fragata();
+		else if(pMota==2) i=new Suntsitzaile();
+		else if(pMota==3) i=new Itsaspeko();
+		else if(pMota==4) i=new HegazkinOntzi();
 		return i;
 	}
 }

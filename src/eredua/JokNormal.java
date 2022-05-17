@@ -32,8 +32,14 @@ public class JokNormal  extends Jokalari{
 			if(pArma instanceof Bonba || pArma instanceof Misil) FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 			int kop = this.baliabideak.armaKantitateaEguneratu(pArma);
 			int arma=0;
-			if (pArma instanceof Radarra) arma = 1;
-			else if(pArma instanceof Ezkutua) arma = 2;
+			if (pArma instanceof Radarra) {
+				System.out.println("Radarra erabili da (" + x + "," + y + ") koordenatuan.");
+				arma = 1;
+			}
+			else if(pArma instanceof Ezkutua) {
+				System.out.println("Ezkutua erabili da (" + x + "," + y + ") koordenatuan.");
+				arma = 2;
+			}
 			setChanged();
 			notifyObservers(new int[] {arma,kop}); 
 		}
@@ -53,4 +59,6 @@ public class JokNormal  extends Jokalari{
 			notifyObservers(new int[] {x,y,12});
 		}
 	}
+	
+	
 }

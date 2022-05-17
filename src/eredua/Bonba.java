@@ -28,10 +28,7 @@ public class Bonba extends Arma {
 				this.ezkutuaTxikitu(x, y, tablero);
 			}
 			else {
-				if (ontziOsoaUkituDu(x,y, tablero)) {
-					Arma m=new Misil();
-					m.erabili(x, y, tablero);
-				}
+				if (ontziOsoaUkituDu(x,y, tablero)) ontziaUrperatu(x, y, tablero);
 				else {
 					tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
 					fu.bistanEkintzaBurutu(x, y,1);
@@ -65,39 +62,29 @@ public class Bonba extends Arma {
 		int gogoratu=r.nextInt(5);
 		
 		if (x>0 && tablero.itsasontziaDuGelaxka(x-1, y) ) { 
-			ezkerrekoak=this.ezkerrekoakAztertu( x-1, y, tablero); 	
-			if(!fu.getTxanda() && gogoratu==1) {
-				Bot.getNireBot().koordenatuakGogoratu(x-1, y);
-			}
+			ezkerrekoak=this.ezkerrekoakAztertu(x-1, y, tablero); 	
+			if(!fu.getTxanda() && gogoratu==1) Bot.getNireBot().koordenatuakGogoratu(x-1, y);
 		}
 		
 		if (x<9 && tablero.itsasontziaDuGelaxka(x+1, y)) {
 			eskumakoak=this.eskumakoakAztertu( x+1, y, tablero);
-			if(!fu.getTxanda() && gogoratu==1) {
-				Bot.getNireBot().koordenatuakGogoratu(x+1, y);
-			}
+			if(!fu.getTxanda() && gogoratu==1) Bot.getNireBot().koordenatuakGogoratu(x+1, y);
 		}
 					
 		if (y>0 && tablero.itsasontziaDuGelaxka(x, y-1)) {
 			goikoak=this.goikoakAztertu( x, y-1, tablero);	
-			if(!fu.getTxanda() && gogoratu==1) {
-				Bot.getNireBot().koordenatuakGogoratu(x, y-1);
-			}
+			if(!fu.getTxanda() && gogoratu==1) Bot.getNireBot().koordenatuakGogoratu(x, y-1);
 		}
 		
 		if (y<9 && tablero.itsasontziaDuGelaxka(x, y+1)) {
 			behekoak=this.behekoakAztertu( x, y+1, tablero);
-			if(!fu.getTxanda() && gogoratu==1) {
-				Bot.getNireBot().koordenatuakGogoratu(x, y+1);
-			}
+			if(!fu.getTxanda() && gogoratu==1) Bot.getNireBot().koordenatuakGogoratu(x, y+1);
 		}
 		
 		if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
 			urperatuta=true;
 		}
-		if (urperatuta) {
-			FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 5);
-		}			
+		if (urperatuta) FlotaUrperatu.getNireFlotaUrperatu().bistanEkintzaBurutu(x, y, 5);
 		return urperatuta;
 	}
 	

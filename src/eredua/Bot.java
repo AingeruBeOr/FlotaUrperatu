@@ -12,12 +12,10 @@ public class Bot extends Jokalari{
 	
 	private Bot() {
 		super();
-		//txanda=0;
 		xR=10;
 		yR=10;
 		this.itsasontziaAurkitu=false;
 		this.probazkoOntziakJarri();
-		//this.txandaJokatu();
 		
 	}
 	public static Bot getNireBot() {
@@ -27,7 +25,7 @@ public class Bot extends Jokalari{
 		return nireBot;
 	}
 	
-	public void txandaJokatu() {		
+	public void txandaJokatu() {
 		this.gertaeraLortu();
 		FlotaUrperatu.getNireFlotaUrperatu().aldatuTxanda();
 	}
@@ -35,13 +33,6 @@ public class Bot extends Jokalari{
 	public void probazkoOntziakJarri() {
 		botarenItsasontziakKokatu();
 	}
-	/*public void ontziaKokatu(int pX, int pY, boolean pHorizontal, int pLuz) {
-		nireItsasontziak.ontziaKokatu(pX, pY, pHorizontal, pLuz);
-	}
-	
-	public boolean ontziaKokatuAhalDa(int pX, int pY, boolean pHorizontal, int pLuz) {f
-		return nireItsasontziak.ontziaKokatuAhalDa(pX, pY, pHorizontal, pLuz);
-	}*/
 	
 	private void botarenItsasontziakKokatu(){
 		hegazkinOntziaKokatu();
@@ -83,20 +74,14 @@ public class Bot extends Jokalari{
 	private void itsaspekoaKokatu(){
 		Random r = new Random();
 		int luzera = 3;
-		int horber =  r.nextInt(2);
+		int horber = r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
 			int x = r.nextInt(10);
 			int y = r.nextInt(10);
-			if (horber == 0){
-				horizontal = true;
-			}
-
-			else{
-				horizontal = false;
-			}
-			
+			if (horber == 0) horizontal = true;
+			else horizontal = false;
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
@@ -108,20 +93,14 @@ public class Bot extends Jokalari{
 	private void suntzitzaileaKokatu(){
 		Random r = new Random();
 		int luzera = 2;
-		int horber =  r.nextInt(2);
+		int horber = r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
 			int x = r.nextInt(10);
 			int y = r.nextInt(10);
-			if (horber == 0){
-				horizontal = true;
-			}
-
-			else{
-				horizontal = false;
-			}
-			
+			if (horber == 0) horizontal = true;
+			else horizontal = false;
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
@@ -133,20 +112,14 @@ public class Bot extends Jokalari{
 	private void fragataKokatu(){
 		Random r = new Random();
 		int luzera = 1;
-		int horber =  r.nextInt(2);
+		int horber = r.nextInt(2);
 		boolean horizontal;
 		boolean kokatua = false;
 		while (!kokatua){
 			int x = r.nextInt(10);
 			int y = r.nextInt(10);
-			if (horber == 0){
-				horizontal = true;
-			}
-
-			else{
-				horizontal = false;
-			}
-			
+			if (horber == 0) horizontal = true;
+			else horizontal = false;
 			if (ontziaKokatuAhalDa(x, y, horizontal, luzera)){
 				ontziaKokatu(x, y, horizontal, luzera);
 				kokatua = true;
@@ -155,145 +128,20 @@ public class Bot extends Jokalari{
 			}
 		}
 	}
-	//********************************************** UKITUAK *******************************************************
-	/**
-	 * true bueltatuko du adieraztiako posizioan itsasontzi bat ukitu badu tiro egitean edo false bestela
-	 * @param x: x koordenatua
-	 * @param y: y koordenatua
-	 * @return
-	 */
-	/*public boolean ukituDuItsasontzia(int x, int y) {
-		if(JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) return true;
-		else return false;
-	}
-	public boolean ontziOsoaUkituDu(int x, int y) {
-		boolean urperatuta=false;
-		boolean goikoak=false;
-		boolean behekoak=false;
-		boolean ezkerrekoak=false;
-		boolean eskumakoak=false;	
-
-		if(ukituDuItsasontzia(x,y)) {
-			
-			if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-				ezkerrekoak=this.ezkerrekoakAztertu( x-1, y); 	
-			}
-			if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-				eskumakoak=this.eskumakoakAztertu( x+1, y);	
-			}
-						
-			if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-				goikoak=this.goikoakAztertu( x, y-1);	
-			}
-			
-			if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-				behekoak=this.behekoakAztertu( x, y+1);
-			}	
-			if (!ezkerrekoak && !eskumakoak && !goikoak && !behekoak) { //guztiak ukituta daudenean, (ez duzu ez ukiturik aurkitu) orduan itsasontzia urperatuta dago
-				urperatuta=true;
-			}
-			if (urperatuta) {
-				setChanged();
-				notifyObservers(new int[] {x,y,5});
-			}			
-		}
-		return urperatuta;
-	}
-	
-	/**
-	 *  true urperatuta ez dagoen gelaxka aurkitzen badu
-	 * @param x
-	 * @param y
-	 * @return 
-	 */
-	/*private boolean goikoakAztertu(int x, int y) { 
-		boolean aurkitua=false;
-		while (!aurkitua && y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
-			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
-				aurkitua=true;
-			}
-			y--;
-		}	
-		return aurkitua;
-	}
-	
-	private boolean behekoakAztertu(int x, int y) {
-		boolean aurkitua=false;
-		while (!aurkitua && y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
-			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
-				aurkitua=true;
-			}
-			y++;
-		}	
-		return aurkitua;
-	}
-	
-	private boolean ezkerrekoakAztertu(int x, int y) {
-		boolean aurkitua=false;
-		while (!aurkitua && x>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
-			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
-				aurkitua=true;
-			}
-			x--;
-		}	
-		return aurkitua;
-	}
-	
-	private boolean eskumakoakAztertu(int x, int y) {
-		boolean aurkitua=false;
-		while (!aurkitua && x<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y) ) {
-			if (!JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(x, y)) {
-				aurkitua=true;
-			}
-			x++;
-		}	
-		return aurkitua;
-	}*/
-	
 	//************************************ GERTAERA RANDOM ***************************************************
-	//TODO MÉTODO PARA OBTENER NÚMEROS RANDOM Y QUE DEPENDIENDO DEL NÚMERO SE UTILICE UN ARMA DIFERENTE
-	
-	/*private void gertaeraLortu() {
-		//limiteak ezarri
-		Random r= new Random();
-		int x, y;
-		int min = 1;
-		//int max = 10;
-		
-		//Zenbaki bat lortu
-		int zenb = min + r.nextInt(10);
-		
-		System.out.println("Lortutako zenbakia: " + zenb);
-		boolean tiro=false;
-		do {
-			x = r.nextInt(10);
-			y = r.nextInt(10);
-			if (zenb == 10 && getArmaKop(new Ezkutua()) >0) ezkutuaErabili(x,y);
-			else if(!ukituak[x][y]) {
-				if (zenb == 4 && getArmaKop(new Misil()) >0) misilErabili(x, y);
-				else if (zenb == 7 && getArmaKop(new Radarra()) >0) radarraErabili(x, y);
-				else tiroEgin();
-				tiro=true;
-			}
-		}while(!tiro);
-		txanda++;
-	 }*/
-	
 	public void koordenatuakGogoratu(int x,int y) {
 		System.out.println("Gorde dut koordenatua: x "+x+" eta y "+y);
-		xR=x;
-		yR=y;
+		xR = x;
+		yR = y;
 		this.itsasontziaAurkitu=true;
 	}
 	
 	private void gertaeraLortu() {
-		Random r= new Random();
-		int x, y;
-		int zenb = r.nextInt(10);
-		x = r.nextInt(10);
-		y = r.nextInt(10);
-		System.out.println("Lortutako zenbakia: " + zenb);
-		boolean tiro=false;
+		Random r = new Random();
+		int zenb = r.nextInt(10); 
+		int x = r.nextInt(10);
+		int y = r.nextInt(10);
+		boolean tiro = false;
 		if(itsasontziaAurkitu) {
 			zenb=0;
 			x=xR;
@@ -304,20 +152,18 @@ public class Bot extends Jokalari{
 			System.out.println("Erabiliko dut koordenatua: x "+x+" eta y "+y);
 		}
 		do {		
-			if (zenb == 9 || zenb==5) {
-				if(getArmaKop(new Ezkutua()) >0) tiro=ezkutuaErabili(x,y);
-			}else if(!ukituak[x][y]) {
+			if ((zenb == 9 || zenb == 5) && getArmaKop(new Ezkutua()) > 0) ezkutuaErabili(x,y);
+			else if(!ukituak[x][y]) {
 				if (zenb == 8) {
 					if(getArmaKop(new Misil()) >0) {
 						misilErabili(x, y);
 						tiro=true;
 					} 
 				}
-				else if (zenb == 7) {
-					if( getArmaKop(new Radarra()) >0) radarraErabili(x, y);
-				} else if (zenb == 6) {
-					ontziaKonpondu(x,y);
-				}else {
+				else if(zenb == 7 && getArmaKop(new Radarra()) > 0) radarraErabili(x, y);
+				else if(zenb == 6 && getDirua() > 75) ontziaKonpondu(x,y);
+				else if(zenb == 5) armamentuErosketa();
+				else {
 					new Bonba().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
 					tiro=true;
 					System.out.println("Bonba bota dut koordenatua: x "+x+" eta y "+y);
@@ -326,16 +172,8 @@ public class Bot extends Jokalari{
 			x = r.nextInt(10);
 			y = r.nextInt(10);
 			zenb=r.nextInt(10);
-		}while(!tiro);
+		} while(!tiro);
 	 }
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	//*********************************************** TIROAK *******************************************************
 		
@@ -349,211 +187,21 @@ public class Bot extends Jokalari{
 		this.baliabideak.armaKantitateaEguneratu(new Radarra());
 	}
 	
-	public boolean ezkutuaErabili(int x, int y) {
-		boolean erabili=new Ezkutua().erabili(x, y, nireItsasontziak);
+	public void ezkutuaErabili(int x, int y) {
+		boolean erabili = new Ezkutua().erabili(x, y, nireItsasontziak);
 		if(erabili) {
 			System.out.println("Ezkutua jarri du BOT-a x "+x+" eta y "+y);
 			this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
 		}
-		return erabili;
 	}
 
-	/*public void gelaxkaUkitutaIpini(int x, int y) {
-		if(ukituDuItsasontzia(x,y)) {
-			setChanged();
-			notifyObservers(new int[] {x,y,1});
-		}else {
-			setChanged();
-			notifyObservers(new int[] {x,y,0});
-		}
-		JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-		Bot.getNireBot().ukituak.gelaxkaUkituaIpini(x, y);
-		
-	}*/
-	
-	/*public void gelaxkaUrperatu(int x, int y) {
-		setChanged();
-		notifyObservers(new int[] {x,y,2});
-		JokNormal.getNireJok().nireItsasontziak.gelaxkaUrperatutaIpini(x, y);
-		ukituak[x][y]=true; //--> Bot.getNireBot().ukituak.gelaxkaUrperatutaIpini(x, y);
-	}*/
-	
-	
-	
-	//********************************** MISIL TIROA *******************************************************
-	/*private void misilTiroa( int x, int y) {
-		System.out.println("Bot-ak misil bat kokatu du (" + x + ", " + y + ") koordenatuetan");
-		if(JokNormal.getNireJok().ezkutuaDago(x, y)) JokNormal.getNireJok().ezkutuaXTxikitu(x, y, 2);
-		else if(ukituDuItsasontzia(x,y)) ontziaUrperatu(x,y);
-		else {
-			setChanged();
-			notifyObservers(new int[] {x,y,0});
-			JokNormal.getNireJok().nireItsasontziak.gelaxkaUkituaIpini(x, y);
-			ukituak[x][y]=true;
-		}
-		//misil kantitatea eguneratu:
-		armaKantitateaEguneratu(new Misil());
-	}*/
-	
-
-	
-	//****************************************ONTZI OSOA URPERATU*****************************************************
-	
-	/*public void ontziaUrperatu(int x, int y) {
-		gelaxkaUrperatu(x,y);
-		if (x>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x-1, y) ) { 
-			this.ezkerrekoakUrperatu( x-1, y); 	
-		}
-		if (x<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x+1, y)) {
-			this.eskumakoakUrperatu( x+1, y);	
-		}
-					
-		if (y>0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y-1)) {
-			this.goikoakUrperatu( x, y-1);	
-		}
-		if (y<9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y+1)) {
-			this.behekoakUrperatu( x, y+1);
-		}
-	}
-	
-	private void goikoakUrperatu ( int x, int y) {
-		while (y>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			gelaxkaUrperatu(x,y);
-			y--;
-		}
-	}
-	private void behekoakUrperatu ( int x, int y) {
-		while (y<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			gelaxkaUrperatu(x,y);
-			y++;
-		}
-	}
-	private void ezkerrekoakUrperatu ( int x, int y) {
-		while (x>=0 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			gelaxkaUrperatu(x,y);
-			x--;
-		}
-	}
-	
-	private void eskumakoakUrperatu ( int x, int y) {
-		while (x<=9 && JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			gelaxkaUrperatu(x,y);
-			x++;
-		}
-	}*/
-	
-	
-	//********************************** RADAR *******************************************************
-	/*public void radarraKontsultatu(int x, int y) {
-		boolean aurkituDu=false;
-		for(int i=x-1; i<=x+1; i++) {
-			for(int j=y-1; j<=y+1; j++) {
-				if(i>=0 && i<=9 && j>=0 && j<=9 ) {
-					if (JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j) && !JokNormal.getNireJok().nireItsasontziak.ukitutaEdoUrperatutaZegoen(i, j)){
-						setChanged();
-						notifyObservers(new int[] {i,j,4});
-						aurkituDu=true;
-					}
-					else if(!JokNormal.getNireJok().nireItsasontziak.itsasontziaDuGelaxka(i, j)) {
-						setChanged();
-						notifyObservers(new int[] {i,j,0});
-					}
-						
-				}
-			}
-		}
-		System.out.println("Bot-ak radar bat kokatu du (" + x + ", " + y + ") koordenatuetan");
-		if (!aurkituDu) {
-			setChanged();
-			notifyObservers(new int[] {x,y,6});
-		}
-		//radar kantitatea eguneratu:
-		armaKantitateaEguneratu(new Radarra());
-	}*/
-
-	//********************************** EZKUTUA *******************************************************
-	//Ezkutua ontzia babesten du misil batetik edo bi bonbetatik
-	/*private void ezkutuaKokatu() {
-		int x;
-		int y;
-		Random r=new Random();
-		boolean ezkutuKokatua = false;	
-		do{
-			x = r.nextInt(10);
-			y = r.nextInt(10);
-			if (super.itsasontziaDaukat(x, y)) {
-				if (!super.ezkutuaDago(x, y)) {
-					if (!nireItsasontziak.urperatutaDago(x, y)) {
-						super.ezkutuaIpini(x, y);
-						armaKantitateaEguneratu(new Ezkutua());
-						//ezkutuKop = ezkutuKop --;
-						System.out.println("Bot-ak ezkutu bat kokatu du (" + x + ", " + y + ") koordenatuetan");
-						ezkutuKokatua=true;
-					}
-				}
-			}
-		}while(!ezkutuKokatua);
-	}*/
-	
-	//@Override
-	/*public void ezkutuaXTxikitu(int x, int y, int k) {
-		int hX=x;
-		int hY=y;
-		int level = this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-		setChanged();
-		notifyObservers(new int[] {x, y, 3, level});
-		if(level == 0) { //itsasontzia kendu eta gero klik egin zaion azken posizioari horiz ipintzeko erabiltzen da.
-			setChanged();
-			notifyObservers(new int[] {x,y,3,2});
-		}
-		y--;
-		while(y>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			if(level == 0) {
-				setChanged();
-				notifyObservers(new int[] {x, y, 3, level});
-			}
-			y--;
-		}
-		y=hY+1;
-		while (y<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			if(level == 0) {
-				setChanged();
-				notifyObservers(new int[] {x, y, 3, level});
-			}
-			y++;
-		}
-		y=hY;
-		x=hX-1;
-		while (x>=0 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			if(level == 0) {
-				setChanged();
-				notifyObservers(new int[] {x, y, 3, level});
-			}
-			x--;
-		}
-		x=hX+1;
-		while (x<=9 && nireItsasontziak.itsasontziaDuGelaxka(x, y)) {
-			this.nireItsasontziak.ezkutuaXTxikitu(x,y, k);
-			if(level == 0) {
-				setChanged();
-				notifyObservers(new int[] {x, y, 3, level});
-			}
-			x++;
-		}
-	}*/
-	//********************************** EROSKETAK *******************************************************
-		//public void armamentuaErosi() {}
 	
 		
 		
 	//************************** KONPONKETAK **************************************************
 
 	
-	//x eta y pasatu eta posizio horretarik aurrera konpontzen saiatzen du
-	
+	@Override
 	public void ontziaKonpondu (int x, int y) {
 		boolean konpondua=false;
 		int i=x;
@@ -566,8 +214,6 @@ public class Bot extends Jokalari{
 			System.out.println(lista.get(1)+"BOTAREN KONPONKETAAAAAAAAAAAAAAAAAAA");
 		}
 		*/
-		
-
 		while(i<=9 && !konpondua) {
 			while(j<=9 && !konpondua) {
 				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
@@ -576,20 +222,21 @@ public class Bot extends Jokalari{
 					System.out.println("Bot-ak konpondu du X --> "+i+" eta  Y --> "+j);
 					setChanged();
 					notifyObservers(new int[] {i,j,11,1});	
-					konpondua=true;
+					konpondua = true;
 				}
 				j++;
 			}
 			j=0;
 			i++;
-			
 		}
-		
-	
 	}
 	
-	
-	
-	
-
+	//************************** EROSKETAK ***********************************************************
+	private void armamentuErosketa() {
+		while(getDirua() > new Misil().getPrezioa()) {
+			if(getDirua() > new Radarra().getPrezioa()) armamentuaErosi(new Radarra(),1);
+			if(getDirua() > new Ezkutua().getPrezioa()) armamentuaErosi(new Ezkutua(),1);
+			if(getDirua() > new Misil().getPrezioa()) armamentuaErosi(new Misil(),1);
+		}
+	}
 }

@@ -46,29 +46,30 @@ public class FlotaUrperatu extends Observable{
 	 * 
 	 */
 	public void aldatuTxanda() {
-		txanda=!txanda;
-		setChanged();
-		notifyObservers(null);
 		if(jokoaAmaituDa()) {
 			Irabazlea.main(null);
 			//Tableroa kendu:
 			setChanged();
 			notifyObservers(new int[] {0});
 		}
-		else if(!txanda) Bot.getNireBot().txandaJokatu();
+		else {
+			txanda=!txanda;
+			setChanged();
+			notifyObservers(null);
+			if(txanda) System.out.println("\n\n************ Jokalariaren txanda ****************");
+			else {
+				System.out.println("\n\n************ BOT-aren txanda ****************");
+				Bot.getNireBot().txandaJokatu();
+			}
+		}		
 	}
 	
-	public void botTxanda() { 
-		Bot.getNireBot().txandaJokatu();
-	}
-	
-
-	public boolean jokoaAmaituDa() {
-		return !ontzirenBatGeratzenDa();
-	}
-	
-	private boolean ontzirenBatGeratzenDa() {
-		return (Bot.getNireBot().ontzirenBatGeratzenDa() && 
+	/**
+	 * 
+	 * @return true jokoa amaitu bada
+	 */
+	private boolean jokoaAmaituDa() {
+		return !(Bot.getNireBot().ontzirenBatGeratzenDa() && 
 				JokNormal.getNireJok().ontzirenBatGeratzenDa());
 	}
 	

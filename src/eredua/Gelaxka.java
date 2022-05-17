@@ -32,14 +32,24 @@ public class Gelaxka{
 		return false;
 	}
 	
+	/**
+	 * Gelaxkan itsasontzia badago, urperatuta daogen adieraziko du.
+	 * @return true itsasontzia badago eta urperatuta badago, false bestela
+	 */
 	public boolean urperatutaDu() {
 		if(itsasontzi!=null && itsasontzi.urperatutaDago()) return true;
 		return false;
 	}
+	
+	/**
+	 * Gelaxkan itsasontzia badago, ezkutua daukan adieraziko du.
+	 * @return true itsasontzia badago eta ezkutua badauka, false bestela
+	 */
 	public boolean ezkutuaDago() {
 		if(itsasontzi!=null && itsasontzi.ezkututaDago()) return true;
 		return false;
 	}
+	
 	/**
 	 * Gelaxkan itsasontzia badago, gelaxka hori ukitu gabe dagoen adieraziko du.
 	 * @return 
@@ -48,9 +58,18 @@ public class Gelaxka{
 		if(itsasontzi!=null && itsasontzi.osoaDago()) return true;
 		return false;
 	}
+	
+	/**
+	 * 
+	 */
 	public void erreparatu() {
 		if(itsasontzi!=null) this.itsasontzi.egoeraAldatu(new Osoa());
 	}
+	
+	/**
+	 * 
+	 * @param pL
+	 */
 	public void aldatuItsasontzia(int pL) {
 		if(pL==0) itsasontzi=null;
 		else itsasontzi=ItsasontziFactory.getNireItsasontziFactory().createItsasontzi(pL);
@@ -58,8 +77,7 @@ public class Gelaxka{
 	
 	
 	public int kalkulatuIrabazi() {
-		int prezioa=0;
-		if (itsasontzi!=null) prezioa=itsasontzi.kalkulatuIrabazia();
-		return prezioa;
+		if (itsasontzi!=null) return itsasontzi.kalkulatuIrabazia();
+		return 0;
 	}
 }

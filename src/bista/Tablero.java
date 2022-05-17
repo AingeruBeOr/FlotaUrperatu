@@ -589,7 +589,6 @@ public class Tablero extends JFrame implements Observer{
 						if(rdbtnMisil.isSelected()) jokNormal.txandaJokatu(x, y, new Misil());
 						else if(rdbtnRadar.isSelected()) jokNormal.txandaJokatu(x, y, new Radarra());
 						else jokNormal.txandaJokatu(x, y, new Bonba());
-						System.out.println("TIRO EGIN DUT HONA: X "+x+" ETA Y "+y);
 					}
 					else getLblArazoa().setText("Puntu hori jadanik ukitu duzu. Mesedez, click egin ukitu ez duzun beste puntu batean.");
 				}

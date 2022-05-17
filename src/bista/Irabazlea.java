@@ -69,7 +69,7 @@ public class Irabazlea extends JFrame {
 	private JLabel getZORIONAK() {
 		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if (ZORIONAK == null) {
-			if(!fu.getTxanda()) {ZORIONAK = new JLabel("ZORIONAK!!!");}
+			if(fu.getTxanda()) {ZORIONAK = new JLabel("ZORIONAK!!!");}
 			else {ZORIONAK = new JLabel("OOOOOOH....");}
 			ZORIONAK.setFont(new Font("Wide Latin", Font.BOLD, 40));
 			ZORIONAK.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,7 +79,7 @@ public class Irabazlea extends JFrame {
 	private JLabel getIrabazlea() {
 		FlotaUrperatu fu=FlotaUrperatu.getNireFlotaUrperatu();
 		if (irabazlea == null) {
-			if(!fu.getTxanda()) {irabazlea = new JLabel("IRABAZLEA ZARA!!!");}
+			if(fu.getTxanda()) {irabazlea = new JLabel("IRABAZLEA ZARA!!!");}
 			else{irabazlea = new JLabel("GALDU DUZU...");}
 			irabazlea.setFont(new Font("Wide Latin", Font.PLAIN, 35));
 			irabazlea.setHorizontalAlignment(SwingConstants.CENTER);

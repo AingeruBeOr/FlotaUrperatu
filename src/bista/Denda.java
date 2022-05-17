@@ -464,13 +464,6 @@ public class Denda extends JFrame {
 		if(geratzenDirua < radarPrezio) getBtnRadarGehitu().setEnabled(false);
 		else getBtnRadarGehitu().setEnabled(true);
 	}
-	private void lehioaItxi(){
-	
-	}
-	
-	
-	
-	
 	
 	/************* KONTROLADOREA *****************************/
 	private Kontroladore getKontroladore() {
@@ -509,21 +502,20 @@ public class Denda extends JFrame {
 				getBtnRadarKendu().setEnabled(true);
 			}
 			else if(botoi.equals(btnErosi)) {
-				JokNormal.getNireJok().setDirua(geratzenDirua);
+//				JokNormal.getNireJok().setDirua(geratzenDirua);
 				JokNormal.getNireJok().armamentuaErosi(new Misil(), misilKop);
 				JokNormal.getNireJok().armamentuaErosi(new Ezkutua(), ezkutuKop);
 				JokNormal.getNireJok().armamentuaErosi(new Radarra(), radarKop);
-			//TODO
 				setVisible(false);
 				nagusia.dendaIrekiItxi(false);
 			}
 			eguneratu();
 		}
 		
-		@Override
 		/**
 		 * X botoiari ematean zer egiten den adierazteko erabiltzen da.
 		 */
+		@Override
 		public void windowClosing(WindowEvent event) {
 			setVisible(false);
 			dispose();
