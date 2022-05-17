@@ -1,8 +1,5 @@
 package eredua;
 
-import java.util.Arrays;
-
-
 public class Misil extends Arma implements ArmaSuntsitzaile{
 	
 	public Misil() {super(250);}
@@ -34,26 +31,26 @@ public class Misil extends Arma implements ArmaSuntsitzaile{
 		int hY=y;
 		while(y>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			fu.bistanEkintzaBurutu(x, y, 3, 0,0);
 			y--;
 		}
 		y=hY+1;
 		while (y<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			fu.bistanEkintzaBurutu(x, y, 3, 0,0);
 			y++;
 		}
 		y=hY;
 		x=hX-1;
 		while (x>=0 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			fu.bistanEkintzaBurutu(x, y, 3, 0,0);
 			x--;
 		}
 		x=hX+1;
 		while (x<=9 && tablero.itsasontziaDuGelaxka(x, y)) {
 			tablero.gelaxkariArmaAplikatu(x, y, new Bonba());;
-			fu.bistanEkintzaBurutu(x, y, 3, 0);
+			fu.bistanEkintzaBurutu(x, y, 3, 0,0);
 			x++;
 		}
 	}

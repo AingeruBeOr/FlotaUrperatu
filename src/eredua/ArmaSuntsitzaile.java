@@ -14,6 +14,7 @@ public interface ArmaSuntsitzaile {
 		if (x<9 && tablero.itsasontziaDuGelaxka(x+1, y)) eskumakoakUrperatu( x+1, y, tablero);	
 		if (y>0 && tablero.itsasontziaDuGelaxka(x, y-1)) goikoakUrperatu( x, y-1, tablero);	
 		if (y<9 && tablero.itsasontziaDuGelaxka(x, y+1)) behekoakUrperatu( x, y+1, tablero);
+		if (!FlotaUrperatu.getNireFlotaUrperatu().getTxanda()) System.out.println("Dudan dirua: "+ Bot.getNireBot().getDirua());
 	}
 	
 	private void goikoakUrperatu ( int x, int y, Tablero tablero) {

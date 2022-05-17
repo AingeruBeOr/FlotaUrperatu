@@ -1,16 +1,10 @@
 package eredua;
 
 
-import java.util.Observable;
+
 import java.util.Arrays;
-import java.util.*;
-import java.util.List;
 
-
-
-import static java.util.stream.Collectors.*;
-
-public class Tablero extends Observable{
+public class Tablero {
 	private Gelaxka[][] tablero;
 	
 	public Tablero() {
@@ -99,12 +93,6 @@ public class Tablero extends Observable{
 		return tablero[x][y].itsasontziaDago();
 	}
 	
-	/*public int ezkutuaXTxikitu(int x, int y, int k) {
-		return tablero[x][y].ezkutuaXTxikitu(k);
-	}
-	public void setEzkutua(int x,int y, int level) {
-		tablero[x][y].setEzkutua(level);		
-	}*/
 	public void gelaxkariArmaAplikatu(int x, int y, Arma pArma) {
 		tablero[x][y].armaAplikatu(pArma);
 	}
@@ -119,21 +107,4 @@ public class Tablero extends Observable{
 	}
 	
 	
-	
-	
-	/*botaren konponketarako
-	public List<Gelaxka> urperatuak(int y){
-		List<Gelaxka> l = null;
-		for (int i=y; i<10; i++) {
-			 l= Arrays.stream(tablero[i]).filter(p->p.ukitutaDu()).collect(toList());
-			 System.out.println(l.size()+"ajajjjjjjjjjjsdjjdjj");
-			 if (l.size()!=0) {
-				 l.add((Gelaxka) Arrays.stream(tablero[i]).filter(p->p.ukitutaDu()));
-			 }
-			 System.out.println(l.size()+"aaaaaaaaaaaaaa");
-		}
-		System.out.println(l.size());
-		return l;	
-	}
-	*/
 }

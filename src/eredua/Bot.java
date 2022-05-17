@@ -1,10 +1,8 @@
 package eredua;
 
 import java.util.Random;
-import java.util.List;
 
 public class Bot extends Jokalari{
-	//private int txanda;
 	private int xR;
 	private int yR;
 	private boolean itsasontziaAurkitu;
@@ -152,7 +150,7 @@ public class Bot extends Jokalari{
 			System.out.println("Erabiliko dut koordenatua: x "+x+" eta y "+y);
 		}
 		do {		
-			if ((zenb == 9 || zenb == 5) && getArmaKop(new Ezkutua()) > 0) ezkutuaErabili(x,y);
+			if ((zenb == 9 || zenb == 4) && getArmaKop(new Ezkutua()) > 0) ezkutuaErabili(x,y);
 			else if(!ukituak[x][y]) {
 				if (zenb == 8) {
 					if(getArmaKop(new Misil()) >0) {
@@ -179,18 +177,20 @@ public class Bot extends Jokalari{
 		
 	public void misilErabili(int x, int y) {
 		new Misil().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+		System.out.println("Misila erabili dut: x "+x+" eta y "+y);
 		this.baliabideak.armaKantitateaEguneratu(new Misil());
 	}
 	
 	public void radarraErabili(int x, int y) {
 		new Radarra().erabili(x, y, JokNormal.getNireJok().nireItsasontziak);
+		System.out.println("Radarra erabili dut: x "+x+" eta y "+y);
 		this.baliabideak.armaKantitateaEguneratu(new Radarra());
 	}
 	
 	public void ezkutuaErabili(int x, int y) {
 		boolean erabili = new Ezkutua().erabili(x, y, nireItsasontziak);
 		if(erabili) {
-			System.out.println("Ezkutua jarri du BOT-a x "+x+" eta y "+y);
+			System.out.println("Ezkutua jarri dut x "+x+" eta y "+y);
 			this.baliabideak.armaKantitateaEguneratu(new Ezkutua());
 		}
 	}
@@ -206,14 +206,6 @@ public class Bot extends Jokalari{
 		boolean konpondua=false;
 		int i=x;
 		int j=y;
-		/*
-		List <Gelaxka> lista=nireItsasontziak.urperatuak(y);
-		System.out.println("Bot-ak HASI konponketa hemen:  X --> "+i+" eta  Y --> "+j);
-		System.out.println(lista.size()+"bbbbbbbbbbbbbbbbbbbbbbbbbb");
-		if(lista.size()!=0) {
-			System.out.println(lista.get(1)+"BOTAREN KONPONKETAAAAAAAAAAAAAAAAAAA");
-		}
-		*/
 		while(i<=9 && !konpondua) {
 			while(j<=9 && !konpondua) {
 				if(nireItsasontziak.itsasontziaDuGelaxka(i, j) && nireItsasontziak.ukitutaDago(i, j)) {
@@ -233,10 +225,21 @@ public class Bot extends Jokalari{
 	
 	//************************** EROSKETAK ***********************************************************
 	private void armamentuErosketa() {
+		System.out.println("Botak duen dirua hurrengoa da: "+getDirua());
 		while(getDirua() > new Misil().getPrezioa()) {
-			if(getDirua() > new Radarra().getPrezioa()) armamentuaErosi(new Radarra(),1);
-			if(getDirua() > new Ezkutua().getPrezioa()) armamentuaErosi(new Ezkutua(),1);
-			if(getDirua() > new Misil().getPrezioa()) armamentuaErosi(new Misil(),1);
+			if(getDirua() > new Radarra().getPrezioa()) {
+				armamentuaErosi(new Radarra(),1);
+				System.out.println("Radar bat erosi du bot-ak");
+			}
+			if(getDirua() > new Ezkutua().getPrezioa()) {
+				armamentuaErosi(new Ezkutua(),1);
+				System.out.println("Ezkutu bat erosi du bot-ak");
+			}
+			if(getDirua() > new Misil().getPrezioa()) {
+				armamentuaErosi(new Misil(),1);
+				System.out.println("Misil bat erosi du bot-ak");
+			}
 		}
+		System.out.println("Botari geratu zaion dirua hurrengoa da: "+getDirua());
 	}
 }
