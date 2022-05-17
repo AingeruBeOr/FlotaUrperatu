@@ -3,7 +3,7 @@ package eredua;
 import java.util.Arrays;
 
 
-public class Misil extends Arma {
+public class Misil extends Arma implements ArmaSuntsitzaile{
 	
 	public Misil() {super(250);}
 	

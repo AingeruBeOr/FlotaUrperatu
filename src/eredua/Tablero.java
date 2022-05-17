@@ -31,16 +31,6 @@ public class Tablero extends Observable{
 		return !ema;
 	}
 	
-	
-	/*
-	public void gelaxkaUrperatutaIpini(int x, int y) {
-		tablero[x][y].aldatuEgoera(Egoera.URPERATUTA);
-	}
-	public void gelaxkaUkituaIpini(int x, int y) {
-		tablero[x][y].aldatuEgoera(Egoera.UKITUA);
-	}
-	*/
-	
 	public boolean urperatutaDago(int x, int y) {
 		return tablero[x][y].urperatutaDu();
 	}

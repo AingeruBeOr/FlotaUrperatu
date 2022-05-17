@@ -1,7 +1,7 @@
 package eredua;
 import java.util.Random;
 
-public class Bonba extends Arma {
+public class Bonba extends Arma implements ArmaSuntsitzaile{
 	
 	public Bonba() {super();}
 	
