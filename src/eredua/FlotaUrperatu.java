@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import bista.Irabazlea;
 import bista.Tablero;
-import java.util.*;
+
 public class FlotaUrperatu extends Observable{
 	private static FlotaUrperatu nireFlota;
 	private boolean txanda; //True bada Jokalaria jolasten ari da, bestela bota
