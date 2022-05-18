@@ -27,8 +27,8 @@ public class Menu extends JFrame {
 	private JPanel north;
 	private JLabel JokoIzen;
 	private JButton botoi1;
-	private JButton botoi2;
-	private JButton botoi3;
+	//private JButton botoi2;
+	//private JButton botoi3;
 	private JButton botoi4;
 	private JButton botoi5;
 	private Kontroladore kontroladore;
@@ -72,8 +72,8 @@ public class Menu extends JFrame {
 			center = new JPanel();
 			center.setLayout(new GridLayout(5, 1, 0, 0));
 			center.add(getBotoi1());
-			center.add(getBotoi2());
-			center.add(getBotoi3());
+			//center.add(getBotoi2());
+			//center.add(getBotoi3());
 			center.add(getBotoi4());
 			center.add(getBotoi5());
 		}
@@ -101,6 +101,9 @@ public class Menu extends JFrame {
 		}
 		return botoi1;
 	}
+	
+	//Partida kargatzeko eta ranking-a ikusteteko aukerak etorkizuneko hobenkuntzak dira.
+	/*
 	private JButton getBotoi2() {
 		if (botoi2 == null) {
 			botoi2 = new JButton("Partida kargatu");
@@ -119,6 +122,7 @@ public class Menu extends JFrame {
 		}
 		return botoi3;
 	}
+	*/
 	private JButton getBotoi4() {
 		if (botoi4 == null) {
 			botoi4 = new JButton("Nola jokatu");
@@ -153,6 +157,7 @@ public class Menu extends JFrame {
 				Hasieraketak.main(null);
 				setVisible(false);
 			}
+			/*
 			else if(e.getSource().equals(botoi2)) {
 				
 				//TODO
@@ -160,6 +165,7 @@ public class Menu extends JFrame {
 			else if(e.getSource().equals(botoi3)) {
 				//TODO
 			}
+			*/
 			else if(e.getSource().equals(botoi4)) {
 				try {
 					File objetofile = new File ("./fitxategiak/ARAUAK.pdf");
