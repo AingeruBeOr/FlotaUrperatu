@@ -1,14 +1,12 @@
 package eredua;
 
 public abstract class Itsasontzi {
-	protected int konponketaPrezioa;
-	protected int suntziketaIrabazia;
+	protected final int konponketaPrezioa = 75;
+	protected final int suntziketaIrabazia = 50;
 	private EgoeraState egoera;
 	protected int luzera;
 	
 	public Itsasontzi() {
-		this.konponketaPrezioa = 75;
-		this.suntziketaIrabazia = 50;
 		this.egoera=new Osoa();
 	}
 	
